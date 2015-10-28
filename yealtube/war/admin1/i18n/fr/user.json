@@ -1,0 +1,58 @@
+{
+    "proconcoappApp": {
+        "user" : {
+            "home": {
+                "title": "Users",
+                "createLabel": "Créer un nouveau User",
+                "createOrEditLabel": "Créer ou éditer un User"
+            },
+            "form": {
+	            "firstname": "First Namefr",
+	            "firstname.placeholder": "Your first namefr",
+	            "lastname": "Last Namefr",
+	            "lastname.placeholder": "Your last namefr",
+	            "language": "Languagefr",
+	            "button": "Savefr"
+	        },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le User {{ id }} ?"
+            },
+            "detail": {
+                "title": "User"
+            },
+            "username": "Loginfr",
+            "email": "Emailfr",
+            "newpassword": "New passwordfr",
+            "confirmpassword": "New password confirmationfr",
+            "activated": "Activatedfr",
+            "crtTms": "CrtTmsfr",
+            "firstName": "Firstnamefr",
+            "lastName": "Lastnamefr",
+            "langKey": "Languagefr",
+            "group": "Groupfr",
+            "position": "Positionfr",
+            "authorities": "Authoritiesfr",
+            "messages": {
+	            "validate": {
+	                "login": {
+	                    "required": "Your login is required.fr",
+	                    "minlength": "Your login is required to be at least 1 characterfr",
+	                    "maxlength": "Your login cannot be longer than 50 charactersfr",
+	                    "pattern": "Your login can only contain lower-case letters and digitsfr"
+	                }
+	            },
+            	"success": "<strong>Registration saved!</strong> Please check your email for confirmation.fr",
+            	"error": {
+	                "fail": "<strong>Registration failed!</strong> Please try again later.fr",
+	                "userexists": "<strong>Login name already registered!</strong> Please choose another one.fr",
+	                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one.fr",
+	                "userandemailexists": "<strong>User and E-mail is already in use!</strong> Please choose another one.fr",
+	                "accountexists": "<strong>Account is already in use!</strong> Please choose another one.fr",
+	                "querySearch":"Invalid query search!fr",
+	           		"invalidName":"Invalid name!fr"
+            	},
+	            "updated": "User updated!fr"
+            }	
+        }
+    }
+}

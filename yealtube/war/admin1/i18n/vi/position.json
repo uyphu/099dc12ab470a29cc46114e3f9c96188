@@ -1,0 +1,29 @@
+{
+   "proconcoappApp": {
+       "position" : {
+           "home": {
+               "title": "Positionsvi",
+               "createLabel": "Créer un nouveau Positionvi",
+               "createOrEditLabel": "Créer ou éditer un Positionvi"
+           },
+           "delete": {
+               "question": "Etes-vous certain de vouloir supprimer le Position {{ id }} ?"
+           },
+           "detail": {
+               "title": "Positionvi"
+           },
+           "postName": "PostNamevi",
+           "delFlag": "DelFlagvi",
+           "crtUid": "CrtUidvi",
+           "crtTms": "CrtTmsvi",
+           "updUid": "UpdUidvi",
+           "updTms": "CrtTmsvi",
+           "error": {
+           		"message": {
+           			"querySearch":"Invalid query search!vi",
+           			"invalidName":"Invalid name!vi"
+           		}
+           }
+       }
+   }
+}

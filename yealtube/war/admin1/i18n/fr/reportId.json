@@ -1,0 +1,31 @@
+{
+    "proconcoappApp": {
+        "reportId" : {
+            "home": {
+                "title": "ReportIds",
+                "createLabel": "Créer un nouveau ReportId",
+                "createOrEditLabel": "Créer ou éditer un ReportId"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le ReportId {{ id }} ?"
+            },
+            "detail": {
+                "title": "ReportIdfr"
+            },
+            "week": "Weekfr",
+            "year": "Yearfr",
+            "user": "Userfr",
+            "status": "Statusfr",
+            "ctrTms": "CtrTmsfr",
+            "report": "reportfr",
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!fr",
+           			"invalidName":"Invalid name!fr",
+           			"insertError":"Insert Error!fr",
+           			"sucessfullyApproved": "Successfully approved!"
+           		}
+           }
+        }
+    }
+}

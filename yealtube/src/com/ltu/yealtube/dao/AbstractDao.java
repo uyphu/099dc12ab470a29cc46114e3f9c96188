@@ -13,20 +13,20 @@ import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
 import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.domain.Comment;
+import com.ltu.yealtube.domain.Tube;
+import com.ltu.yealtube.domain.User;
+import com.ltu.yealtube.domain.UserGroup;
 
 public abstract class AbstractDao<T> implements Dao<T> {
 
 	static {
 		ObjectifyService.register(Category.class);
-		// ObjectifyService.register(Group.class);
-		// ObjectifyService.register(PlanningWeek.class);
-		// ObjectifyService.register(PlanningWeekId.class);
-		// ObjectifyService.register(Position.class);
-		// ObjectifyService.register(Report.class);
-		// ObjectifyService.register(ReportId.class);
-		// ObjectifyService.register(SessionInfo.class);
-		// ObjectifyService.register(SystemSecurity.class);
-		// ObjectifyService.register(User.class);
+		ObjectifyService.register(Comment.class);
+		ObjectifyService.register(Tube.class);
+		ObjectifyService.register(User.class);
+		ObjectifyService.register(UserGroup.class);
+		ObjectifyService.register(Category.class);
 	}
 
 	public static Objectify ofy() {

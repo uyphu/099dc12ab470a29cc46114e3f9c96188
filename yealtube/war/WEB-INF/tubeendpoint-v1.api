@@ -228,6 +228,16 @@
           "url" : {
             "type" : "string"
           },
+          "like" : {
+            "type" : "integer"
+          },
+          "dislike" : {
+            "type" : "integer"
+          },
+          "rating" : {
+            "type" : "number",
+            "format" : "float"
+          },
           "status" : {
             "type" : "integer"
           },

@@ -1,0 +1,19 @@
+{
+    "main": {
+        "title": "Welcome, proconco",
+        "subtitle": "This is your homepage",
+        "logged": {
+            "message": "You are logged in as user \"{{username}}\"."
+        },
+        "question": "If you have any question on proconco:",
+        "link": {
+            "homepage": "proconco homepage",
+            "stackoverflow": "proconco on Stack Overflow",
+            "bugtracker": "proconco bug tracker",
+            "chat": "proconco public chat room",
+            "contact": "contact @proconco on facebook"
+        },
+        "like": "If you like proconco, don't forget to give us a star on",
+        "github": "Github"
+    }
+}

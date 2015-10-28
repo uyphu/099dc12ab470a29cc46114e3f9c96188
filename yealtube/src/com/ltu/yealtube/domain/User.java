@@ -146,6 +146,10 @@ public class User {
 	public final void setDate_added(Date date_added) {
 		this.date_added = date_added;
 	}
+	
+	public User() {
+		
+	}
 
 	public User(Long id, Long userGroupId, String username, String password, String salt, String firstname,
 			String lastname, String email, String image, String code, String ip, int status, Date date_added) {

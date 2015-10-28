@@ -29,7 +29,7 @@ public class TubeDao extends AbstractDao<Tube> {
 		Tube tube;
 
 		for (Long i = 1L; i < 10; i++) {
-			tube = new Tube(i, 1L, 1L, "name" + i, "description", "url", 1, Calendar.getInstance().getTime(), Calendar
+			tube = new Tube(i, 1L, 1L, "name" + i, "description", "url", 0, 0, 0, 1, Calendar.getInstance().getTime(), Calendar
 					.getInstance().getTime());
 			persist(tube);
 		}

@@ -27,6 +27,12 @@ public class Tube {
 	@Index
 	private String url;
 	
+	private int like;
+	
+	private int dislike;
+	
+	private float rating;
+	
 	@Index
 	private int status;
 	
@@ -106,29 +112,64 @@ public class Tube {
 	public final void setDateModified(Date dateModified) {
 		this.dateModified = dateModified;
 	}
+	
+	public final int getLike() {
+		return this.like;
+	}
 
-	public Tube(Long id, Long userId, Long categoryId, String name, String description, String url, int status,
-			Date dateAdded, Date dateModified) {
+	public final void setLike(int like) {
+		this.like = like;
+	}
+	
+	public final int getDislike() {
+		return this.dislike;
+	}
+
+	public final void setDislike(int dislike) {
+		this.dislike = dislike;
+	}
+
+	public final float getRating() {
+		return this.rating;
+	}
+
+	public final void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public Tube() {
+		
+	}
+
+	public Tube(Long id, Long userId, Long categoryId, String name, String description, String url, int like,
+			int dislike, float rating, int status, Date dateAdded, Date dateModified) {
 		this.id = id;
 		this.userId = userId;
 		this.categoryId = categoryId;
 		this.name = name;
 		this.description = description;
 		this.url = url;
+		this.like = like;
+		this.dislike = dislike;
+		this.rating = rating;
 		this.status = status;
 		this.dateAdded = dateAdded;
 		this.dateModified = dateModified;
 	}
 	
-	public Tube(Long userId, Long categoryId, String name, String description, String url, int status,
-			Date dateAdded, Date dateModified) {
+	public Tube(Long userId, Long categoryId, String name, String description, String url, int like,
+			int dislike, float rating, int status, Date dateAdded, Date dateModified) {
 		this.userId = userId;
 		this.categoryId = categoryId;
 		this.name = name;
 		this.description = description;
 		this.url = url;
+		this.like = like;
+		this.dislike = dislike;
+		this.rating = rating;
 		this.status = status;
 		this.dateAdded = dateAdded;
 		this.dateModified = dateModified;
 	}
+
 }

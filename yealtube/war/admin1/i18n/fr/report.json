@@ -1,0 +1,44 @@
+{
+    "proconcoappApp": {
+        "report" : {
+            "home": {
+                "title": "Reports",
+                "createLabel": "Créer un nouveau Report",
+                "createOrEditLabel": "Créer ou éditer un Report"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Report {{ id }} ?"
+            },
+            "detail": {
+                "title": "Reportfr"
+            },
+            "amt": "Amtfr",
+            "marketRpt": "MarketRptfr",
+            "competitors": "Competitorsfr",
+            "disease": "Diseasefr",
+            "monday": "Mondayfr",
+            "tuesday": "Tuesdayfr",
+            "wednesday": "Wednesdayfr",
+            "thursday": "Thursdayfr",
+            "friday": "Fridayfr",
+            "saturday": "Saturdayfr",
+            "sunday": "Sundayfr",
+            "delFlag": "DelFlagfr",
+            "crtUid": "CrtUidfr",
+            "crtTms": "CrtTmsfr",
+            "updUid": "UpdUidfr",
+            "updTms": "UpdTmsfr",
+            "reportId": "reportIdfr",
+            "message": {
+            	"success":"Successfuly updated!fr"
+            },
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!fr",
+           			"update":"Update error!fr",
+           			"sucessfullyApproved": "Successfully approved!"
+           		}
+           }
+        }
+    }
+}

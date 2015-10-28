@@ -1,0 +1,32 @@
+{
+    "proconcoappApp": {
+        "group" : {
+            "home": {
+                "title": "Groups",
+                "createLabel": "Create a new Group",
+                "createOrEditLabel": "Create or edit a Group"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Group"
+            },
+            "grpName": "GrpName",
+            "delFlag": "DelFlag",
+            "crtUid": "CrtUid",
+            "ctrTms": "CtrTms",
+            "updUid": "UpdUid",
+            "updTms": "UpdTms",
+            "manager": "Manager",
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!",
+           			"invalidName":"Invalid name!",
+           			"invalidUser":"Invalid user!",
+           			"saveError":"Save Error!"
+           		}
+           }
+        }
+    }
+}

@@ -1,0 +1,111 @@
+{
+    "global": {
+        "title": "proconcovi",
+        "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.vi",
+        "menu": {
+            "home": "Accueilvi",
+            "entities": {
+                "main": "Entitésvi",
+                "position": "Positionvivi",
+                "group": "Groupvivi",
+                "reportId": "ReportIdvivi",
+               	"planningWeekId": "PlanningWeekIdvivi",
+               	"report": "Reportvi",
+               	"planningWeek": "PlanningWeekvi",
+               	"approval":"Approvalvi",
+                "additionalEntity": "JHipster will add additional entities here (do not translate!)"
+            },
+            "account": {
+                "main": "Comptevi",
+                "settings": "Profilvi",
+                "password": "Mot de passevi",
+                "sessions": "Sessionsvi",
+                "login": "S'authentifiervi",
+                "logout": "Déconnexionvi",
+                "register": "Créer un compte"
+            },
+            "admin": {
+                "main": "Administrationvi",
+                "tracker": "Suivi des utilisateursvi",
+                "metrics": "Métriquesvi",
+                "health": "Diagnosticsvi",
+                "configuration": "Configurationvi",
+                "logs": "Logsvi",
+                "audits": "Auditsvi",
+                "apidocs": "APIvi",
+                "database": "Base de donnéesvi",
+                "users": "Usersvi"
+            },
+            "language": "Langue"
+        },
+        "form": {
+            "username": "Nom d'utilisateurvi",
+            "username.placeholder": "Votre nom d'utilisateurvi",
+            "newpassword": "Nouveau mot de passevi",
+            "newpassword.placeholder": "Nouveau mot de passevi",
+            "confirmpassword": "Confirmation du nouveau mot de passevi",
+            "confirmpassword.placeholder": "Confirmation du nouveau mot de passevi",
+            "email": "Emailvi",
+            "email.placeholder": "Votre email"
+        },
+        "messages": {
+            "info": {
+                "authenticated": "Si vous voulez vous <a href=\"#/login\">connecter</a>, vous pouvez utiliser les comptes par défaut : <br/> - Administrateur (nom d'utilisateur=\"admin\" et mot de passe =\"admin\") <br/> - Utilisateur (nom d'utilisateur=\"user\" et mot de passe =\"user\").vi",
+                "register": "Vous n'avez pas encore de compte ? <a href=\"#/register\">Créer un compte</a>"
+            },
+            "error": {
+                "dontmatch": "Le nouveau mot de passe et sa confirmation ne sont pas égaux!"
+            },
+            "validate": {
+                "newpassword": {
+                    "required": "Votre mot de passe est requis.vi",
+                    "minlength": "Votre mot de passe doit comporter au moins 5 caractèresvi",
+                    "maxlength": "Votre mot de passe ne doit pas comporter plus de 50 caractèresvi",
+                    "strength": "Robustesse du mot de passe:"
+                },
+                "confirmpassword": {
+                    "required": "Votre confirmation du mot de passe est requis.vi",
+                    "minlength": "Votre confirmation du mot de passe doit comporter au moins 5 caractèresvi",
+                    "maxlength": "Votre confirmation du mot de passe ne doit pas comporter plus de 50 caractères"
+                },
+                "email": {
+                    "required": "Votre email est requis.vi",
+                    "minlength": "Votre email doit comporter au moins 5 caractèresvi",
+                    "maxlength": "Votre email ne doit pas comporter plus de 50 caractèresvi",
+                    "invalid": "Votre email n'est pas valide."
+                }
+            }
+        }
+    },
+    "entity": {
+        "action": {
+            "back": "Retourvi",
+            "cancel": "Annulervi",
+            "edit": "Editervi",
+            "delete": "Supprimervi",
+            "save": "Sauvegardervi",
+            "view": "Voirvi",
+            "detail": "Detailvi",
+            "report": "Reportvi",
+            "approval": "Approvalvi"
+        },
+        "detail": {
+            "field": "Champsvi",
+            "value": "Valeur"
+        },
+        "delete": {
+            "title": "Confirmation de suppression"
+        },
+        "validation": {
+            "required": "Ce champs est obligatoire.vi",
+            "minlength": "Ce champs doit faire au minimum {{min}} caractères.vi",
+            "maxlength": "Ce champs doit faire moins de {{max}} caractères.vi",
+            "min": "Ce champs doit être inférieur à {{min}}.vi",
+            "max": "Ce champs doit être supérieur à {{max}}.vi",
+            "pattern": "Ce champs doit suivre l'expression régluière {{pattern}}.vi",
+            "number": "Ce champs doit être un nombre.vi",
+            "datetimelocal": "Ce champs doit être une date et une heure."
+        }
+    },
+    "footer": "Ceci est votre pied de page"
+}

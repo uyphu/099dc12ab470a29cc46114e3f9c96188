@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.google.api.server.spi.response.CollectionResponse;
 import com.googlecode.objectify.cmd.Query;
+import com.ltu.yealtube.constants.AuthoritiesConstants;
 import com.ltu.yealtube.constants.Constants;
 import com.ltu.yealtube.domain.UserGroup;
 import com.ltu.yealtube.exception.CommonException;
@@ -27,10 +28,20 @@ public class UserGroupDao extends AbstractDao<UserGroup> {
 	public void initData() {
 		UserGroup userGroup;
 
-		for (Long i = 1L; i < 10; i++) {
-			userGroup = new UserGroup(i, "name" + i, "permission");
-			persist(userGroup);
-		}
+		userGroup = new UserGroup(1L, "Admin", "", AuthoritiesConstants.ROLE_ADMIN);
+		persist(userGroup);
+		
+		userGroup = new UserGroup(2L, "User", "", AuthoritiesConstants.ROLE_USER);
+		persist(userGroup);
+		
+		userGroup = new UserGroup(3L, "Anonymous", "", AuthoritiesConstants.ROLE_ANONYMOUS);
+		persist(userGroup);
+		
+		userGroup = new UserGroup(4L, "Edit", "", AuthoritiesConstants.ROLE_EDIT);
+		persist(userGroup);
+		
+		userGroup = new UserGroup(5L, "Read Only", "", AuthoritiesConstants.ROLE_READONLY);
+		persist(userGroup);
 
 	}
 

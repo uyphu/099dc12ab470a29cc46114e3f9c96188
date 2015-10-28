@@ -1,0 +1,59 @@
+{
+    "proconcoappApp": {
+        "approval" : {
+            "home": {
+                "title": "Users",
+                "createLabel": "Create a new User",
+                "createOrEditLabel": "Create or edit a User"
+            },
+            "form": {
+	            "firstname": "First Name",
+	            "firstname.placeholder": "Your first name",
+	            "lastname": "Last Name",
+	            "lastname.placeholder": "Your last name",
+	            "language": "Language",
+	            "button": "Save"
+	        },
+            "delete": {
+                "question": "Are you sure you want to delete User {{ id }}?"
+            },
+            "detail": {
+                "title": "User"
+            },
+            "username": "Login",
+            "email": "Email",
+            "newpassword": "New password",
+            "confirmpassword": "New password confirmation",
+            "activated": "Activated",
+            "group": "Group",
+            "position": "Position",
+            "crtTms": "CrtTms",
+            "firstName": "Firstname",
+            "lastName": "LastName",
+            "langKey": "Language",
+            "group": "Group",
+            "position": "Position",
+           	"messages": {
+	            "validate": {
+	                "login": {
+	                    "required": "Your login is required.",
+	                    "minlength": "Your login is required to be at least 1 character",
+	                    "maxlength": "Your login cannot be longer than 50 characters",
+	                    "pattern": "Your login can only contain lower-case letters and digits"
+	                }
+	            },
+	            "success": "<strong>Registration Saved!</strong> Please check your email for confirmation.",
+	            "error": {
+	                "fail": "<strong>Registration Failed!</strong> Please try again later.",
+	                "userexists": "<strong>Login name already registered!</strong> Please choose another one.",
+	                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one.",
+	                "userandemailexists": "<strong>User and E-mail is already in use!</strong> Please choose another one.",
+	                "accountexists": "<strong>Account is already in use!</strong> Please choose another one.",
+	                "querySearch":"Invalid query search!",
+	           		"invalidName":"Invalid name!"
+	            },
+	            "updated": "User updated!"
+        	}
+        }
+    }
+}

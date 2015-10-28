@@ -94,6 +94,10 @@ public class Comment {
 	public final void setDateModified(Date dateModified) {
 		this.dateModified = dateModified;
 	}
+	
+	public Comment() {
+		
+	}
 
 	public Comment(Long id, Long tubeId, Long userId, String text, int rating, int status, Date dateAdded,
 			Date dateModified) {

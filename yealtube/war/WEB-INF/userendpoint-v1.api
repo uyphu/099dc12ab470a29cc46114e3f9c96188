@@ -85,6 +85,65 @@
         "body" : "empty"
       }
     },
+    "userendpoint.searchUser" : {
+      "path" : "search_user",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.searchUser",
+      "request" : {
+        "parameters" : {
+          "querySearch" : {
+            "type" : "string",
+            "required" : false
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.initData" : {
+      "path" : "initData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.initData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "userendpoint.cleanData" : {
+      "path" : "cleanData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.cleanData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "userendpoint.listUser" : {
       "path" : "user",
       "httpMethod" : "GET",
@@ -99,7 +158,7 @@
             "type" : "string",
             "required" : false
           },
-          "limit" : {
+          "count" : {
             "type" : "int32",
             "required" : false
           }
@@ -208,6 +267,15 @@
         }
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.removeUser" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.searchUser" : {
+        "response" : {
+          "$ref" : "CollectionResponse_User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.initData" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.listUser" : {
         "response" : {

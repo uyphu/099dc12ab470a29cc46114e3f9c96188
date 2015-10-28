@@ -1,0 +1,59 @@
+{
+    "proconcoappApp": {
+        "approval" : {
+            "home": {
+                "title": "Users",
+                "createLabel": "Créer un nouveau User",
+                "createOrEditLabel": "Créer ou éditer un User"
+            },
+            "form": {
+	            "firstname": "First Namevi",
+	            "firstname.placeholder": "Your first namevi",
+	            "lastname": "Last Namevi",
+	            "lastname.placeholder": "Your last namevi",
+	            "language": "Languagevi",
+	            "button": "Savevi"
+	        },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le User {{ id }} ?"
+            },
+            "detail": {
+                "title": "User"
+            },
+            "username": "Loginvi",
+            "email": "Emailvi",
+            "newpassword": "New passwordvi",
+            "confirmpassword": "New password confirmationvi",
+            "activated": "Activatedvi",
+            "group": "Groupvi",
+            "position": "Positionvi",
+            "crtTms": "CrtTmsvi",
+            "firstName": "Firstnamevi",
+            "lastName": "Lastnamevi",
+            "langKey": "Languagevi",
+            "group": "Groupvi",
+            "position": "Positionvi",
+            "messages": {
+	            "validate": {
+	                "login": {
+	                    "required": "Your login is required.vi",
+	                    "minlength": "Your login is required to be at least 1 charactervi",
+	                    "maxlength": "Your login cannot be longer than 50 charactersvi",
+	                    "pattern": "Your login can only contain lower-case letters and digitsvi"
+	                }
+	            },
+            	"success": "<strong>Registration saved!</strong> Please check your email for confirmation.vi",
+            	"error": {
+	                "fail": "<strong>Registration failed!</strong> Please try again later.vi",
+	                "userexists": "<strong>Login name already registered!</strong> Please choose another one.vi",
+	                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one.vi",
+	                "userandemailexists": "<strong>User and E-mail is already in use!</strong> Please choose another one.vi",
+	                "accountexists": "<strong>Account is already in use!</strong> Please choose another one.vi",
+	                "querySearch":"Invalid query search!vi",
+	           		"invalidName":"Invalid name!vi"
+            	},
+	            "updated": "User updated!vi"
+            }	
+        }
+    }
+}

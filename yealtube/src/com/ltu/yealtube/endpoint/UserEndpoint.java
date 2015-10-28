@@ -1,166 +1,173 @@
 package com.ltu.yealtube.endpoint;
 
-import com.ltu.yealtube.domain.EMF;
-import com.ltu.yealtube.domain.User;
-import com.google.api.server.spi.config.Api;
-import com.google.api.server.spi.config.ApiMethod;
-import com.google.api.server.spi.config.ApiNamespace;
-import com.google.api.server.spi.response.CollectionResponse;
-import com.google.appengine.api.datastore.Cursor;
-import com.google.appengine.datanucleus.query.JPACursorHelper;
-
-import java.util.List;
-
 import javax.annotation.Nullable;
 import javax.inject.Named;
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+
+import com.google.api.server.spi.config.Api;
+import com.google.api.server.spi.config.ApiMethod;
+import com.google.api.server.spi.config.ApiMethod.HttpMethod;
+import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.response.CollectionResponse;
+import com.ltu.yealtube.dao.UserDao;
+import com.ltu.yealtube.domain.User;
+import com.ltu.yealtube.exception.CommonException;
+import com.ltu.yealtube.exception.ErrorCode;
+import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 @Api(name = "userendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class UserEndpoint {
 
 	/**
-	 * This method lists all the entities inserted in datastore.
-	 * It uses HTTP GET method and paging support.
-	 *
-	 * @return A CollectionResponse class containing the list of all entities
-	 * persisted and a cursor to the next page.
-	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	* Return a collection of users
+	*
+	* @param count The number of users
+	* @return a list of Users
+	*/
 	@ApiMethod(name = "listUser")
-	public CollectionResponse<User> listUser(@Nullable @Named("cursor") String cursorString,
-			@Nullable @Named("limit") Integer limit) {
-
-		EntityManager mgr = null;
-		Cursor cursor = null;
-		List<User> execute = null;
-
-		try {
-			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from User as User");
-			if (cursorString != null && cursorString != "") {
-				cursor = Cursor.fromWebSafeString(cursorString);
-				query.setHint(JPACursorHelper.CURSOR_HINT, cursor);
+	public CollectionResponse<User> listUser(
+			@Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("count") Integer count) {
+		UserDao dao = new UserDao();
+		return dao.list(cursorString, count);
+	}
+	
+	/**
+	* This inserts a new <code>User</code> object.
+	* @param user The object to be added.
+	* @return The object to be added.
+	*/
+	@ApiMethod(name = "insertUser")
+	public User insertUser(User user) throws CommonException {
+		// If if is not null, then check if it exists. If yes, throw an
+		// Exception
+		// that it is already present
+		if (user.getId() != null) {
+			if (user.getId() == 0) {
+				user.setId(null);
+			} else {
+				if (findRecord(user.getId()) != null) {
+					throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
+							ErrorCodeDetail.ERROR_EXIST_OBJECT);
+				}
 			}
-
-			if (limit != null) {
-				query.setFirstResult(0);
-				query.setMaxResults(limit);
-			}
-
-			execute = (List<User>) query.getResultList();
-			cursor = JPACursorHelper.getCursor(execute);
-			if (cursor != null)
-				cursorString = cursor.toWebSafeString();
-
-			// Tight loop for fetching all entities from datastore and accomodate
-			// for lazy fetch.
-			for (User obj : execute)
-				;
-		} finally {
-			mgr.close();
 		}
-
-		return CollectionResponse.<User> builder().setItems(execute).setNextPageToken(cursorString).build();
+		// Since our @Id field is a Long, Objectify will generate a unique value
+		// for us
+		// when we use put
+		UserDao dao = new UserDao();
+		//User pos = dao.getUserByName(user.get);
+		//FIXME Check the code below
+		//if (pos == null) {
+			dao.persist(user);
+//		} else {
+//			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
+//					ErrorCodeDetail.ERROR_EXIST_OBJECT);
+//		}
+		return user;
 	}
 
 	/**
-	 * This method gets the entity having primary key id. It uses HTTP GET method.
+	 * This updates an existing <code>User</code> object.
+	 * 
+	 * @param user
+	 *            The object to be added.
+	 * @return The object to be updated.
+	 */
+	@ApiMethod(name = "updateUser")
+	public User updateUser(User user) throws CommonException {
+		User oldUser = findRecord(user.getId());
+		if (oldUser == null) {
+			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
+					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
+		}
+		UserDao dao = new UserDao();
+		//User pos = null; //dao.getUserByName(user.getName());
+		//FIXME Check this logic
+		//if (pos == null || pos.getId().equals(user.getId())) {
+			//oldUser.setName(user.getName());
+//			if (user.getManager() != null) {
+//				UserDao userDao = new UserDao();
+//				User manager = userDao.getUserByLogin(user.getManager());
+//				if (manager != null) {
+//					user.setManager(manager.getLogin());
+//				} else {
+//					throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
+//							ErrorCodeDetail.ERROR_USER_NOT_FOUND);
+//				}
+//			}
+			dao.update(user);
+		//} else {
+//			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
+//					ErrorCodeDetail.ERROR_EXIST_OBJECT);
+		//}
+		return user;
+	}
+
+	/**
+	 * This deletes an existing <code>User</code> object.
 	 *
-	 * @param id the primary key of the java bean.
-	 * @return The entity with primary key id.
+	 * @param id            The id of the object to be deleted.
+	 * @throws CommonException the proconco exception
+	 */
+	@ApiMethod(name = "removeUser")
+	public void removeUser(@Named("id") Long id) throws CommonException {
+		User record = findRecord(id);
+		if (record == null) {
+			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
+					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
+		}
+		UserDao dao = new UserDao();
+		dao.delete(record);
+	}
+	
+	/**
+	 * Gets the user.
+	 *
+	 * @param id the id
+	 * @return the user
 	 */
 	@ApiMethod(name = "getUser")
 	public User getUser(@Named("id") Long id) {
-		EntityManager mgr = getEntityManager();
-		User user = null;
-		try {
-			user = mgr.find(User.class, id);
-		} finally {
-			mgr.close();
-		}
-		return user;
+		return findRecord(id);
 	}
-
+	
 	/**
-	 * This inserts a new entity into App Engine datastore. If the entity already
-	 * exists in the datastore, an exception is thrown.
-	 * It uses HTTP POST method.
+	 * Find record.
 	 *
-	 * @param user the entity to be inserted.
-	 * @return The inserted entity.
+	 * @param id the id
+	 * @return the user main
 	 */
-	@ApiMethod(name = "insertUser")
-	public User insertUser(User user) {
-		EntityManager mgr = getEntityManager();
-		try {
-			if (containsUser(user)) {
-				throw new EntityExistsException("Object already exists");
-			}
-			mgr.persist(user);
-		} finally {
-			mgr.close();
-		}
-		return user;
+	private User findRecord(Long id) {
+		UserDao dao = new UserDao();
+		return dao.find(id);
 	}
-
+	
 	/**
-	 * This method is used for updating an existing entity. If the entity does not
-	 * exist in the datastore, an exception is thrown.
-	 * It uses HTTP PUT method.
-	 *
-	 * @param user the entity to be updated.
-	 * @return The updated entity.
+	 * Inits the data.
 	 */
-	@ApiMethod(name = "updateUser")
-	public User updateUser(User user) {
-		EntityManager mgr = getEntityManager();
-		try {
-			if (!containsUser(user)) {
-				throw new EntityNotFoundException("Object does not exist");
-			}
-			mgr.persist(user);
-		} finally {
-			mgr.close();
-		}
-		return user;
+	@ApiMethod(name = "initData", httpMethod = HttpMethod.POST, path = "initData")
+	public void initData() {
+		UserDao dao = new UserDao();
+		dao.initData();
 	}
-
+	
 	/**
-	 * This method removes the entity with primary key id.
-	 * It uses HTTP DELETE method.
-	 *
-	 * @param id the primary key of the entity to be deleted.
+	 * Clean data.
 	 */
-	@ApiMethod(name = "removeUser")
-	public void removeUser(@Named("id") Long id) {
-		EntityManager mgr = getEntityManager();
-		try {
-			User user = mgr.find(User.class, id);
-			mgr.remove(user);
-		} finally {
-			mgr.close();
-		}
+	@ApiMethod(name = "cleanData", httpMethod = HttpMethod.POST, path = "cleanData")
+	public void cleanData() {
+		UserDao dao = new UserDao();
+		dao.cleanData();
+	}
+	
+	@ApiMethod(name = "searchUser", httpMethod=HttpMethod.GET, path="search_user")
+	public CollectionResponse<User> searchUser(
+			@Nullable @Named("querySearch") String querySearch,
+			@Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("count") Integer count) throws CommonException {
+		UserDao dao = new UserDao();
+		return dao.searchUser(querySearch, cursorString, count);
 	}
 
-	private boolean containsUser(User user) {
-		EntityManager mgr = getEntityManager();
-		boolean contains = true;
-		try {
-			User item = mgr.find(User.class, user.getId());
-			if (item == null) {
-				contains = false;
-			}
-		} finally {
-			mgr.close();
-		}
-		return contains;
-	}
-
-	private static EntityManager getEntityManager() {
-		return EMF.get().createEntityManager();
-	}
 
 }

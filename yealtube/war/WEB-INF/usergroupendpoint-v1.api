@@ -201,6 +201,9 @@
           },
           "permission" : {
             "type" : "string"
+          },
+          "key" : {
+            "type" : "string"
           }
         }
       },

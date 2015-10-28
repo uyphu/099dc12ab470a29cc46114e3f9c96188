@@ -1,0 +1,32 @@
+{
+    "proconcoappApp": {
+        "group" : {
+            "home": {
+                "title": "Groups",
+                "createLabel": "Créer un nouveau Groupvi",
+                "createOrEditLabel": "Créer ou éditer un Groupvi"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Group {{ id }} ?"
+            },
+            "detail": {
+                "title": "Groupvi"
+            },
+            "grpName": "GrpName",
+            "delFlag": "DelFlag",
+            "crtUid": "CrtUid",
+            "ctrTms": "CtrTms",
+            "updUid": "UpdUid",
+            "updTms": "UpdTms",
+            "manager": "Managervi",
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!vi",
+           			"invalidName":"Invalid name!vi",
+           			"invalidUser":"INvalid User!vi",
+           			"saveError":"Save Error!"
+           		}
+           }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "login": {
+        "title": "Authentication",
+        "form": {
+            "password": "Password",
+            "password.placeholder": "Your password",
+            "rememberme": "Automatic Login",
+            "button": "Authenticate"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>Authentication failed!</strong> Please check your credentials and try again.",
+                "activated": "<strong>User not activated!</strong> Please contact admin and try again.",
+                "password.invalid": "<strong>Password invalid!</strong> Please check your credentials and try again."
+            }
+        },
+        "password" : {
+            "forgot": "Did you forget your password?"
+        }
+    }
+}
