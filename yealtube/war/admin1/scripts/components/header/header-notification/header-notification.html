@@ -1,5 +1,5 @@
-<ul class="nav navbar-top-links navbar-right">
-    <li class="dropdown">
+<ul class="nav navbar-top-links navbar-right" ng-switch="true">
+    <li class="dropdown" ng-switch-when="false">
         <a class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
         </a>
@@ -50,7 +50,7 @@
         <!-- /.dropdown-messages -->
     </li>
     <!-- /.dropdown -->
-    <li class="dropdown">
+    <li class="dropdown" ng-switch-when="false">
         <a class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
         </a>
@@ -129,7 +129,7 @@
         <!-- /.dropdown-tasks -->
     </li>
     <!-- /.dropdown -->
-    <li class="dropdown">
+    <li class="dropdown" ng-switch-when="false">
         <a class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
         </a>
@@ -189,7 +189,21 @@
         <!-- /.dropdown-alerts -->
     </li>
     <!-- /.dropdown -->
-    <li class="dropdown">
+    <li class="dropdown" ng-switch-when="true">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+            <li><a ui-sref="login"><i class="fa fa-sign-in fa-fw"></i> Sign in</a>
+            </li>
+            <li class="divider"></li>
+            <li><a ui-sref="login"><i class="fa fa-plus fa-fw"></i> Register</a>
+            </li>
+        </ul>
+        <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+    <li class="dropdown" ng-switch-when="false">
         <a class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
         </a>
@@ -200,6 +214,20 @@
             </li>
             <li class="divider"></li>
             <li><a ui-sref="login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+        </ul>
+        <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+    <li class="dropdown" >
+        <a ui-sref-active="active" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-flag fa-fw"></i>  <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user" ng-controller="LanguageController">
+<!--             <li active-menu="{{language}}" ng-repeat="language in languages"> -->
+<!--             	<a href="#" ng-click="changeLanguage(language)"><i class="fa fa-flag fa-fw"></i> {{'language.' + language| translate}}</a> -->
+<!--             </li> -->
+			<li ng-repeat="language in languages"><a href="#" ng-click="changeLanguage(language)">{{'language.' + language| translate}}</a>
             </li>
         </ul>
         <!-- /.dropdown-user -->

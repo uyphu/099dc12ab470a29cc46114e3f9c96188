@@ -11,7 +11,7 @@ angular.module('jhipsterApp')
 		return {
         templateUrl:'scripts/components/header/header-notification/header-notification.html',
         restrict: 'E',
-        replace: true,
+        replace: true
     	}
 	});
 

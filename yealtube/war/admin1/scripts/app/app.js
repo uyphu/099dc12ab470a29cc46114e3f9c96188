@@ -55,7 +55,8 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
 
-        $urlRouterProvider.otherwise('/');
+        //$urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/dashboard/home');
         $stateProvider.state('site', {
             'abstract': true,
             views: {
@@ -76,6 +77,27 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
                 }]
             }
         });
+        
+//        $stateProvider.state('site', {
+//            'abstract': true,
+//            views: {
+//                'header@': {
+//                    templateUrl: 'scripts/components/header/header.html',
+//                    controller: 'HeaderController'
+//                }
+//            },
+//            resolve: {
+//                authorize: ['Auth',
+//                    function (Auth) {
+//                        return Auth.authorize();
+//                    }
+//                ],
+//                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+//                    $translatePartialLoader.addPart('global');
+//                    $translatePartialLoader.addPart('language');
+//                }]
+//            }
+//        });
 
 
         // Initialize angular-translate
