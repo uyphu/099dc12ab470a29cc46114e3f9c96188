@@ -17,8 +17,6 @@ angular.module('jhipsterApp')
                         return $translate.refresh();
                     }]
                     
-                    
-                
                 }
             });
     });

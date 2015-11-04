@@ -57,7 +57,7 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
 
         //$urlRouterProvider.otherwise('/');
         $urlRouterProvider.otherwise('/dashboard/home');
-        $stateProvider.state('site', {
+        $stateProvider.state('site1', {
             'abstract': true,
             views: {
                 'navbar@': {

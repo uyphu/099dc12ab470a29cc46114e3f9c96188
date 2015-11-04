@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('HeaderController', function ($scope) {
+    .controller('BannerController', function ($scope) {
         $scope.logo = "logo";
     });
