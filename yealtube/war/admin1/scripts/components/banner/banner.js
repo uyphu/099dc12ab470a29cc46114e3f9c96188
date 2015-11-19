@@ -7,7 +7,7 @@ angular.module('jhipsterApp')
             views: {
                 'banner@': {
                     templateUrl: 'scripts/components/banner/banner.html',
-                    controller: 'NavbarController'
+                    controller: 'BannerController'
                 }
             },
             resolve: {

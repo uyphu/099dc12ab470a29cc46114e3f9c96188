@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://yealtube.appspot.com/_ah/api",
+  "root" : "https://yealtubetest.appspot.com/_ah/api",
   "name" : "userendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "https://yealtube.appspot.com/_ah/spi",
+    "bns" : "https://yealtubetest.appspot.com/_ah/spi",
     "deadline" : 65.0,
     "type" : "lily"
   },
@@ -27,6 +27,27 @@
   "ownerName" : "ltu.com",
   "packagePath" : "yealtube.domain",
   "methods" : {
+    "userendpoint.getToken" : {
+      "path" : "getToken",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.getToken",
+      "request" : {
+        "parameters" : {
+          "token" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "userendpoint.getUser" : {
       "path" : "user/{id}",
       "httpMethod" : "GET",
@@ -129,6 +150,52 @@
         "body" : "empty"
       }
     },
+    "userendpoint.activateAccount" : {
+      "path" : "activateAccount",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount",
+      "request" : {
+        "parameters" : {
+          "activateKey" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.login" : {
+      "path" : "login",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.login",
+      "request" : {
+        "parameters" : {
+          "login" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "userendpoint.cleanData" : {
       "path" : "cleanData",
       "httpMethod" : "POST",
@@ -169,6 +236,27 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "userendpoint.testInsert" : {
+      "path" : "testInsert",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.testInsert",
+      "request" : {
+        "parameters" : {
+          "value" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "userendpoint.insertUser" : {
       "path" : "user",
       "httpMethod" : "POST",
@@ -200,7 +288,7 @@
             "type" : "string",
             "format" : "int64"
           },
-          "username" : {
+          "login" : {
             "type" : "string"
           },
           "password" : {
@@ -209,14 +297,41 @@
           "salt" : {
             "type" : "string"
           },
-          "firstname" : {
+          "firstName" : {
             "type" : "string"
           },
-          "lastname" : {
+          "lastName" : {
             "type" : "string"
           },
           "email" : {
             "type" : "string"
+          },
+          "activated" : {
+            "type" : "boolean"
+          },
+          "langKey" : {
+            "type" : "string"
+          },
+          "activationKey" : {
+            "type" : "string"
+          },
+          "token" : {
+            "type" : "string"
+          },
+          "tokenDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "resetKey" : {
+            "type" : "string"
+          },
+          "resetDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time"
           },
           "image" : {
             "type" : "string"
@@ -226,13 +341,6 @@
           },
           "ip" : {
             "type" : "string"
-          },
-          "status" : {
-            "type" : "integer"
-          },
-          "date_added" : {
-            "type" : "string",
-            "format" : "date-time"
           }
         }
       },
@@ -253,6 +361,11 @@
       }
     },
     "methods" : {
+      "com.ltu.yealtube.endpoint.UserEndpoint.getToken" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
       "com.ltu.yealtube.endpoint.UserEndpoint.getUser" : {
         "response" : {
           "$ref" : "User"
@@ -275,11 +388,26 @@
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.initData" : {
       },
+      "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.login" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
       "com.ltu.yealtube.endpoint.UserEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.listUser" : {
         "response" : {
           "$ref" : "CollectionResponse_User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.testInsert" : {
+        "response" : {
+          "$ref" : "User"
         }
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.insertUser" : {

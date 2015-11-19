@@ -10,6 +10,7 @@ angular.module('jhipsterApp')
 				if (!AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
 					gapi.client.load('userendpoint', AppConstant.ENDPOINT_VERSION, function() {
 						AppConstant.USER_PROFILE_ENDPOINT_LOADED = true;
+						AppConstant.USER_LOGIN_ENDPOINT_LOADED = true;
 						hwdefer.resolve(gapi);
 					}, AppConstant.ROOT_API);
 				}

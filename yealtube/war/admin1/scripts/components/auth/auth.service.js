@@ -3,31 +3,6 @@
 angular.module('jhipsterApp')
     .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
         return {
-//            login: function (credentials, callback) {
-//                var cb = callback || angular.noop;
-//                var deferred = $q.defer();
-//
-//                AuthServerProvider.login(credentials).then(function (data) {
-//                    // retrieve the logged account information
-//                	AppConstant.ACCOUNT = data;
-//                    Principal.identity(true).then(function(account) {
-//                        // After the login the language will be changed to
-//                        // the language selected by the user during his registration
-//                        $translate.use(account.langKey);
-//                        $translate.refresh();
-//                        deferred.resolve(data);
-//                    });
-//                	deferred.resolve(data);
-//                    return cb();
-//                }).catch(function (err) {
-//                    this.logout();
-//                    deferred.reject(err);
-//                    return cb(err);
-//                }.bind(this));
-//
-//                return deferred.promise;
-//            },
-        	
         	login: function (credentials, callback) {
                 //var cb = callback || angular.noop;
                 var deferred = $q.defer();
@@ -80,27 +55,6 @@ angular.module('jhipsterApp')
                         }
                     });
             },
-//            createAccount: function (account, callback) {
-//                var cb = callback || angular.noop;
-//
-////                return Register.save(account,
-////                    function () {
-////                        return cb(account);
-////                    },
-////                    function (err) {
-////                        this.logout();
-////                        return cb(err);
-////                    }.bind(this)).$promise;
-//                	Register.save(account).then(function(){
-//                		return cb(account);
-//    				},
-//    				function(err){
-//    					console.log(ErrorCode.ERROR_INIT_ENDPOINT_SERVICE);
-//    					this.logout();
-//                      return cb(err);
-//    				}.bind(this)).$promise;
-//                
-//            },
             createAccount: function (account) {
             	var p=$q.defer();
             	Register.save(account).then(function(data){
@@ -118,13 +72,6 @@ angular.module('jhipsterApp')
             updateAccount: function (account, callback) {
                 var cb = callback || angular.noop;
 
-//                return Account.save(account,
-//                    function () {
-//                        return cb(account);w
-//                    },
-//                    function (err) {
-//                        return cb(err);
-//                    }.bind(this)).$promise;
                 return Account.save(account).then(function(data){
             		return cb(account);
 				},
@@ -136,27 +83,29 @@ angular.module('jhipsterApp')
             },
 
             activateAccount: function (key, callback) {
-                var cb = callback || angular.noop;
-
-                return Activate.get(key,
-                    function (response) {
-                        return cb(response);
-                    },
-                    function (err) {
-                        return cb(err);
-                    }.bind(this)).$promise;
-            },
-
-//            changePassword: function (newPassword, callback) {
 //                var cb = callback || angular.noop;
 //
-//                return Password.save(newPassword, function () {
-//                    return cb();
-//                }, function (err) {
-//                    return cb(err);
-//                }).$promise;
-//            },
-            
+//                return Activate.get(key,
+//                    function (response) {
+//                        return cb(response);
+//                    },
+//                    function (err) {
+//                        return cb(err);
+//                    }.bind(this)).$promise;
+                
+                var p=$q.defer();
+                Activate.get(key).then(function(data){
+            		p.resolve(data);
+				},
+				function(error){
+					console.log(ErrorCode.ERROR_CALL_ENDPOINT_SERVICE + error);
+					this.logout();
+					p.resolve(error);
+				});
+				
+				return p.promise;
+            },
+
             changePassword: function (account) {
             	var p=$q.defer();
             	Password.save(account).then(function(data){
@@ -190,7 +139,7 @@ angular.module('jhipsterApp')
                     return cb(err);
                 }).$promise;
             },
-
+            
             init: function() {
     		    var hwdefer=$q.defer();
     		    var oauthloaddefer=$q.defer();
@@ -198,6 +147,8 @@ angular.module('jhipsterApp')
     		    if (!AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
     		    	gapi.client.load('userendpoint', AppConstant.ENDPOINT_VERSION, function() {
     					AppConstant.USER_PROFILE_ENDPOINT_LOADED = true;
+    					AppConstant.USER_LOGIN_ENDPOINT_LOADED = true;
+    					$rootScope.LOADED = true;
     					hwdefer.resolve(gapi);
     				}, AppConstant.ROOT_API);
     			}

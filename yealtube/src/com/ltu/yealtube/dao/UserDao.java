@@ -12,7 +12,12 @@ import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
+import com.ltu.yealtube.utils.AppUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserDao.
+ */
 public class UserDao extends AbstractDao<User> {
 
 	/**
@@ -29,8 +34,9 @@ public class UserDao extends AbstractDao<User> {
 		User user;
 
 		for (Long i = 1L; i < 10; i++) {
-			user = new User(i, 1L, "username" + i, "password", "salt", "firstname" + i, "lastname" + i, "email" + i
-					+ "@yahoo.com", "image", "code", "ip", 1, Calendar.getInstance().getTime());
+			user = new User(i, 1L, "login" + i, "password", "salt", "firstName" + i, "lastName" + i, "email" + i
+					+ "@yahoo.com", false, "en", "activationKey", "resetKey", Calendar.getInstance().getTime(),
+					Calendar.getInstance().getTime(), "image", "code", "ip");
 			persist(user);
 		}
 
@@ -98,15 +104,14 @@ public class UserDao extends AbstractDao<User> {
 
 	/**
 	 * Gets the user by name.
-	 * 
-	 * @param name
-	 *            the name
+	 *
+	 * @param login the login
 	 * @return the user by name
 	 */
-	public User getUserByName(String name) {
-		if (name != null) {
+	public User getUserByName(String login) {
+		if (login != null) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("grpName", name);
+			map.put("login", login);
 			Query<User> query = getQuery(map);
 			List<User> list = executeQuery(query, 1);
 			if (list != null && list.size() > 0) {
@@ -135,4 +140,102 @@ public class UserDao extends AbstractDao<User> {
 		}
 		return null;
 	}
+	
+	/**
+	 * Find one by login.
+	 *
+	 * @param login the login
+	 * @return the user
+	 */
+	public User findOneByLogin(String login) {
+		if (login != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("login", login);
+			Query<User> query = getQuery(map);
+			List<User> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Find one by email.
+	 *
+	 * @param email the email
+	 * @return the user
+	 */
+	public User findOneByEmail(String email) {
+		if (email != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("email", email);
+			Query<User> query = getQuery(map);
+			List<User> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Find one by activation key.
+	 *
+	 * @param activationKey the activation key
+	 * @return the user
+	 */
+	public User findOneByActivationKey(String activationKey) {
+		if (activationKey != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("activationKey", activationKey);
+			Query<User> query = getQuery(map);
+			List<User> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Login.
+	 *
+	 * @param login the login
+	 * @param password the password
+	 * @return the user
+	 */
+	public User login(String login, String password) {
+		if (login != null && password != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("login", login);
+			map.put("password", AppUtils.cryptWithMD5(password));
+			Query<User> query = getQuery(map);
+			List<User> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Find one by token.
+	 *
+	 * @param token the token
+	 * @return the user
+	 */
+	public User findOneByToken(String token) {
+		if (token != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("token", token);
+			Query<User> query = getQuery(map);
+			List<User> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
 }

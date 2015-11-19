@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-5.1.5.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-collections.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

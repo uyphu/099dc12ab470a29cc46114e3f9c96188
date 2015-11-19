@@ -6,6 +6,15 @@ angular.module('jhipsterApp')
         .state('login',{
         	parent: 'site',
             templateUrl:'scripts/app/account/login/login.html',
-            url:'/login'
+            url:'/login',
+            resolve: {
+                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                    $translatePartialLoader.addPart('login');
+                    $translatePartialLoader.addPart('global');
+                    $translatePartialLoader.addPart('language');
+                    return $translate.refresh();
+                }]
+                
+            }
         });
     });

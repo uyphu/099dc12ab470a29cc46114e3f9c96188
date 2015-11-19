@@ -15,9 +15,26 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>com.ltu.yealtube.endpoint.CategoryEndpoint,com.ltu.yealtube.endpoint.CommentEndpoint,com.ltu.yealtube.endpoint.TubeEndpoint,com.ltu.yealtube.endpoint.UserEndpoint,com.ltu.yealtube.endpoint.UserGroupEndpoint</param-value>
+   <param-value>com.ltu.yealtube.endpoint.CategoryEndpoint,com.ltu.yealtube.endpoint.CommentEndpoint,com.ltu.yealtube.endpoint.MailEndpoint,com.ltu.yealtube.endpoint.TubeEndpoint,com.ltu.yealtube.endpoint.UserEndpoint,com.ltu.yealtube.endpoint.UserGroupEndpoint</param-value>
   </init-param>
  </servlet>
+<!--  <servlet> -->
+<!--   <servlet-name>mailhandler</servlet-name> -->
+<!--   <servlet-class>MailHandlerServlet</servlet-class> -->
+<!-- </servlet> -->
+<!-- <servlet-mapping> -->
+<!--   <servlet-name>mailhandler</servlet-name> -->
+<!--   <url-pattern>/_ah/mail/*</url-pattern> -->
+<!-- </servlet-mapping> -->
+<security-constraint>
+  <web-resource-collection>
+    <web-resource-name>mail</web-resource-name>
+    <url-pattern>/_ah/mail/*</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>admin</role-name>
+  </auth-constraint>
+</security-constraint>
  <servlet-mapping>
   <servlet-name>SystemServiceServlet</servlet-name>
   <url-pattern>/_ah/spi/*</url-pattern>

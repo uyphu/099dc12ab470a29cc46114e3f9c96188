@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://yealtube.appspot.com/_ah/api",
+  "root" : "https://yealtubetest.appspot.com/_ah/api",
   "name" : "usergroupendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "https://yealtube.appspot.com/_ah/spi",
+    "bns" : "https://yealtubetest.appspot.com/_ah/spi",
     "deadline" : 65.0,
     "type" : "lily"
   },
@@ -27,27 +27,6 @@
   "ownerName" : "ltu.com",
   "packagePath" : "yealtube.domain",
   "methods" : {
-    "usergroupendpoint.getUserGroup" : {
-      "path" : "usergroup/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "usergroupendpoint.searchUserGroup" : {
       "path" : "search_userGroup",
       "httpMethod" : "GET",
@@ -69,6 +48,27 @@
           "count" : {
             "type" : "int32",
             "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "usergroupendpoint.getUserGroup" : {
+      "path" : "usergroup/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
           }
         },
         "body" : "empty"
@@ -188,6 +188,21 @@
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponse_UserGroup" : {
+        "id" : "CollectionResponse_UserGroup",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "UserGroup"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "UserGroup" : {
         "id" : "UserGroup",
         "type" : "object",
@@ -206,32 +221,17 @@
             "type" : "string"
           }
         }
-      },
-      "CollectionResponse_UserGroup" : {
-        "id" : "CollectionResponse_UserGroup",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "UserGroup"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
       }
     },
     "methods" : {
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup" : {
-        "response" : {
-          "$ref" : "UserGroup"
-        }
-      },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.searchUserGroup" : {
         "response" : {
           "$ref" : "CollectionResponse_UserGroup"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup" : {
+        "response" : {
+          "$ref" : "UserGroup"
         }
       },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData" : {
