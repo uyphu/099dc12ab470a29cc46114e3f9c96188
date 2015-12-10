@@ -10,11 +10,12 @@ angular.module('jhipsterApp')
                     roles: [],
                     pageTitle: 'errors.title'
                 },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/error/error.html'
-                    }
-                },
+                templateUrl: 'scripts/app/error/error.html',
+//                views: {
+//                    'content@': {
+//                        templateUrl: 'scripts/app/error/error.html'
+//                    }
+//                },
                 resolve: {
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                         $translatePartialLoader.addPart('error');
@@ -28,11 +29,12 @@ angular.module('jhipsterApp')
                 data: {
                     roles: []
                 },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/error/accessdenied.html'
-                    }
-                },
+                templateUrl: 'scripts/app/error/accessdenied.html',
+//                views: {
+//                    'content@': {
+//                        templateUrl: 'scripts/app/error/accessdenied.html'
+//                    }
+//                },
                 resolve: {
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                         $translatePartialLoader.addPart('error');

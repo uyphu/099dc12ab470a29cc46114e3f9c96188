@@ -21,15 +21,17 @@ public class AppUtils {
 	
 	public static String cryptWithMD5(String pass){
 		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] passBytes = pass.getBytes();
-			md.reset();
-			byte[] digested = md.digest(passBytes);
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < digested.length; i++) {
-				sb.append(Integer.toHexString(0xff & digested[i]));
+			if (pass != null) {
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] passBytes = pass.getBytes();
+				md.reset();
+				byte[] digested = md.digest(passBytes);
+				StringBuffer sb = new StringBuffer();
+				for (int i = 0; i < digested.length; i++) {
+					sb.append(Integer.toHexString(0xff & digested[i]));
+				}
+				return sb.toString();
 			}
-			return sb.toString();
 		} catch (NoSuchAlgorithmException ex) {
 			logger.error(ex.getMessage());
 		}

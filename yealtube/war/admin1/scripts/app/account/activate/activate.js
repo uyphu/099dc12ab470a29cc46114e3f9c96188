@@ -4,7 +4,7 @@ angular.module('jhipsterApp')
     .config(function ($stateProvider) {
         $stateProvider
 	        .state('activate',{
-	        	parent: 'site',
+	        	parent: 'account',
 	            templateUrl:'scripts/app/account/activate/activate.html',
 	            controller: 'ActivationController',
 	            url:'/activate?key',

@@ -8,6 +8,22 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         $rootScope.VERSION = VERSION;
         $rootScope.LOADED = false;
         
+        AppConstant.API_LOAD_TYPE = 2;
+        $window.init = function() {
+        	$rootScope.initgapi();
+		};
+		
+        $rootScope.initgapi = function() {
+			if (!AppConstant.USER_LOGIN_ENDPOINT_LOADED) {
+				Auth.init().then(function(){
+					console.log('Loaded login endpoint.');
+				},
+				function(){
+					console.log(ErrorCode.ERROR_INIT_ENDPOINT_SERVICE);
+				});
+			} 
+		};
+        
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             $rootScope.toState = toState;
             $rootScope.toStateParams = toStateParams;
@@ -41,9 +57,27 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         $rootScope.back = function() {
             // If previous state is 'activate' or do not exist go to 'home'
             if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {
-                $state.go('home');
+                //$state.go('home');
+            	$state.go('dashboard.home');
             } else {
                 $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
+            }
+        };
+        
+        
+    })
+    .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
+        return {
+            // Add authorization token to headers
+            request: function (config) {
+                config.headers = config.headers || {};
+                var token = localStorageService.get('token');
+                
+                if (token && token.expires && token.expires > new Date().getTime()) {
+                  config.headers['x-auth-token'] = token.token;
+                }
+                
+                return config;
             }
         };
     })
@@ -57,26 +91,68 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
 
-        //$urlRouterProvider.otherwise('/');
-        $urlRouterProvider.otherwise('/dashboard/home');
-        $stateProvider.state('site1', {
-            'abstract': true,
-            views: {
-                'navbar@': {
-                    templateUrl: 'scripts/components/navbar/navbar.html',
-                    controller: 'NavbarController'
-                }
+        $urlRouterProvider.otherwise('/');
+        //$urlRouterProvider.otherwise('/dashboard/home');
+//        $stateProvider.state('site', {
+//            'abstract': true,
+//            views: {
+//                'navbar@': {
+//                    templateUrl: 'scripts/components/navbar/navbar.html',
+//                    controller: 'NavbarController'
+//                }
+//            },
+//            resolve: {
+//                authorize: ['Auth',
+//                    function (Auth) {
+//                        return Auth.authorize();
+//                    }
+//                ],
+//                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+//                    $translatePartialLoader.addPart('global');
+//                    $translatePartialLoader.addPart('language');
+//                }]
+//            }
+//        });
+        
+        $stateProvider
+        .state('site', {
+        	'abstract': true,
+        	templateUrl: 'scripts/app/site/site.html',
+            controller: 'SiteController',
+            data: {
+                roles: []
             },
             resolve: {
-                authorize: ['Auth',
-                    function (Auth) {
-                        return Auth.authorize();
-                    }
-                ],
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('global');
+                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                    $translatePartialLoader.addPart('main');
+                    $translatePartialLoader.addPart('login');
                     $translatePartialLoader.addPart('language');
+                    //return $translate.refresh();
                 }]
+                
+            }
+        });
+        
+        $stateProvider
+        .state('dashboard', {
+        	'abstract': true,
+            templateUrl: 'scripts/app/main/main.html',
+            controller: 'MainController',
+            data: {
+                roles: ['ROLE_USER']
+            },
+            resolve: {
+            	authorize: ['Auth',
+                          function (Auth) {
+                              return Auth.authorize();
+                          }
+                      ],
+                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                    $translatePartialLoader.addPart('main');
+                    $translatePartialLoader.addPart('language');
+                    return $translate.refresh();
+                }]
+                
             }
         });
         

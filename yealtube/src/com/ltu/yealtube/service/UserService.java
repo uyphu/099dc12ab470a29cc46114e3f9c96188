@@ -1,13 +1,12 @@
 package com.ltu.yealtube.service;
 
-import java.util.Calendar;
-
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
 import org.apache.log4j.Logger;
 
 import com.google.api.server.spi.response.CollectionResponse;
+import com.ltu.yealtube.constants.Constants;
 import com.ltu.yealtube.dao.UserDao;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.exception.CommonException;
@@ -25,7 +24,29 @@ public class UserService {
 	private final Logger log = Logger.getLogger(UserService.class);
 	
 	/** The user dao. */
-	private UserDao userDao = new UserDao();
+	private UserDao userDao = UserDao.getInstance();
+	
+	/** The instance. */
+	private static UserService instance = null;
+	
+	/**
+	 * Instantiates a new user dao.
+	 */
+	public UserService() {
+		
+	}
+	
+	/**
+	 * Gets the single instance of UserService.
+	 *
+	 * @return single instance of UserService
+	 */
+	public static UserService getInstance() {
+		if (instance == null) {
+			instance = new UserService();
+		}
+		return instance;
+	}
 	
 	/**
 	 * List user.
@@ -65,9 +86,14 @@ public class UserService {
 	 * @throws CommonException the common exception
 	 */
 	public User insertUser(User user) throws CommonException {
+		
 		// If if is not null, then check if it exists. If yes, throw an
 		// Exception
 		// that it is already present
+		if (user.getLogin() == null) {
+			throw new CommonException(ErrorCode.BAD_REQUEST_EXCEPTION,
+					ErrorCodeDetail.ERROR_USER_NOT_VALID);
+		}
 		if (user.getId() != null) {
 			if (user.getId() == 0) {
 				user.setId(null);
@@ -79,21 +105,17 @@ public class UserService {
 			}
 		}
 		
-		
-		User objUser = userDao.findOneByLogin(user.getLogin());
+		User objUser = userDao.findOneByLogin(user.getLogin(), user.getType());
         if (objUser != null) {
         	throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
 					ErrorCodeDetail.ERROR_CONFLICT_LOGIN);
         } else {
-            if (userDao.findOneByEmail(user.getEmail()) != null) {
-//            	throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-//    					ErrorCodeDetail.ERROR_DUPLICATED_EMAIL);
-            	//FIXME comment it for testing 
+            if (userDao.findOneByEmail(user.getEmail(), user.getType()) != null) {
+            	throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
+    					ErrorCodeDetail.ERROR_CONFLICT_EMAIL);
             }
-            
             return createUserInformation(user);
         }
-		
 	}
 	
 	/**
@@ -104,31 +126,17 @@ public class UserService {
 	 * @throws CommonException the common exception
 	 */
 	public User updateUser(User user) throws CommonException {
-		User oldUser = findRecord(user.getId());
-		if (oldUser == null) {
-			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
+		
+		if (user.getId() == null && Constants.SYSTEM_USER.equals(user.getType())) {
+			return insertUser(user);
+		} else {
+			User oldUser = userDao.findOneByLogin(user.getLogin(), user.getType());
+			if (oldUser != null) {
+				return userDao.update(user);
+			} else {
+				return insertUser(user);
+			}
 		}
-		//User pos = null; //dao.getUserByName(user.getName());
-		//FIXME Check this logic
-		//if (pos == null || pos.getId().equals(user.getId())) {
-			//oldUser.setName(user.getName());
-//			if (user.getManager() != null) {
-//				UserDao userDao = new UserDao();
-//				User manager = userDao.getUserByLogin(user.getManager());
-//				if (manager != null) {
-//					user.setManager(manager.getLogin());
-//				} else {
-//					throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-//							ErrorCodeDetail.ERROR_USER_NOT_FOUND);
-//				}
-//			}
-			userDao.update(user);
-		//} else {
-//			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-//					ErrorCodeDetail.ERROR_EXIST_OBJECT);
-		//}
-		return user;
 	}
 	
 	/**
@@ -154,8 +162,6 @@ public class UserService {
 	 */
 	private User createUserInformation(User user) {
 
-		//wUser user = new User();
-		
 		//FIXME add authorities.
 //		Authority authority = authorityRepository.findOne("ROLE_USER");
 //		Set<Authority> authorities = new HashSet<>();
@@ -168,19 +174,22 @@ public class UserService {
 //		user.setEmail(email);
 //		user.setLangKey(langKey);
 		// new user is not active
-		user.setActivated(false);
-		// new user gets registration key
-		user.setActivationKey(RandomUtil.generateActivationKey());
+		if (Constants.SYSTEM_USER.equals(user.getType())) {
+			user.setActivated(false);
+			// new user gets registration key
+			user.setActivationKey(RandomUtil.generateActivationKey());
+		} else {
+			user.setActivated(true);
+		}
 		//FIXME handle ROLE_USER
 //		authorities.add(authority);
 //		user.setAuthorities(authorities);
 //		userRepository.save(user);
-		UserDao dao = new UserDao();
-		dao.persist(user);
-        //FIXME adding baseUrl to properties file
-        String baseUrl = "https://yealtubetest.appspot.com/admin1";
-        MailService mailService = new MailService();
-        mailService.sendActivationEmail(user, baseUrl);
+		userDao.persist(user);
+		if (Constants.SYSTEM_USER.equals(user.getType())) {
+			 MailService mailService = new MailService();
+		     mailService.sendActivationEmail(user, Constants.BASE_URL);
+		}
 		log.debug("Created Information for User: " + user.toString());
 		return user;
 	}
@@ -248,24 +257,28 @@ public class UserService {
 	 * @param login the login
 	 * @param password the password
 	 * @return the user
+	 * @throws CommonException the common exception
 	 */
 	public User login(String login, String password) throws CommonException {
-		User user = userDao.login(login, password);
-		if (user != null ) {
-			if (user.isActivated()) {
-				user.setToken(AppUtils.generateToken(user.getLogin()));
-				user.setTokenDate(Calendar.getInstance().getTime());
-				userDao.update(user);
-				return user;
+		if (login != null && password != null) {
+			User user = userDao.login(login, password);
+			if (user != null ) {
+				if (user.isActivated()) {
+					user.setToken(AppUtils.generateToken(user.getLogin()));
+					userDao.update(user);
+					return user;
+				} else {
+					throw new CommonException(ErrorCode.FORBIDDEN_EXCEPTION,
+							ErrorCodeDetail.ERROR_NOT_ACTIVATED); 
+				}
 			} else {
-				throw new CommonException(ErrorCode.FORBIDDEN_EXCEPTION,
-						ErrorCodeDetail.ERROR_NOT_ACTIVATED); 
+				throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
+						ErrorCodeDetail.ERROR_USER_NOT_FOUND); 
 			}
 		} else {
 			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
 					ErrorCodeDetail.ERROR_USER_NOT_FOUND); 
 		}
-		
 	}
 	
 	/**
@@ -302,9 +315,38 @@ public class UserService {
 		return dao.findOneByLogin(key);
     }
 	
+	/**
+	 * Find one by activation key.
+	 *
+	 * @param key the key
+	 * @return the user
+	 * @throws CommonException the common exception
+	 */
 	public User findOneByActivationKey(String key) throws CommonException {
 		UserDao dao = new UserDao();
 		return dao.findOneByActivationKey(key);
     }
+	
+	/**
+	 * Adds the authority.
+	 *
+	 * @param userId the user id
+	 * @param role the role
+	 * @throws CommonException the common exception
+	 */
+	public void addAuthority(Long userId, String role) throws CommonException {
+		UserDao dao = new UserDao();
+		dao.addRole(userId, role);
+	}
+	
+	/**
+	 * Find one by token.
+	 *
+	 * @param token the token
+	 * @return the user
+	 */
+	public User findOneByToken(String token) {
+		return userDao.findOneByToken(token);
+	}
 
 }

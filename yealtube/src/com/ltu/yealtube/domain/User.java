@@ -1,10 +1,21 @@
 package com.ltu.yealtube.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.jdo.annotations.Column;
+
+import com.google.api.server.spi.config.AnnotationBoolean;
+import com.google.api.server.spi.config.ApiResourceProperty;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.annotation.OnLoad;
+import com.ltu.yealtube.dao.AuthorityDao;
 
 /**
  * The Class User.
@@ -58,9 +69,6 @@ public class User {
     @Index
     private String token;
     
-    /** The token date. */
-    private Date tokenDate;
-
     /** The reset key. */
     private String resetKey;
 
@@ -78,6 +86,40 @@ public class User {
 	
 	/** The ip. */
 	private String ip;
+	
+	@Index
+	@Column(name="type", length=1)
+	private String type;
+	
+	@Load
+    private List<Key<Authority>> authorityKeys;
+	
+	/** The authority ids. */
+	@IgnoreSave
+	private List<Long> authorityIds;
+	
+	/** The authorities. */
+	@IgnoreSave
+	private List<Authority> authorities;
+	
+	/** The roles. */
+	@IgnoreSave
+	private List<String> roles;
+	
+	@OnLoad
+	private void onLoad() {
+		
+		if (authorityKeys != null) {
+			roles = new ArrayList<String>();
+			for (Key<Authority> key : authorityKeys) {
+				AuthorityDao dao = new AuthorityDao();
+				Authority authority = dao.find(key.getId());
+				if (authority != null) {
+					roles.add(authority.getName());
+				}
+			}
+		}
+	}
 
 	/**
 	 * Gets the id.
@@ -403,22 +445,45 @@ public class User {
 		this.token = token;
 	}
 
-	/**
-	 * Gets the token date.
-	 *
-	 * @return the token date
-	 */
-	public final Date getTokenDate() {
-		return this.tokenDate;
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE) 
+	public final List<Key<Authority>> getAuthorityKeys() {
+		return this.authorityKeys;
 	}
 
-	/**
-	 * Sets the token date.
-	 *
-	 * @param tokenDate the new token date
-	 */
-	public final void setTokenDate(Date tokenDate) {
-		this.tokenDate = tokenDate;
+	public final void setAuthorityKeys(List<Key<Authority>> authorityKeys) {
+		this.authorityKeys = authorityKeys;
+	}
+
+	public final List<Long> getAuthorityIds() {
+		return this.authorityIds;
+	}
+
+	public final void setAuthorityIds(List<Long> authorityIds) {
+		this.authorityIds = authorityIds;
+	}
+
+	public final List<Authority> getAuthorities() {
+		return this.authorities;
+	}
+
+	public final void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
+
+	public final List<String> getRoles() {
+		return this.roles;
+	}
+
+	public final void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	
+	public final String getType() {
+		return this.type;
+	}
+
+	public final void setType(String type) {
+		this.type = type;
 	}
 
 	/**

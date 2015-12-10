@@ -30,7 +30,8 @@ angular.module('jhipsterApp')
 	                $scope.authenticationError = false;
 	                $scope.passwordError = false;
 	           	   	if ($rootScope.previousStateName === 'register') {
-	                    $state.go('home');
+	                    //$state.go('home');
+	           	   		$state.go('dashboard.home');
 	                } else {
 	                    $rootScope.back();
 	                }
@@ -38,36 +39,36 @@ angular.module('jhipsterApp')
             });
         };
         
-        $window.init = function() {
-		  	$scope.$apply($scope.initgapi);
-		};
-		
-		$scope.initgapi = function() {
-			if (!AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
-				Auth.init().then(function(){
-					if (AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
-						//getCustomersSummary('customersSummary',vm.currentPage - 1,vm.pageSize);
-						console.log("userprofileendpoint loaded...")
-					}
-				},
-				function(){
-					console.log(ErrorCode.ERROR_INIT_ENDPOINT_SERVICE);
-				});
-			}
-			
-		};
-		
-		function loadData() {
-			if (AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
-				//getCustomersSummary('customersSummary',vm.currentPage - 1,vm.pageSize);
-			} else {
-				if (AppConstant.API_LOAD_TYPE != 0) {
-					$scope.initgapi();
-				} else {
-					AppConstant.API_LOAD_TYPE = 2;
-				}
-			}
-		};
+//        $window.init = function() {
+//		  	$scope.$apply($scope.initgapi);
+//		};
+//		
+//		$scope.initgapi = function() {
+//			if (!AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
+//				Auth.init().then(function(){
+//					if (AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
+//						//getCustomersSummary('customersSummary',vm.currentPage - 1,vm.pageSize);
+//						console.log("userprofileendpoint loaded...")
+//					}
+//				},
+//				function(){
+//					console.log(ErrorCode.ERROR_INIT_ENDPOINT_SERVICE);
+//				});
+//			}
+//			
+//		};
+//		
+//		function loadData() {
+//			if (AppConstant.USER_PROFILE_ENDPOINT_LOADED) {
+//				//getCustomersSummary('customersSummary',vm.currentPage - 1,vm.pageSize);
+//			} else {
+//				if (AppConstant.API_LOAD_TYPE != 0) {
+//					$scope.initgapi();
+//				} else {
+//					AppConstant.API_LOAD_TYPE = 2;
+//				}
+//			}
+//		};
 		
 		function showError(errorMsg) {
  		   	if (errorMsg.indexOf('[613]') != -1) {
@@ -100,5 +101,5 @@ angular.module('jhipsterApp')
  		   	$scope.spinneractive = false;
  	   	});
 		
-		loadData();
+		//loadData();
     });

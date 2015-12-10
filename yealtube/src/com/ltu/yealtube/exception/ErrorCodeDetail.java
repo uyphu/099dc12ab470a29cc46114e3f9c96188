@@ -52,7 +52,13 @@ public enum ErrorCodeDetail {
 	ERROR_INVALID_PASSWORD(614, "[614] Invalid password"),
 	
 	/** The error user not found. */
-	ERROR_USER_NOT_FOUND(615, "[615] User not found");
+	ERROR_USER_NOT_FOUND(615, "[615] User not found"),
+	
+	/** The error user not authenticated. */
+	ERROR_USER_NOT_AUTHENTICATED(616, "[616] User not authenticated"),
+	
+	/** The error user not valid. */
+	ERROR_USER_NOT_VALID(617, "[617] User not valid");
 
 	/** The id. */
 	private final int id;

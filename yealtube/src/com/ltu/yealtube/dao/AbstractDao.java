@@ -12,6 +12,7 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
+import com.ltu.yealtube.domain.Authority;
 import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.domain.Comment;
 import com.ltu.yealtube.domain.Tube;
@@ -27,6 +28,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(UserGroup.class);
 		ObjectifyService.register(Category.class);
+		ObjectifyService.register(Authority.class);
 	}
 
 	public static Objectify ofy() {

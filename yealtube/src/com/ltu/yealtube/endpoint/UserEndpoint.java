@@ -8,6 +8,7 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.ltu.yealtube.constants.Constants;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.service.UserService;
@@ -29,7 +30,10 @@ public class UserEndpoint {
 	 * @param count The number of users
 	 * @return a list of Users
 	 */
-	@ApiMethod(name = "listUser")
+	@ApiMethod(name = "listUser", scopes = {Constants.EMAIL_SCOPE},
+			clientIds = {Constants.WEB_CLIENT_ID, 
+		     com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID},
+		     audiences = {Constants.ANDROID_AUDIENCE})
 	public CollectionResponse<User> listUser(
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) {
@@ -165,5 +169,10 @@ public class UserEndpoint {
 		User user = new User("login" + value, "password", "uyphu@yahoo.com");
 		return insertUser(user);
     }
+	
+	@ApiMethod(name = "addAuthority", httpMethod = HttpMethod.POST, path = "addAuthority")
+	public void addAuthority(@Named("userId") Long userId, @Named("role") String role) throws CommonException {
+		userService.addAuthority(userId, role);
+	}
 	
 }

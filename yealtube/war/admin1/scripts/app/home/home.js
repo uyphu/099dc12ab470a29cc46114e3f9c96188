@@ -4,11 +4,12 @@ angular.module('jhipsterApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('dashboard.home', {
-                url: '/home',
+            	parent: 'dashboard',
+                url: '/',
                 templateUrl: 'scripts/app/home/home.html',
                 controller: 'MainController',
                 data: {
-                    roles: []
+                	roles: ['ROLE_USER']
                 },
                 resolve: {
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {

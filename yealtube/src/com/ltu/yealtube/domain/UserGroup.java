@@ -61,7 +61,6 @@ public class UserGroup {
 	}
 
 	public UserGroup(String name, String permission, String key) {
-		this.id = id;
 		this.name = name;
 		this.permission = permission;
 		this.key = key;
