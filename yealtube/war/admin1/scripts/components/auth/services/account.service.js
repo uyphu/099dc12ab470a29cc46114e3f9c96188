@@ -1,29 +1,16 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .factory('Account', function Account($resource, $q) {
-//        return $resource('api/account', {}, {
-//            'get': { method: 'GET', params: {}, isArray: false,
-//                interceptor: {
-//                    response: function(response) {
-//                        // expose response
-//                        return response;
-//                    }
-//                }
-//            }
-//        });
+    .factory('Account', function Account($resource, $q, GApi) {
     	return {
     		getAccount: function () {
     			var p=$q.defer();
-//    			gapi.client.userendpoint.getAccount().execute(function(resp) {
-//                    if (resp != null) {
-//                    	p.resolve(AppConstant.ACCOUNT);
-//    				} else {
-//    					p.resolve(null);
-//    				}
-//    			});
-    			p.resolve(AppConstant.ACCOUNT);
-    			return p.promise;
+	        	GApi.executeAuth(AppConstant.USER_ENDPOINT, 'getAccount').then(function(resp) {
+	        		  p.resolve(resp);
+	          	}).catch(function (err) {
+	          		  p.resolve(err);
+		        });
+	        	return p.promise;
     		},
     		save: function (account){
     			var p=$q.defer();

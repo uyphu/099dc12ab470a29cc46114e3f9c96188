@@ -19,11 +19,11 @@ public class AppUtils {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(AppUtils.class.getName());
 	
-	public static String cryptWithMD5(String pass){
+	public static String cryptWithMD5(String password){
 		try {
-			if (pass != null) {
+			if (password != null) {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				byte[] passBytes = pass.getBytes();
+				byte[] passBytes = password.getBytes();
 				md.reset();
 				byte[] digested = md.digest(passBytes);
 				StringBuffer sb = new StringBuffer();

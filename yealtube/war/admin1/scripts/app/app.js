@@ -1,16 +1,50 @@
 'use strict';
 
 angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bootstrap',
-    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'infinite-scroll', 'angularSpinner'])
-
-    .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
+    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'infinite-scroll', 
+    'angularSpinner', 'angular-google-gapi'])
+    
+    .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, 
+    		ENV, VERSION, GAuth, GApi, GData) {
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.LOADED = false;
         
+        //Loading facebook
+        $window.fbAsyncInit = function() {
+	        FB.init({
+	          appId      : '142987259399471',
+	          xfbml      : true,
+	          version    : 'v2.5'
+	        });
+	      };
+	
+	      (function(d, s, id){
+	         var js, fjs = d.getElementsByTagName(s)[0];
+	         if (d.getElementById(id)) {return;}
+	         js = d.createElement(s); js.id = id;
+	         js.src = "//connect.facebook.net/en_US/sdk.js";
+	         fjs.parentNode.insertBefore(js, fjs);
+	       }(document, 'script', 'facebook-jssdk'));
+        
+		var BASE;
+		if($window.location.hostname == 'localhost') {
+		BASE = 'http://localhost:9494/_ah/api';
+		} else {
+		    BASE = 'https://yealtubetest.appspot.com/_ah/api';
+		}
+		
+		  BASE = 'https://yealtubetest.appspot.com/_ah/api';
+		
+		GApi.load('userxauthtokenendpoint', 'v1', BASE);
+		GApi.load('userendpoint', 'v1', BASE);
+		GApi.load('calendar', 'v3');
+		GAuth.setClient(AppConstant.CLIENT_ID);
+		GAuth.setScope('https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar.readonly');
+	      
         AppConstant.API_LOAD_TYPE = 2;
         $window.init = function() {
-        	$rootScope.initgapi();
+        	//$rootScope.initgapi();
 		};
 		
         $rootScope.initgapi = function() {
@@ -66,21 +100,22 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         
         
     })
-    .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
-        return {
-            // Add authorization token to headers
-            request: function (config) {
-                config.headers = config.headers || {};
-                var token = localStorageService.get('token');
-                
-                if (token && token.expires && token.expires > new Date().getTime()) {
-                  config.headers['x-auth-token'] = token.token;
-                }
-                
-                return config;
-            }
-        };
-    })
+//    .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
+//        return {
+//            // Add authorization token to headers
+//            request: function (config) {
+//                config.headers = config.headers || {};
+//                var token = localStorageService.get('token');
+//                
+//                if (token && token.expires && token.expires > new Date().getTime()) {
+//                  config.headers['x-auth-token'] = token.token;
+//                  config.headers['x-type-token'] = token.type;
+//                }
+//                
+//                return config;
+//            }
+//        };
+//    })
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, 
     		tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider, usSpinnerConfigProvider) {
 
@@ -114,24 +149,24 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
 //            }
 //        });
         
-        $stateProvider
-        .state('site', {
-        	'abstract': true,
-        	templateUrl: 'scripts/app/site/site.html',
-            controller: 'SiteController',
-            data: {
-                roles: []
-            },
-            resolve: {
-                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
-                    $translatePartialLoader.addPart('main');
-                    $translatePartialLoader.addPart('login');
-                    $translatePartialLoader.addPart('language');
-                    //return $translate.refresh();
-                }]
-                
-            }
-        });
+//        $stateProvider
+//        .state('site', {
+//        	'abstract': true,
+//        	templateUrl: 'scripts/app/site/site.html',
+//            controller: 'SiteController',
+//            data: {
+//                roles: []
+//            },
+//            resolve: {
+//                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+//                    $translatePartialLoader.addPart('main');
+//                    $translatePartialLoader.addPart('login');
+//                    $translatePartialLoader.addPart('language');
+//                    //return $translate.refresh();
+//                }]
+//                
+//            }
+//        });
         
         $stateProvider
         .state('dashboard', {
@@ -139,14 +174,14 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
             templateUrl: 'scripts/app/main/main.html',
             controller: 'MainController',
             data: {
-                roles: ['ROLE_USER']
+                roles: []
             },
             resolve: {
-            	authorize: ['Auth',
-                          function (Auth) {
-                              return Auth.authorize();
-                          }
-                      ],
+//            	authorize: ['Auth',
+//                          function (Auth) {
+//                              return Auth.authorize();
+//                          }
+//                      ],
                 mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('main');
                     $translatePartialLoader.addPart('language');

@@ -96,5 +96,10 @@ AppConstant.APPROVED = "Approved";
 /** The Constant CANCELLED. */
 AppConstant.CANCELLED = "Cancelled";
 
+/** The Constant USERXAUTHTOKEN_ENDPOINT. */
+AppConstant.USERXAUTHTOKEN_ENDPOINT = "userxauthtokenendpoint"; 
+
+/** The Constant USER_ENDPOINT. */
+AppConstant.USER_ENDPOINT = "userendpoint"; 
 
 

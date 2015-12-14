@@ -63,4 +63,16 @@ public class Constants {
     /** The Constant BASE_URL. */
     public static final String BASE_URL = "https://yealtubetest.appspot.com/admin1";
     
+    /** The Constant ADMIN_EMAIL. */
+    public static final String ADMIN_EMAIL = "uyphu@yahoo.com";
+    
+    /** The Constant X_AUTH_TOKEN. */
+    public static final String X_AUTH_TOKEN = "x-auth-token";
+    
+	/** The Constant X_TYPE_TOKEN. */
+	public static final String X_TYPE_TOKEN = "x-type-token";
+	
+	/** The Constant EMPTY_STRING. */
+	public static final String EMPTY_STRING = "";
+    
 }

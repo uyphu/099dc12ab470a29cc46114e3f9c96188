@@ -5,7 +5,9 @@
             "password": "Password",
             "password.placeholder": "Your password",
             "rememberme": "Automatic Login",
-            "button": "Authenticate"
+            "button": "Authenticate",
+            "google.button": "Login with Google",
+            "facebook.button": "Login with facebook"
         },
         "messages": {
             "error": {

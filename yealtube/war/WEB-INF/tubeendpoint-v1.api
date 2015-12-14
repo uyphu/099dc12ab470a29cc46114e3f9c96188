@@ -56,6 +56,22 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "tubeendpoint.updateTube" : {
+      "path" : "tube",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "tubeendpoint.getTube" : {
       "path" : "tube/{id}",
       "httpMethod" : "GET",
@@ -72,22 +88,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tubeendpoint.updateTube" : {
-      "path" : "tube",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -258,15 +258,15 @@
           "$ref" : "CollectionResponse_Tube"
         }
       },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.getTube" : {
-        "response" : {
-          "$ref" : "Tube"
-        }
-      },
       "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube" : {
         "request" : {
           "$ref" : "Tube"
         },
+        "response" : {
+          "$ref" : "Tube"
+        }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.getTube" : {
         "response" : {
           "$ref" : "Tube"
         }

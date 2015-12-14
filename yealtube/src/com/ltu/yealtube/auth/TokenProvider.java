@@ -1,11 +1,11 @@
 package com.ltu.yealtube.auth;
 
-import com.ltu.yealtube.domain.User;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.geronimo.mail.util.Hex;
+
+import com.ltu.yealtube.domain.User;
 
 
 /**
@@ -18,6 +18,16 @@ public class TokenProvider {
     
     /** The token validity. */
     private final int tokenValidity;
+    
+    /** The instance. */
+	private static TokenProvider instance = null;
+	
+	public static TokenProvider getInstance(String secretKey, int tokenValidity) {
+		if (instance == null) {
+			instance = new TokenProvider(secretKey, tokenValidity);
+		}
+		return instance;
+	}
 
     /**
      * Instantiates a new token provider.

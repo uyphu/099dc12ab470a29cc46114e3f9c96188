@@ -66,7 +66,7 @@ public class User {
     private String activationKey;
     
     /** The token. */
-    @Index
+    @IgnoreSave
     private String token;
     
     /** The reset key. */

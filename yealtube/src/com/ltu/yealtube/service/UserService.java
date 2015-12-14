@@ -261,12 +261,19 @@ public class UserService {
 	 */
 	public User login(String login, String password) throws CommonException {
 		if (login != null && password != null) {
-			User user = userDao.login(login, password);
+			User user = userDao.findOneByLogin(login, Constants.SYSTEM_USER);
 			if (user != null ) {
+				
 				if (user.isActivated()) {
-					user.setToken(AppUtils.generateToken(user.getLogin()));
-					userDao.update(user);
-					return user;
+					if (user.getPassword().equals(AppUtils.cryptWithMD5(password))) {
+						user.setToken(AppUtils.generateToken(user.getLogin()));
+						userDao.update(user);
+						return user;
+					} else {
+						throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION,
+								ErrorCodeDetail.ERROR_INVALID_PASSWORD);
+					}
+					
 				} else {
 					throw new CommonException(ErrorCode.FORBIDDEN_EXCEPTION,
 							ErrorCodeDetail.ERROR_NOT_ACTIVATED); 
@@ -347,6 +354,28 @@ public class UserService {
 	 */
 	public User findOneByToken(String token) {
 		return userDao.findOneByToken(token);
+	}
+	
+	/**
+	 * Find one by login.
+	 *
+	 * @param login the login
+	 * @param userType the user type
+	 * @return the user
+	 */
+	public User findOneByLogin(String login, String userType) {
+		return userDao.findOneByLogin(login, userType);
+	}
+	
+	/**
+	 * Find one by email.
+	 *
+	 * @param email the email
+	 * @param userType the user type
+	 * @return the user
+	 */
+	public User findOneByEmail(String email, String userType) {
+		return userDao.findOneByEmail(email, userType);
 	}
 
 }

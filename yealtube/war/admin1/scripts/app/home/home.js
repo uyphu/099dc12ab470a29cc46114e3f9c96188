@@ -9,7 +9,7 @@ angular.module('jhipsterApp')
                 templateUrl: 'scripts/app/home/home.html',
                 controller: 'MainController',
                 data: {
-                	roles: ['ROLE_USER']
+                	roles: []
                 },
                 resolve: {
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {

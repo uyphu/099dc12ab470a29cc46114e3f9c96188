@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, 
+    		Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
         return {
         	login: function (credentials, callback) {
                 //var cb = callback || angular.noop;
                 var deferred = $q.defer();
-
                 AuthServerProvider.login(credentials).then(function (data) {
                     // retrieve the logged account information
                 	if (data.error == null) {
-                		AppConstant.ACCOUNT = data;
+                		//AppConstant.ACCOUNT = data;
                         Principal.identity(true).then(function(account) {
                             // After the login the language will be changed to
                             // the language selected by the user during his registration
@@ -18,13 +18,10 @@ angular.module('jhipsterApp')
                             $translate.refresh();
                             deferred.resolve(data);
                         });
-                    	//deferred.resolve(data);
 					} else {
 						deferred.resolve(data);
 					}
-                	
                 });
-
                 return deferred.promise;
             },
 

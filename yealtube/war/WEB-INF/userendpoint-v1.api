@@ -64,25 +64,19 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.removeUser" : {
-      "path" : "user/{id}",
-      "httpMethod" : "DELETE",
+    "userendpoint.getAccount" : {
+      "path" : "getAccount",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.removeUser",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.getAccount",
       "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
         "body" : "empty"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "userendpoint.searchUser" : {
@@ -114,9 +108,30 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "userendpoint.removeUser" : {
+      "path" : "user/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.removeUser",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "userendpoint.activateAccount" : {
       "path" : "activateAccount",
-      "httpMethod" : "GET",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
@@ -162,7 +177,7 @@
     },
     "userendpoint.testInsert" : {
       "path" : "testInsert",
-      "httpMethod" : "GET",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
@@ -430,12 +445,17 @@
           "$ref" : "User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.removeUser" : {
+      "com.ltu.yealtube.endpoint.UserEndpoint.getAccount" : {
+        "response" : {
+          "$ref" : "User"
+        }
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.searchUser" : {
         "response" : {
           "$ref" : "CollectionResponse_User"
         }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.removeUser" : {
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount" : {
         "response" : {
