@@ -102,4 +102,16 @@ AppConstant.USERXAUTHTOKEN_ENDPOINT = "userxauthtokenendpoint";
 /** The Constant USER_ENDPOINT. */
 AppConstant.USER_ENDPOINT = "userendpoint"; 
 
+/** The Constant CATEGORY_ENDPOINT. */
+AppConstant.CATEGORY_ENDPOINT = "categoryendpoint"; 
+
+/** The Constant TUBE_ENDPOINT. */
+AppConstant.TUBE_ENDPOINT = "tubeendpoint"; 
+
+/** The Constant USER_ENDPOINT. */
+AppConstant.USER_ENDPOINT = "userendpoint"; 
+
+/** The Constant USERGROUP_ENDPOINT. */
+AppConstant.USERGROUP_ENDPOINT = "usergroupendpoint"; 
+
 

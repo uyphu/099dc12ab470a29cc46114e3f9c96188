@@ -389,4 +389,32 @@ public class UserDao extends AbstractDao<User> {
 		}
 	}
 	
+	@Override
+	public User update(User user) {
+		User oldUser = find(user.getId());
+		if (user.getFirstName() != null) {
+			oldUser.setFirstName(user.getFirstName());
+		}
+		if (user.getLastName() != null) {
+			oldUser.setLastName(user.getLastName());
+		}
+		if (user.getLangKey() != null) {
+			oldUser.setLangKey(user.getLangKey());
+		}
+		if (user.getEmail() != null) {
+			oldUser.setEmail(user.getEmail());
+		}
+		if (user.getUserGroupId() != null) {
+			oldUser.setUserGroupId(user.getUserGroupId());
+		}
+		
+		if (user.isActivated() != oldUser.isActivated()) {
+			oldUser.setActivated(user.isActivated());
+		}
+		if (!user.getPassword().equals(oldUser.getPassword())) {
+			oldUser.setPassword(AppUtils.cryptWithMD5(user.getPassword()));
+		}
+		return super.update(oldUser);
+	}
+	
 }

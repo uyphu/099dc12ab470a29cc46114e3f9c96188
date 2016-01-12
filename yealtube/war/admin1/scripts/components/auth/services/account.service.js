@@ -5,23 +5,25 @@ angular.module('jhipsterApp')
     	return {
     		getAccount: function () {
     			var p=$q.defer();
-	        	GApi.executeAuth(AppConstant.USER_ENDPOINT, 'getAccount').then(function(resp) {
-	        		  p.resolve(resp);
-	          	}).catch(function (err) {
-	          		  p.resolve(err);
-		        });
+    			
+    			GApi.execute(AppConstant.USER_ENDPOINT, 'getAccount', null).then (function(resp){
+    				 p.resolve(resp);
+    			},function(error){
+					console.log(ErrorCode.ERROR_CALL_ENDPOINT_SERVICE + error);
+					p.reject(error);
+				});
+    			
 	        	return p.promise;
     		},
     		save: function (account){
     			var p=$q.defer();
     			
-    			gapi.client.userendpoint.updateUser(account).execute(function(resp) {
-                    if (resp != null) {
-                    	p.resolve(resp);
-    				} else {
-    					p.resolve(null);
-    				}
-    			});
+    			GApi.execute(AppConstant.USER_ENDPOINT, 'updateUser', null).then (function(resp){
+   				 p.resolve(resp);
+    			},function(error){
+					console.log(ErrorCode.ERROR_CALL_ENDPOINT_SERVICE + error);
+					p.reject(error);
+				});
     			return p.promise;
     		}
     	}

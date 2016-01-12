@@ -1,0 +1,69 @@
+<div>
+   <h2><span translate="yealtube.user.detail.title">User</span> {{user.id}}</h2>
+   <div class="table-responsive">
+       <table class="table table-striped">
+           <thead>
+               <tr>
+                   <th translate="entity.detail.field">Field</th>
+                   <th translate="entity.detail.value">Value</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>
+                       <span translate="yealtube.user.login">login</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{user.login}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.user.email">email</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{user.email}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.user.firstName">firstName</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{user.firstName}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.user.lastName">lastName</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{user.lastName}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.user.userGroupId">userGroupId</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{user.userGroupId}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.user.activated">activated</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{user.activated}}" readonly>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+
+   <button type="submit"
+           ui-sref="dashboard.user"
+           class="btn btn-info">
+       <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+   </button>
+</div>

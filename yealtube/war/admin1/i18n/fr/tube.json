@@ -1,0 +1,36 @@
+{
+    "yealtube": {
+        "tube" : {
+            "home": {
+                "title": "Tubesfr",
+                "createLabel": "Create a new Tube",
+                "createOrEditLabel": "Create or edit a Tube"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Tube {{ id }}?"
+            },
+            "detail": {
+                "title": "Tube"
+            },
+            "name": "Name",
+            "userId": "UserId",
+            "description": "Description",
+            "categoryId": "CategoryId",
+            "url": "Url",
+            "like": "Like",
+            "dislike": "Dislike",
+            "rating": "Rating",
+            "status": "Status",
+            "dateModified": "Modified",
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!",
+           			"invalidName":"Invalid name!",
+           			"invalidUser":"Invalid user!",
+           			"saveError":"Save Error!"
+           		}
+           }
+        }
+    }
+}
+

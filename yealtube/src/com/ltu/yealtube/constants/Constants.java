@@ -48,7 +48,7 @@ public class Constants {
     
     //FIXME need to be configurable
     /** The Constant TOKEN_VALIDITY_IN_SECONDS. */
-    public static final int TOKEN_VALIDITY_IN_SECONDS = 1800;
+    public static final int TOKEN_VALIDITY_IN_SECONDS = 1800000;
     
     /** The Constant GOOGLE_USER. */
     public static final String GOOGLE_USER = "G";

@@ -1,5 +1,5 @@
 {
-    "proconcoappApp": {
+    "yealtube": {
         "user" : {
             "home": {
                 "title": "Users",
@@ -21,6 +21,7 @@
                 "title": "User"
             },
             "username": "Loginfr",
+            "login": "Loginfr",
             "email": "Emailfr",
             "newpassword": "New passwordfr",
             "confirmpassword": "New password confirmationfr",
@@ -30,6 +31,7 @@
             "lastName": "Lastnamefr",
             "langKey": "Languagefr",
             "group": "Groupfr",
+            "userGroupId": "Groupfr",
             "position": "Positionfr",
             "authorities": "Authoritiesfr",
             "messages": {

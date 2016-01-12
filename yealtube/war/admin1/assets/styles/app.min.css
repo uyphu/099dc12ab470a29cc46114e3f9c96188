@@ -1,0 +1,347 @@
+@CHARSET "UTF-8";
+
+.row-sm {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.row-sm>div {
+	padding-right: 10px;
+	padding-left: 10px
+}
+
+.item {
+	position: relative
+}
+
+.item .bottom, .item .center, .item .top, .item-overlay {
+	position: absolute
+}
+
+.item .top {
+	top: 0;
+	left: 0
+}
+
+.item .bottom {
+	bottom: 0;
+	left: 0
+}
+
+.item .center {
+	top: 50%
+}
+
+.item-overlay {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: none
+}
+
+.item-overlay.active, .item:hover .item-overlay {
+	display: block
+}
+
+.wrapper-xs {
+	padding: 5px
+}
+
+.wrapper-sm {
+	padding: 10px
+}
+
+.wrapper {
+	padding: 15px
+}
+
+.wrapper-md {
+	padding: 20px
+}
+
+.wrapper-lg {
+	padding: 30px
+}
+
+.wrapper-xl {
+	padding: 50px
+}
+
+.pos-rlt {
+	position: relative
+}
+
+.pos-stc {
+	position: static !important
+}
+
+.pos-abt {
+	position: absolute
+}
+
+.pos-fix {
+	position: fixed
+}
+
+.b {
+	border: 1px solid rgba(0, 0, 0, .05)
+}
+
+.b-a {
+	border: 1px solid #dee5e7
+}
+
+.b-t {
+	border-top: 1px solid #dee5e7
+}
+
+.b-r {
+	border-right: 1px solid #dee5e7
+}
+
+.b-b {
+	border-bottom: 1px solid #dee5e7
+}
+
+.b-l {
+	border-left: 1px solid #dee5e7
+}
+
+.b-light {
+	border-color: #edf1f2
+}
+
+.b-black, .b-dark {
+	border-color: #3a3f51
+}
+
+.b-primary {
+	border-color: #7266ba
+}
+
+.b-success {
+	border-color: #27c24c
+}
+
+.b-info {
+	border-color: #23b7e5
+}
+
+.b-warning {
+	border-color: #fad733
+}
+
+.b-danger {
+	border-color: #f05050
+}
+
+.b-white {
+	border-color: #fff
+}
+
+.b-dashed {
+	border-style: dashed !important
+}
+
+.b-l-light {
+	border-left-color: #edf1f2
+}
+
+.b-l-black, .b-l-dark {
+	border-left-color: #3a3f51
+}
+
+.b-l-primary {
+	border-left-color: #7266ba
+}
+
+.b-l-success {
+	border-left-color: #27c24c
+}
+
+.b-l-info {
+	border-left-color: #23b7e5
+}
+
+.b-l-warning {
+	border-left-color: #fad733
+}
+
+.b-l-danger {
+	border-left-color: #f05050
+}
+
+.b-l-white {
+	border-left-color: #fff
+}
+
+.b-l-2x {
+	border-left-width: 2px
+}
+
+.b-l-3x {
+	border-left-width: 3px
+}
+
+.b-l-4x {
+	border-left-width: 4px
+}
+
+.b-l-5x {
+	border-left-width: 5px
+}
+
+.b-2x {
+	border-width: 2px
+}
+
+.b-3x {
+	border-width: 3px
+}
+
+.b-4x {
+	border-width: 4px
+}
+
+.b-5x {
+	border-width: 5px
+}
+
+.bg-white, .bg-white .dk, .bg-white .dker, .bg-white .lt, .bg-white .lter,
+	.bg-white-only {
+	background-color: #fff
+}
+
+.item .bottom, .item .center, .item .top, .item-overlay {
+    position: absolute;
+}
+
+.bg-white {
+	color: #58666e
+}
+
+.bg-white a, .bg-white a:hover {
+	color: inherit
+}
+
+.bg-white .text-muted {
+	color: #98a6ad !important
+}
+
+.bg-white-opacity {
+	background-color: rgba(255, 255, 255, .5)
+}
+
+.bg-black-opacity {
+	background-color: rgba(32, 43, 54, .5)
+}
+
+.item .center {
+    top: 50%;
+}
+.item .bottom, .item .center, .item .top, .item-overlay {
+    position: absolute;
+}
+.w-full {
+    width: 100%;
+}
+.m-t-n {
+    margin-top: -15px;
+}
+.text-center {
+    text-align: center;
+}
+.avatar, .avatar img {
+	border-radius: 500px
+}
+.avatar img {
+	width: 100%
+}
+.img-full, .img-full img {
+	width: 100%
+}
+.text-ellipsis {
+    text-overflow: ellipsis;
+}
+.text-xs {
+    font-size: 12px;
+}
+.clear, .text-ellipsis {
+    display: block;
+    overflow: hidden;
+}
+.text-muted {
+    color: #98a6ad;
+}
+.avatar, .list-icon div, .text-ellipsis {
+    white-space: nowrap;
+}
+.text-muted {
+    color: #777;
+}
+.m-t-sm {
+    margin-top: 10px;
+}
+.m-l-sm {
+    margin-left: 10px;
+}
+.bg-dark {
+    color: #a6a8b1;
+    background-color: #3a3f51;
+}
+.badge {
+    background-color: #cfdadd;
+}
+.badge, .label {
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
+.badge, .label {
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #777;
+    border-radius: 10px;
+}
+
+.padder-v p.author {
+    font-size: 13px;
+    margin: -10 0 0 0;
+}
+.padder-v ul{
+	list-style-type: none;
+	padding:0;
+	margin:0;
+}
+.padder-v ul li{
+	display:inline-block;
+	height: 30px
+}
+.padder-v ul li{
+    display: inline-block !important;
+    width: 49%;
+}
+.padder-v ul li.right-list{
+   text-align:right;
+}
+.padder-v p.author-info{
+    font-size: 13px;
+    font-weight: 600;
+}
+.padder-v p.views {
+    font-size: 13px;
+}
+.padder-v p.views-info{
+    font-size: 12px;
+}

@@ -64,7 +64,7 @@ angular.module('jhipsterApp')
 //                        deferred.resolve(_identity);
 //                    });
                 Account.getAccount().then(function (account) {
-                	if (account != null) {
+                	if (account.error == null) {
                 		_identity = account.result;
                         _authenticated = true;
                         deferred.resolve(_identity);
@@ -74,8 +74,7 @@ angular.module('jhipsterApp')
 	                    deferred.resolve(_identity);
 					}
                     
-                })
-                .catch(function() {
+                },function(error) {
                     _identity = null;
                     _authenticated = false;
                     deferred.resolve(_identity);

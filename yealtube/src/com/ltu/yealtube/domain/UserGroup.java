@@ -15,7 +15,7 @@ public class UserGroup {
 
 	private String permission;
 	
-	private String key;
+	private String keyword;
 
 	public final Long getId() {
 		return this.id;
@@ -41,28 +41,28 @@ public class UserGroup {
 		this.permission = permission;
 	}
 	
-	public final String getKey() {
-		return this.key;
+	public final String getKeyword() {
+		return this.keyword;
 	}
 
-	public final void setKey(String key) {
-		this.key = key;
+	public final void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public UserGroup() {
 		
 	}
 
-	public UserGroup(Long id, String name, String permission, String key) {
+	public UserGroup(Long id, String name, String permission, String keyword) {
 		this.id = id;
 		this.name = name;
 		this.permission = permission;
-		this.key = key;
+		this.keyword = keyword;
 	}
 
-	public UserGroup(String name, String permission, String key) {
+	public UserGroup(String name, String permission, String keyword) {
 		this.name = name;
 		this.permission = permission;
-		this.key = key;
+		this.keyword = keyword;
 	}
 }

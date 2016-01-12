@@ -1,0 +1,32 @@
+{
+    "yealtube": {
+        "category" : {
+            "home": {
+                "title": "Categorysfr",
+                "createLabel": "Create a new Category",
+                "createOrEditLabel": "Create or edit a Category"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Category"
+            },
+            "name": "Name",
+            "parentId": "ParentId",
+            "description": "Description",
+            "metaTitle": "MetaTitle",
+            "metaDescription": "MetaDescription",
+            "metaKeyword": "MetaKeyword",
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!",
+           			"invalidName":"Invalid name!",
+           			"invalidUser":"Invalid user!",
+           			"saveError":"Save Error!"
+           		}
+           }
+        }
+    }
+}
+

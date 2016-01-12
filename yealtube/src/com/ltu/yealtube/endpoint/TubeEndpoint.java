@@ -1,5 +1,7 @@
 package com.ltu.yealtube.endpoint;
 
+import java.util.Calendar;
+
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
@@ -55,9 +57,11 @@ public class TubeEndpoint {
 		// for us
 		// when we use put
 		TubeDao dao = new TubeDao();
-		Tube pos = dao.getTubeByName(tube.getName());
+		Tube pos = dao.getTubeByUrl(tube.getUrl());
 		//FIXME Check the code below
 		if (pos == null) {
+			tube.setDateAdded(Calendar.getInstance().getTime());
+			tube.setDateModified(Calendar.getInstance().getTime());
 			dao.persist(tube);
 		} else {
 			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
@@ -81,25 +85,8 @@ public class TubeEndpoint {
 					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
 		}
 		TubeDao dao = new TubeDao();
-		Tube pos = dao.getTubeByName(tube.getName());
-		//FIXME Check this logic
-		if (pos == null || pos.getId().equals(tube.getId())) {
-			oldTube.setName(tube.getName());
-//			if (tube.getManager() != null) {
-//				UserDao userDao = new UserDao();
-//				User manager = userDao.getUserByLogin(tube.getManager());
-//				if (manager != null) {
-//					tube.setManager(manager.getLogin());
-//				} else {
-//					throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-//							ErrorCodeDetail.ERROR_USER_NOT_FOUND);
-//				}
-//			}
-			dao.update(tube);
-		} else {
-			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-					ErrorCodeDetail.ERROR_EXIST_OBJECT);
-		}
+		tube.setDateModified(Calendar.getInstance().getTime());
+		dao.update(tube);
 		return tube;
 	}
 

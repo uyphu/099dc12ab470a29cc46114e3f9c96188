@@ -65,7 +65,7 @@ public class TubeDao extends AbstractDao<Tube> {
 					map.put("delFlag", Long.parseLong(queries[1]));
 					query = getQuery(map);
 				} else {
-					query = getQueryByName("grpName", querySearch);
+					query = getQueryByName("name", querySearch);
 				}
 				return query;
 			} else {
@@ -106,7 +106,26 @@ public class TubeDao extends AbstractDao<Tube> {
 	public Tube getTubeByName(String name) {
 		if (name != null) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("grpName", name);
+			map.put("name", name);
+			Query<Tube> query = getQuery(map);
+			List<Tube> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the tube by url.
+	 *
+	 * @param url the url
+	 * @return the tube by url
+	 */
+	public Tube getTubeByUrl(String url) {
+		if (url != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("url", url);
 			Query<Tube> query = getQuery(map);
 			List<Tube> list = executeQuery(query, 1);
 			if (list != null && list.size() > 0) {

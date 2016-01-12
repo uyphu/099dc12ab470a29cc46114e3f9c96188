@@ -74,7 +74,7 @@ public class UserGroupDao extends AbstractDao<UserGroup> {
 					map.put("delFlag", Long.parseLong(queries[1]));
 					query = getQuery(map);
 				} else {
-					query = getQueryByName("grpName", querySearch);
+					query = getQueryByName("name", querySearch);
 				}
 				return query;
 			} else {

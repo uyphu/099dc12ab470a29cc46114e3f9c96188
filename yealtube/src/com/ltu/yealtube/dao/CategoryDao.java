@@ -57,12 +57,12 @@ public class CategoryDao extends AbstractDao<Category> {
 			if (querySearch != null) {
 				Query<Category> query;
 				Map<String, Object> map = new HashMap<String, Object>();
-				if (querySearch.indexOf("delFlag:") != -1) {
+				if (querySearch.indexOf("keyword:") != -1) {
 					String[] queries = querySearch.split(":");
-					map.put("delFlag", Long.parseLong(queries[1]));
+					map.put("metaKeyword", Long.parseLong(queries[1]));
 					query = getQuery(map);
 				} else {
-					query = getQueryByName("grpName", querySearch);
+					query = getQueryByName("name", querySearch);
 				}
 				return query;
 			} else {

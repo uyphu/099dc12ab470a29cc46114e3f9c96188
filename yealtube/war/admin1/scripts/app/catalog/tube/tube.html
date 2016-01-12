@@ -1,0 +1,211 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header" translate="yealtube.tube.home.title">Tube</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- <h2 translate="yealtube.tube.home.title">Categories</h2> -->
+
+<div class="container">
+	<!-- spinner -->
+	<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
+	<!-- end spinner -->
+	<div class="row">
+		<div class="col-md-8">
+			<div class="alert alert-danger" ng-show="invalidQuerySearch" translate="yealtube.tube.error.message.querySearch">
+		        Invalid query search!
+		    </div>
+	    </div>
+	</div>
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#saveTubeModal" ng-click="clear()">
+                <span class="glyphicon glyphicon-flash"></span> <span translate="yealtube.tube.home.createLabel">Create a new Tube</span>
+            </button>
+        </div>
+        <div class="col-md-8">
+            <form name="searchForm" class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()" id="searchQuery" placeholder="query">
+                </div>
+                <button class="btn btn-info" ng-click="search()"><span class="glyphicon glyphicon-search"></span> <span>Search a Tube</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="saveTubeModal" tabindex="-1" role="dialog" aria-labelledby="myTubeLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+<!--                 <div class="modal-header"> -->
+<!--                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" -->
+<!--                             ng-click="clear()">&times;</button> -->
+<!--                     <h4 class="modal-title" id="myTubeLabel" translate="yealtube.tube.home.createOrEditLabel">Create or edit a Tube</h4> -->
+<!--                 </div> -->
+                <div class="modal-body">
+                	<div class="form-group">
+						<div class="alert alert-danger" ng-show="invalidName" translate="yealtube.tube.error.message.invalidName">
+					        Invalid name!
+					    </div>
+				    </div>
+				    
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" class="form-control" name="id"
+                               ng-model="tube.id" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label translate="yealtube.tube.name">Name</label>
+                        <input type="text" class="form-control" name="name"
+                               ng-model="tube.name" required>
+
+                        <div ng-show="editForm.name.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.name.$error.required" translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.description">Description</label>
+                        <input type="text" class="form-control" name="description"
+                               ng-model="tube.description">
+                        <div ng-show="editForm.description.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.description.$error.required" translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.url">Url</label>
+                        <input type="text" class="form-control" name="url"
+                               ng-model="tube.url" >
+                        <div ng-show="editForm.url.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.url.$error.required" translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <label translate="yealtube.tube.categoryId">CategoryId</label>
+                         <input type="text" class="form-control" name="categoryId"
+                                ng-model="tube.categoryId" min="0">
+
+                         <div ng-show="editForm.categoryId.$invalid">
+                             <p class="help-block"
+                                ng-show="editForm.categoryId.$error.min" translate="entity.validation.min" translate-value-min="0">
+                                 This field should be more than 0.
+                             </p>
+                             <p class="help-block"
+                                ng-show="editForm.categoryId.$error.number" translate="entity.validation.number">
+                                 This field should be a number.
+                             </p>
+                         </div>
+                         <div ng-show="editForm.categoryId.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.categoryId.$error.required" translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                     </div>
+                     
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteTubeConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="deleteForm" ng-submit="confirmDelete(tube.id)">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                            ng-click="clear()">&times;</button>
+                    <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                </div>
+                <div class="modal-body">
+                    <p translate="yealtube.tube.delete.question" translate-values="{id: '{{tube.id}}'}">Are you sure you want to delete this Tube?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th translate="yealtube.tube.name">Name</th>
+                <th translate="yealtube.tube.userId">userId</th>
+                <th translate="yealtube.tube.categoryId">categoryId</th>
+                <th translate="yealtube.tube.description">Description</th>
+                <th translate="yealtube.tube.url">Url</th>
+                <th translate="yealtube.tube.like">Like</th>
+                <th translate="yealtube.tube.dislike">Dislike</th>
+                <th translate="yealtube.tube.rating">Rating</th>
+                <th translate="yealtube.tube.status">Status</th>
+                <th translate="yealtube.tube.dateModified">Modified</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+            <tr ng-repeat="tube in tubes">
+                <td><a ui-sref="tubeDetail({id:tube.id})">{{tube.id}}</a></td>
+                <td>{{tube.name}}</td>
+                <td>{{tube.userId}}</td>
+                <td>{{tube.categoryId}}</td>
+                <td>{{tube.description}}</td>
+                <td>{{tube.url}}</td>
+                <td>{{tube.like}}</td>
+                <td>{{tube.dislike}}</td>
+                <td>{{tube.rating}}</td>
+                <td>{{tube.status}}</td>
+                <td>{{tube.dateModified}}</td>
+                <td>
+                    <button type="submit"
+                            ui-sref="tubeDetail({id:tube.id})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                    </button>
+                    <button type="submit"
+                            ng-click="showUpdate(tube.id)"
+                            class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                    </button>
+                    <button type="submit"
+                            ng-click="delete(tube.id)"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

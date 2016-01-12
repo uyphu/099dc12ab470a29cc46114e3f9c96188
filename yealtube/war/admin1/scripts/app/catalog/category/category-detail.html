@@ -1,0 +1,69 @@
+<div>
+   <h2><span translate="yealtube.category.detail.title">Category</span> {{category.id}}</h2>
+   <div class="table-responsive">
+       <table class="table table-striped">
+           <thead>
+               <tr>
+                   <th translate="entity.detail.field">Field</th>
+                   <th translate="entity.detail.value">Value</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>
+                       <span translate="yealtube.category.name">Name</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{category.name}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.category.parentId">parentId</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{category.parentId}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.category.description">description</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{category.description}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.category.metaTitle">metaTitle</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{category.metaTitle}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.category.metaDescription">metaDescription</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{category.metaDescription}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.category.metaKeyword">metaKeyword</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{category.metaKeyword}}" readonly>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+
+   <button type="submit"
+           ui-sref="dashboard.category"
+           class="btn btn-info">
+       <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+   </button>
+</div>

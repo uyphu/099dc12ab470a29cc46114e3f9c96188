@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/styles/main.css">
     <link rel="stylesheet" href="assets/styles/sb-admin-2.css">
     <link rel="stylesheet" href="assets/styles/timeline.css">
+    <link rel="stylesheet" href="assets/styles/app.min.css">
     <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
@@ -62,7 +63,7 @@
 	    <script src="bower_components/angular-animate/angular-animate.js"></script>
 	    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    	<script src="bower_components/angular-google-gapi/angular-google-gapi.min.js"></script>
+    	<script src="bower_components/angular-google-gapi/angular-google-gapi.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
@@ -108,6 +109,10 @@
         <script src="scripts/app/constants/app.constant.js"></script>
         <script src="scripts/app/constants/app.utils.js"></script>
         <script src="scripts/app/exceptions/errorCode.js"></script>
+        <script src="scripts/components/util/truncate.filter.js"></script>
+        <script src="scripts/components/util/base64.service.js"></script>
+        <script src="scripts/components/util/parse-links.service.js"></script>
+        <script src="scripts/components/util/dateutil.service.js"></script>
         <script src="scripts/components/auth/auth.service.js"></script>
         <script src="scripts/components/auth/principal.service.js"></script>
         <script src="scripts/components/auth/authority.directive.js"></script>
@@ -230,6 +235,9 @@
 <!--        <script src="scripts/components/entities/approval/approval.search.service.js"></script> -->
 <!--        <script src="scripts/app/entities/reportId/reportId-user.controller.js"></script> -->
 
+		<script src="scripts/app/dashboard/video/video.directive.js"></script>
+		<script src="scripts/app/dashboard/stats/stats1.directive.js"></script>
+
 		<script src="scripts/components/chat/chat.directive.js"></script>
 		<script src="scripts/components/dashboard/stats/stats.directive.js"></script>
 		<script src="scripts/components/header/header.controller.js"></script>
@@ -238,6 +246,14 @@
 		<script src="scripts/components/header/header-notification/header-notification.directive.js"></script>
 		<script src="scripts/components/notifications/notifications.directive.js"></script>
 		<script src="scripts/components/sidebar/sidebar.directive.js"></script>
+		<script src="scripts/components/catalog/category/category.service.js"></script>
+		<script src="scripts/components/catalog/category/category.search.service.js"></script>
+		<script src="scripts/components/catalog/tube/tube.service.js"></script>
+		<script src="scripts/components/catalog/tube/tube.search.service.js"></script>
+		<script src="scripts/components/catalog/user/user.service.js"></script>
+		<script src="scripts/components/catalog/user/user.search.service.js"></script>
+		<script src="scripts/components/catalog/user-group/user-group.service.js"></script>
+		<script src="scripts/components/catalog/user-group/user-group.search.service.js"></script>
 		
 		<script src="scripts/components/sidebar/sidebar-search/sidebar-search.directive.js"></script>
 		<script src="scripts/components/timeline/timeline.directive.js"></script>
@@ -259,6 +275,17 @@
 		<script src="scripts/app/account/register/register.js"></script>
 		<script src="scripts/app/account/activate/activate.controller.js"></script>
 		<script src="scripts/app/account/activate/activate.js"></script>
+		<script src="scripts/app/catalog/category/category.controller.js"></script>
+		<script src="scripts/app/catalog/category/category-detail.controller.js"></script>
+		<script src="scripts/app/catalog/category/category.js"></script>
+		<script src="scripts/app/catalog/tube/tube.controller.js"></script>
+		<script src="scripts/app/catalog/tube/tube-detail.controller.js"></script>
+		<script src="scripts/app/catalog/tube/tube.js"></script>
+		<script src="scripts/app/catalog/user/user.controller.js"></script>
+		<script src="scripts/app/catalog/user/user-detail.controller.js"></script>
+		<script src="scripts/app/catalog/user/user.js"></script>
+		<script src="scripts/app/catalog/user-group/user-group.controller.js"></script>
+		<script src="scripts/app/catalog/user-group/user-group.js"></script>
 		
         <!-- endbuild -->
     <!-- google api -->    

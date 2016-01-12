@@ -5,7 +5,7 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
     'angularSpinner', 'angular-google-gapi'])
     
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, 
-    		ENV, VERSION, GAuth, GApi, GData) {
+    		ENV, VERSION, GAuth, GApi, GData, localStorageService) {
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.LOADED = false;
@@ -29,19 +29,28 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         
 		var BASE;
 		if($window.location.hostname == 'localhost') {
-		BASE = 'http://localhost:9494/_ah/api';
+			BASE = 'http://localhost:9494/_ah/api';
 		} else {
 		    BASE = 'https://yealtubetest.appspot.com/_ah/api';
 		}
 		
-		  BASE = 'https://yealtubetest.appspot.com/_ah/api';
+		BASE = 'https://yealtubetest.appspot.com/_ah/api';
 		
 		GApi.load('userxauthtokenendpoint', 'v1', BASE);
 		GApi.load('userendpoint', 'v1', BASE);
+		GApi.load('usergroupendpoint', 'v1', BASE);
+		GApi.load('categoryendpoint', 'v1', BASE);
+		GApi.load('tubeendpoint', 'v1', BASE);
 		GApi.load('calendar', 'v3');
 		GAuth.setClient(AppConstant.CLIENT_ID);
 		GAuth.setScope('https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar.readonly');
-	      
+		
+		var token = localStorageService.get('token');
+		console.log('Set token: ' + token.token + token.type);
+		GAuth.setToken({
+			  access_token: token.token + token.type
+			});
+		
         AppConstant.API_LOAD_TYPE = 2;
         $window.init = function() {
         	//$rootScope.initgapi();
@@ -61,7 +70,7 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             $rootScope.toState = toState;
             $rootScope.toStateParams = toStateParams;
-
+            
             if (Principal.isIdentityResolved()) {
                 Auth.authorize();
             }
@@ -74,7 +83,7 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
 
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
             var titleKey = 'global.title';
-
+            
             $rootScope.previousStateName = fromState.name;
             $rootScope.previousStateParams = fromParams;
 
@@ -100,22 +109,42 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
         
         
     })
-//    .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
-//        return {
-//            // Add authorization token to headers
-//            request: function (config) {
-//                config.headers = config.headers || {};
-//                var token = localStorageService.get('token');
-//                
-//                if (token && token.expires && token.expires > new Date().getTime()) {
-//                  config.headers['x-auth-token'] = token.token;
-//                  config.headers['x-type-token'] = token.type;
-//                }
-//                
-//                return config;
-//            }
-//        };
-//    })
+    .factory('BearerAuthInterceptor', function ($rootScope, $q, $location, localStorageService) {
+        return {
+            // Add authorization token to headers
+            request: function (config) {
+            	
+                config.headers = config.headers || {};
+                var token = localStorageService.get('token');
+                console.log('Set token Interceptor: ' + token.token + token.type);
+                if (token && token.expires && token.expires > new Date().getTime()) {
+                  config.headers['x-auth-token'] = token.token;
+                  config.headers['x-type-token'] = token.type;
+                }
+                
+                return config;
+            }
+        };
+    })
+//	  .factory('BearerAuthInterceptor', function ($window, $q) {
+//		    return {
+//		        request: function(config) {
+//		            config.headers = config.headers || {};
+//		            if ($window.localStorage.getItem('token')) {
+//		              // may also use sessionStorage
+//		                config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('token');
+//		            }
+//		            return config || $q.when(config);
+//		        },
+//		        response: function(response) {
+//		            if (response.status === 401) {
+//		                //  Redirect user to login page / signup Page.
+//		            }
+//		            return response || $q.when(response);
+//		        }
+//		    };
+//		});
+
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, 
     		tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider, usSpinnerConfigProvider) {
 
@@ -125,6 +154,9 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
 
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
+        
+        // Register the previously created AuthInterceptor.
+        $httpProvider.interceptors.push('BearerAuthInterceptor');
 
         $urlRouterProvider.otherwise('/');
         //$urlRouterProvider.otherwise('/dashboard/home');
@@ -149,24 +181,24 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
 //            }
 //        });
         
-//        $stateProvider
-//        .state('site', {
-//        	'abstract': true,
-//        	templateUrl: 'scripts/app/site/site.html',
-//            controller: 'SiteController',
-//            data: {
-//                roles: []
-//            },
-//            resolve: {
-//                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
-//                    $translatePartialLoader.addPart('main');
-//                    $translatePartialLoader.addPart('login');
-//                    $translatePartialLoader.addPart('language');
-//                    //return $translate.refresh();
-//                }]
-//                
-//            }
-//        });
+        $stateProvider
+        .state('site', {
+        	'abstract': true,
+        	templateUrl: 'scripts/app/site/site.html',
+            controller: 'SiteController',
+            data: {
+                roles: []
+            },
+            resolve: {
+                mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
+                    $translatePartialLoader.addPart('main');
+                    $translatePartialLoader.addPart('login');
+                    $translatePartialLoader.addPart('language');
+                    //return $translate.refresh();
+                }]
+                
+            }
+        });
         
         $stateProvider
         .state('dashboard', {
@@ -177,41 +209,21 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
                 roles: []
             },
             resolve: {
-//            	authorize: ['Auth',
-//                          function (Auth) {
-//                              return Auth.authorize();
-//                          }
-//                      ],
+            	authorize: ['Auth',
+                          function (Auth) {
+                              return Auth.authorize();
+                          }
+                      ],
                 mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('main');
+                    $translatePartialLoader.addPart('global');
                     $translatePartialLoader.addPart('language');
-                    return $translate.refresh();
+                    //return $translate.refresh();
                 }]
-                
             }
         });
         
-//        $stateProvider.state('site', {
-//            'abstract': true,
-//            views: {
-//                'header@': {
-//                    templateUrl: 'scripts/components/header/header.html',
-//                    controller: 'HeaderController'
-//                }
-//            },
-//            resolve: {
-//                authorize: ['Auth',
-//                    function (Auth) {
-//                        return Auth.authorize();
-//                    }
-//                ],
-//                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-//                    $translatePartialLoader.addPart('global');
-//                    $translatePartialLoader.addPart('language');
-//                }]
-//            }
-//        });
-
+        //$httpProvider.interceptors.push('authInterceptor');
 
         // Initialize angular-translate
         $translateProvider.useLoader('$translatePartialLoader', {

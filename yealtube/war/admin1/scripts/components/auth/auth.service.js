@@ -2,7 +2,7 @@
 
 angular.module('jhipsterApp')
     .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, 
-    		Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    		Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish, localStorageService) {
         return {
         	login: function (credentials, callback) {
                 //var cb = callback || angular.noop;
@@ -14,6 +14,7 @@ angular.module('jhipsterApp')
                         Principal.identity(true).then(function(account) {
                             // After the login the language will be changed to
                             // the language selected by the user during his registration
+                        	localStorageService.set('account', account);
                             $translate.use(account.langKey);
                             $translate.refresh();
                             deferred.resolve(data);
@@ -47,6 +48,7 @@ angular.module('jhipsterApp')
                                 $rootScope.returnToStateParams = $rootScope.toStateParams;
 
                                 // now, send them to the signin state so they can log in
+                                console.log('Go Login...');
                                 $state.go('login');
                             }
                         }
