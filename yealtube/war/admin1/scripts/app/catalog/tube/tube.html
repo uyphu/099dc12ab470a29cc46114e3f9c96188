@@ -62,61 +62,61 @@
                     </div>
 
                     <div class="form-group">
-                        <label translate="yealtube.tube.name">Name</label>
-                        <input type="text" class="form-control" name="name"
-                               ng-model="tube.name" required>
+                        <label translate="yealtube.tube.videoId">Video Id</label>
+                        <input type="text" class="form-control" name="id"
+                               ng-model="tube.id" required>
 
-                        <div ng-show="editForm.name.$invalid">
+                        <div ng-show="editForm.id.$invalid">
                             <p class="help-block"
-                               ng-show="editForm.name.$error.required" translate="entity.validation.required">
+                               ng-show="editForm.id.$error.required" translate="entity.validation.required">
                                 This field is required.
                             </p>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.description">Description</label>
-                        <input type="text" class="form-control" name="description"
-                               ng-model="tube.description">
-                        <div ng-show="editForm.description.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.description.$error.required" translate="entity.validation.required">
-                                This field is required.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.url">Url</label>
-                        <input type="text" class="form-control" name="url"
-                               ng-model="tube.url" >
-                        <div ng-show="editForm.url.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.url.$error.required" translate="entity.validation.required">
-                                This field is required.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                         <label translate="yealtube.tube.categoryId">CategoryId</label>
-                         <input type="text" class="form-control" name="categoryId"
-                                ng-model="tube.categoryId" min="0">
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.description">Description</label> -->
+<!--                         <input type="text" class="form-control" name="description" -->
+<!--                                ng-model="tube.description"> -->
+<!--                         <div ng-show="editForm.description.$invalid"> -->
+<!--                             <p class="help-block" -->
+<!--                                ng-show="editForm.description.$error.required" translate="entity.validation.required"> -->
+<!--                                 This field is required. -->
+<!--                             </p> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.url">Url</label> -->
+<!--                         <input type="text" class="form-control" name="url" -->
+<!--                                ng-model="tube.url" > -->
+<!--                         <div ng-show="editForm.url.$invalid"> -->
+<!--                             <p class="help-block" -->
+<!--                                ng-show="editForm.url.$error.required" translate="entity.validation.required"> -->
+<!--                                 This field is required. -->
+<!--                             </p> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                          <label translate="yealtube.tube.categoryId">CategoryId</label> -->
+<!--                          <input type="text" class="form-control" name="categoryId" -->
+<!--                                 ng-model="tube.categoryId" min="0"> -->
 
-                         <div ng-show="editForm.categoryId.$invalid">
-                             <p class="help-block"
-                                ng-show="editForm.categoryId.$error.min" translate="entity.validation.min" translate-value-min="0">
-                                 This field should be more than 0.
-                             </p>
-                             <p class="help-block"
-                                ng-show="editForm.categoryId.$error.number" translate="entity.validation.number">
-                                 This field should be a number.
-                             </p>
-                         </div>
-                         <div ng-show="editForm.categoryId.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.categoryId.$error.required" translate="entity.validation.required">
-                                This field is required.
-                            </p>
-                        </div>
-                     </div>
+<!--                          <div ng-show="editForm.categoryId.$invalid"> -->
+<!--                              <p class="help-block" -->
+<!--                                 ng-show="editForm.categoryId.$error.min" translate="entity.validation.min" translate-value-min="0"> -->
+<!--                                  This field should be more than 0. -->
+<!--                              </p> -->
+<!--                              <p class="help-block" -->
+<!--                                 ng-show="editForm.categoryId.$error.number" translate="entity.validation.number"> -->
+<!--                                  This field should be a number. -->
+<!--                              </p> -->
+<!--                          </div> -->
+<!--                          <div ng-show="editForm.categoryId.$invalid"> -->
+<!--                             <p class="help-block" -->
+<!--                                ng-show="editForm.categoryId.$error.required" translate="entity.validation.required"> -->
+<!--                                 This field is required. -->
+<!--                             </p> -->
+<!--                         </div> -->
+<!--                      </div> -->
                      
                 </div>
                 <div class="modal-footer">

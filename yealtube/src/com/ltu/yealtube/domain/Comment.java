@@ -13,7 +13,7 @@ public class Comment {
 	private Long id;
 	
 	@Index
-	private Long tubeId;
+	private String tubeId;
 	
 	@Index
 	private Long userId;
@@ -27,6 +27,7 @@ public class Comment {
 	@Index
 	private int status;
 	
+	@Index
 	private Date dateAdded;
 	
 	private Date dateModified;
@@ -39,11 +40,11 @@ public class Comment {
 		this.id = id;
 	}
 
-	public final Long getTubeId() {
+	public final String getTubeId() {
 		return this.tubeId;
 	}
 
-	public final void setTubeId(Long tubeId) {
+	public final void setTubeId(String tubeId) {
 		this.tubeId = tubeId;
 	}
 
@@ -99,7 +100,7 @@ public class Comment {
 		
 	}
 
-	public Comment(Long id, Long tubeId, Long userId, String text, int rating, int status, Date dateAdded,
+	public Comment(Long id, String tubeId, Long userId, String text, int rating, int status, Date dateAdded,
 			Date dateModified) {
 		this.id = id;
 		this.tubeId = tubeId;
@@ -111,7 +112,7 @@ public class Comment {
 		this.dateModified = dateModified;
 	}
 	
-	public Comment(Long tubeId, Long userId, String text, int rating, int status, Date dateAdded,
+	public Comment(String tubeId, Long userId, String text, int rating, int status, Date dateAdded,
 			Date dateModified) {
 		this.tubeId = tubeId;
 		this.userId = userId;

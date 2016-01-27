@@ -12,6 +12,9 @@ public class Constants {
 	/** The Constant EMAIL_SCOPE. */
 	public static final String EMAIL_SCOPE = "https://www.googleapis.com/auth/userinfo.email";
 	
+	/** The Constant API_KEY. */
+	public static final String API_KEY = "AIzaSyBrrKgaw1iD9ETQIF5CRyXWKrriQZT-yQU";
+	
 	/** The Constant ANDROID_AUDIENCE. */
 	public static final String ANDROID_AUDIENCE = WEB_CLIENT_ID;
 	 
@@ -74,5 +77,6 @@ public class Constants {
 	
 	/** The Constant EMPTY_STRING. */
 	public static final String EMPTY_STRING = "";
+	
     
 }

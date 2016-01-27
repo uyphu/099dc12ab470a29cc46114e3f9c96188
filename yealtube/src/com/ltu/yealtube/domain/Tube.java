@@ -1,22 +1,26 @@
 package com.ltu.yealtube.domain;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import com.google.api.server.spi.config.AnnotationBoolean;
+import com.google.api.server.spi.config.ApiResourceProperty;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Load;
 
 @Entity
 public class Tube {
 
 	@Id
-	private Long id;
+	private String id;
 	
 	@Index
 	private Long userId;
-	
-	@Index
-	private Long categoryId;
 	
 	@Index
 	private String name;
@@ -25,13 +29,35 @@ public class Tube {
 	private String description;
 	
 	@Index
-	private String url;
+	private int viewCount;
 	
-	private int like;
+	@IgnoreSave
+	private int likeCount;
 	
-	private int dislike;
+	@IgnoreSave
+	private int dislikeCount;
 	
+	@IgnoreSave
+	private int favoriteCount;
+	
+	@IgnoreSave
+	private int commentCount;
+	
+	@IgnoreSave
 	private float rating;
+	
+	@IgnoreSave
+	private String author;
+	
+	@Index
+	private String tags;
+	
+	@Load
+    private List<Key<Category>> categoryKeys;
+	
+	/** The categories. */
+	@IgnoreSave
+	private List<String> categories;
 	
 	@Index
 	private int status;
@@ -40,12 +66,13 @@ public class Tube {
 	private Date dateAdded;
 	
 	private Date dateModified;
+	
 
-	public final Long getId() {
+	public final String getId() {
 		return this.id;
 	}
 
-	public final void setId(Long id) {
+	public final void setId(String id) {
 		this.id = id;
 	}
 
@@ -57,12 +84,21 @@ public class Tube {
 		this.userId = userId;
 	}
 
-	public final Long getCategoryId() {
-		return this.categoryId;
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE) 
+	public final List<Key<Category>> getCategoryKeys() {
+		return this.categoryKeys;
 	}
 
-	public final void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public final void setCategoryKeys(List<Key<Category>> categoryKeys) {
+		this.categoryKeys = categoryKeys;
+	}
+
+	public final List<String> getCategories() {
+		return this.categories;
+	}
+
+	public final void setCategories(List<String> categories) {
+		this.categories = categories;
 	}
 
 	public final String getName() {
@@ -79,14 +115,6 @@ public class Tube {
 
 	public final void setDescription(String description) {
 		this.description = description;
-	}
-
-	public final String getUrl() {
-		return this.url;
-	}
-
-	public final void setUrl(String url) {
-		this.url = url;
 	}
 
 	public final int getStatus() {
@@ -113,20 +141,44 @@ public class Tube {
 		this.dateModified = dateModified;
 	}
 	
-	public final int getLike() {
-		return this.like;
+	public final int getViewCount() {
+		return this.viewCount;
 	}
 
-	public final void setLike(int like) {
-		this.like = like;
-	}
-	
-	public final int getDislike() {
-		return this.dislike;
+	public final void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
 
-	public final void setDislike(int dislike) {
-		this.dislike = dislike;
+	public final int getLikeCount() {
+		return this.likeCount;
+	}
+
+	public final void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public final int getDislikeCount() {
+		return this.dislikeCount;
+	}
+
+	public final void setDislikeCount(int dislikeCount) {
+		this.dislikeCount = dislikeCount;
+	}
+
+	public final int getFavoriteCount() {
+		return this.favoriteCount;
+	}
+
+	public final void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
+
+	public final int getCommentCount() {
+		return this.commentCount;
+	}
+
+	public final void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	public final float getRating() {
@@ -136,40 +188,69 @@ public class Tube {
 	public final void setRating(float rating) {
 		this.rating = rating;
 	}
+	
+	public final String getAuthor() {
+		return this.author;
+	}
+
+	public final void setAuthor(String author) {
+		this.author = author;
+	}
+	
+	public final String getTags() {
+		return this.tags;
+	}
+
+	public final void setTags(String tags) {
+		this.tags = tags;
+	}
 
 	public Tube() {
 		
 	}
-
-	public Tube(Long id, Long userId, Long categoryId, String name, String description, String url, int like,
-			int dislike, float rating, int status, Date dateAdded, Date dateModified) {
+	
+	public Tube(String id, Long userId, String name, String description, int status) {
 		this.id = id;
 		this.userId = userId;
-		this.categoryId = categoryId;
 		this.name = name;
 		this.description = description;
-		this.url = url;
-		this.like = like;
-		this.dislike = dislike;
-		this.rating = rating;
+		this.status = status;
+		this.dateAdded = Calendar.getInstance().getTime();
+		this.dateModified = Calendar.getInstance().getTime();
+	}
+
+	public Tube(String id, Long userId, String name, String description, int status, Date dateAdded,
+			Date dateModified) {
+		this.id = id;
+		this.userId = userId;
+		this.name = name;
+		this.description = description;
 		this.status = status;
 		this.dateAdded = dateAdded;
 		this.dateModified = dateModified;
 	}
 	
-	public Tube(Long userId, Long categoryId, String name, String description, String url, int like,
-			int dislike, float rating, int status, Date dateAdded, Date dateModified) {
+	public Tube(Long userId, String name, String description, int status, Date dateAdded,
+			Date dateModified) {
 		this.userId = userId;
-		this.categoryId = categoryId;
 		this.name = name;
 		this.description = description;
-		this.url = url;
-		this.like = like;
-		this.dislike = dislike;
-		this.rating = rating;
 		this.status = status;
 		this.dateAdded = dateAdded;
 		this.dateModified = dateModified;
 	}
 
+	@Override
+	public String toString() {
+		return "Tube [id=" + id + ", userId=" + userId + ", name=" + name
+				+ ", description=" + description + ", viewCount=" + viewCount
+				+ ", likeCount=" + likeCount + ", dislikeCount=" + dislikeCount
+				+ ", favoriteCount=" + favoriteCount + ", commentCount="
+				+ commentCount + ", rating=" + rating + ", author=" + author
+				+ ", tags=" + tags + ", categoryKeys=" + categoryKeys
+				+ ", categories=" + categories + ", status=" + status
+				+ ", dateAdded=" + dateAdded + ", dateModified=" + dateModified
+				+ "]";
+	}
+	
 }

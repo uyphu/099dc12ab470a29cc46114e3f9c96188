@@ -11,7 +11,14 @@ angular.module('jhipsterApp')
     	return {
   		templateUrl:'scripts/app/dashboard/video/video.html',
   		restrict:'E',
-  		replace: true
+  		replace: true,
+  		scope: {
+        'model': '=',
+        'image': '@',
+        'author': '@',
+        'title': '@',
+        'view': '@'
+  		}
   		
   	}
   });

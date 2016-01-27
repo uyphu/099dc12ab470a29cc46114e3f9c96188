@@ -1,247 +1,29 @@
 <div>
-	<div class="row row-sm">
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Tempered Song</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Miaow</a> -->
-          <ul>
-			<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-			<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-		</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/dNHANEXLvVM/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Morbi id neque quam</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Phasellus</a> -->
-			<ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
+	<div class="recommended-info">
+		<div class="heading">
+			<h3>Recommended</h3>
+		</div>
+	</div>
+	<div class="row row-sm" >
+	    <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="tube in tubes">
+	      <div class="item">
+	        <div class="pos-rlt b-a bg-white wrapper-xs">
+	          <div class="item-overlay bg-white-opacity">
+	            <div class="center text-center m-t-n w-full">
+	              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
+	            </div>
+	          </div>
+	          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/{{tube.id}}/mqdefault.webp" alt="" class="img-full"></a>
+	        </div>
+	        <div class="padder-v">
+	          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">{{tube.name}}</a>
+	          <ul>
+				<li><p class="author author-info"><a href="#" class="author">{{tube.author}}</a></p></li>
+				<li class="right-list"><p class="views views-info">{{tube.viewCount}} views</p></li>
 			</ul>
-        </div>
-      </div>
+	        </div>
+	      </div>
+	    </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <div class="top">
-            <span class="badge bg-dark m-l-sm m-t-sm">03:20</span>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/vr_5mdhqEAE/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Aliquam sollicitudin venenatis ipsum</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Malesuada</a> -->
-<ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Citudin venenatis ipsum ac</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Volutpat</a> -->
-<ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Vestibulum ullamcorper sodales nisi</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Mauris Qiaos</a> -->
-	<ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Mauris convallis mauris at</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Neque</a> -->
-<ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Sodales nisi nec condimentum</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Augue</a> -->
-          <ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Nisi nec condimentum</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Miaow</a> -->
-          <ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Phasellus at ultricies nequ</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Volutpat</a> -->
-          <ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Quis malesuada augue</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Feugiat</a> -->
-          <ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Ipsum ac feugiat</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Quam AC</a> -->
-          <ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <div class="item">
-        <div class="pos-rlt b-a bg-white wrapper-xs">
-          <div class="item-overlay bg-white-opacity">
-            <div class="center text-center m-t-n w-full">
-              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
-            </div>
-          </div>
-          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/U1oFgJjL9q4/mqdefault.webp" alt="" class="img-full"></a>
-        </div>
-        <div class="padder-v">
-          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">Ullamcorper sodales nisi nec condimentu</a>
-<!--           <a ui-sref="music.mtvdetail" class="text-ellipsis text-xs text-muted" href="#/music/mtvdetail">Convallis</a> -->
-          <ul>
-				<li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-				<li class="right-list"><p class="views views-info">2,114,200 views</p></li>
-			</ul>
-        </div>
-      </div>
-    </div>                
-  </div>
 </div>
+    

@@ -6,7 +6,7 @@ angular.module('jhipsterApp').config(
 				parent : 'dashboard',
 				url : '/',
 				templateUrl : 'scripts/app/home/home.html',
-				controller : 'MainController',
+				controller : 'HomeController',
 				data : {
 					roles : ['ROLE_USER']
 				},

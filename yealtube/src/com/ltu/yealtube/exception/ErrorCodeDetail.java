@@ -58,7 +58,10 @@ public enum ErrorCodeDetail {
 	ERROR_USER_NOT_AUTHENTICATED(616, "[616] User not authenticated"),
 	
 	/** The error user not valid. */
-	ERROR_USER_NOT_VALID(617, "[617] User not valid");
+	ERROR_USER_NOT_VALID(617, "[617] User not valid"),
+	
+	/** The error input not valid. */
+	ERROR_INPUT_NOT_VALID(618, "[618] User not valid");
 
 	/** The id. */
 	private final int id;

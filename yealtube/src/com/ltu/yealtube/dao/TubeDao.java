@@ -1,6 +1,5 @@
 package com.ltu.yealtube.dao;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +13,21 @@ import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 public class TubeDao extends AbstractDao<Tube> {
+	
+	private static TubeDao instance = null;
 
 	/**
 	 * Instantiates a new tube dao.
 	 */
 	public TubeDao() {
 		super(Tube.class);
+	}
+	
+	public static TubeDao getInstance() {
+		if (instance == null) {
+			instance = new TubeDao();
+		}
+		return instance;
 	}
 
 	/**
@@ -29,8 +37,7 @@ public class TubeDao extends AbstractDao<Tube> {
 		Tube tube;
 
 		for (Long i = 1L; i < 10; i++) {
-			tube = new Tube(i, 1L, 1L, "name" + i, "description", "url", 0, 0, 0, 1, Calendar.getInstance().getTime(), Calendar
-					.getInstance().getTime());
+			tube = new Tube(i.toString(), 1L, "name" + i, "description", 1);
 			persist(tube);
 		}
 
@@ -103,55 +110,12 @@ public class TubeDao extends AbstractDao<Tube> {
 	 *            the name
 	 * @return the tube by name
 	 */
-	public Tube getTubeByName(String name) {
+	public CollectionResponse<Tube> getTubeByName(String name, String cursorString, Integer count) throws CommonException {
 		if (name != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("name", name);
-			Query<Tube> query = getQuery(map);
-			List<Tube> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
+			Query<Tube> query = getQueryByName("name", name);
+			return executeQuery(query, cursorString, count);
 		}
 		return null;
 	}
 	
-	/**
-	 * Gets the tube by url.
-	 *
-	 * @param url the url
-	 * @return the tube by url
-	 */
-	public Tube getTubeByUrl(String url) {
-		if (url != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("url", url);
-			Query<Tube> query = getQuery(map);
-			List<Tube> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the tube by manager.
-	 * 
-	 * @param manager
-	 *            the manager
-	 * @return the tube by manager
-	 */
-	public Tube getTubeByManager(String manager) {
-		if (manager != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("manager", manager);
-			Query<Tube> query = getQuery(map);
-			List<Tube> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
 }

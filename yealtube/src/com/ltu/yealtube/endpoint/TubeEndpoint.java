@@ -44,7 +44,7 @@ public class TubeEndpoint {
 		// Exception
 		// that it is already present
 		if (tube.getId() != null) {
-			if (tube.getId() == 0) {
+			if (tube.getId().isEmpty()) {
 				tube.setId(null);
 			} else {
 				if (findRecord(tube.getId()) != null) {
@@ -57,7 +57,7 @@ public class TubeEndpoint {
 		// for us
 		// when we use put
 		TubeDao dao = new TubeDao();
-		Tube pos = dao.getTubeByUrl(tube.getUrl());
+		Tube pos = findRecord(tube.getId());
 		//FIXME Check the code below
 		if (pos == null) {
 			tube.setDateAdded(Calendar.getInstance().getTime());
@@ -68,6 +68,26 @@ public class TubeEndpoint {
 					ErrorCodeDetail.ERROR_EXIST_OBJECT);
 		}
 		return tube;
+	}
+	
+	@ApiMethod(name = "insertYouTube")
+	public Tube insertYouTube(@Named("videoId") String videoId) throws CommonException {
+
+
+		if (videoId != null) {
+			Tube tube = findRecord(videoId);
+			if (tube == null) {
+				
+			} else {
+				throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
+						ErrorCodeDetail.ERROR_EXIST_OBJECT);
+			}
+		} else {
+			throw new CommonException(ErrorCode.BAD_REQUEST_EXCEPTION,
+					ErrorCodeDetail.ERROR_INPUT_NOT_VALID);
+		}
+		
+		return null;
 	}
 
 	/**
@@ -97,7 +117,7 @@ public class TubeEndpoint {
 	 * @throws CommonException the proconco exception
 	 */
 	@ApiMethod(name = "removeTube")
-	public void removeTube(@Named("id") Long id) throws CommonException {
+	public void removeTube(@Named("id") String id) throws CommonException {
 		Tube record = findRecord(id);
 		if (record == null) {
 			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
@@ -114,7 +134,7 @@ public class TubeEndpoint {
 	 * @return the tube
 	 */
 	@ApiMethod(name = "getTube")
-	public Tube getTube(@Named("id") Long id) {
+	public Tube getTube(@Named("id") String id) {
 		return findRecord(id);
 	}
 	
@@ -124,7 +144,7 @@ public class TubeEndpoint {
 	 * @param id the id
 	 * @return the user main
 	 */
-	private Tube findRecord(Long id) {
+	private Tube findRecord(String id) {
 		TubeDao dao = new TubeDao();
 		return dao.find(id);
 	}

@@ -15,7 +15,7 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>com.ltu.yealtube.endpoint.AuthorityEndpoint,com.ltu.yealtube.endpoint.CategoryEndpoint,com.ltu.yealtube.endpoint.CommentEndpoint,com.ltu.yealtube.endpoint.MailEndpoint,com.ltu.yealtube.endpoint.TubeEndpoint,com.ltu.yealtube.endpoint.UserEndpoint,com.ltu.yealtube.endpoint.UserGroupEndpoint,com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint</param-value>
+   <param-value>com.ltu.yealtube.endpoint.AuthorityEndpoint,com.ltu.yealtube.endpoint.CategoryEndpoint,com.ltu.yealtube.endpoint.CommentEndpoint,com.ltu.yealtube.endpoint.MailEndpoint,com.ltu.yealtube.endpoint.TubeEndpoint,com.ltu.yealtube.endpoint.UserEndpoint,com.ltu.yealtube.endpoint.UserGroupEndpoint,com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint,com.ltu.yealtube.endpoint.YoutubeEndpoint</param-value>
   </init-param>
  </servlet>
 <!--  <servlet> -->

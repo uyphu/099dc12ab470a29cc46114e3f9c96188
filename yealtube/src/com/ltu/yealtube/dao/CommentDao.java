@@ -29,7 +29,7 @@ public class CommentDao extends AbstractDao<Comment> {
 		Comment comment;
 
 		for (Long i = 1L; i < 10; i++) {
-			comment = new Comment(i, 1L, 1L, "text", 5, 1, Calendar.getInstance().getTime(), Calendar.getInstance()
+			comment = new Comment(i, "1", 1L, "text", 5, 1, Calendar.getInstance().getTime(), Calendar.getInstance()
 					.getTime());
 			persist(comment);
 		}
