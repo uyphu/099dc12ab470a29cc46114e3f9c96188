@@ -35,6 +35,12 @@ public class YoutubeEndpoint {
 		return tubeService.insertTube(tube);
 	}
 	
+	/**
+	 * This method gets the entity having primary key id. It uses HTTP GET method.
+	 *
+	 * @param id the primary key of the java bean.
+	 * @return The entity with primary key id.
+	 */
 	@ApiMethod(name = "getTube", httpMethod=HttpMethod.GET, path="getTube")
 	public Tube getTube(@Named("id") String id) throws CommonException{
 		return tubeService.findRecord(id);
