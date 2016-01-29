@@ -118,4 +118,10 @@ public class TubeDao extends AbstractDao<Tube> {
 		return null;
 	}
 	
+	@Override
+	public CollectionResponse<Tube> list(String cursorString, Integer count) {
+		Query<Tube> query = getQuery().order("-dateAdded");
+		return executeQuery(query, cursorString, count);
+	}
+	
 }

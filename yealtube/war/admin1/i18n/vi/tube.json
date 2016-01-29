@@ -21,6 +21,7 @@
             "like": "Like",
             "dislike": "Dislike",
             "rating": "Rating",
+            "view": "View",
             "status": "Status",
             "dateModified": "Modified",
             "error":{

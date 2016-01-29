@@ -2,7 +2,7 @@
 
 angular.module('jhipsterApp')
    .controller('TubeController', function ($scope, $rootScope, $timeout, usSpinnerService, 
-		   Tube, TubeSearch, ParseLinks, localStorageService) {
+		   Tube, TubeSearch,  Youtube, YoutubeSearch, ParseLinks, localStorageService) {
        $scope.tubes = [];
        $scope.page = 1;
        $scope.cursor = null;
@@ -55,27 +55,48 @@ angular.module('jhipsterApp')
        };
 
        $scope.save = function () {
-           if ($scope.tube.id != null) {
-        	   var account = localStorageService.get('account');
-        	   $scope.tube.userId = account.id;
-               Tube.update($scope.tube).then(function (data){
-            	   if (data.error != null) {
-            		   showError(data.code);
-            	   } else {
-            		   $scope.refresh();
-            	   }
-               });
-           } else {
-        	   var account = localStorageService.get('account');
-        	   $scope.tube.userId = account.id;
-        	   Tube.insert($scope.tube).then(function (data){
-        		   if (data.error != null) {
-            		   showError(data.code);
-            	   } else {
-            		   $scope.refresh();
-            	   }
-               });
-           }
+//           if ($scope.tube.id != null) {
+//        	   var account = localStorageService.get('account');
+//        	   $scope.tube.userId = account.id;
+//               Tube.update($scope.tube).then(function (data){
+//            	   if (data.error != null) {
+//            		   showError(data.code);
+//            	   } else {
+//            		   $scope.refresh();
+//            	   }
+//               });
+//           } else {
+//        	   var account = localStorageService.get('account');
+//        	   $scope.tube.userId = account.id;
+//        	   Tube.insert($scope.tube).then(function (data){
+//        		   if (data.error != null) {
+//            		   showError(data.code);
+//            	   } else {
+//            		   $scope.refresh();
+//            	   }
+//               });
+//           }
+	       if ($scope.tube.id != null) {
+	    	   var account = localStorageService.get('account');
+	    	   $scope.tube.userId = account.id;
+	           Youtube.update($scope.tube.id).then(function (data){
+	        	   if (data.error != null) {
+	        		   showError(data.code);
+	        	   } else {
+	        		   $scope.refresh();
+	        	   }
+	           });
+	       } else {
+	    	   var account = localStorageService.get('account');
+	    	   $scope.tube.userId = account.id;
+	    	   Youtube.insert($scope.tube.id).then(function (data){
+	    		   if (data.error != null) {
+	        		   showError(data.code);
+	        	   } else {
+	        		   $scope.refresh();
+	        	   }
+	           });
+	       }
        };
 
        $scope.delete = function (id) {
@@ -102,8 +123,9 @@ angular.module('jhipsterApp')
     		   if ($scope.searchQuery.indexOf('id:') != -1) {
     			   var query = $scope.searchQuery.split(':', 2);
     			   try {
-    				   var id = parseInt(query[1]);
-    				   if (!isNaN(id)) {
+//    				   var id = parseInt(query[1]);
+    				   var id = query[1];
+    				   //if (!isNaN(id)) {
     					   $scope.startSpin();
     					   Tube.get(id).then(function(data){
     						   startTimer();
@@ -112,9 +134,9 @@ angular.module('jhipsterApp')
     							   $scope.tubes.push(data.result);
     						   }
     					   });
-    				   } else {
-    					   $scope.invalidQuerySearch = 'ERROR';
-    				   }
+//    				   } else {
+//    					   $scope.invalidQuerySearch = 'ERROR';
+//    				   }
     				} catch (e) {
     					$scope.invalidQuerySearch = 'ERROR';
     				}

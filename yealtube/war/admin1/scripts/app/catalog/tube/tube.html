@@ -73,51 +73,6 @@
                             </p>
                         </div>
                     </div>
-<!--                     <div class="form-group"> -->
-<!--                         <label translate="yealtube.tube.description">Description</label> -->
-<!--                         <input type="text" class="form-control" name="description" -->
-<!--                                ng-model="tube.description"> -->
-<!--                         <div ng-show="editForm.description.$invalid"> -->
-<!--                             <p class="help-block" -->
-<!--                                ng-show="editForm.description.$error.required" translate="entity.validation.required"> -->
-<!--                                 This field is required. -->
-<!--                             </p> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="form-group"> -->
-<!--                         <label translate="yealtube.tube.url">Url</label> -->
-<!--                         <input type="text" class="form-control" name="url" -->
-<!--                                ng-model="tube.url" > -->
-<!--                         <div ng-show="editForm.url.$invalid"> -->
-<!--                             <p class="help-block" -->
-<!--                                ng-show="editForm.url.$error.required" translate="entity.validation.required"> -->
-<!--                                 This field is required. -->
-<!--                             </p> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="form-group"> -->
-<!--                          <label translate="yealtube.tube.categoryId">CategoryId</label> -->
-<!--                          <input type="text" class="form-control" name="categoryId" -->
-<!--                                 ng-model="tube.categoryId" min="0"> -->
-
-<!--                          <div ng-show="editForm.categoryId.$invalid"> -->
-<!--                              <p class="help-block" -->
-<!--                                 ng-show="editForm.categoryId.$error.min" translate="entity.validation.min" translate-value-min="0"> -->
-<!--                                  This field should be more than 0. -->
-<!--                              </p> -->
-<!--                              <p class="help-block" -->
-<!--                                 ng-show="editForm.categoryId.$error.number" translate="entity.validation.number"> -->
-<!--                                  This field should be a number. -->
-<!--                              </p> -->
-<!--                          </div> -->
-<!--                          <div ng-show="editForm.categoryId.$invalid"> -->
-<!--                             <p class="help-block" -->
-<!--                                ng-show="editForm.categoryId.$error.required" translate="entity.validation.required"> -->
-<!--                                 This field is required. -->
-<!--                             </p> -->
-<!--                         </div> -->
-<!--                      </div> -->
-                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -163,13 +118,14 @@
             <tr>
                 <th>ID</th>
                 <th translate="yealtube.tube.name">Name</th>
-                <th translate="yealtube.tube.userId">userId</th>
+<!--                 <th translate="yealtube.tube.userId">userId</th> -->
                 <th translate="yealtube.tube.categoryId">categoryId</th>
-                <th translate="yealtube.tube.description">Description</th>
-                <th translate="yealtube.tube.url">Url</th>
-                <th translate="yealtube.tube.like">Like</th>
-                <th translate="yealtube.tube.dislike">Dislike</th>
-                <th translate="yealtube.tube.rating">Rating</th>
+<!--                 <th translate="yealtube.tube.description">Description</th> -->
+<!--                 <th translate="yealtube.tube.url">Url</th> -->
+<!--                 <th translate="yealtube.tube.like">Like</th> -->
+<!--                 <th translate="yealtube.tube.dislike">Dislike</th> -->
+<!--                 <th translate="yealtube.tube.rating">Rating</th> -->
+				<th translate="yealtube.tube.view">View</th>
                 <th translate="yealtube.tube.status">Status</th>
                 <th translate="yealtube.tube.dateModified">Modified</th>
                 <th></th>
@@ -179,15 +135,16 @@
             <tr ng-repeat="tube in tubes">
                 <td><a ui-sref="tubeDetail({id:tube.id})">{{tube.id}}</a></td>
                 <td>{{tube.name}}</td>
-                <td>{{tube.userId}}</td>
+<!--                 <td>{{tube.userId}}</td> -->
                 <td>{{tube.categoryId}}</td>
-                <td>{{tube.description}}</td>
-                <td>{{tube.url}}</td>
-                <td>{{tube.like}}</td>
-                <td>{{tube.dislike}}</td>
-                <td>{{tube.rating}}</td>
+<!--                 <td>{{tube.description}}</td> -->
+<!--                 <td>{{tube.url}}</td> -->
+<!--                 <td>{{tube.like}}</td> -->
+<!--                 <td>{{tube.dislike}}</td> -->
+<!--                 <td>{{tube.rating}}</td> -->
+                <td>{{tube.viewCount | number:0}}</td>
                 <td>{{tube.status}}</td>
-                <td>{{tube.dateModified}}</td>
+                <td>{{tube.dateModified | date:'yyyy-MM-dd'}}</td>
                 <td>
                     <button type="submit"
                             ui-sref="tubeDetail({id:tube.id})"

@@ -13,13 +13,13 @@
 	              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
 	            </div>
 	          </div>
-	          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi_webp/{{tube.id}}/mqdefault.webp" alt="" class="img-full"></a>
+	          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi/{{tube.id}}/mqdefault.jpg" alt="" class="img-full"></a>
 	        </div>
 	        <div class="padder-v">
 	          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">{{tube.name}}</a>
 	          <ul>
 				<li><p class="author author-info"><a href="#" class="author">{{tube.author}}</a></p></li>
-				<li class="right-list"><p class="views views-info">{{tube.viewCount}} views</p></li>
+				<li class="right-list"><p class="views views-info">{{tube.viewCount | number:0}} views</p></li>
 			</ul>
 	        </div>
 	      </div>

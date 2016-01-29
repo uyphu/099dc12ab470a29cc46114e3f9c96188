@@ -114,4 +114,7 @@ AppConstant.USER_ENDPOINT = "userendpoint";
 /** The Constant USERGROUP_ENDPOINT. */
 AppConstant.USERGROUP_ENDPOINT = "usergroupendpoint"; 
 
+/** The Constant YOUTUBE_ENDPOINT. */
+AppConstant.YOUTUBE_ENDPOINT = "youtubeendpoint"; 
+
 

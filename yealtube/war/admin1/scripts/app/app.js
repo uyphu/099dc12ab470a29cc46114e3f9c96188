@@ -41,15 +41,18 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
 		GApi.load('usergroupendpoint', 'v1', BASE);
 		GApi.load('categoryendpoint', 'v1', BASE);
 		GApi.load('tubeendpoint', 'v1', BASE);
+		GApi.load('youtubeendpoint', 'v1', BASE);
 		GApi.load('calendar', 'v3');
 		GAuth.setClient(AppConstant.CLIENT_ID);
 		GAuth.setScope('https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar.readonly');
 		
 		var token = localStorageService.get('token');
-		console.log('Set token: ' + token.token + token.type);
-		GAuth.setToken({
-			  access_token: token.token + token.type
-			});
+		if (token != null) {
+			console.log('Set token: ' + token.token + token.type);
+			GAuth.setToken({
+				  access_token: token.token + token.type
+				});
+		}
 		
         AppConstant.API_LOAD_TYPE = 2;
         $window.init = function() {
@@ -116,12 +119,13 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
             	
                 config.headers = config.headers || {};
                 var token = localStorageService.get('token');
-                console.log('Set token Interceptor: ' + token.token + token.type);
-                if (token && token.expires && token.expires > new Date().getTime()) {
-                  config.headers['x-auth-token'] = token.token;
-                  config.headers['x-type-token'] = token.type;
+                if (token != null) {
+                	console.log('Set token Interceptor: ' + token.token + token.type);
+                    if (token && token.expires && token.expires > new Date().getTime()) {
+                      config.headers['x-auth-token'] = token.token;
+                      config.headers['x-type-token'] = token.type;
+                    }
                 }
-                
                 return config;
             }
         };

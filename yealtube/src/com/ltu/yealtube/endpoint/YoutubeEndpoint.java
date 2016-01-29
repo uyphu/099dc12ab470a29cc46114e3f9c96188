@@ -35,6 +35,17 @@ public class YoutubeEndpoint {
 		return tubeService.insertTube(tube);
 	}
 	
+	@ApiMethod(name = "updateVideo", httpMethod=HttpMethod.POST, path="updateVideo")
+	public Tube updateVideo(@Named("id") String id) throws CommonException {
+		Tube tube = YoutubeUtils.getTube(id);
+		Tube obj = tubeService.findRecord(id);
+		if (obj != null) {
+			return tubeService.updateTube(tube);
+		} else {
+			return tubeService.insertTube(tube);
+		}
+	}
+	
 	/**
 	 * This method gets the entity having primary key id. It uses HTTP GET method.
 	 *
