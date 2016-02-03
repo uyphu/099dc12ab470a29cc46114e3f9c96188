@@ -76,4 +76,13 @@ public class YoutubeEndpoint {
 		return tubeService.findRecord(id);
 	}
 
+	@ApiMethod(name = "helloWorld1", httpMethod=HttpMethod.GET, path="helloWorld1")
+	public Tube helloWorld1(@Named("id") String id) throws CommonException{
+		return new Tube(id, 1L, "name", "description", 0);
+	}
+	
+	@ApiMethod(name = "helloWorld2", httpMethod=HttpMethod.POST, path="helloWorld2")
+	public Tube helloWorld2(@Named("id") String id) throws CommonException{
+		return new Tube(id, 2L, "name2", "description2", 2);
+	}
 }
