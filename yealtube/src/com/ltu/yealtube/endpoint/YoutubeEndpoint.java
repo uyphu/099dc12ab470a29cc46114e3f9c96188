@@ -11,6 +11,10 @@ import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.service.TubeService;
 import com.ltu.yealtube.utils.YoutubeUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class YoutubeEndpoint.
+ */
 @Api(name = "youtubeendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class YoutubeEndpoint {
 	
@@ -29,12 +33,26 @@ public class YoutubeEndpoint {
 		return tube;
 	}
 	
+	/**
+	 * Insert video.
+	 *
+	 * @param id the id
+	 * @return the tube
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "insertVideo", httpMethod=HttpMethod.POST, path="insertVideo")
 	public Tube insertVideo(@Named("id") String id) throws CommonException {
 		Tube tube = YoutubeUtils.getTube(id);
 		return tubeService.insertTube(tube);
 	}
 	
+	/**
+	 * Update video.
+	 *
+	 * @param id the id
+	 * @return the tube
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "updateVideo", httpMethod=HttpMethod.POST, path="updateVideo")
 	public Tube updateVideo(@Named("id") String id) throws CommonException {
 		Tube tube = YoutubeUtils.getTube(id);
@@ -51,6 +69,7 @@ public class YoutubeEndpoint {
 	 *
 	 * @param id the primary key of the java bean.
 	 * @return The entity with primary key id.
+	 * @throws CommonException the common exception
 	 */
 	@ApiMethod(name = "getTube", httpMethod=HttpMethod.GET, path="getTube")
 	public Tube getTube(@Named("id") String id) throws CommonException{

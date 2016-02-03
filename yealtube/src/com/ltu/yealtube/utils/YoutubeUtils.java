@@ -15,6 +15,10 @@ import org.json.JSONObject;
 import com.ltu.yealtube.constants.Constants;
 import com.ltu.yealtube.domain.Tube;
 
+/**
+ * The Class YoutubeUtils.
+ * @author uyphu
+ */
 public class YoutubeUtils {
 	
 	/** The Constant log. */
@@ -41,7 +45,7 @@ public class YoutubeUtils {
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			
-//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			//Set UTF8 encode
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constants.UTF_8));
 
 			String output;
@@ -65,6 +69,12 @@ public class YoutubeUtils {
 		return null;
 	}
 	
+	/**
+	 * Gets the tube.
+	 *
+	 * @param id the id
+	 * @return the tube
+	 */
 	public static Tube getTube(String id) {
 		try {
 			Tube tube = new Tube();
@@ -101,9 +111,61 @@ public class YoutubeUtils {
 		return null;
 	}
 	
+	/**
+	 * Send tube.
+	 *
+	 * @param videoId the video id
+	 * @return true, if successful
+	 */
+	public static boolean sendTube(String videoId) {
+		try {
+
+//			URL url = new URL("https://yealtubetest.appspot.com/_ah/api/youtubeendpoint/v1/insertVideo?id=NxYlshEVqo8");
+			URL url = new URL("https://yealtubetest.appspot.com/_ah/api/youtubeendpoint/v1/updateVideo?id=czkJYLqylzs");//https://yealtubetest.appspot.com/_ah/api/youtubeendpoint/v1/getVideo?id=-0gED3rn2Tc");//https://yealtubetest.appspot.com/_ah/api/tubeendpoint/v1/tube/czkJYLqylzs");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			//conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/json");
+
+//			String input = "{\"id\":\"" + videoId + "\"}";
+
+//			OutputStream os = conn.getOutputStream();
+//			os.write(input.getBytes());
+//			os.flush();
+
+			if (conn.getResponseCode() != 200 ){//HttpURLConnection.HTTP_CREATED) {
+				//throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+			String output;
+			System.out.println("Output from Server .... \n");
+			while ((output = br.readLine()) != null) {
+				System.out.println(output);
+			}
+
+			conn.disconnect();
+
+			return true;
+		} catch (MalformedURLException e) {
+			log.error(e.getMessage(), e.getCause());
+		} catch (IOException e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+
+		return false;
+	}
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
-		Tube tube = getTube("DQkrfti22mo");
-		System.out.println(tube.toString());
+//		Tube tube = getTube("DQkrfti22mo");
+//		System.out.println(tube.toString());
+		sendTube("czkJYLqylzs");
 	}
 
 }
