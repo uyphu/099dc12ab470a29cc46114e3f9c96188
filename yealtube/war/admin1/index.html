@@ -64,12 +64,14 @@
 	    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	    <script src="bower_components/angular-touch/angular-touch.js"></script>
     	<script src="bower_components/angular-google-gapi/angular-google-gapi.js"></script>
+    	<script src="bower_components/angular-read-more/dist/readmore.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app/app.js"></script>
         <script src="js/sb-admin-2.js"></script>
+        <script src="js/angular-sanitize.js"></script>
     <!-- endbuild -->
 
 
@@ -98,13 +100,14 @@
 		<div ui-view></div>
     </div>
     
-    
         <!-- endbower -->
         <!-- endbuild -->
         
         <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
         <script src="scripts/app/app.js"></script>
         <script src="js/sb-admin-2.js"></script>
+        <script src="js/jquery-1.12.0.js"></script>
+        <script src="js/ng-infinite-scroll.min.js"></script>
         <script src="scripts/app/app.constants.js"></script>
         <script src="scripts/app/constants/app.constant.js"></script>
         <script src="scripts/app/constants/app.utils.js"></script>
@@ -186,38 +189,6 @@
         <script src="scripts/components/banner/banner-notification/banner-notification.directive.js"></script>
 <!--         <script src="scripts/app/account/sessions/sessions.js"></script> -->
 <!--         <script src="scripts/app/account/sessions/sessions.controller.js"></script> -->
-<!--         <script src="scripts/app/entities/position/position.js"></script> -->
-<!--        <script src="scripts/app/entities/position/position.controller.js"></script> -->
-<!--        <script src="scripts/app/entities/position/position-detail.controller.js"></script> -->
-<!--        <script src="scripts/components/entities/position/position.service.js"></script> -->
-<!--        <script src="scripts/components/entities/position/position.search.service.js"></script> -->
-<!--        <script src="scripts/app/entities/group/group.js"></script> -->
-<!--        <script src="scripts/app/entities/group/group.controller.js"></script> -->
-<!--        <script src="scripts/app/entities/group/group-detail.controller.js"></script> -->
-<!--        <script src="scripts/components/entities/group/group.service.js"></script> -->
-<!--        <script src="scripts/components/entities/group/group.search.service.js"></script> -->
-<!--        <script src="scripts/app/entities/reportId/reportId.js"></script> -->
-<!--        <script src="scripts/app/entities/reportId/reportId.controller.js"></script> -->
-<!--        <script src="scripts/app/entities/reportId/reportId-detail.controller.js"></script> -->
-<!--        <script src="scripts/components/entities/reportId/reportId.service.js"></script> -->
-<!--        <script src="scripts/components/entities/reportId/reportId.search.service.js"></script> -->
-<!--        <script src="scripts/app/entities/report/report.js"></script> -->
-<!--         <script src="scripts/app/entities/report/report.controller.js"></script> -->
-<!--         <script src="scripts/app/entities/report/report-detail.controller.js"></script> -->
-<!--         <script src="scripts/app/entities/report/report-edit.controller.js"></script> -->
-<!--         <script src="scripts/components/entities/report/report.service.js"></script> -->
-<!--         <script src="scripts/components/entities/report/report.search.service.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeekId/planningWeekId.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeekId/planningWeekId.controller.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeekId/planningWeekId-detail.controller.js"></script> -->
-<!--         <script src="scripts/components/entities/planningWeekId/planningWeekId.service.js"></script> -->
-<!--         <script src="scripts/components/entities/planningWeekId/planningWeekId.search.service.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeek/planningWeek.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeek/planningWeek.controller.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeek/planningWeek-edit.controller.js"></script> -->
-<!--         <script src="scripts/app/entities/planningWeek/planningWeek-detail.controller.js"></script> -->
-<!--         <script src="scripts/components/entities/planningWeek/planningWeek.service.js"></script> -->
-<!--         <script src="scripts/components/entities/planningWeek/planningWeek.search.service.js"></script> -->
 <!--         <script src="scripts/app/admin/user/user.js"></script> -->
 <!--        <script src="scripts/app/admin/user/user.controller.js"></script> -->
 <!--        <script src="scripts/app/admin/user/user-detail.controller.js"></script> -->
@@ -227,14 +198,6 @@
        <script src="scripts/components/auth/services/user.search.service.js"></script>
        <script src="scripts/components/auth/services/authority.service.js"></script>
        
-<!--        <script src="scripts/app/entities/approval/approval.js"></script> -->
-<!--        <script src="scripts/app/entities/approval/approval.controller.js"></script> -->
-<!--        <script src="scripts/app/entities/approval/approval-detail.controller.js"></script> -->
-<!--        <script src="scripts/app/entities/approval/approval-edit.controller.js"></script> -->
-<!--        <script src="scripts/components/entities/approval/approval.service.js"></script> -->
-<!--        <script src="scripts/components/entities/approval/approval.search.service.js"></script> -->
-<!--        <script src="scripts/app/entities/reportId/reportId-user.controller.js"></script> -->
-
 		<script src="scripts/app/dashboard/video/video.directive.js"></script>
 		<script src="scripts/app/dashboard/stats/stats1.directive.js"></script>
 
@@ -288,6 +251,9 @@
 		<script src="scripts/app/catalog/user/user.js"></script>
 		<script src="scripts/app/catalog/user-group/user-group.controller.js"></script>
 		<script src="scripts/app/catalog/user-group/user-group.js"></script>
+		<script src="scripts/app/catalog/video-detail/video.js"></script>
+		<script src="scripts/app/catalog/video-detail/video.controller.js"></script>
+		<script src="scripts/app/catalog/video-detail/video-detail.controller.js"></script>
 		
         <!-- endbuild -->
     <!-- google api -->    

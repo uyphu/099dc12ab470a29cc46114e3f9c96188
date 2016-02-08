@@ -6,16 +6,17 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.ltu.yealtube.constants.Constants;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.service.TubeService;
 import com.ltu.yealtube.utils.YoutubeUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class YoutubeEndpoint.
  */
-@Api(name = "youtubeendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
+@Api(name = "youtubeendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"), 
+			version="v1", clientIds={Constants.WEB_CLIENT_ID})
 public class YoutubeEndpoint {
 	
 	/** The user service. */
@@ -75,14 +76,10 @@ public class YoutubeEndpoint {
 	public Tube getTube(@Named("id") String id) throws CommonException{
 		return tubeService.findRecord(id);
 	}
-
-	@ApiMethod(name = "helloWorld1", httpMethod=HttpMethod.GET, path="helloWorld1")
-	public Tube helloWorld1(@Named("id") String id) throws CommonException{
-		return new Tube(id, 1L, "name", "description", 0);
-	}
 	
-	@ApiMethod(name = "helloWorld2", httpMethod=HttpMethod.POST, path="helloWorld2")
-	public Tube helloWorld2(@Named("id") String id) throws CommonException{
-		return new Tube(id, 2L, "name2", "description2", 2);
+	@ApiMethod(name = "getDetailVideo", httpMethod=HttpMethod.GET, path="getDetailVideo")
+	public Tube getDetailVideo(@Named("id") String id) {
+		return tubeService.getDetailTube(id);
 	}
+
 }

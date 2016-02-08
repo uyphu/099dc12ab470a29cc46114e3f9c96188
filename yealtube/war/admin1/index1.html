@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Angular-Read-More Directive</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+	<link rel="stylesheet" href="https://material.angularjs.org/0.11.1/angular-material.css">
+	<link rel="stylesheet" href="https://material.angularjs.org/0.11.1/docs.css">
+	<style>
+		a {
+			cursor: pointer;
+		}
+		.more-show-hide {
+			-webkit-transition: all linear 0.2s;
+			transition: all linear 0.2s;
+		}
+		.more-show-hide.ng-hide {
+			opacity: 0;
+		}
+		.toggle-dots-grey {
+			color: darkgrey;
+		}
+		.toggle-dots-yellow {
+			color: yellow;
+		}
+		.toggle-link-yellow {
+			color: yellow;
+		}
+		.toggle-link-grey {
+			color: darkgrey;
+		}
+	</style>
+</head>
+<body layout="row">
+<div ng-app="MyApp" ng-controller="ExampleController" layout="column" layout-padding ng-cloak>
+	<h1>Angular Read More Directive</h1>
+
+<!-- 	<md-content md-theme="docs-dark" layout-padding> -->
+		<h2>Result</h2>
+
+<!-- 		<div hm-read-more -->
+<!-- 			 hm-text="{{text}}" -->
+<!-- 			 hm-limit="{{limit}}" -->
+<!-- 			 hm-more-text="{{moreText}}" -->
+<!-- 			 hm-less-text="{{lessText}}" -->
+<!-- 			 hm-dots-class="{{dotsClass}}" -->
+<!-- 			 hm-link-class="{{linkClass}}" -->
+<!-- 			> -->
+<!-- 		</div> -->
+		<hm-read-more
+	        hm-text="{{ text }}" 
+	        hm-limit="100" 
+	        hm-more-text="read more" 
+	        hm-less-text="read less"
+	        hm-dots-class="dots"
+	        hm-link-class="links">
+	</hm-read-more>
+<!-- 	</md-content> -->
+	
+</div>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.11.0/angular-material.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.11.1/angular-material.min.js"></script> -->
+<script src="bower_components/angular-spinner/angular-spinner.js"></script>
+<script src="dist/readmore.js"></script>
+<script src="dist/app.js"></script>
+	
+</body>
+</html>

@@ -56,6 +56,19 @@ angular.module('jhipsterApp')
 					p.reject(error);
 				});
     			return p.promise;
+   			}, 
+   			
+   			getDetail: function (id) {
+   				var p=$q.defer();
+   				var requestData = {};
+   				requestData.id = id;
+    			GApi.execute(AppConstant.YOUTUBE_ENDPOINT, 'getDetailVideo', requestData).then (function(resp){
+   				 	p.resolve(resp);
+    			},function(error){
+					console.log(ErrorCode.ERROR_CALL_ENDPOINT_SERVICE + error);
+					p.reject(error);
+				});
+    			return p.promise;
    			}
 	   };
    });

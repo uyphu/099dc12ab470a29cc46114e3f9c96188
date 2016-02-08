@@ -1,0 +1,36 @@
+<div>
+	<div class="app-content-body fade-in-up ng-scope" ui-view="" style="">
+		<div class="wrapper-lg ng-scope">
+		  <div class="row">
+		    <div class="col-sm-9">
+		      <div class="blog-post">                   
+		        <div class="panel no-border">
+		          <div id="video-player"></div>
+		          <div class="wrapper-lg">
+		            <h2 class="m-t-none"><a href="">{{tube.name}}</a></h2>
+		            <div hm-read-more
+					        hm-text="{{ tube.description }}" 
+					        hm-limit="100" 
+					        hm-more-text="read more" 
+					        hm-less-text="read less"
+					        hm-dots-class="dots"
+					        hm-link-class="links">
+					</div>
+					
+		            <div class="line line-lg b-b b-light"></div>
+		            <div class="text-muted">
+		              <i class="fa fa-user text-muted"></i> by <a href="" class="m-r-sm">{{tube.author}}</a>
+		              <i class="fa fa-clock-o text-muted"></i> {{tube.dateAdded}}
+		              <a href="" class="m-l-sm"><i class="fa fa-comment-o text-muted"></i> {{tube.commentCount}} comment(s)</a>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		
+		    </div>
+		
+		  </div>
+		</div>
+	</div>
+	
+</div>	

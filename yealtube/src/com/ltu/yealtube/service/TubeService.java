@@ -5,17 +5,21 @@ import java.util.Calendar;
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
+import org.apache.log4j.Logger;
+
 import com.google.api.server.spi.response.CollectionResponse;
+import com.ltu.yealtube.constants.Constants;
 import com.ltu.yealtube.dao.TubeDao;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
+import com.ltu.yealtube.utils.YoutubeUtils;
 
 public class TubeService {
 	
 	/** The log. */
-	//private final Logger log = Logger.getLogger(TubeService.class);
+	private final Logger log = Logger.getLogger(TubeService.class);
 	
 	/** The tube dao. */
 	private TubeDao tubeDao = TubeDao.getInstance();
@@ -52,6 +56,7 @@ public class TubeService {
 		
 		tube.setDateAdded(Calendar.getInstance().getTime());
 		tube.setDateModified(Calendar.getInstance().getTime());
+		tube.setStatus(Constants.PENDING_STATUS);
 		return tubeDao.persist(tube);
 	}
 	
@@ -81,6 +86,19 @@ public class TubeService {
 					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
 		}
 		tubeDao.delete(record);
+	}
+	
+	public Tube getDetailTube(String id) {
+		
+		Tube tube = YoutubeUtils.getTube(id);
+		
+		//Update tube info from youtube
+		try {
+			updateTube(tube);
+		} catch (CommonException e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+		return tube; 
 	}
 	
 	/**

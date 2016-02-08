@@ -67,6 +67,9 @@ public class Tube {
 	
 	private Date dateModified;
 	
+	@IgnoreSave
+	private String embedHtml;
+	
 
 	public final String getId() {
 		return this.id;
@@ -203,6 +206,14 @@ public class Tube {
 
 	public final void setTags(String tags) {
 		this.tags = tags;
+	}
+	
+	public String getEmbedHtml() {
+		return embedHtml;
+	}
+
+	public void setEmbedHtml(String embedHtml) {
+		this.embedHtml = embedHtml;
 	}
 
 	public Tube() {

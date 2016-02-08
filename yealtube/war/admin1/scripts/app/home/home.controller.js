@@ -11,14 +11,16 @@ angular.module('jhipsterApp')
        $scope.invalidName = null;
        $scope.value = 10;
        //$scope.startcounter = 0;
+       $scope.busy  = false;
        $scope.loadAll = function() {
-    	   listData($scope.cursor, AppConstant.MAX_PAGE_SIZE);
+    	   initData($scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
        };
        $scope.reset = function() {
            $scope.page = 1;
            $scope.cursor = null;
            $scope.tubes = [];
            $scope.loadAll();
+           $scope.busy  = false;
        };
        $scope.loadPage = function(page) {
            $scope.page = page;
@@ -27,7 +29,7 @@ angular.module('jhipsterApp')
            } else {
         	   if ($scope.cursor != null) {
             	   //listData($scope.cursor);
-        		   listData($scope.cursor, AppConstant.MAX_PAGE_SIZE);
+        		   listData($scope.cursor, AppConstant.MAX_NEXT_PAGE_SIZE);
                }
            }
        };
@@ -39,7 +41,7 @@ angular.module('jhipsterApp')
            });
        };
        
-       function listData(cursor, count) {
+       function initData(cursor, count) {
     	   $scope.startSpin();
     	   Tube.loadAll(cursor, count).then(function(data) {
     		   $scope.stopSpin();
@@ -51,6 +53,23 @@ angular.module('jhipsterApp')
 	    			   $scope.cursor = data.nextPageToken;
     			   }
     		   }
+    	   });
+       };
+       
+       function listData(cursor, count) {
+    	   $scope.startSpin();
+    	   $scope.busy  = true;
+    	   Tube.loadAll(cursor, count).then(function(data) {
+    		   $scope.stopSpin();
+    		   if (data != null) {
+    			   if (data.items != null) {
+	    			   for (var i = 0; i < data.items.length; i++) {
+	                     $scope.tubes.push(data.items[i]);
+	    			   }
+	    			   $scope.cursor = data.nextPageToken;
+    			   }
+    		   }
+    		   $scope.busy  = false;
     	   });
        };
 

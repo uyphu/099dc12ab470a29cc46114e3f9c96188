@@ -43,20 +43,67 @@
         "body" : "empty"
       }
     },
-    "tubeendpoint.updateTube" : {
-      "path" : "tube",
-      "httpMethod" : "PUT",
+    "tubeendpoint.insertYouTube" : {
+      "path" : "tube/{videoId}",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.insertYouTube",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "videoId" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tubeendpoint.getTube" : {
+      "path" : "tube/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTube",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tubeendpoint.removeTube" : {
+      "path" : "tube/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.removeTube",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "tubeendpoint.searchTube" : {
@@ -103,46 +150,36 @@
         "body" : "empty"
       }
     },
-    "tubeendpoint.getTube" : {
-      "path" : "tube/{id}",
-      "httpMethod" : "GET",
+    "tubeendpoint.insertTube" : {
+      "path" : "tube",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTube",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.insertTube",
       "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tubeendpoint.removeTube" : {
-      "path" : "tube/{id}",
-      "httpMethod" : "DELETE",
+    "tubeendpoint.updateTube" : {
+      "path" : "tube",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.removeTube",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube",
       "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "tubeendpoint.listTube" : {
@@ -162,43 +199,6 @@
           "count" : {
             "type" : "int32",
             "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tubeendpoint.insertTube" : {
-      "path" : "tube",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.insertTube",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tubeendpoint.insertYouTube" : {
-      "path" : "tube/{videoId}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.insertYouTube",
-      "request" : {
-        "parameters" : {
-          "videoId" : {
-            "type" : "string",
-            "required" : true
           }
         },
         "body" : "empty"
@@ -268,6 +268,9 @@
           "dateModified" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "embedHtml" : {
+            "type" : "string"
           }
         }
       },
@@ -290,20 +293,10 @@
     "methods" : {
       "com.ltu.yealtube.endpoint.TubeEndpoint.initData" : {
       },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube" : {
-        "request" : {
-          "$ref" : "Tube"
-        },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.insertYouTube" : {
         "response" : {
           "$ref" : "Tube"
         }
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.searchTube" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Tube"
-        }
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.TubeEndpoint.getTube" : {
         "response" : {
@@ -312,10 +305,12 @@
       },
       "com.ltu.yealtube.endpoint.TubeEndpoint.removeTube" : {
       },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.listTube" : {
+      "com.ltu.yealtube.endpoint.TubeEndpoint.searchTube" : {
         "response" : {
           "$ref" : "CollectionResponse_Tube"
         }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.TubeEndpoint.insertTube" : {
         "request" : {
@@ -325,9 +320,17 @@
           "$ref" : "Tube"
         }
       },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.insertYouTube" : {
+      "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube" : {
+        "request" : {
+          "$ref" : "Tube"
+        },
         "response" : {
           "$ref" : "Tube"
+        }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.listTube" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Tube"
         }
       }
     }

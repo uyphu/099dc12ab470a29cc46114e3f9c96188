@@ -5,24 +5,26 @@
 		</div>
 	</div>
 	<div class="row row-sm" >
+		<div infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="busy" infinite-scroll-distance='1'>
 	    <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="tube in tubes">
 	      <div class="item">
 	        <div class="pos-rlt b-a bg-white wrapper-xs">
 	          <div class="item-overlay bg-white-opacity">
 	            <div class="center text-center m-t-n w-full">
-	              <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><i class="fa fa-play-circle fa-2x text-white"></i></a>
+	              <a ui-sref="dashboard.videoDetail({id:tube.id})" ><i class="fa fa-play-circle fa-2x text-white"></i></a>
 	            </div>
 	          </div>
-	          <a ui-sref="music.mtvdetail" href="#/music/mtvdetail"><img src="//i.ytimg.com/vi/{{tube.id}}/mqdefault.jpg" alt="" class="img-full"></a>
+	          <a ui-sref="dashboard.videoDetail({id:tube.id})"><img src="//i.ytimg.com/vi/{{tube.id}}/mqdefault.jpg" alt="" class="img-full"></a>
 	        </div>
 	        <div class="padder-v">
-	          <a ui-sref="music.mtvdetail" class="text-ellipsis" href="#/music/mtvdetail">{{tube.name}}</a>
+	          <a ui-sref="dashboard.videoDetail({id:tube.id})" class="text-ellipsis" >{{tube.name}}</a>
 	          <ul>
 				<li><p class="author author-info"><a href="#" class="author">{{tube.author}}</a></p></li>
 				<li class="right-list"><p class="views views-info">{{tube.viewCount | number:0}} views</p></li>
 			</ul>
 	        </div>
 	      </div>
+	    </div>
 	    </div>
     </div>
 </div>

@@ -33,8 +33,11 @@ AppConstant.OAUTH2_VERSION = 'v2';
 /** The Constant OAUTH2. */
 AppConstant.OAUTH2 = 'oauth2';
 
-/** The Constant OAUTH2. */
-AppConstant.MAX_PAGE_SIZE = 20;
+/** The Constant MAX_INIT_PAGE_SIZE. */
+AppConstant.MAX_INIT_PAGE_SIZE = 20;
+
+/** The Constant MAX_NEXT_PAGE_SIZE. */
+AppConstant.MAX_NEXT_PAGE_SIZE = 5;
 
 /** The Constant OAUTH2_ENDPOINT_LOADED. */
 AppConstant.OAUTH2_ENDPOINT_LOADED = false;

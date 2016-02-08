@@ -289,6 +289,9 @@
     color: #a6a8b1;
     background-color: #3a3f51;
 }
+.m-t-none {
+	margin-top: 0 !important
+}
 .badge {
     background-color: #cfdadd;
 }
@@ -345,3 +348,131 @@
 .padder-v p.views-info{
     font-size: 12px;
 }
+
+/* video detail */
+.app-content-body {
+	float: left;
+	width: 100%;
+	padding-bottom: 50px
+}
+
+/* fade */
+.fade-in-right-big.ng-enter {
+	-webkit-animation: fadeInRightBig .5s;
+	animation: fadeInRightBig .5s
+}
+
+.fade-in-right-big.ng-leave {
+	-webkit-animation: fadeOutLeftBig .5s;
+	animation: fadeOutLeftBig .5s
+}
+
+.fade-in-left-big.ng-enter {
+	-webkit-animation: fadeInLeftBig .5s;
+	animation: fadeInLeftBig .5s
+}
+
+.fade-in-left-big.ng-leave {
+	-webkit-animation: fadeOutRightBig .5s;
+	animation: fadeOutRightBig .5s
+}
+
+.fade-in-up-big.ng-enter {
+	-webkit-animation: fadeInUpBig .5s;
+	animation: fadeInUpBig .5s
+}
+
+.fade-in-up-big.ng-leave {
+	-webkit-animation: fadeOutUpBig .5s;
+	animation: fadeOutUpBig .5s
+}
+
+.fade-in-down-big.ng-enter {
+	-webkit-animation: fadeInDownBig .5s;
+	animation: fadeInDownBig .5s
+}
+
+.fade-in-down-big.ng-leave {
+	-webkit-animation: fadeOutDownBig .5s;
+	animation: fadeOutDownBig .5s
+}
+
+.fade-in.ng-enter {
+	-webkit-animation: fadeIn .5s;
+	animation: fadeIn .5s
+}
+
+.fade-in.ng-leave {
+	-webkit-animation: fadeOut .5s;
+	animation: fadeOut .5s
+}
+
+.fade-in-right.ng-enter {
+	-webkit-animation: fadeInRight .5s;
+	animation: fadeInRight .5s
+}
+
+.fade-in-right.ng-leave {
+	-webkit-animation: fadeOutLeft .5s;
+	animation: fadeOutLeft .5s
+}
+
+.fade-in-left.ng-enter {
+	-webkit-animation: fadeInLeft .5s;
+	animation: fadeInLeft .5s
+}
+
+.fade-in-left.ng-leave {
+	-webkit-animation: fadeOutRight .5s;
+	animation: fadeOutRight .5s
+}
+
+.fade-in-up.ng-enter {
+	-webkit-animation: fadeInUp .5s;
+	animation: fadeInUp .5s
+}
+
+.fade-in-up.ng-leave {
+	-webkit-animation: fadeOutUp .5s;
+	animation: fadeOutUp .5s
+}
+
+.fade-in-down.ng-enter {
+	-webkit-animation: fadeInDown .5s;
+	animation: fadeInDown .5s
+}
+
+.fade-in-down.ng-leave {
+	-webkit-animation: fadeOutDown .5s;
+	animation: fadeOutDown .5s
+}
+
+/* readmore */
+a {
+	cursor: pointer;
+}
+.more-show-hide {
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+}
+
+.more-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.toggle-dots-grey {
+  color: darkgrey;
+}
+
+.toggle-dots-yellow {
+  color: yellow;
+}
+
+.toggle-link-yellow {
+  color: yellow;
+}
+
+.toggle-link-grey {
+  color: darkgrey;
+}
+/* end readmore */

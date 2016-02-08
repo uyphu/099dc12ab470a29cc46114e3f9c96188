@@ -43,22 +43,6 @@
         "body" : "empty"
       }
     },
-    "usergroupendpoint.updateUserGroup" : {
-      "path" : "usergroup",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.updateUserGroup",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "usergroupendpoint.cleanData" : {
       "path" : "cleanData",
       "httpMethod" : "POST",
@@ -72,22 +56,6 @@
       },
       "response" : {
         "body" : "empty"
-      }
-    },
-    "usergroupendpoint.insertUserGroup" : {
-      "path" : "usergroup",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.insertUserGroup",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
       }
     },
     "usergroupendpoint.listUserGroup" : {
@@ -107,6 +75,80 @@
           "count" : {
             "type" : "int32",
             "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "usergroupendpoint.updateUserGroup" : {
+      "path" : "usergroup",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.updateUserGroup",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "usergroupendpoint.insertUserGroup" : {
+      "path" : "usergroup",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.insertUserGroup",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "usergroupendpoint.removeUserGroup" : {
+      "path" : "usergroup/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.removeUserGroup",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "usergroupendpoint.getUserGroup" : {
+      "path" : "usergroup/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
           }
         },
         "body" : "empty"
@@ -143,52 +185,25 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "usergroupendpoint.getUserGroup" : {
-      "path" : "usergroup/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "usergroupendpoint.removeUserGroup" : {
-      "path" : "usergroup/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.removeUserGroup",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponse_UserGroup" : {
+        "id" : "CollectionResponse_UserGroup",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "UserGroup"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "UserGroup" : {
         "id" : "UserGroup",
         "type" : "object",
@@ -207,25 +222,17 @@
             "type" : "string"
           }
         }
-      },
-      "CollectionResponse_UserGroup" : {
-        "id" : "CollectionResponse_UserGroup",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "UserGroup"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
       }
     },
     "methods" : {
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.initData" : {
+      },
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData" : {
+      },
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.listUserGroup" : {
+        "response" : {
+          "$ref" : "CollectionResponse_UserGroup"
+        }
       },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.updateUserGroup" : {
         "request" : {
@@ -235,8 +242,6 @@
           "$ref" : "UserGroup"
         }
       },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData" : {
-      },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.insertUserGroup" : {
         "request" : {
           "$ref" : "UserGroup"
@@ -245,22 +250,17 @@
           "$ref" : "UserGroup"
         }
       },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.listUserGroup" : {
-        "response" : {
-          "$ref" : "CollectionResponse_UserGroup"
-        }
-      },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.searchUserGroup" : {
-        "response" : {
-          "$ref" : "CollectionResponse_UserGroup"
-        }
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.removeUserGroup" : {
       },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup" : {
         "response" : {
           "$ref" : "UserGroup"
         }
       },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.removeUserGroup" : {
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.searchUserGroup" : {
+        "response" : {
+          "$ref" : "CollectionResponse_UserGroup"
+        }
       }
     }
   }

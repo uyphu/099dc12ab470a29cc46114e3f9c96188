@@ -64,21 +64,6 @@
         "body" : "empty"
       }
     },
-    "commentendpoint.cleanData" : {
-      "path" : "cleanData",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "commentendpoint.insertComment" : {
       "path" : "comment",
       "httpMethod" : "POST",
@@ -93,6 +78,21 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "commentendpoint.cleanData" : {
+      "path" : "cleanData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "commentendpoint.removeComment" : {
@@ -247,8 +247,6 @@
       },
       "com.ltu.yealtube.endpoint.CommentEndpoint.initData" : {
       },
-      "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData" : {
-      },
       "com.ltu.yealtube.endpoint.CommentEndpoint.insertComment" : {
         "request" : {
           "$ref" : "Comment"
@@ -256,6 +254,8 @@
         "response" : {
           "$ref" : "Comment"
         }
+      },
+      "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.CommentEndpoint.removeComment" : {
       },
