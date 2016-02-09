@@ -9,7 +9,7 @@ import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.ltu.yealtube.auth.AppAuthenticator;
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
@@ -34,8 +34,8 @@ public class UserEndpoint {
 	 *            The number of users
 	 * @return a list of Users
 	 */
-	@ApiMethod(name = "listUser", scopes = { Constants.EMAIL_SCOPE }, clientIds = { Constants.WEB_CLIENT_ID,
-			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID }, audiences = { Constants.ANDROID_AUDIENCE }, authenticators = AppAuthenticator.class)
+	@ApiMethod(name = "listUser", scopes = { Constant.EMAIL_SCOPE }, clientIds = { Constant.WEB_CLIENT_ID,
+			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID }, audiences = { Constant.ANDROID_AUDIENCE }, authenticators = AppAuthenticator.class)
 	public CollectionResponse<User> listUser(com.google.appengine.api.users.User user,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count)
 			throws CommonException {
@@ -55,7 +55,7 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "insertUser")
 	public User insertUser(User user) throws CommonException {
-		user.setType(Constants.SYSTEM_USER);
+		user.setType(Constant.SYSTEM_USER);
 		return userService.insertUser(user);
 	}
 
@@ -115,7 +115,7 @@ public class UserEndpoint {
 	public User getAccount(com.google.appengine.api.users.User user) throws CommonException {
 		if (user == null)
 			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION, ErrorCodeDetail.ERROR_USER_NOT_AUTHENTICATED);
-		return userService.findOneByEmail(user.getEmail(), Constants.SYSTEM_USER);
+		return userService.findOneByEmail(user.getEmail(), Constant.SYSTEM_USER);
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class UserEndpoint {
 	@ApiMethod(name = "testInsert", httpMethod = HttpMethod.POST, path = "testInsert")
 	public User testInsert(@Nullable @Named(value = "value") String value) throws CommonException {
 		User user = new User("login" + value, "password", "uyphu" + value + "@yahoo.com");
-		user.setType(Constants.SYSTEM_USER);
+		user.setType(Constant.SYSTEM_USER);
 		return insertUser(user);
 	}
 

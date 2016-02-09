@@ -3,7 +3,7 @@ package com.ltu.yealtube.service;
 
 import org.apache.log4j.Logger;
 
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.utils.MailUtil;
 
@@ -33,7 +33,7 @@ public class MailService {
         String subject = "yealtube account activation";
         //FIXME added it for developement
 //        sendEmail(user.getEmail(), subject, content, false, true);
-        sendEmail(Constants.ADMIN_EMAIL, subject, content, false, true);
+        sendEmail(Constant.ADMIN_EMAIL, subject, content, false, true);
     }
 
 //    public void sendPasswordResetMail(User user, String baseUrl) {

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import com.google.api.server.spi.auth.common.User;
 import com.google.api.server.spi.config.Authenticator;
 import com.google.common.net.HttpHeaders;
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.service.FacebookService;
 import com.ltu.yealtube.service.GoogleService;
@@ -34,12 +34,12 @@ public class AppAuthenticator implements Authenticator {
 			String type = String.valueOf(token.charAt(token.length()-1));
 			token = token.substring("Bearer".length(), token.length()-1).trim();
 			
-			if (Constants.SYSTEM_USER.equals(type)) {
-				TokenProvider tokenProvider = TokenProvider.getInstance(Constants.SECRET_KEY, Constants.TOKEN_VALIDITY_IN_SECONDS);
+			if (Constant.SYSTEM_USER.equals(type)) {
+				TokenProvider tokenProvider = TokenProvider.getInstance(Constant.SECRET_KEY, Constant.TOKEN_VALIDITY_IN_SECONDS);
 				UserService userService = UserService.getInstance();
 				if (StringUtils.hasText(token)) {
 	                String login = tokenProvider.getUserNameFromToken(token);
-	                com.ltu.yealtube.domain.User user = userService.findOneByLogin(login, Constants.SYSTEM_USER);
+	                com.ltu.yealtube.domain.User user = userService.findOneByLogin(login, Constant.SYSTEM_USER);
 	                if (tokenProvider.validateToken(token, user)) {
 	                    return new User(user.getEmail());
 	                }
@@ -48,7 +48,7 @@ public class AppAuthenticator implements Authenticator {
 	            }
 			}
 			
-			if (Constants.GOOGLE_USER.equals(type)) {
+			if (Constant.GOOGLE_USER.equals(type)) {
 				GoogleService googleService = new GoogleService(token);
 				try {
 					com.ltu.yealtube.domain.User user = googleService.authenticate();
@@ -59,7 +59,7 @@ public class AppAuthenticator implements Authenticator {
 				}
 			}
 			
-			if (Constants.FACEBOOK_USER.equals(type)) {
+			if (Constant.FACEBOOK_USER.equals(type)) {
 				FacebookService googleService = new FacebookService(token);
 				try {
 					com.ltu.yealtube.domain.User user = googleService.authenticate();

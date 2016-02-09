@@ -6,7 +6,7 @@ import javax.inject.Named;
 import org.apache.log4j.Logger;
 
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.dao.UserDao;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.exception.CommonException;
@@ -127,7 +127,7 @@ public class UserService {
 	 */
 	public User updateUser(User user) throws CommonException {
 		
-		if (user.getId() == null && Constants.SYSTEM_USER.equals(user.getType())) {
+		if (user.getId() == null && Constant.SYSTEM_USER.equals(user.getType())) {
 			return insertUser(user);
 		} else {
 			User oldUser = userDao.findOneByLogin(user.getLogin(), user.getType());
@@ -174,7 +174,7 @@ public class UserService {
 //		user.setEmail(email);
 //		user.setLangKey(langKey);
 		// new user is not active
-		if (Constants.SYSTEM_USER.equals(user.getType())) {
+		if (Constant.SYSTEM_USER.equals(user.getType())) {
 			user.setActivated(false);
 			// new user gets registration key
 			user.setActivationKey(RandomUtil.generateActivationKey());
@@ -186,9 +186,9 @@ public class UserService {
 //		user.setAuthorities(authorities);
 //		userRepository.save(user);
 		userDao.persist(user);
-		if (Constants.SYSTEM_USER.equals(user.getType())) {
+		if (Constant.SYSTEM_USER.equals(user.getType())) {
 			 MailService mailService = new MailService();
-		     mailService.sendActivationEmail(user, Constants.BASE_URL);
+		     mailService.sendActivationEmail(user, Constant.BASE_URL);
 		}
 		log.debug("Created Information for User: " + user.toString());
 		return user;
@@ -261,7 +261,7 @@ public class UserService {
 	 */
 	public User login(String login, String password) throws CommonException {
 		if (login != null && password != null) {
-			User user = userDao.findOneByLogin(login, Constants.SYSTEM_USER);
+			User user = userDao.findOneByLogin(login, Constant.SYSTEM_USER);
 			if (user != null ) {
 				
 				if (user.isActivated()) {

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
@@ -51,7 +51,7 @@ public class FacebookService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e.getCause());
 			throw new CommonException(ErrorCode.SYSTEM_EXCEPTION.getId(), ErrorCode.UNAUTHORIZED_EXCEPTION
-					+ Constants.STRING_EXEPTION_DETAIL + e.getMessage());
+					+ Constant.STRING_EXEPTION_DETAIL + e.getMessage());
 		}
 		if (result.getLogin() == null) {
 			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION,
