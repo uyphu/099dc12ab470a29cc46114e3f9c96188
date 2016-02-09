@@ -4,7 +4,7 @@ package com.ltu.yealtube.constants;
 /**
  * The Class Constants.
  */
-public class Constants {
+public class Constant {
 	
 	/** The Constant WEB_CLIENT_ID. */
 	public static final String WEB_CLIENT_ID = "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com";
@@ -78,5 +78,5 @@ public class Constants {
 	/** The Constant EMPTY_STRING. */
 	public static final String EMPTY_STRING = "";
 	
-    
+	public static final Long ADMIN_ID = 1L;
 }

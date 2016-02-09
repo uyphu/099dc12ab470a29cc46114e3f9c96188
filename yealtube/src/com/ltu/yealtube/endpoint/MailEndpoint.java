@@ -10,14 +10,31 @@ import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.service.MailService;
 import com.ltu.yealtube.utils.MailUtil;
 
+/**
+ * The Class MailEndpoint.
+ * @author uyphu
+ */
 @Api(name = "mailendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class MailEndpoint {
 	
+	/**
+	 * Send mail.
+	 *
+	 * @param toEmail the to email
+	 * @param subject the subject
+	 * @param body the body
+	 */
 	@ApiMethod(name = "sendMail", httpMethod = HttpMethod.POST, path = "sendMail")
 	public void sendMail(@Named("toEmail") String toEmail, @Named("subject") String subject, @Named("body") String body) {
 		MailUtil.sendEmail(toEmail, subject, body);
 	}
 	
+	/**
+	 * Send active mail.
+	 *
+	 * @param toEmail the to email
+	 * @param subject the subject
+	 */
 	@ApiMethod(name = "sendActiveMail", httpMethod = HttpMethod.POST, path = "sendActiveMail")
 	public void sendActiveMail(@Named("toEmail") String toEmail, @Named("subject") String subject) {
 		 String baseUrl = "https://yealtubetest.appspot.com";

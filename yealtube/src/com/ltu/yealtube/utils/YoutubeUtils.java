@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.Tube;
 
 /**
@@ -35,7 +35,7 @@ public class YoutubeUtils {
 		try {
 
 			URL url = new URL(
-					"https://www.googleapis.com/youtube/v3/videos?part="+part+"&id="+id+"&key="+Constants.API_KEY);
+					"https://www.googleapis.com/youtube/v3/videos?part="+part+"&id="+id+"&key="+Constant.API_KEY);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
@@ -46,7 +46,7 @@ public class YoutubeUtils {
 			}
 			
 			//Set UTF8 encode
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constants.UTF_8));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constant.UTF_8));
 
 			String output;
 			StringBuilder builder = new StringBuilder();
@@ -70,7 +70,7 @@ public class YoutubeUtils {
 	}
 	
 	/**
-	 * Gets the tube.
+	 * Gets the tube from youtube.
 	 *
 	 * @param id the id
 	 * @return the tube
@@ -96,9 +96,15 @@ public class YoutubeUtils {
 						if (jsonArray != null) {
 							item = new JSONObject(jsonArray.get(0).toString());
 							item = new JSONObject(item.get("snippet").toString());
-							tube.setName(item.getString("title"));
+							tube.setTitle(item.getString("title"));
 							tube.setDescription(item.getString("description"));
 							tube.setEmbedHtml(YoutubeUtils.getEmbedHtml(id));
+							jsonArray = (JSONArray)json.get("tags");
+							if (jsonArray != null) {
+								tube.setTags(jsonArray.toString());
+							}
+							tube.setAuthor("admin");
+							tube.setUserId(Constant.ADMIN_ID);
 							return tube;
 						}
 					}
@@ -130,7 +136,7 @@ public class YoutubeUtils {
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constants.UTF_8));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constant.UTF_8));
 
 			String output;
 			StringBuilder builder = new StringBuilder();
@@ -152,7 +158,7 @@ public class YoutubeUtils {
 	}
 	
 	public static JSONObject getPlayer(String id) {
-		String urlString = "https://www.googleapis.com/youtube/v3/videos?part=player&id="+id+"&key="+Constants.API_KEY;
+		String urlString = "https://www.googleapis.com/youtube/v3/videos?part=player&id="+id+"&key="+Constant.API_KEY;
 		try {
 			URL url = new URL(urlString);
 			return callYoutube(url);
@@ -163,7 +169,7 @@ public class YoutubeUtils {
 	}
 	
 	public static String getEmbedHtml(String id) {
-		String urlString = "https://www.googleapis.com/youtube/v3/videos?part=player&id="+id+"&key="+Constants.API_KEY;
+		String urlString = "https://www.googleapis.com/youtube/v3/videos?part=player&id="+id+"&key="+Constant.API_KEY;
 		try {
 			URL url = new URL(urlString);
 			JSONObject json = callYoutube(url);

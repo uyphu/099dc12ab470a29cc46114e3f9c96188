@@ -1,6 +1,5 @@
 package com.ltu.yealtube.domain;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,16 +19,27 @@ public class Tube {
 	private String id;
 	
 	@Index
-	private Long userId;
-	
-	@Index
-	private String name;
+	private String title;
 	
 	@Index
 	private String description;
 	
+	@Load
+    private List<Key<Category>> categoryKeys;
+	
+	@Index
+	private Long userId;
+	
 	@Index
 	private int viewCount;
+	
+	@Index
+	private int status;
+	
+	@Index
+	private Date createdAt;
+	
+	private Date modifiedAt;
 	
 	@IgnoreSave
 	private int likeCount;
@@ -52,162 +62,150 @@ public class Tube {
 	@Index
 	private String tags;
 	
-	@Load
-    private List<Key<Category>> categoryKeys;
-	
 	/** The categories. */
 	@IgnoreSave
 	private List<String> categories;
 	
-	@Index
-	private int status;
-	
-	@Index
-	private Date dateAdded;
-	
-	private Date dateModified;
-	
 	@IgnoreSave
 	private String embedHtml;
-	
 
-	public final String getId() {
-		return this.id;
+	public String getId() {
+		return id;
 	}
 
-	public final void setId(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public final Long getUserId() {
-		return this.userId;
+	public String getTitle() {
+		return title;
 	}
 
-	public final void setUserId(Long userId) {
-		this.userId = userId;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE) 
-	public final List<Key<Category>> getCategoryKeys() {
-		return this.categoryKeys;
+	public String getDescription() {
+		return description;
 	}
 
-	public final void setCategoryKeys(List<Key<Category>> categoryKeys) {
-		this.categoryKeys = categoryKeys;
-	}
-
-	public final List<String> getCategories() {
-		return this.categories;
-	}
-
-	public final void setCategories(List<String> categories) {
-		this.categories = categories;
-	}
-
-	public final String getName() {
-		return this.name;
-	}
-
-	public final void setName(String name) {
-		this.name = name;
-	}
-
-	public final String getDescription() {
-		return this.description;
-	}
-
-	public final void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public final int getStatus() {
-		return this.status;
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE) 
+	public List<Key<Category>> getCategoryKeys() {
+		return categoryKeys;
 	}
 
-	public final void setStatus(int status) {
-		this.status = status;
+	public void setCategoryKeys(List<Key<Category>> categoryKeys) {
+		this.categoryKeys = categoryKeys;
 	}
 
-	public final Date getDateAdded() {
-		return this.dateAdded;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public final void setDateAdded(Date dateAdded) {
-		this.dateAdded = dateAdded;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public final Date getDateModified() {
-		return this.dateModified;
+	public int getViewCount() {
+		return viewCount;
 	}
 
-	public final void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
-	}
-	
-	public final int getViewCount() {
-		return this.viewCount;
-	}
-
-	public final void setViewCount(int viewCount) {
+	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
 
-	public final int getLikeCount() {
-		return this.likeCount;
+	public int getStatus() {
+		return status;
 	}
 
-	public final void setLikeCount(int likeCount) {
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
 
-	public final int getDislikeCount() {
-		return this.dislikeCount;
+	public int getDislikeCount() {
+		return dislikeCount;
 	}
 
-	public final void setDislikeCount(int dislikeCount) {
+	public void setDislikeCount(int dislikeCount) {
 		this.dislikeCount = dislikeCount;
 	}
 
-	public final int getFavoriteCount() {
-		return this.favoriteCount;
+	public int getFavoriteCount() {
+		return favoriteCount;
 	}
 
-	public final void setFavoriteCount(int favoriteCount) {
+	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
 
-	public final int getCommentCount() {
-		return this.commentCount;
+	public int getCommentCount() {
+		return commentCount;
 	}
 
-	public final void setCommentCount(int commentCount) {
+	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
 	}
 
-	public final float getRating() {
-		return this.rating;
+	public float getRating() {
+		return rating;
 	}
 
-	public final void setRating(float rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	
-	public final String getAuthor() {
-		return this.author;
+
+	public String getAuthor() {
+		return author;
 	}
 
-	public final void setAuthor(String author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	public final String getTags() {
-		return this.tags;
+
+	public String getTags() {
+		return tags;
 	}
 
-	public final void setTags(String tags) {
+	public void setTags(String tags) {
 		this.tags = tags;
 	}
-	
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
 	public String getEmbedHtml() {
 		return embedHtml;
 	}
@@ -215,53 +213,58 @@ public class Tube {
 	public void setEmbedHtml(String embedHtml) {
 		this.embedHtml = embedHtml;
 	}
-
+	
 	public Tube() {
 		
 	}
-	
-	public Tube(String id, Long userId, String name, String description, int status) {
-		this.id = id;
-		this.userId = userId;
-		this.name = name;
-		this.description = description;
-		this.status = status;
-		this.dateAdded = Calendar.getInstance().getTime();
-		this.dateModified = Calendar.getInstance().getTime();
-	}
 
-	public Tube(String id, Long userId, String name, String description, int status, Date dateAdded,
-			Date dateModified) {
+	public Tube(String id, String title, String description,
+			List<Key<Category>> categoryKeys, Long userId, int viewCount,
+			int status, Date createdAt, Date modifiedAt, int likeCount,
+			int dislikeCount, int favoriteCount, int commentCount,
+			float rating, String author, String tags, List<String> categories,
+			String embedHtml) {
 		this.id = id;
-		this.userId = userId;
-		this.name = name;
+		this.title = title;
 		this.description = description;
+		this.categoryKeys = categoryKeys;
+		this.userId = userId;
+		this.viewCount = viewCount;
 		this.status = status;
-		this.dateAdded = dateAdded;
-		this.dateModified = dateModified;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+		this.likeCount = likeCount;
+		this.dislikeCount = dislikeCount;
+		this.favoriteCount = favoriteCount;
+		this.commentCount = commentCount;
+		this.rating = rating;
+		this.author = author;
+		this.tags = tags;
+		this.categories = categories;
+		this.embedHtml = embedHtml;
 	}
 	
-	public Tube(Long userId, String name, String description, int status, Date dateAdded,
-			Date dateModified) {
-		this.userId = userId;
-		this.name = name;
+	public Tube(String id, String title, String description,
+			Long userId, int viewCount, int status) {
+		this.id = id;
+		this.title = title;
 		this.description = description;
+		this.userId = userId;
+		this.viewCount = viewCount;
 		this.status = status;
-		this.dateAdded = dateAdded;
-		this.dateModified = dateModified;
 	}
 
 	@Override
 	public String toString() {
-		return "Tube [id=" + id + ", userId=" + userId + ", name=" + name
-				+ ", description=" + description + ", viewCount=" + viewCount
+		return "Tube [id=" + id + ", title=" + title + ", description="
+				+ description + ", categoryKeys=" + categoryKeys + ", userId="
+				+ userId + ", viewCount=" + viewCount + ", status=" + status
+				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt
 				+ ", likeCount=" + likeCount + ", dislikeCount=" + dislikeCount
 				+ ", favoriteCount=" + favoriteCount + ", commentCount="
 				+ commentCount + ", rating=" + rating + ", author=" + author
-				+ ", tags=" + tags + ", categoryKeys=" + categoryKeys
-				+ ", categories=" + categories + ", status=" + status
-				+ ", dateAdded=" + dateAdded + ", dateModified=" + dateModified
-				+ "]";
+				+ ", tags=" + tags + ", categories=" + categories
+				+ ", embedHtml=" + embedHtml + "]";
 	}
 	
 }

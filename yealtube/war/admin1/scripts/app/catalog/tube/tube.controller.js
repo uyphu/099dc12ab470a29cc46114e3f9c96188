@@ -12,7 +12,7 @@ angular.module('jhipsterApp')
        $scope.value = 10;
        //$scope.startcounter = 0;
        $scope.loadAll = function() {
-    	   listData($scope.cursor, AppConstant.MAX_PAGE_SIZE);
+    	   listData($scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
        };
        $scope.reset = function() {
            $scope.page = 1;
@@ -27,7 +27,7 @@ angular.module('jhipsterApp')
            } else {
         	   if ($scope.cursor != null) {
             	   //listData($scope.cursor);
-        		   listData($scope.cursor, AppConstant.MAX_PAGE_SIZE);
+        		   listData($scope.cursor, AppConstant.MAX_NEXT_PAGE_SIZE);
                }
            }
        };

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.google.api.server.spi.response.CollectionResponse;
 import com.googlecode.objectify.cmd.Query;
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
@@ -70,7 +70,7 @@ public class CategoryDao extends AbstractDao<Category> {
 			}
 		} catch (Exception e) {
 			throw new CommonException(ErrorCode.SYSTEM_EXCEPTION.getId(), ErrorCodeDetail.ERROR_PARSE_QUERY
-					+ Constants.STRING_EXEPTION_DETAIL + e.getMessage());
+					+ Constant.STRING_EXEPTION_DETAIL + e.getMessage());
 		}
 	}
 

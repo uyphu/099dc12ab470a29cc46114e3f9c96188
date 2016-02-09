@@ -14,15 +14,20 @@ import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
+/**
+ * The Class UserGroupEndpoint.
+ * @author uyphu
+ */
 @Api(name = "usergroupendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class UserGroupEndpoint {
 
 	/**
-	* Return a collection of userGroups
-	*
-	* @param count The number of userGroups
-	* @return a list of UserGroups
-	*/
+	 * Return a collection of userGroups.
+	 *
+	 * @param cursorString the cursor string
+	 * @param count The number of userGroups
+	 * @return a list of UserGroups
+	 */
 	@ApiMethod(name = "listUserGroup")
 	public CollectionResponse<UserGroup> listUserGroup(
 			@Nullable @Named("cursor") String cursorString,
@@ -32,10 +37,12 @@ public class UserGroupEndpoint {
 	}
 	
 	/**
-	* This inserts a new <code>UserGroup</code> object.
-	* @param userGroup The object to be added.
-	* @return The object to be added.
-	*/
+	 * This inserts a new <code>UserGroup</code> object.
+	 *
+	 * @param userGroup The object to be added.
+	 * @return The object to be added.
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "insertUserGroup")
 	public UserGroup insertUserGroup(UserGroup userGroup) throws CommonException {
 		// If if is not null, then check if it exists. If yes, throw an
@@ -68,10 +75,10 @@ public class UserGroupEndpoint {
 
 	/**
 	 * This updates an existing <code>UserGroup</code> object.
-	 * 
-	 * @param userGroup
-	 *            The object to be added.
+	 *
+	 * @param userGroup            The object to be added.
 	 * @return The object to be updated.
+	 * @throws CommonException the common exception
 	 */
 	@ApiMethod(name = "updateUserGroup")
 	public UserGroup updateUserGroup(UserGroup userGroup) throws CommonException {
@@ -160,6 +167,15 @@ public class UserGroupEndpoint {
 		dao.cleanData();
 	}
 	
+	/**
+	 * Search user group.
+	 *
+	 * @param querySearch the query search
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the collection response
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "searchUserGroup", httpMethod=HttpMethod.GET, path="search_userGroup")
 	public CollectionResponse<UserGroup> searchUserGroup(
 			@Nullable @Named("querySearch") String querySearch,

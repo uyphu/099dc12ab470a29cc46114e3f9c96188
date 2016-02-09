@@ -24,6 +24,7 @@
             "view": "View",
             "status": "Status",
             "dateModified": "Modified",
+            "dateAdded": "Added",
             "error":{
            		"message":{
            			"querySearch":"Invalid query search!",

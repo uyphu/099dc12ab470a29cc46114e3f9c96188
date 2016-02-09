@@ -96,10 +96,7 @@ public class CommentEndpoint {
 //				}
 //			}
 			dao.update(comment);
-		} else {
-//			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-//					ErrorCodeDetail.ERROR_EXIST_OBJECT);
-		}
+		} 
 		return comment;
 	}
 

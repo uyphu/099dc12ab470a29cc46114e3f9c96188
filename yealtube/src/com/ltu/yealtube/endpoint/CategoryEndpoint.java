@@ -14,15 +14,20 @@ import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CategoryEndpoint.
+ */
 @Api(name = "categoryendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class CategoryEndpoint {
 
 	/**
-	* Return a collection of categorys
-	*
-	* @param count The number of categorys
-	* @return a list of Categorys
-	*/
+	 * Return a collection of categorys.
+	 *
+	 * @param cursorString the cursor string
+	 * @param count The number of categorys
+	 * @return a list of Categorys
+	 */
 	@ApiMethod(name = "listCategory")
 	public CollectionResponse<Category> listCategory(
 			@Nullable @Named("cursor") String cursorString,
@@ -32,10 +37,12 @@ public class CategoryEndpoint {
 	}
 	
 	/**
-	* This inserts a new <code>Category</code> object.
-	* @param category The object to be added.
-	* @return The object to be added.
-	*/
+	 * This inserts a new <code>Category</code> object.
+	 *
+	 * @param category The object to be added.
+	 * @return The object to be added.
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "insertCategory")
 	public Category insertCategory(Category category) throws CommonException {
 		// If if is not null, then check if it exists. If yes, throw an
@@ -68,10 +75,10 @@ public class CategoryEndpoint {
 
 	/**
 	 * This updates an existing <code>Category</code> object.
-	 * 
-	 * @param category
-	 *            The object to be added.
+	 *
+	 * @param category            The object to be added.
 	 * @return The object to be updated.
+	 * @throws CommonException the common exception
 	 */
 	@ApiMethod(name = "updateCategory")
 	public Category updateCategory(Category category) throws CommonException {
@@ -160,6 +167,15 @@ public class CategoryEndpoint {
 		dao.cleanData();
 	}
 	
+	/**
+	 * Search category.
+	 *
+	 * @param querySearch the query search
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the collection response
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "searchCategory", httpMethod=HttpMethod.GET, path="search_category")
 	public CollectionResponse<Category> searchCategory(
 			@Nullable @Named("querySearch") String querySearch,

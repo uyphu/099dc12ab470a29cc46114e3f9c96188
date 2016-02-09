@@ -1,10 +1,9 @@
 package com.ltu.yealtube.endpoint;
 
-import java.util.Calendar;
-
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
+import com.google.api.client.http.HttpMethods;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -13,81 +12,59 @@ import com.google.api.server.spi.response.CollectionResponse;
 import com.ltu.yealtube.dao.TubeDao;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
-import com.ltu.yealtube.exception.ErrorCode;
-import com.ltu.yealtube.exception.ErrorCodeDetail;
+import com.ltu.yealtube.service.TubeService;
 
+/**
+ * The Class TubeEndpoint.
+ * @author uyphu
+ */
 @Api(name = "tubeendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class TubeEndpoint {
 
 	/**
-	* Return a collection of tubes
-	*
-	* @param count The number of tubes
-	* @return a list of Tubes
-	*/
-	@ApiMethod(name = "listTube")
-	public CollectionResponse<Tube> listTube(
-			@Nullable @Named("cursor") String cursorString,
+	 * Return a collection of tubes.
+	 * 
+	 * @param cursorString
+	 *            the cursor string
+	 * @param count
+	 *            The number of tubes
+	 * @return a list of Tubes
+	 */
+	@ApiMethod(name = "listTube", httpMethod = HttpMethods.GET)
+	public CollectionResponse<Tube> listTube(@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) {
 		TubeDao dao = new TubeDao();
 		return dao.list(cursorString, count);
 	}
-	
+
 	/**
-	* This inserts a new <code>Tube</code> object.
-	* @param tube The object to be added.
-	* @return The object to be added.
-	*/
-	@ApiMethod(name = "insertTube")
+	 * This inserts a new <code>Tube</code> object.
+	 * 
+	 * @param tube
+	 *            The object to be added.
+	 * @return The object to be added.
+	 * @throws CommonException
+	 *             the common exception
+	 */
+	@ApiMethod(name = "insertTube", httpMethod = HttpMethods.POST)
 	public Tube insertTube(Tube tube) throws CommonException {
-		// If if is not null, then check if it exists. If yes, throw an
-		// Exception
-		// that it is already present
-		if (tube.getId() != null) {
-			if (tube.getId().isEmpty()) {
-				tube.setId(null);
-			} else {
-				if (findRecord(tube.getId()) != null) {
-					throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-							ErrorCodeDetail.ERROR_EXIST_OBJECT);
-				}
-			}
-		}
-		// Since our @Id field is a Long, Objectify will generate a unique value
-		// for us
-		// when we use put
-		TubeDao dao = new TubeDao();
-		Tube pos = findRecord(tube.getId());
-		//FIXME Check the code below
-		if (pos == null) {
-			tube.setDateAdded(Calendar.getInstance().getTime());
-			tube.setDateModified(Calendar.getInstance().getTime());
-			dao.persist(tube);
-		} else {
-			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-					ErrorCodeDetail.ERROR_EXIST_OBJECT);
-		}
-		return tube;
+		TubeService service = TubeService.getInstance();
+		return service.insert(tube);
 	}
-	
-	@ApiMethod(name = "insertYouTube")
+
+	/**
+	 * Insert you tube.
+	 * 
+	 * @param videoId
+	 *            the video id
+	 * @return the tube
+	 * @throws CommonException
+	 *             the common exception
+	 */
+	@ApiMethod(name = "insertYouTube", httpMethod = HttpMethods.POST)
 	public Tube insertYouTube(@Named("videoId") String videoId) throws CommonException {
-
-
-		if (videoId != null) {
-			Tube tube = findRecord(videoId);
-			if (tube == null) {
-				
-			} else {
-				throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-						ErrorCodeDetail.ERROR_EXIST_OBJECT);
-			}
-		} else {
-			throw new CommonException(ErrorCode.BAD_REQUEST_EXCEPTION,
-					ErrorCodeDetail.ERROR_INPUT_NOT_VALID);
-		}
-		
-		return null;
+		TubeService service = TubeService.getInstance();
+		return service.insert(videoId);
 	}
 
 	/**
@@ -96,57 +73,71 @@ public class TubeEndpoint {
 	 * @param tube
 	 *            The object to be added.
 	 * @return The object to be updated.
+	 * @throws CommonException
+	 *             the common exception
 	 */
-	@ApiMethod(name = "updateTube")
+	@ApiMethod(name = "updateTube", httpMethod = HttpMethods.POST)
 	public Tube updateTube(Tube tube) throws CommonException {
-		Tube oldTube = findRecord(tube.getId());
-		if (oldTube == null) {
-			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
-		}
-		TubeDao dao = new TubeDao();
-		tube.setDateModified(Calendar.getInstance().getTime());
-		dao.update(tube);
-		return tube;
+		TubeService service = TubeService.getInstance();
+		return service.insert(tube);
 	}
 
 	/**
 	 * This deletes an existing <code>Tube</code> object.
-	 *
-	 * @param id            The id of the object to be deleted.
-	 * @throws CommonException the proconco exception
+	 * 
+	 * @param id
+	 *            The id of the object to be deleted.
+	 * @throws CommonException
+	 *             the proconco exception
 	 */
-	@ApiMethod(name = "removeTube")
+	@ApiMethod(name = "removeTube", httpMethod = HttpMethods.POST)
 	public void removeTube(@Named("id") String id) throws CommonException {
-		Tube record = findRecord(id);
-		if (record == null) {
-			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
-		}
-		TubeDao dao = new TubeDao();
-		dao.delete(record);
+		TubeService service = TubeService.getInstance();
+		service.delete(id);
 	}
-	
+
 	/**
 	 * Gets the tube.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return the tube
 	 */
-	@ApiMethod(name = "getTube")
+	@ApiMethod(name = "getTube", httpMethod = HttpMethods.GET)
 	public Tube getTube(@Named("id") String id) {
 		return findRecord(id);
 	}
-	
+
 	/**
 	 * Find record.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return the user main
 	 */
 	private Tube findRecord(String id) {
 		TubeDao dao = new TubeDao();
 		return dao.find(id);
+	}
+
+	/**
+	 * Search tube.
+	 * 
+	 * @param querySearch
+	 *            the query search
+	 * @param cursorString
+	 *            the cursor string
+	 * @param count
+	 *            the count
+	 * @return the collection response
+	 * @throws CommonException
+	 *             the common exception
+	 */
+	@ApiMethod(name = "searchTube", httpMethod = HttpMethod.GET, path = "search_tube")
+	public CollectionResponse<Tube> searchTube(@Nullable @Named("querySearch") String querySearch,
+			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
+		TubeDao dao = new TubeDao();
+		return dao.searchTube(querySearch, cursorString, count);
 	}
 	
 	/**
@@ -157,7 +148,7 @@ public class TubeEndpoint {
 		TubeDao dao = new TubeDao();
 		dao.initData();
 	}
-	
+
 	/**
 	 * Clean data.
 	 */
@@ -166,15 +157,5 @@ public class TubeEndpoint {
 		TubeDao dao = new TubeDao();
 		dao.cleanData();
 	}
-	
-	@ApiMethod(name = "searchTube", httpMethod=HttpMethod.GET, path="search_tube")
-	public CollectionResponse<Tube> searchTube(
-			@Nullable @Named("querySearch") String querySearch,
-			@Nullable @Named("cursor") String cursorString,
-			@Nullable @Named("count") Integer count) throws CommonException {
-		TubeDao dao = new TubeDao();
-		return dao.searchTube(querySearch, cursorString, count);
-	}
-
 
 }

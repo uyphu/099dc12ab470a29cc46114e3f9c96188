@@ -119,32 +119,43 @@
                 <th>ID</th>
                 <th translate="yealtube.tube.name">Name</th>
 <!--                 <th translate="yealtube.tube.userId">userId</th> -->
-                <th translate="yealtube.tube.categoryId">categoryId</th>
+<!--                 <th translate="yealtube.tube.categoryId">categoryId</th> -->
 <!--                 <th translate="yealtube.tube.description">Description</th> -->
 <!--                 <th translate="yealtube.tube.url">Url</th> -->
 <!--                 <th translate="yealtube.tube.like">Like</th> -->
 <!--                 <th translate="yealtube.tube.dislike">Dislike</th> -->
 <!--                 <th translate="yealtube.tube.rating">Rating</th> -->
-				<th translate="yealtube.tube.view">View</th>
-                <th translate="yealtube.tube.status">Status</th>
-                <th translate="yealtube.tube.dateModified">Modified</th>
+<!-- 				<th translate="yealtube.tube.view">View</th> -->
+<!--                 <th translate="yealtube.tube.status">Status</th> -->
+<!--                 <th translate="yealtube.tube.dateAdded">Modified</th> -->
                 <th></th>
             </tr>
         </thead>
         <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
             <tr ng-repeat="tube in tubes">
-                <td><a ui-sref="tubeDetail({id:tube.id})">{{tube.id}}</a></td>
-                <td>{{tube.name}}</td>
+<!--                 <td><a ui-sref="tubeDetail({id:tube.id})">{{tube.id}}</a></td> -->
+<!--                 <td>{{tube.name}}</td> -->
+				<td><a ui-sref="dashboard.videoDetail({id:tube.id})"><img src="//i.ytimg.com/vi/{{tube.id}}/default.jpg" ui-sref="dashboard.videoDetail({id:tube.id})" alt="" class="img-full"></a></td>
+<!-- 				<td>{{tube.name}}</td> -->
+				<td>
+					<ul style="list-style: none; padding-left: 0">
+					  <li>{{tube.name}}</li>
+					  <li>{{tube.viewCount | number:0}}</li>
+					  <li>{{tube.status}}</li>
+					  <li>{{tube.dateAdded | date:'yyyy-MM-dd'}}</li>
+					  <li>{{tube.categoryId}}</li>
+					</ul>
+				</td>
 <!--                 <td>{{tube.userId}}</td> -->
-                <td>{{tube.categoryId}}</td>
+<!--                 <td>{{tube.categoryId}}</td> -->
 <!--                 <td>{{tube.description}}</td> -->
 <!--                 <td>{{tube.url}}</td> -->
 <!--                 <td>{{tube.like}}</td> -->
 <!--                 <td>{{tube.dislike}}</td> -->
 <!--                 <td>{{tube.rating}}</td> -->
-                <td>{{tube.viewCount | number:0}}</td>
-                <td>{{tube.status}}</td>
-                <td>{{tube.dateModified | date:'yyyy-MM-dd'}}</td>
+<!--                 <td>{{tube.viewCount | number:0}}</td> -->
+<!--                 <td>{{tube.status}}</td> -->
+<!--                 <td>{{tube.dateAdded | date:'yyyy-MM-dd'}}</td> -->
                 <td>
                     <button type="submit"
                             ui-sref="tubeDetail({id:tube.id})"

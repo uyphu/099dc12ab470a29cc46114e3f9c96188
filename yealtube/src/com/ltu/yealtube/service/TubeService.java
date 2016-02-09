@@ -2,20 +2,21 @@ package com.ltu.yealtube.service;
 
 import java.util.Calendar;
 
-import javax.annotation.Nullable;
-import javax.inject.Named;
-
 import org.apache.log4j.Logger;
 
+import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.constants.Constants;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.dao.TubeDao;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
-import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 import com.ltu.yealtube.utils.YoutubeUtils;
 
+/**
+ * The Class TubeService.
+ * @author uyphu
+ */
 public class TubeService {
 	
 	/** The log. */
@@ -27,6 +28,11 @@ public class TubeService {
 	/** The instance. */
 	private static TubeService instance = null;
 	
+	/**
+	 * Gets the single instance of TubeService.
+	 *
+	 * @return single instance of TubeService
+	 */
 	public static TubeService getInstance() {
 		if (instance == null) {
 			instance = new TubeService();
@@ -46,55 +52,144 @@ public class TubeService {
 	}
 	
 	/**
-	 * Insert tube.
+	 * Insert.
 	 *
 	 * @param tube the tube
 	 * @return the tube
 	 * @throws CommonException the common exception
 	 */
-	public Tube insertTube(Tube tube) throws CommonException {
-		
-		tube.setDateAdded(Calendar.getInstance().getTime());
-		tube.setDateModified(Calendar.getInstance().getTime());
-		tube.setStatus(Constants.PENDING_STATUS);
-		return tubeDao.persist(tube);
+	public Tube insert(Tube tube) throws CommonException {
+		if (tube != null && tube.getId() != null) {
+			if (containsTube(tube)) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
+			}
+			tube.setCreatedAt(Calendar.getInstance().getTime());
+			tube.setModifiedAt(Calendar.getInstance().getTime());
+			return tubeDao.persist(tube);
+		} else {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+		}
 	}
 	
 	/**
-	 * Update tube.
+	 * Insert.
+	 *
+	 * @param youtubeId the youtube id
+	 * @return the tube
+	 * @throws CommonException the common exception
+	 */
+	public Tube insert(String youtubeId) throws CommonException {
+		if (youtubeId != null) {
+			if (containsTube(youtubeId)) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
+			}
+			Tube tube = YoutubeUtils.getTube(youtubeId);
+			tube.setCreatedAt(Calendar.getInstance().getTime());
+			tube.setModifiedAt(Calendar.getInstance().getTime());
+			tube.setStatus(Constant.PENDING_STATUS);
+			tube.setUserId(Constant.ADMIN_ID);
+			tube = tubeDao.persist(tube);
+		} else {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+		}
+		return null;
+	}
+	
+	/**
+	 * Update.
 	 *
 	 * @param tube the tube
 	 * @return the tube
 	 * @throws CommonException the common exception
 	 */
-	public Tube updateTube(Tube tube) throws CommonException {
-		
-		tube.setDateModified(Calendar.getInstance().getTime());
-		return tubeDao.update(tube); 
+	public Tube update(Tube tube) throws CommonException {
+		if (tube != null && tube.getId() != null) {
+			if (!containsTube(tube)) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_NOT_FOUND,
+						ErrorCodeDetail.ERROR_RECORD_NOT_FOUND.getMsg());
+			}
+			tube.setModifiedAt(Calendar.getInstance().getTime());
+			return tubeDao.update(tube);
+		} else {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+		}
 	}
 	
 	/**
-	 * Removes the tube.
+	 * Delete.
+	 *
+	 * @param tube the tube
+	 * @throws CommonException the common exception
+	 */
+	public void delete(Tube tube) throws CommonException {
+		if (tube != null && tube.getId() != null) {
+			if (!containsTube(tube)) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_NOT_FOUND,
+						ErrorCodeDetail.ERROR_RECORD_NOT_FOUND.getMsg());
+			}
+			tube.setModifiedAt(Calendar.getInstance().getTime());
+			tubeDao.delete(tube);
+		} else {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+		}
+	}
+	
+	/**
+	 * Delete.
 	 *
 	 * @param id the id
 	 * @throws CommonException the common exception
 	 */
-	public void removeTube(String id) throws CommonException {
-		Tube record = findRecord(id);
-		if (record == null) {
-			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
-		}
-		tubeDao.delete(record);
+	public void delete(String id) throws CommonException {
+		Tube tube = findRecord(id);
+		delete(tube);
 	}
 	
+	/**
+	 * Contains tube.
+	 *
+	 * @param tube the tube
+	 * @return true, if successful
+	 */
+	private boolean containsTube(Tube tube) {
+		return containsTube(tube.getId());
+	}
+	
+	/**
+	 * Contains tube.
+	 *
+	 * @param youtubeId the youtube id
+	 * @return true, if successful
+	 */
+	private boolean containsTube(String youtubeId) {
+		boolean contains = true;
+		if (youtubeId != null) {
+			Tube item = tubeDao.find(youtubeId);
+			if (item == null) {
+				contains = false;
+			}
+		} else {
+			return contains = false;
+		}
+		
+		return contains;
+	}
+	
+	
+	/**
+	 * Gets the detail tube.
+	 *
+	 * @param id the id
+	 * @return the detail tube
+	 */
 	public Tube getDetailTube(String id) {
 		
-		Tube tube = YoutubeUtils.getTube(id);
-		
+		Tube youtube = YoutubeUtils.getTube(id);
+		Tube tube = tubeDao.find(id);
 		//Update tube info from youtube
 		try {
-			updateTube(tube);
+			tube.setViewCount(youtube.getViewCount());
+			update(tube);
 		} catch (CommonException e) {
 			log.error(e.getMessage(), e.getCause());
 		}
@@ -112,6 +207,32 @@ public class TubeService {
 	}
 	
 	/**
+	 * Search tube.
+	 *
+	 * @param querySearch the query search
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the collection response
+	 * @throws CommonException the common exception
+	 */
+	public CollectionResponse<Tube> searchTube(String querySearch, String cursorString, Integer count) throws CommonException {
+		return tubeDao.searchTube(querySearch, cursorString, count);
+	}
+	
+	/**
+	 * Find one by name.
+	 *
+	 * @param name the name
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the collection response
+	 * @throws CommonException the common exception
+	 */
+	public CollectionResponse<Tube> findOneByTitle(String title, String cursorString, Integer count) throws CommonException {
+		return tubeDao.getTubeByTitle(title, cursorString, count);
+	}
+
+	/**
 	 * Inits the data.
 	 */
 	public void initData() {
@@ -123,28 +244,6 @@ public class TubeService {
 	 */
 	public void cleanData() {
 		tubeDao.cleanData();
-	}
-	
-	/**
-	 * Search tube.
-	 *
-	 * @param querySearch the query search
-	 * @param cursorString the cursor string
-	 * @param count the count
-	 * @return the collection response
-	 * @throws CommonException the common exception
-	 */
-	public CollectionResponse<Tube> searchTube(
-			@Nullable @Named("querySearch") String querySearch,
-			@Nullable @Named("cursor") String cursorString,
-			@Nullable @Named("count") Integer count) throws CommonException {
-		return tubeDao.searchTube(querySearch, cursorString, count);
-	}
-	
-	public CollectionResponse<Tube> findOneByName(@Nullable @Named("name") String name,
-			@Nullable @Named("cursor") String cursorString,
-			@Nullable @Named("count") Integer count) throws CommonException {
-		return tubeDao.getTubeByName(name, cursorString, count);
 	}
 
 }
