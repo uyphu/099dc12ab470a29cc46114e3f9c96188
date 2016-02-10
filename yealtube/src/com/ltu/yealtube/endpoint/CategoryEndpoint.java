@@ -8,15 +8,13 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.dao.CategoryDao;
 import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.exception.CommonException;
-import com.ltu.yealtube.exception.ErrorCode;
-import com.ltu.yealtube.exception.ErrorCodeDetail;
+import com.ltu.yealtube.service.CategoryService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CategoryEndpoint.
+ * @author uyphu
  */
 @Api(name = "categoryendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class CategoryEndpoint {
@@ -29,11 +27,10 @@ public class CategoryEndpoint {
 	 * @return a list of Categorys
 	 */
 	@ApiMethod(name = "listCategory")
-	public CollectionResponse<Category> listCategory(
-			@Nullable @Named("cursor") String cursorString,
+	public CollectionResponse<Category> listCategory(@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) {
-		CategoryDao dao = new CategoryDao();
-		return dao.list(cursorString, count);
+		CategoryService service = CategoryService.getInstance();
+		return service.listCategory(cursorString, count);
 	}
 	
 	/**
@@ -45,32 +42,8 @@ public class CategoryEndpoint {
 	 */
 	@ApiMethod(name = "insertCategory")
 	public Category insertCategory(Category category) throws CommonException {
-		// If if is not null, then check if it exists. If yes, throw an
-		// Exception
-		// that it is already present
-		if (category.getId() != null) {
-			if (category.getId() == 0) {
-				category.setId(null);
-			} else {
-				if (findRecord(category.getId()) != null) {
-					throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-							ErrorCodeDetail.ERROR_EXIST_OBJECT);
-				}
-			}
-		}
-		// Since our @Id field is a Long, Objectify will generate a unique value
-		// for us
-		// when we use put
-		CategoryDao dao = new CategoryDao();
-		Category pos = dao.getCategoryByName(category.getName());
-		//FIXME Check the code below
-		if (pos == null) {
-			dao.persist(category);
-		} else {
-			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-					ErrorCodeDetail.ERROR_EXIST_OBJECT);
-		}
-		return category;
+		CategoryService service = CategoryService.getInstance();
+		return service.insertCategory(category);
 	}
 
 	/**
@@ -82,32 +55,8 @@ public class CategoryEndpoint {
 	 */
 	@ApiMethod(name = "updateCategory")
 	public Category updateCategory(Category category) throws CommonException {
-		Category oldCategory = findRecord(category.getId());
-		if (oldCategory == null) {
-			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
-		}
-		CategoryDao dao = new CategoryDao();
-		Category pos = dao.getCategoryByName(category.getName());
-		//FIXME Check this logic
-		if (pos == null || pos.getId().equals(category.getId())) {
-			oldCategory.setName(category.getName());
-//			if (category.getManager() != null) {
-//				UserDao userDao = new UserDao();
-//				User manager = userDao.getUserByLogin(category.getManager());
-//				if (manager != null) {
-//					category.setManager(manager.getLogin());
-//				} else {
-//					throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-//							ErrorCodeDetail.ERROR_USER_NOT_FOUND);
-//				}
-//			}
-			dao.update(category);
-		} else {
-			throw new CommonException(ErrorCode.CONFLICT_EXCEPTION,
-					ErrorCodeDetail.ERROR_EXIST_OBJECT);
-		}
-		return category;
+		CategoryService service = CategoryService.getInstance();
+		return service.updateCategory(category);
 	}
 
 	/**
@@ -118,13 +67,8 @@ public class CategoryEndpoint {
 	 */
 	@ApiMethod(name = "removeCategory")
 	public void removeCategory(@Named("id") Long id) throws CommonException {
-		Category record = findRecord(id);
-		if (record == null) {
-			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION,
-					ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
-		}
-		CategoryDao dao = new CategoryDao();
-		dao.delete(record);
+		CategoryService service = CategoryService.getInstance();
+		service.removeCategory(id);
 	}
 	
 	/**
@@ -145,8 +89,8 @@ public class CategoryEndpoint {
 	 * @return the user main
 	 */
 	private Category findRecord(Long id) {
-		CategoryDao dao = new CategoryDao();
-		return dao.find(id);
+		CategoryService service = CategoryService.getInstance();
+		return service.findRecord(id);
 	}
 	
 	/**
@@ -154,8 +98,8 @@ public class CategoryEndpoint {
 	 */
 	@ApiMethod(name = "initData", httpMethod = HttpMethod.POST, path = "initData")
 	public void initData() {
-		CategoryDao dao = new CategoryDao();
-		dao.initData();
+		CategoryService service = CategoryService.getInstance();
+		service.initData();
 	}
 	
 	/**
@@ -163,8 +107,8 @@ public class CategoryEndpoint {
 	 */
 	@ApiMethod(name = "cleanData", httpMethod = HttpMethod.POST, path = "cleanData")
 	public void cleanData() {
-		CategoryDao dao = new CategoryDao();
-		dao.cleanData();
+		CategoryService service = CategoryService.getInstance();
+		service.cleanData();
 	}
 	
 	/**
@@ -181,8 +125,8 @@ public class CategoryEndpoint {
 			@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) throws CommonException {
-		CategoryDao dao = new CategoryDao();
-		return dao.searchCategory(querySearch, cursorString, count);
+		CategoryService service = CategoryService.getInstance();
+		return service.searchCategory(querySearch, cursorString, count);
 	}
 
 }

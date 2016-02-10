@@ -13,11 +13,21 @@ import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 public class CategoryDao extends AbstractDao<Category> {
+	
+	/** The instance. */
+	private static CategoryDao instance = null;
 	/**
 	 * Instantiates a new category dao.
 	 */
 	public CategoryDao() {
 		super(Category.class);
+	}
+	
+	public static CategoryDao getInstance() {
+		if (instance == null) {
+			instance = new CategoryDao();
+		}
+		return instance;
 	}
 
 	/**
@@ -26,11 +36,16 @@ public class CategoryDao extends AbstractDao<Category> {
 	public void initData() {
 		Category category;
 
-		for (Long i = 1L; i < 10; i++) {
-			category = new Category(i, "name" + i, 0L, "description", "metaTitle", "metaDescription", "metaKeyword");
-			persist(category);
-		}
-
+		category = new Category(1L, Constant.CATEGORY_FUN, 0L, "Fun", "Fun", "Fun", "Fun");
+		persist(category);
+		category = new Category(2L, Constant.CATEGORY_SPORTS, 0L, "Sports", "Sports", "Sports", "Sports");
+		persist(category);
+		category = new Category(3L, Constant.CATEGORY_MUSIC, 0L, "Music", "Music", "Music", "Music");
+		persist(category);
+		category = new Category(4L, Constant.CATEGORY_18PLUS, 0L, "18+", "18+", "18+", "18+");
+		persist(category);
+		category = new Category(5L, Constant.CATEGORY_MOVIE, 0L, "Movie", "Movie", "Movie", "Movie");
+		persist(category);
 	}
 
 	/**
@@ -93,43 +108,4 @@ public class CategoryDao extends AbstractDao<Category> {
 		return executeQuery(query, cursorString, count);
 	}
 
-	/**
-	 * Gets the category by name.
-	 * 
-	 * @param name
-	 *            the name
-	 * @return the category by name
-	 */
-	public Category getCategoryByName(String name) {
-		if (name != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("grpName", name);
-			Query<Category> query = getQuery(map);
-			List<Category> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the category by manager.
-	 * 
-	 * @param manager
-	 *            the manager
-	 * @return the category by manager
-	 */
-	public Category getCategoryByManager(String manager) {
-		if (manager != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("manager", manager);
-			Query<Category> query = getQuery(map);
-			List<Category> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
 }

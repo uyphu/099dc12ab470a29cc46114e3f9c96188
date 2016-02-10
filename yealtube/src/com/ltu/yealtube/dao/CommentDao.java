@@ -13,7 +13,29 @@ import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
+/**
+ * The Class CommentDao.
+ * @author uyphu
+ * @Date 2016-02-10
+ * @version 1.0
+ */
 public class CommentDao extends AbstractDao<Comment> {
+	
+	/** The instance. */
+	private static CommentDao instance = null;
+	
+	/**
+	 * Instantiates a new category dao.
+	 *
+	 * @return single instance of CommentDao
+	 */
+	
+	public static CommentDao getInstance() {
+		if (instance == null) {
+			instance = new CommentDao();
+		}
+		return instance;
+	}
 
 	/**
 	 * Instantiates a new comment dao.
@@ -60,12 +82,12 @@ public class CommentDao extends AbstractDao<Comment> {
 			if (querySearch != null) {
 				Query<Comment> query;
 				Map<String, Object> map = new HashMap<String, Object>();
-				if (querySearch.indexOf("delFlag:") != -1) {
+				if (querySearch.indexOf("tubeId:") != -1) {
 					String[] queries = querySearch.split(":");
-					map.put("delFlag", Long.parseLong(queries[1]));
+					map.put("tubeId", queries[1]);
 					query = getQuery(map);
 				} else {
-					query = getQueryByName("grpName", querySearch);
+					query = getQueryByName("text", querySearch);
 				}
 				return query;
 			} else {
@@ -96,43 +118,4 @@ public class CommentDao extends AbstractDao<Comment> {
 		return executeQuery(query, cursorString, count);
 	}
 
-	/**
-	 * Gets the comment by name.
-	 * 
-	 * @param name
-	 *            the name
-	 * @return the comment by name
-	 */
-	public Comment getCommentByName(String name) {
-		if (name != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("grpName", name);
-			Query<Comment> query = getQuery(map);
-			List<Comment> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the comment by manager.
-	 * 
-	 * @param manager
-	 *            the manager
-	 * @return the comment by manager
-	 */
-	public Comment getCommentByManager(String manager) {
-		if (manager != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("manager", manager);
-			Query<Comment> query = getQuery(map);
-			List<Comment> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
 }

@@ -48,7 +48,7 @@ public class TubeDao extends AbstractDao<Tube> {
 		Tube tube;
 
 		for (Long i = 1L; i < 10; i++) {
-			tube = new Tube(String.valueOf(i), "title" + String.valueOf(i), "description" + String.valueOf(i), 1L, 0, 1);
+			tube = new Tube(String.valueOf(i), "title" + String.valueOf(i), "description" + String.valueOf(i), 1L, 0, 1, null, null);
 			persist(tube);
 		}
 

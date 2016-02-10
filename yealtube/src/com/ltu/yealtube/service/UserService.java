@@ -208,7 +208,7 @@ public class UserService {
 	/**
 	 * Inits the data.
 	 */
-	public void initData() {
+	public void initData() throws CommonException{
 		userDao.initData();
 	}
 	

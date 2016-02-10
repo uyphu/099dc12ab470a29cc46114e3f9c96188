@@ -6,14 +6,33 @@ import java.util.Map;
 
 import com.google.api.server.spi.response.CollectionResponse;
 import com.googlecode.objectify.cmd.Query;
-import com.ltu.yealtube.constants.AuthoritiesConstants;
+import com.ltu.yealtube.constants.AuthorityConstants;
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.UserGroup;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
+/**
+ * The Class UserGroupDao.
+ * @author uyphu
+ */
 public class UserGroupDao extends AbstractDao<UserGroup> {
+	
+	/** The instance. */
+	private static UserGroupDao instance = null;
+	
+	/**
+	 * Gets the single instance of UserGroupDao.
+	 *
+	 * @return single instance of UserGroupDao
+	 */
+	public static UserGroupDao getInstance() {
+		if (instance == null) {
+			instance = new UserGroupDao();
+		}
+		return instance;
+	}
 
 	/**
 	 * Instantiates a new userGroup dao.
@@ -28,19 +47,19 @@ public class UserGroupDao extends AbstractDao<UserGroup> {
 	public void initData() {
 		UserGroup userGroup;
 
-		userGroup = new UserGroup(1L, "Admin", "", AuthoritiesConstants.ROLE_ADMIN);
+		userGroup = new UserGroup(1L, "Admin", "", AuthorityConstants.ROLE_ADMIN);
 		persist(userGroup);
 		
-		userGroup = new UserGroup(2L, "User", "", AuthoritiesConstants.ROLE_USER);
+		userGroup = new UserGroup(2L, "User", "", AuthorityConstants.ROLE_USER);
 		persist(userGroup);
 		
-		userGroup = new UserGroup(3L, "Anonymous", "", AuthoritiesConstants.ROLE_ANONYMOUS);
+		userGroup = new UserGroup(3L, "Edit", "", AuthorityConstants.ROLE_EDIT);
 		persist(userGroup);
 		
-		userGroup = new UserGroup(4L, "Edit", "", AuthoritiesConstants.ROLE_EDIT);
+		userGroup = new UserGroup(4L, "Anonymous", "", AuthorityConstants.ROLE_ANONYMOUS);
 		persist(userGroup);
 		
-		userGroup = new UserGroup(5L, "Read Only", "", AuthoritiesConstants.ROLE_READONLY);
+		userGroup = new UserGroup(5L, "Read Only", "", AuthorityConstants.ROLE_READONLY);
 		persist(userGroup);
 
 	}
@@ -115,7 +134,7 @@ public class UserGroupDao extends AbstractDao<UserGroup> {
 	public UserGroup getUserGroupByName(String name) {
 		if (name != null) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("grpName", name);
+			map.put("name", name);
 			Query<UserGroup> query = getQuery(map);
 			List<UserGroup> list = executeQuery(query, 1);
 			if (list != null && list.size() > 0) {
@@ -125,23 +144,4 @@ public class UserGroupDao extends AbstractDao<UserGroup> {
 		return null;
 	}
 
-	/**
-	 * Gets the userGroup by manager.
-	 * 
-	 * @param manager
-	 *            the manager
-	 * @return the userGroup by manager
-	 */
-	public UserGroup getUserGroupByManager(String manager) {
-		if (manager != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("manager", manager);
-			Query<UserGroup> query = getQuery(map);
-			List<UserGroup> list = executeQuery(query, 1);
-			if (list != null && list.size() > 0) {
-				return list.get(0);
-			}
-		}
-		return null;
-	}
 }

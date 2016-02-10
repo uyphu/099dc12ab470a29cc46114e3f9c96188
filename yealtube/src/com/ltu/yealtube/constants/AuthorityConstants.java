@@ -1,15 +1,16 @@
 package com.ltu.yealtube.constants;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AuthoritiesConstants.
+ * @author uyphu
+ * @version 1.0
  */
-public class AuthoritiesConstants {
+public class AuthorityConstants {
 
 	/**
 	 * Instantiates a new authorities constants.
 	 */
-	private AuthoritiesConstants() {
+	private AuthorityConstants() {
     }
 
     /** The Constant ADMIN. */

@@ -9,6 +9,7 @@ import java.util.Map;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
+import com.ltu.yealtube.constants.AuthorityConstants;
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.Authority;
 import com.ltu.yealtube.domain.User;
@@ -41,15 +42,24 @@ public class UserDao extends AbstractDao<User> {
 	/**
 	 * Inits the data.
 	 */
-	public void initData() {
+	public void initData() throws CommonException {
 		User user;
 
-		for (Long i = 1L; i < 10; i++) {
-			user = new User(i, 1L, "login" + i, "password", "salt", "firstName" + i, "lastName" + i, "email" + i
-					+ "@yahoo.com", false, "en", "activationKey", "resetKey", Calendar.getInstance().getTime(),
-					Calendar.getInstance().getTime(), "image", "code", "ip");
-			persist(user);
-		}
+		user = new User(1L, "admin", AppUtils.cryptWithMD5("password1"), "", "Phu", "Le", "uyphu@yahoo.com", true, "en", null,
+				"", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null);
+		persist(user);
+		addRole(1L, AuthorityConstants.ROLE_ADMIN);
+		addRole(1L, AuthorityConstants.ROLE_USER);
+		addRole(1L, AuthorityConstants.ROLE_EDIT);
+		
+		user = new User(2L, "user", AppUtils.cryptWithMD5("password1"), "", "User", "Le", "user@yahoo.com", true, "en", null,
+				"", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null);
+		addRole(1L, AuthorityConstants.ROLE_USER);
+		addRole(1L, AuthorityConstants.ROLE_EDIT);
+		user = new User(2L, "Anonymous", AppUtils.cryptWithMD5("password1"), "", "Anonymous", "Le", "Anonymous@yahoo.com", true, "en", null,
+				"", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null);
+		persist(user);
+		addRole(1L, AuthorityConstants.ROLE_ANONYMOUS);
 
 	}
 

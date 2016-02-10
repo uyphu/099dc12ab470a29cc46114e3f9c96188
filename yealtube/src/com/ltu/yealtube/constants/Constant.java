@@ -3,6 +3,7 @@ package com.ltu.yealtube.constants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Constants.
+ * @author uyphu
  */
 public class Constant {
 	
@@ -78,5 +79,29 @@ public class Constant {
 	/** The Constant EMPTY_STRING. */
 	public static final String EMPTY_STRING = "";
 	
+	/** The Constant ADMIN_ID. */
 	public static final Long ADMIN_ID = 1L;
+	
+	/** The Constant CATEGORY_SPORTS. */
+	public static final String CATEGORY_SPORTS = "Sports";
+	
+	/** The Constant CATEGORY_FUN. */
+	public static final String CATEGORY_FUN = "Fun";
+	
+	/** The Constant CATEGORY_18PLUS. */
+	public static final String CATEGORY_18PLUS = "18+";
+	
+	/** The Constant CATEGORY_MUSIC. */
+	public static final String CATEGORY_MUSIC = "Music";
+	
+	/** The Constant CATEGORY_MOVIE. */
+	public static final String CATEGORY_MOVIE = "Movie";
+	
+	/** The Constant HOME_DIRECTORY_PROPERTY. */
+	public static final String HOME_DIRECTORY_PROPERTY = "/WEB-INF/classes/";
+	
+	/** The Constant HOME_DIRECTORY_FILENAME. */
+	public static final String HOME_DIRECTORY_FILENAME = "config.properties";
+	
+	
 }

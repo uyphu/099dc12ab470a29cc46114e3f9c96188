@@ -9,7 +9,6 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.dao.TubeDao;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.service.TubeService;
@@ -33,8 +32,8 @@ public class TubeEndpoint {
 	@ApiMethod(name = "listTube", httpMethod = HttpMethods.GET)
 	public CollectionResponse<Tube> listTube(@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) {
-		TubeDao dao = new TubeDao();
-		return dao.list(cursorString, count);
+		TubeService service = TubeService.getInstance();
+		return service.listTube(cursorString, count);
 	}
 
 	/**
@@ -46,7 +45,7 @@ public class TubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	@ApiMethod(name = "insertTube", httpMethod = HttpMethods.POST)
+	@ApiMethod(name = "insertTube")
 	public Tube insertTube(Tube tube) throws CommonException {
 		TubeService service = TubeService.getInstance();
 		return service.insert(tube);
@@ -61,7 +60,7 @@ public class TubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	@ApiMethod(name = "insertYouTube", httpMethod = HttpMethods.POST)
+	@ApiMethod(name = "insertYouTube")
 	public Tube insertYouTube(@Named("videoId") String videoId) throws CommonException {
 		TubeService service = TubeService.getInstance();
 		return service.insert(videoId);
@@ -76,7 +75,7 @@ public class TubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	@ApiMethod(name = "updateTube", httpMethod = HttpMethods.POST)
+	@ApiMethod(name = "updateTube")
 	public Tube updateTube(Tube tube) throws CommonException {
 		TubeService service = TubeService.getInstance();
 		return service.insert(tube);
@@ -90,7 +89,7 @@ public class TubeEndpoint {
 	 * @throws CommonException
 	 *             the proconco exception
 	 */
-	@ApiMethod(name = "removeTube", httpMethod = HttpMethods.POST)
+	@ApiMethod(name = "removeTube")
 	public void removeTube(@Named("id") String id) throws CommonException {
 		TubeService service = TubeService.getInstance();
 		service.delete(id);
@@ -116,8 +115,8 @@ public class TubeEndpoint {
 	 * @return the user main
 	 */
 	private Tube findRecord(String id) {
-		TubeDao dao = new TubeDao();
-		return dao.find(id);
+		TubeService service = TubeService.getInstance();
+		return service.findRecord(id);
 	}
 
 	/**
@@ -136,8 +135,8 @@ public class TubeEndpoint {
 	@ApiMethod(name = "searchTube", httpMethod = HttpMethod.GET, path = "search_tube")
 	public CollectionResponse<Tube> searchTube(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
-		TubeDao dao = new TubeDao();
-		return dao.searchTube(querySearch, cursorString, count);
+		TubeService service = TubeService.getInstance();
+		return service.searchTube(querySearch, cursorString, count);
 	}
 	
 	/**
@@ -145,8 +144,8 @@ public class TubeEndpoint {
 	 */
 	@ApiMethod(name = "initData", httpMethod = HttpMethod.POST, path = "initData")
 	public void initData() {
-		TubeDao dao = new TubeDao();
-		dao.initData();
+		TubeService service = TubeService.getInstance();
+		service.initData();
 	}
 
 	/**
@@ -154,8 +153,8 @@ public class TubeEndpoint {
 	 */
 	@ApiMethod(name = "cleanData", httpMethod = HttpMethod.POST, path = "cleanData")
 	public void cleanData() {
-		TubeDao dao = new TubeDao();
-		dao.cleanData();
+		TubeService service = TubeService.getInstance();
+		service.cleanData();
 	}
 
 }
