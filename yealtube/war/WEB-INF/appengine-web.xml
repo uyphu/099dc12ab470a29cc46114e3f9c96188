@@ -17,6 +17,11 @@
   <property name="java.util.logging.config.file" value="WEB-INF/classes/log4j.properties"/> 
 </system-properties> 
 
+  <resource-files>
+	  <include path="/**.propeties" />
+	</resource-files>
+
+
 	<inbound-services>
 		<service>mail</service>
 	</inbound-services>

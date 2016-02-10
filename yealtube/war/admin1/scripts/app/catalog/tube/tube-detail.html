@@ -19,7 +19,7 @@
                </tr>
                <tr>
                    <td>
-                       <span translate="yealtube.tube.categoryId">categoryId</span>
+                       <span translate="yealtube.tube.categoryId">category</span>
                    </td>
                    <td>
                        <input type="text" class="input-sm form-control" value="{{tube.categoryId}}" readonly>
@@ -27,10 +27,10 @@
                </tr>
                <tr>
                    <td>
-                       <span translate="yealtube.tube.name">name</span>
+                       <span translate="yealtube.tube.title">title</span>
                    </td>
                    <td>
-                       <input type="text" class="input-sm form-control" value="{{tube.name}}" readonly>
+                       <input type="text" class="input-sm form-control" value="{{tube.title}}" readonly>
                    </td>
                </tr>
                <tr>
@@ -43,10 +43,10 @@
                </tr>
                <tr>
                    <td>
-                       <span translate="yealtube.tube.url">url</span>
+                       <span translate="yealtube.tube.viewCount">viewCount</span>
                    </td>
                    <td>
-                       <input type="text" class="input-sm form-control" value="{{tube.url}}" readonly>
+                       <input type="text" class="input-sm form-control" value="{{tube.viewCount}}" readonly>
                    </td>
                </tr>
                <tr>
@@ -54,7 +54,7 @@
                        <span translate="yealtube.tube.like">like</span>
                    </td>
                    <td>
-                       <input type="text" class="input-sm form-control" value="{{tube.like}}" readonly>
+                       <input type="text" class="input-sm form-control" value="{{tube.likeCount}}" readonly>
                    </td>
                </tr>
                <tr>
@@ -62,7 +62,23 @@
                        <span translate="yealtube.tube.dislike">dislike</span>
                    </td>
                    <td>
-                       <input type="text" class="input-sm form-control" value="{{tube.dislike}}" readonly>
+                       <input type="text" class="input-sm form-control" value="{{tube.dislikeCount}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.tube.favoriteCount">favoriteCount</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{tube.favoriteCount}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.tube.commentCount">commentCount</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{tube.commentCount}}" readonly>
                    </td>
                </tr>
                <tr>
@@ -75,10 +91,10 @@
                </tr>
                <tr>
                    <td>
-                       <span translate="yealtube.tube.dateModified">dateModified</span>
+                       <span translate="yealtube.tube.createdAt">createdAt</span>
                    </td>
                    <td>
-                       <input type="text" class="input-sm form-control" value="{{tube.dateModified}}" readonly>
+                       <input type="text" class="input-sm form-control" value="{{tube.createdAt}}" readonly>
                    </td>
                </tr>
                <tr>
@@ -87,6 +103,22 @@
                    </td>
                    <td>
                        <input type="text" class="input-sm form-control" value="{{tube.status}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.tube.tags">tags</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{tube.tags}}" readonly>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <span translate="yealtube.tube.embedHtml">embedHtml</span>
+                   </td>
+                   <td>
+                       <input type="text" class="input-sm form-control" value="{{tube.embedHtml}}" readonly>
                    </td>
                </tr>
            </tbody>

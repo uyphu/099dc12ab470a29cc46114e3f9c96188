@@ -18,6 +18,7 @@ import com.ltu.yealtube.service.UserService;
 
 /**
  * The Class UserEndpoint.
+ * @author uyphu
  */
 @Api(name = "userendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class UserEndpoint {
@@ -27,12 +28,12 @@ public class UserEndpoint {
 
 	/**
 	 * Return a collection of users.
-	 * 
-	 * @param cursorString
-	 *            the cursor string
-	 * @param count
-	 *            The number of users
+	 *
+	 * @param user the user
+	 * @param cursorString            the cursor string
+	 * @param count            The number of users
 	 * @return a list of Users
+	 * @throws CommonException the common exception
 	 */
 	@ApiMethod(name = "listUser", scopes = { Constant.EMAIL_SCOPE }, clientIds = { Constant.WEB_CLIENT_ID,
 			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID }, audiences = { Constant.ANDROID_AUDIENCE }, authenticators = AppAuthenticator.class)
@@ -61,12 +62,11 @@ public class UserEndpoint {
 
 	/**
 	 * This updates an existing <code>User</code> object.
-	 * 
-	 * @param user
-	 *            The object to be added.
+	 *
+	 * @param user            The object to be added.
+	 * @param authUser the auth user
 	 * @return The object to be updated.
-	 * @throws CommonException
-	 *             the common exception
+	 * @throws CommonException             the common exception
 	 */
 	@ApiMethod(name = "updateUser", authenticators = AppAuthenticator.class)
 	public User updateUser(User user, com.google.appengine.api.users.User authUser) throws CommonException {
@@ -90,10 +90,11 @@ public class UserEndpoint {
 
 	/**
 	 * Gets the user.
-	 * 
-	 * @param id
-	 *            the id
+	 *
+	 * @param id            the id
+	 * @param user the user
 	 * @return the user
+	 * @throws CommonException the common exception
 	 */
 	@ApiMethod(name = "getUser", authenticators = AppAuthenticator.class)
 	public User getUser(@Named("id") Long id, com.google.appengine.api.users.User user) throws CommonException {
@@ -120,9 +121,11 @@ public class UserEndpoint {
 
 	/**
 	 * Inits the data.
+	 *
+	 * @throws CommonException the common exception
 	 */
 	@ApiMethod(name = "initData", httpMethod = HttpMethod.POST, path = "initData")
-	public void initData() {
+	public void initData() throws CommonException{
 		userService.initData();
 	}
 
@@ -199,22 +202,14 @@ public class UserEndpoint {
 		return userService.getToken(token);
 	}
 
-	/**
-	 * Test insert.
-	 * 
-	 * @param value
-	 *            the value
-	 * @return the user
-	 * @throws CommonException
-	 *             the common exception
-	 */
-	@ApiMethod(name = "testInsert", httpMethod = HttpMethod.POST, path = "testInsert")
-	public User testInsert(@Nullable @Named(value = "value") String value) throws CommonException {
-		User user = new User("login" + value, "password", "uyphu" + value + "@yahoo.com");
-		user.setType(Constant.SYSTEM_USER);
-		return insertUser(user);
-	}
 
+	/**
+	 * Adds the authority.
+	 *
+	 * @param userId the user id
+	 * @param role the role
+	 * @throws CommonException the common exception
+	 */
 	@ApiMethod(name = "addAuthority", httpMethod = HttpMethod.POST, path = "addAuthority")
 	public void addAuthority(@Named("userId") Long userId, @Named("role") String role) throws CommonException {
 		userService.addAuthority(userId, role);

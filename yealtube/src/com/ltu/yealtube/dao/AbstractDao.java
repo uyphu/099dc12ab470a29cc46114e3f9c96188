@@ -18,6 +18,7 @@ import com.ltu.yealtube.domain.Comment;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.domain.User;
 import com.ltu.yealtube.domain.UserGroup;
+import com.ltu.yealtube.exception.CommonException;
 
 public abstract class AbstractDao<T> implements Dao<T> {
 
@@ -255,10 +256,10 @@ public abstract class AbstractDao<T> implements Dao<T> {
 	/**
 	 * Inits the data.
 	 */
-	abstract public void initData();
+	abstract public void initData() throws CommonException;
 
 	/**
 	 * Clean data.
 	 */
-	abstract public void cleanData();
+	abstract public void cleanData() throws CommonException;
 }

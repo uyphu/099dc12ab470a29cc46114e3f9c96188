@@ -5,49 +5,49 @@ import javax.inject.Named;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.dao.CategoryDao;
-import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.dao.UserGroupDao;
+import com.ltu.yealtube.domain.UserGroup;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 /**
- * The Class CategoryService.
+ * The Class UserGroupService.
  * 
  * @author uyphu
  */
-public class CategoryService {
+public class UserGroupService {
 
 	/** The log. */
-	// private final Logger log = Logger.getLogger(CategoryService.class);
+	// private final Logger log = Logger.getLogger(UserGroupService.class);
 
-	/** The category dao. */
-	private CategoryDao categoryDao = CategoryDao.getInstance();
+	/** The userGroup dao. */
+	private UserGroupDao userGroupDao = UserGroupDao.getInstance();
 
 	/** The instance. */
-	private static CategoryService instance = null;
+	private static UserGroupService instance = null;
 
 	/**
-	 * Instantiates a new category dao.
+	 * Instantiates a new userGroup dao.
 	 */
-	public CategoryService() {
+	public UserGroupService() {
 
 	}
 
 	/**
-	 * Gets the single instance of CategoryService.
+	 * Gets the single instance of UserGroupService.
 	 * 
-	 * @return single instance of CategoryService
+	 * @return single instance of UserGroupService
 	 */
-	public static CategoryService getInstance() {
+	public static UserGroupService getInstance() {
 		if (instance == null) {
-			instance = new CategoryService();
+			instance = new UserGroupService();
 		}
 		return instance;
 	}
 
 	/**
-	 * List category.
+	 * List userGroup.
 	 * 
 	 * @param cursorString
 	 *            the cursor string
@@ -55,52 +55,52 @@ public class CategoryService {
 	 *            the count
 	 * @return the collection response
 	 */
-	public CollectionResponse<Category> listCategory(String cursorString, Integer count) {
-		return categoryDao.list(cursorString, count);
+	public CollectionResponse<UserGroup> listUserGroup(String cursorString, Integer count) {
+		return userGroupDao.list(cursorString, count);
 	}
 
 	/**
-	 * Insert category.
+	 * Insert userGroup.
 	 * 
-	 * @param category
-	 *            the category
-	 * @return the category
+	 * @param userGroup
+	 *            the userGroup
+	 * @return the userGroup
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public Category insertCategory(Category category) throws CommonException {
-		if (category != null && category.getId() != null) {
-			if (containsCategory(category)) {
+	public UserGroup insertUserGroup(UserGroup userGroup) throws CommonException {
+		if (userGroup != null && userGroup.getId() != null) {
+			if (containsUserGroup(userGroup)) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
 			}
-			return categoryDao.persist(category);
+			return userGroupDao.persist(userGroup);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
 	}
 
 	/**
-	 * Contains category.
+	 * Contains userGroup.
 	 * 
-	 * @param category
-	 *            the category
+	 * @param userGroup
+	 *            the userGroup
 	 * @return true, if successful
 	 */
-	private boolean containsCategory(Category category) {
-		return containsCategory(category.getId());
+	private boolean containsUserGroup(UserGroup userGroup) {
+		return containsUserGroup(userGroup.getId());
 	}
 
 	/**
-	 * Contains category.
+	 * Contains userGroup.
 	 * 
 	 * @param id
 	 *            the id
 	 * @return true, if successful
 	 */
-	private boolean containsCategory(Long id) {
+	private boolean containsUserGroup(Long id) {
 		boolean contains = true;
 		if (id != null) {
-			Category item = categoryDao.find(id);
+			UserGroup item = userGroupDao.find(id);
 			if (item == null) {
 				contains = false;
 			}
@@ -112,41 +112,41 @@ public class CategoryService {
 	}
 
 	/**
-	 * Update category.
+	 * Update userGroup.
 	 * 
-	 * @param category
-	 *            the category
-	 * @return the category
+	 * @param userGroup
+	 *            the userGroup
+	 * @return the userGroup
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public Category updateCategory(Category category) throws CommonException {
+	public UserGroup updateUserGroup(UserGroup userGroup) throws CommonException {
 
-		if (category != null && category.getId() != null) {
-			if (!containsCategory(category)) {
+		if (userGroup != null && userGroup.getId() != null) {
+			if (!containsUserGroup(userGroup)) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_NOT_FOUND,
 						ErrorCodeDetail.ERROR_RECORD_NOT_FOUND.getMsg());
 			}
-			return categoryDao.update(category);
+			return userGroupDao.update(userGroup);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
 	}
 
 	/**
-	 * Removes the category.
+	 * Removes the userGroup.
 	 * 
 	 * @param id
 	 *            the id
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public void removeCategory(Long id) throws CommonException {
-		Category record = findRecord(id);
+	public void removeUserGroup(Long id) throws CommonException {
+		UserGroup record = findRecord(id);
 		if (record == null) {
 			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION, ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
 		}
-		categoryDao.delete(record);
+		userGroupDao.delete(record);
 	}
 
 	/**
@@ -154,10 +154,10 @@ public class CategoryService {
 	 * 
 	 * @param id
 	 *            the id
-	 * @return the category
+	 * @return the userGroup
 	 */
-	public Category findRecord(Long id) {
-		CategoryDao dao = new CategoryDao();
+	public UserGroup findRecord(Long id) {
+		UserGroupDao dao = new UserGroupDao();
 		return dao.find(id);
 	}
 
@@ -165,18 +165,18 @@ public class CategoryService {
 	 * Inits the data.
 	 */
 	public void initData() {
-		categoryDao.initData();
+		userGroupDao.initData();
 	}
 
 	/**
 	 * Clean data.
 	 */
 	public void cleanData() {
-		categoryDao.cleanData();
+		userGroupDao.cleanData();
 	}
 
 	/**
-	 * Search category.
+	 * Search userGroup.
 	 * 
 	 * @param querySearch
 	 *            the query search
@@ -188,9 +188,9 @@ public class CategoryService {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public CollectionResponse<Category> searchCategory(@Nullable @Named("querySearch") String querySearch,
+	public CollectionResponse<UserGroup> searchUserGroup(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
-		return categoryDao.searchCategory(querySearch, cursorString, count);
+		return userGroupDao.searchUserGroup(querySearch, cursorString, count);
 	}
 
 }

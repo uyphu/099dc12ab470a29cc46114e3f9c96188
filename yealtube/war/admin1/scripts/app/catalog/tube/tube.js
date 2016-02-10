@@ -34,6 +34,22 @@ angular.module('jhipsterApp')
                         return $translate.refresh();
                     }]
                 }
+            })
+            .state('tubeEdit', {
+                parent: 'dashboard',
+                url: '/tubeedit/:id',
+                data: {
+                    roles: ['ROLE_USER'],
+                    pageTitle: 'proconcoappApp.tube.detail.title'
+                },
+                templateUrl: 'scripts/app/catalog/tube/tube-edit.html',
+                controller: 'TubeEditController',
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('tube');
+                        return $translate.refresh();
+                    }]
+                }
             });
     });
 

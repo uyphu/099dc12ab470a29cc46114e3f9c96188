@@ -55,27 +55,6 @@ angular.module('jhipsterApp')
        };
 
        $scope.save = function () {
-//           if ($scope.tube.id != null) {
-//        	   var account = localStorageService.get('account');
-//        	   $scope.tube.userId = account.id;
-//               Tube.update($scope.tube).then(function (data){
-//            	   if (data.error != null) {
-//            		   showError(data.code);
-//            	   } else {
-//            		   $scope.refresh();
-//            	   }
-//               });
-//           } else {
-//        	   var account = localStorageService.get('account');
-//        	   $scope.tube.userId = account.id;
-//        	   Tube.insert($scope.tube).then(function (data){
-//        		   if (data.error != null) {
-//            		   showError(data.code);
-//            	   } else {
-//            		   $scope.refresh();
-//            	   }
-//               });
-//           }
 	       if ($scope.tube.id != null) {
 	    	   var account = localStorageService.get('account');
 	    	   $scope.tube.userId = account.id;

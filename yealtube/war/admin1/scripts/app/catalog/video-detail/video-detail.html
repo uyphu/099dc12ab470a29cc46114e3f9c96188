@@ -7,7 +7,7 @@
 		        <div class="panel no-border">
 		          <div id="video-player"></div>
 		          <div class="wrapper-lg">
-		            <h2 class="m-t-none"><a href="">{{tube.name}}</a></h2>
+		            <h2 class="m-t-none"><a href="">{{tube.title}}</a></h2>
 		            <div hm-read-more
 					        hm-text="{{ tube.description }}" 
 					        hm-limit="100" 
@@ -20,7 +20,7 @@
 		            <div class="line line-lg b-b b-light"></div>
 		            <div class="text-muted">
 		              <i class="fa fa-user text-muted"></i> by <a href="" class="m-r-sm">{{tube.author}}</a>
-		              <i class="fa fa-clock-o text-muted"></i> {{tube.dateAdded}}
+		              <i class="fa fa-clock-o text-muted"></i> {{tube.createdAt}}
 		              <a href="" class="m-l-sm"><i class="fa fa-comment-o text-muted"></i> {{tube.commentCount}} comment(s)</a>
 		            </div>
 		          </div>

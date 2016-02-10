@@ -7,10 +7,9 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.google.api.server.spi.response.ConflictException;
-import com.google.api.server.spi.response.NotFoundException;
-import com.ltu.yealtube.dao.AuthorityDao;
 import com.ltu.yealtube.domain.Authority;
+import com.ltu.yealtube.exception.CommonException;
+import com.ltu.yealtube.service.AuthorityService;
 
 @Api(name = "authorityendpoint", namespace = @ApiNamespace(ownerDomain = "proconco.com", ownerName = "proconco.com", packagePath = "entity"))
 public class AuthorityEndpoint {
@@ -25,8 +24,8 @@ public class AuthorityEndpoint {
 	public CollectionResponse<Authority> listAuthority(
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) {
-		AuthorityDao dao = new AuthorityDao();
-		return dao.list(cursorString, count);
+		AuthorityService service = AuthorityService.getInstance();
+		return service.listAuthority(cursorString, count);
 	}
 	
 	/**
@@ -35,25 +34,9 @@ public class AuthorityEndpoint {
 	* @return The object to be added.
 	*/
 	@ApiMethod(name = "insertAuthority")
-	public Authority insertAuthority(Authority authority) throws ConflictException {
-		// If if is not null, then check if it exists. If yes, throw an
-		// Exception
-		// that it is already present
-		if (authority.getId() != null) {
-			if (authority.getId() == 0) {
-				authority.setId(null);
-			} else {
-				if (findRecord(authority.getId()) != null) {
-					throw new ConflictException("Object already exists");
-				}
-			}
-		}
-		// Since our @Id field is a Long, Objectify will generate a unique value
-		// for us
-		// when we use put
-		AuthorityDao dao = new AuthorityDao();
-		dao.persist(authority);
-		return authority;
+	public Authority insertAuthority(Authority authority) throws CommonException {
+		AuthorityService service = AuthorityService.getInstance();
+		return service.insertAuthority(authority);
 	}
 
 	/**
@@ -64,13 +47,9 @@ public class AuthorityEndpoint {
 	 * @return The object to be updated.
 	 */
 	@ApiMethod(name = "updateAuthority")
-	public Authority updateAuthority(Authority authority) throws NotFoundException {
-		if (findRecord(authority.getId()) == null) {
-			throw new NotFoundException("Authority Record does not exist");
-		}
-		AuthorityDao dao = new AuthorityDao();
-		dao.update(authority);
-		return authority;
+	public Authority updateAuthority(Authority authority) throws CommonException {
+		AuthorityService service = AuthorityService.getInstance();
+		return service.updateAuthority(authority);
 	}
 
 	/**
@@ -80,13 +59,9 @@ public class AuthorityEndpoint {
 	 *            The id of the object to be deleted.
 	 */
 	@ApiMethod(name = "removeAuthority")
-	public void removeAuthority(@Named("id") Long id) throws NotFoundException {
-		Authority record = findRecord(id);
-		if (record == null) {
-			throw new NotFoundException("Authority Record does not exist");
-		}
-		AuthorityDao dao = new AuthorityDao();
-		dao.delete(record);
+	public void removeAuthority(@Named("id") Long id) throws CommonException {
+		AuthorityService service = AuthorityService.getInstance();
+		service.removeAuthority(id);
 	}
 	
 	/**
@@ -107,8 +82,8 @@ public class AuthorityEndpoint {
 	 * @return the user main
 	 */
 	private Authority findRecord(Long id) {
-		AuthorityDao dao = new AuthorityDao();
-		return dao.find(id);
+		AuthorityService service = AuthorityService.getInstance();
+		return service.findRecord(id);
 	}
 	
 	/**
@@ -116,8 +91,8 @@ public class AuthorityEndpoint {
 	 */
 	@ApiMethod(name = "initData")
 	public void initData() {
-		AuthorityDao dao = new AuthorityDao();
-		dao.initData();
+		AuthorityService service = AuthorityService.getInstance();
+		service.initData();
 	}
 	
 	/**
@@ -125,8 +100,8 @@ public class AuthorityEndpoint {
 	 */
 	@ApiMethod(name = "cleanData")
 	public void cleanData() {
-		AuthorityDao dao = new AuthorityDao();
-		dao.cleanData();
+		AuthorityService service = AuthorityService.getInstance();
+		service.cleanData();
 	}
 
 }

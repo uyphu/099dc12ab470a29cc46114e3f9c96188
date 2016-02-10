@@ -12,7 +12,7 @@
             "detail": {
                 "title": "Tube"
             },
-            "name": "Name",
+            "title": "Title",
             "videoId": "Video Id",
             "userId": "UserId",
             "description": "Description",
@@ -20,11 +20,13 @@
             "url": "Url",
             "like": "Like",
             "dislike": "Dislike",
+            "favorite": "Favorite",
+            "comment": "Comment",
             "rating": "Rating",
             "view": "View",
             "status": "Status",
-            "dateModified": "Modified",
-            "dateAdded": "Added",
+            "modified": "ModifiedAt",
+            "createdAt": "CreatedAt",
             "error":{
            		"message":{
            			"querySearch":"Invalid query search!",

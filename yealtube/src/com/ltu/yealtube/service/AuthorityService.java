@@ -5,49 +5,49 @@ import javax.inject.Named;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.dao.CategoryDao;
-import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.dao.AuthorityDao;
+import com.ltu.yealtube.domain.Authority;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 /**
- * The Class CategoryService.
+ * The Class AuthorityService.
  * 
  * @author uyphu
  */
-public class CategoryService {
+public class AuthorityService {
 
 	/** The log. */
-	// private final Logger log = Logger.getLogger(CategoryService.class);
+	// private final Logger log = Logger.getLogger(AuthorityService.class);
 
-	/** The category dao. */
-	private CategoryDao categoryDao = CategoryDao.getInstance();
+	/** The authority dao. */
+	private AuthorityDao authorityDao = AuthorityDao.getInstance();
 
 	/** The instance. */
-	private static CategoryService instance = null;
+	private static AuthorityService instance = null;
 
 	/**
-	 * Instantiates a new category dao.
+	 * Instantiates a new authority dao.
 	 */
-	public CategoryService() {
+	public AuthorityService() {
 
 	}
 
 	/**
-	 * Gets the single instance of CategoryService.
+	 * Gets the single instance of AuthorityService.
 	 * 
-	 * @return single instance of CategoryService
+	 * @return single instance of AuthorityService
 	 */
-	public static CategoryService getInstance() {
+	public static AuthorityService getInstance() {
 		if (instance == null) {
-			instance = new CategoryService();
+			instance = new AuthorityService();
 		}
 		return instance;
 	}
 
 	/**
-	 * List category.
+	 * List authority.
 	 * 
 	 * @param cursorString
 	 *            the cursor string
@@ -55,52 +55,52 @@ public class CategoryService {
 	 *            the count
 	 * @return the collection response
 	 */
-	public CollectionResponse<Category> listCategory(String cursorString, Integer count) {
-		return categoryDao.list(cursorString, count);
+	public CollectionResponse<Authority> listAuthority(String cursorString, Integer count) {
+		return authorityDao.list(cursorString, count);
 	}
 
 	/**
-	 * Insert category.
+	 * Insert authority.
 	 * 
-	 * @param category
-	 *            the category
-	 * @return the category
+	 * @param authority
+	 *            the authority
+	 * @return the authority
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public Category insertCategory(Category category) throws CommonException {
-		if (category != null && category.getId() != null) {
-			if (containsCategory(category)) {
+	public Authority insertAuthority(Authority authority) throws CommonException {
+		if (authority != null && authority.getId() != null) {
+			if (containsAuthority(authority)) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
 			}
-			return categoryDao.persist(category);
+			return authorityDao.persist(authority);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
 	}
 
 	/**
-	 * Contains category.
+	 * Contains authority.
 	 * 
-	 * @param category
-	 *            the category
+	 * @param authority
+	 *            the authority
 	 * @return true, if successful
 	 */
-	private boolean containsCategory(Category category) {
-		return containsCategory(category.getId());
+	private boolean containsAuthority(Authority authority) {
+		return containsAuthority(authority.getId());
 	}
 
 	/**
-	 * Contains category.
+	 * Contains authority.
 	 * 
 	 * @param id
 	 *            the id
 	 * @return true, if successful
 	 */
-	private boolean containsCategory(Long id) {
+	private boolean containsAuthority(Long id) {
 		boolean contains = true;
 		if (id != null) {
-			Category item = categoryDao.find(id);
+			Authority item = authorityDao.find(id);
 			if (item == null) {
 				contains = false;
 			}
@@ -112,41 +112,41 @@ public class CategoryService {
 	}
 
 	/**
-	 * Update category.
+	 * Update authority.
 	 * 
-	 * @param category
-	 *            the category
-	 * @return the category
+	 * @param authority
+	 *            the authority
+	 * @return the authority
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public Category updateCategory(Category category) throws CommonException {
+	public Authority updateAuthority(Authority authority) throws CommonException {
 
-		if (category != null && category.getId() != null) {
-			if (!containsCategory(category)) {
+		if (authority != null && authority.getId() != null) {
+			if (!containsAuthority(authority)) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_NOT_FOUND,
 						ErrorCodeDetail.ERROR_RECORD_NOT_FOUND.getMsg());
 			}
-			return categoryDao.update(category);
+			return authorityDao.update(authority);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
 	}
 
 	/**
-	 * Removes the category.
+	 * Removes the authority.
 	 * 
 	 * @param id
 	 *            the id
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public void removeCategory(Long id) throws CommonException {
-		Category record = findRecord(id);
+	public void removeAuthority(Long id) throws CommonException {
+		Authority record = findRecord(id);
 		if (record == null) {
 			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION, ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
 		}
-		categoryDao.delete(record);
+		authorityDao.delete(record);
 	}
 
 	/**
@@ -154,10 +154,10 @@ public class CategoryService {
 	 * 
 	 * @param id
 	 *            the id
-	 * @return the category
+	 * @return the authority
 	 */
-	public Category findRecord(Long id) {
-		CategoryDao dao = new CategoryDao();
+	public Authority findRecord(Long id) {
+		AuthorityDao dao = new AuthorityDao();
 		return dao.find(id);
 	}
 
@@ -165,18 +165,18 @@ public class CategoryService {
 	 * Inits the data.
 	 */
 	public void initData() {
-		categoryDao.initData();
+		authorityDao.initData();
 	}
 
 	/**
 	 * Clean data.
 	 */
 	public void cleanData() {
-		categoryDao.cleanData();
+		authorityDao.cleanData();
 	}
 
 	/**
-	 * Search category.
+	 * Search authority.
 	 * 
 	 * @param querySearch
 	 *            the query search
@@ -188,9 +188,9 @@ public class CategoryService {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public CollectionResponse<Category> searchCategory(@Nullable @Named("querySearch") String querySearch,
+	public CollectionResponse<Authority> searchAuthority(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
-		return categoryDao.searchCategory(querySearch, cursorString, count);
+		return authorityDao.searchAuthority(querySearch, cursorString, count);
 	}
 
 }

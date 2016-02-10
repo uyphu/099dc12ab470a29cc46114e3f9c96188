@@ -12,7 +12,7 @@
             "detail": {
                 "title": "Tube"
             },
-            "name": "Name",
+            "title": "Title",
             "videoId": "Video Id",
             "userId": "UserId",
             "description": "Description",
@@ -20,10 +20,12 @@
             "url": "Url",
             "like": "Like",
             "dislike": "Dislike",
+            "favorite": "Favorite",
+            "comment": "Comment",
             "rating": "Rating",
             "view": "View",
             "status": "Status",
-            "dateModified": "Modified",
+            "modifiedAt": "ModifiedAt",
             "createdAt": "createdAt",
             "error":{
            		"message":{

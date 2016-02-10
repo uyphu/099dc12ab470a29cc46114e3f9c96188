@@ -17,6 +17,7 @@ import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.OnLoad;
 import com.ltu.yealtube.dao.AuthorityDao;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class User.
  */
@@ -73,10 +74,10 @@ public class User {
     private String resetKey;
 
     /** The reset date. */
-    private Date resetDate = null;
+    private Date resetAt = null;
     
     /** The create date. */
-    private Date createDate;
+    private Date createdAt;
     
 	/** The image. */
 	private String image;
@@ -87,10 +88,12 @@ public class User {
 	/** The ip. */
 	private String ip;
 	
+	/** The type. */
 	@Index
 	@Column(name="type", length=1)
 	private String type;
 	
+	/** The authority keys. */
 	@Load
     private List<Key<Authority>> authorityKeys;
 	
@@ -106,6 +109,9 @@ public class User {
 	@IgnoreSave
 	private List<String> roles;
 	
+	/**
+	 * On load.
+	 */
 	@OnLoad
 	private void onLoad() {
 		
@@ -338,39 +344,39 @@ public class User {
 	}
 
 	/**
-	 * Gets the reset date.
+	 * Gets the reset at.
 	 *
-	 * @return the reset date
+	 * @return the reset at
 	 */
-	public final Date getResetDate() {
-		return this.resetDate;
+	public Date getResetAt() {
+		return resetAt;
 	}
 
 	/**
-	 * Sets the reset date.
+	 * Sets the reset at.
 	 *
-	 * @param resetDate the new reset date
+	 * @param resetAt the new reset at
 	 */
-	public final void setResetDate(Date resetDate) {
-		this.resetDate = resetDate;
+	public void setResetAt(Date resetAt) {
+		this.resetAt = resetAt;
 	}
 
 	/**
-	 * Gets the creates the date.
+	 * Gets the created at.
 	 *
-	 * @return the creates the date
+	 * @return the created at
 	 */
-	public final Date getCreateDate() {
-		return this.createDate;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
 	/**
-	 * Sets the creates the date.
+	 * Sets the created at.
 	 *
-	 * @param createDate the new creates the date
+	 * @param createdAt the new created at
 	 */
-	public final void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	/**
@@ -445,43 +451,93 @@ public class User {
 		this.token = token;
 	}
 
+	/**
+	 * Gets the authority keys.
+	 *
+	 * @return the authority keys
+	 */
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE) 
 	public final List<Key<Authority>> getAuthorityKeys() {
 		return this.authorityKeys;
 	}
 
+	/**
+	 * Sets the authority keys.
+	 *
+	 * @param authorityKeys the new authority keys
+	 */
 	public final void setAuthorityKeys(List<Key<Authority>> authorityKeys) {
 		this.authorityKeys = authorityKeys;
 	}
 
+	/**
+	 * Gets the authority ids.
+	 *
+	 * @return the authority ids
+	 */
 	public final List<Long> getAuthorityIds() {
 		return this.authorityIds;
 	}
 
+	/**
+	 * Sets the authority ids.
+	 *
+	 * @param authorityIds the new authority ids
+	 */
 	public final void setAuthorityIds(List<Long> authorityIds) {
 		this.authorityIds = authorityIds;
 	}
 
+	/**
+	 * Gets the authorities.
+	 *
+	 * @return the authorities
+	 */
 	public final List<Authority> getAuthorities() {
 		return this.authorities;
 	}
 
+	/**
+	 * Sets the authorities.
+	 *
+	 * @param authorities the new authorities
+	 */
 	public final void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
 
+	/**
+	 * Gets the roles.
+	 *
+	 * @return the roles
+	 */
 	public final List<String> getRoles() {
 		return this.roles;
 	}
 
+	/**
+	 * Sets the roles.
+	 *
+	 * @param roles the new roles
+	 */
 	public final void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
 	
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public final String getType() {
 		return this.type;
 	}
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public final void setType(String type) {
 		this.type = type;
 	}
@@ -516,7 +572,7 @@ public class User {
 	 */
 	public User(Long id, Long userGroupId, String login, String password, String salt, String firstName,
 			String lastName, String email, boolean activated, String langKey, String activationKey, String resetKey,
-			Date resetDate, Date createDate, String image, String code, String ip) {
+			Date resetAt, Date createdAt, String image, String code, String ip) {
 		this.id = id;
 		this.userGroupId = userGroupId;
 		this.login = login;
@@ -529,8 +585,8 @@ public class User {
 		this.langKey = langKey;
 		this.activationKey = activationKey;
 		this.resetKey = resetKey;
-		this.resetDate = resetDate;
-		this.createDate = createDate;
+		this.resetAt = resetAt;
+		this.createdAt = createdAt;
 		this.image = image;
 		this.code = code;
 		this.ip = ip;
@@ -558,7 +614,7 @@ public class User {
 	 */
 	public User(Long userGroupId, String login, String password, String salt, String firstName,
 			String lastName, String email, boolean activated, String langKey, String activationKey, String resetKey,
-			Date resetDate, Date createDate, String image, String code, String ip) {
+			Date resetAt, Date createdAt, String image, String code, String ip) {
 		this.userGroupId = userGroupId;
 		this.login = login;
 		this.password = password;
@@ -570,8 +626,8 @@ public class User {
 		this.langKey = langKey;
 		this.activationKey = activationKey;
 		this.resetKey = resetKey;
-		this.resetDate = resetDate;
-		this.createDate = createDate;
+		this.resetAt = resetAt;
+		this.createdAt = createdAt;
 		this.image = image;
 		this.code = code;
 		this.ip = ip;

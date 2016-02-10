@@ -5,49 +5,49 @@ import javax.inject.Named;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.ltu.yealtube.dao.CategoryDao;
-import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.dao.CommentDao;
+import com.ltu.yealtube.domain.Comment;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 /**
- * The Class CategoryService.
+ * The Class CommentService.
  * 
  * @author uyphu
  */
-public class CategoryService {
+public class CommentService {
 
 	/** The log. */
-	// private final Logger log = Logger.getLogger(CategoryService.class);
+	// private final Logger log = Logger.getLogger(CommentService.class);
 
-	/** The category dao. */
-	private CategoryDao categoryDao = CategoryDao.getInstance();
+	/** The comment dao. */
+	private CommentDao commentDao = CommentDao.getInstance();
 
 	/** The instance. */
-	private static CategoryService instance = null;
+	private static CommentService instance = null;
 
 	/**
-	 * Instantiates a new category dao.
+	 * Instantiates a new comment dao.
 	 */
-	public CategoryService() {
+	public CommentService() {
 
 	}
 
 	/**
-	 * Gets the single instance of CategoryService.
+	 * Gets the single instance of CommentService.
 	 * 
-	 * @return single instance of CategoryService
+	 * @return single instance of CommentService
 	 */
-	public static CategoryService getInstance() {
+	public static CommentService getInstance() {
 		if (instance == null) {
-			instance = new CategoryService();
+			instance = new CommentService();
 		}
 		return instance;
 	}
 
 	/**
-	 * List category.
+	 * List comment.
 	 * 
 	 * @param cursorString
 	 *            the cursor string
@@ -55,52 +55,52 @@ public class CategoryService {
 	 *            the count
 	 * @return the collection response
 	 */
-	public CollectionResponse<Category> listCategory(String cursorString, Integer count) {
-		return categoryDao.list(cursorString, count);
+	public CollectionResponse<Comment> listComment(String cursorString, Integer count) {
+		return commentDao.list(cursorString, count);
 	}
 
 	/**
-	 * Insert category.
+	 * Insert comment.
 	 * 
-	 * @param category
-	 *            the category
-	 * @return the category
+	 * @param comment
+	 *            the comment
+	 * @return the comment
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public Category insertCategory(Category category) throws CommonException {
-		if (category != null && category.getId() != null) {
-			if (containsCategory(category)) {
+	public Comment insertComment(Comment comment) throws CommonException {
+		if (comment != null && comment.getId() != null) {
+			if (containsComment(comment)) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
 			}
-			return categoryDao.persist(category);
+			return commentDao.persist(comment);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
 	}
 
 	/**
-	 * Contains category.
+	 * Contains comment.
 	 * 
-	 * @param category
-	 *            the category
+	 * @param comment
+	 *            the comment
 	 * @return true, if successful
 	 */
-	private boolean containsCategory(Category category) {
-		return containsCategory(category.getId());
+	private boolean containsComment(Comment comment) {
+		return containsComment(comment.getId());
 	}
 
 	/**
-	 * Contains category.
+	 * Contains comment.
 	 * 
 	 * @param id
 	 *            the id
 	 * @return true, if successful
 	 */
-	private boolean containsCategory(Long id) {
+	private boolean containsComment(Long id) {
 		boolean contains = true;
 		if (id != null) {
-			Category item = categoryDao.find(id);
+			Comment item = commentDao.find(id);
 			if (item == null) {
 				contains = false;
 			}
@@ -112,41 +112,41 @@ public class CategoryService {
 	}
 
 	/**
-	 * Update category.
+	 * Update comment.
 	 * 
-	 * @param category
-	 *            the category
-	 * @return the category
+	 * @param comment
+	 *            the comment
+	 * @return the comment
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public Category updateCategory(Category category) throws CommonException {
+	public Comment updateComment(Comment comment) throws CommonException {
 
-		if (category != null && category.getId() != null) {
-			if (!containsCategory(category)) {
+		if (comment != null && comment.getId() != null) {
+			if (!containsComment(comment)) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_NOT_FOUND,
 						ErrorCodeDetail.ERROR_RECORD_NOT_FOUND.getMsg());
 			}
-			return categoryDao.update(category);
+			return commentDao.update(comment);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
 	}
 
 	/**
-	 * Removes the category.
+	 * Removes the comment.
 	 * 
 	 * @param id
 	 *            the id
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public void removeCategory(Long id) throws CommonException {
-		Category record = findRecord(id);
+	public void removeComment(Long id) throws CommonException {
+		Comment record = findRecord(id);
 		if (record == null) {
 			throw new CommonException(ErrorCode.NOT_FOUND_EXCEPTION, ErrorCodeDetail.ERROR_RECORD_NOT_FOUND);
 		}
-		categoryDao.delete(record);
+		commentDao.delete(record);
 	}
 
 	/**
@@ -154,10 +154,10 @@ public class CategoryService {
 	 * 
 	 * @param id
 	 *            the id
-	 * @return the category
+	 * @return the comment
 	 */
-	public Category findRecord(Long id) {
-		CategoryDao dao = new CategoryDao();
+	public Comment findRecord(Long id) {
+		CommentDao dao = new CommentDao();
 		return dao.find(id);
 	}
 
@@ -165,18 +165,18 @@ public class CategoryService {
 	 * Inits the data.
 	 */
 	public void initData() {
-		categoryDao.initData();
+		commentDao.initData();
 	}
 
 	/**
 	 * Clean data.
 	 */
 	public void cleanData() {
-		categoryDao.cleanData();
+		commentDao.cleanData();
 	}
 
 	/**
-	 * Search category.
+	 * Search comment.
 	 * 
 	 * @param querySearch
 	 *            the query search
@@ -188,9 +188,9 @@ public class CategoryService {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	public CollectionResponse<Category> searchCategory(@Nullable @Named("querySearch") String querySearch,
+	public CollectionResponse<Comment> searchComment(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
-		return categoryDao.searchCategory(querySearch, cursorString, count);
+		return commentDao.searchComment(querySearch, cursorString, count);
 	}
 
 }
