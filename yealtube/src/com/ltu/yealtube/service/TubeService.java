@@ -6,8 +6,10 @@ import org.apache.log4j.Logger;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.googlecode.objectify.Key;
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.dao.TubeDao;
+import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
@@ -109,6 +111,9 @@ public class TubeService {
 						ErrorCodeDetail.ERROR_RECORD_NOT_FOUND.getMsg());
 			}
 			tube.setModifiedAt(Calendar.getInstance().getTime());
+			if (tube.getCategory() != null) {
+				tube.setCategoryKey(Key.create(Category.class, tube.getCategory().getId()));
+			}
 			return tubeDao.update(tube);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
@@ -187,13 +192,21 @@ public class TubeService {
 		Tube youtube = YoutubeUtils.getTube(id);
 		Tube tube = tubeDao.find(id);
 		//Update tube info from youtube
-		try {
-			tube.setViewCount(youtube.getViewCount());
-			update(tube);
-		} catch (CommonException e) {
-			log.error(e.getMessage(), e.getCause());
+		if(tube != null) {
+			try {
+				tube.setViewCount(youtube.getViewCount());
+				tube.setLikeCount(youtube.getLikeCount());
+				tube.setDislikeCount(youtube.getDislikeCount());
+				tube.setFavoriteCount(youtube.getFavoriteCount());
+				tube.setCommentCount(youtube.getCommentCount());
+				tube.setEmbedHtml(youtube.getEmbedHtml());
+				update(tube);
+			} catch (CommonException e) {
+				log.error(e.getMessage(), e.getCause());
+			}
+			return tube; 
 		}
-		return tube; 
+		return youtube;
 	}
 	
 	/**

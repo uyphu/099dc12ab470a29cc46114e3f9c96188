@@ -99,7 +99,7 @@ public class YoutubeUtils {
 							tube.setTitle(item.getString("title"));
 							tube.setDescription(item.getString("description"));
 							tube.setEmbedHtml(YoutubeUtils.getEmbedHtml(id));
-							jsonArray = (JSONArray)json.get("tags");
+							jsonArray = (JSONArray)item.get("tags");
 							if (jsonArray != null) {
 								tube.setTags(jsonArray.toString());
 							}
@@ -191,10 +191,10 @@ public class YoutubeUtils {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-//		Tube tube = getTube("DQkrfti22mo");
-//		System.out.println(tube.toString());
+		Tube tube = getTube("AY7GXcmXLE0");
+		System.out.println(tube.toString());
 		//sendTube("2xk7ZiN7A6s");
-		//System.out.println(getEmbedHtml("RgKAFK5djSk1"));
+		//System.out.println(getEmbedHtml("AY7GXcmXLE0"));
 	}
 
 }

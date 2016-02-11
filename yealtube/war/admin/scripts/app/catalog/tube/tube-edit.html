@@ -1,0 +1,149 @@
+<div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        	<!-- spinner -->
+			<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
+			<!-- end spinner -->
+            <h1 translate="yealtube.tube.detail.title">Tube {{tube.id}}</h1>
+            <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+				
+                <div class="modal-body">
+                	<div class="form-group">
+						<div class="alert alert-success" ng-show="success" translate="yealtube.tube.message.success">
+			                <strong>Report updated!</strong>
+			            </div>
+				    </div>
+				    <div class="form-group">
+						<div class="alert alert-danger" ng-show="idNotFoundError" translate="yealtube.tube.error.message.idNotFoundError">
+					        ID not found !
+					    </div>
+				    </div>
+				    <div class="form-group">
+						<div class="alert alert-danger" ng-show="inputError" translate="yealtube.tube.error.message.inputError">
+					        Invalid input!
+					    </div>
+				    </div>
+				    <div class="form-group">
+						<div class="alert alert-danger" ng-show="updateError" translate="yealtube.tube.error.message.updateError">
+					        Update error
+					    </div>
+				    </div>
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" class="form-control" name="id"
+                               ng-model="tube.id" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label translate="yealtube.tube.title">title</label>
+                        <input type="text" class="form-control" name="title"
+                               ng-model="tube.title" required>
+
+                        <div ng-show="editForm.title.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.title.$error.required" translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.description">description</label>
+                        <textarea class="form-control" name="description"
+                               ng-model="tube.description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.status">status</label>
+                        <input type="text" class="form-control" name="status"
+                               ng-model="tube.status" required>
+                               
+                        <div ng-show="editForm.status.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.status.$error.required" translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.status.$error.min" translate="entity.validation.min" translate-value-min="0">
+                                This field should be more than 0.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.status.$error.number" translate="entity.validation.number">
+                                This field should be a number.
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.category">category</label>
+                        <select class="form-control" name="category" ng-model="tube.category.id" ng-options="category.id as category.name for category in categories"></select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label translate="yealtube.tube.userId">userId</label>
+                        <input type="text" class="form-control" name="userId"
+                               ng-model="tube.userId" required min="0" readonly>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label translate="yealtube.tube.like">like</label>
+                        <input type="text" class="form-control" name="likeCount"
+                               ng-model="tube.likeCount" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.dislike">dislike</label>
+                        <input type="text" class="form-control" name="dislikeCount"
+                               ng-model="tube.dislikeCount" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.favorite">favorite</label>
+                        <input type="text" class="form-control" name="favoriteCount"
+                               ng-model="tube.favoriteCount" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.comment">comment</label>
+                        <input type="text" class="form-control" name="commentCount"
+                               ng-model="tube.commentCount" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.rating">rating</label>
+                        <input type="text" class="form-control" name="rating"
+                               ng-model="tube.rating" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.modifiedAt">modifiedAt</label>
+                        <input type="text" class="form-control" name="modifiedAt"
+                               ng-model="tube.modifiedAt" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.createdAt">createdAt</label>
+                        <input type="text" class="form-control" name="createdAt"
+                               ng-model="tube.createdAt" readonly>
+
+                    </div>
+                    <div class="form-group">
+                        <label translate="yealtube.tube.embedHtml">embedHtml</label>
+                        <input type="text" class="form-control" name="embedHtml"
+                               ng-model="tube.embedHtml" readonly>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+				             ui-sref="dashboard.tube"
+				            class="btn btn-info">
+				        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+				    </button>
+                    <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -78,9 +78,9 @@ public class TubeDao extends AbstractDao<Tube> {
 			if (querySearch != null) {
 				Query<Tube> query;
 				Map<String, Object> map = new HashMap<String, Object>();
-				if (querySearch.indexOf("delFlag:") != -1) {
+				if (querySearch.indexOf("status:") != -1) {
 					String[] queries = querySearch.split(":");
-					map.put("delFlag", Long.parseLong(queries[1]));
+					map.put("status", Long.parseLong(queries[1]));
 					query = getQuery(map);
 				} else {
 					query = getQueryByName("title", querySearch);

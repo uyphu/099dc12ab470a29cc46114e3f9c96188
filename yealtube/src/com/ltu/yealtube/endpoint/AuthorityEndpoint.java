@@ -21,8 +21,7 @@ public class AuthorityEndpoint {
 	* @return a list of Authoritys
 	*/
 	@ApiMethod(name = "listAuthority")
-	public CollectionResponse<Authority> listAuthority(
-			@Nullable @Named("cursor") String cursorString,
+	public CollectionResponse<Authority> listAuthority(@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("count") Integer count) {
 		AuthorityService service = AuthorityService.getInstance();
 		return service.listAuthority(cursorString, count);

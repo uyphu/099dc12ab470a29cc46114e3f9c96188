@@ -78,7 +78,7 @@ public class TubeEndpoint {
 	@ApiMethod(name = "updateTube")
 	public Tube updateTube(Tube tube) throws CommonException {
 		TubeService service = TubeService.getInstance();
-		return service.insert(tube);
+		return service.update(tube);
 	}
 
 	/**

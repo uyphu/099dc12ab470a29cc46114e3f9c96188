@@ -23,9 +23,6 @@ import com.ltu.yealtube.service.UserService;
 @Api(name = "userendpoint", namespace = @ApiNamespace(ownerDomain = "ltu.com", ownerName = "ltu.com", packagePath = "yealtube.domain"))
 public class UserEndpoint {
 
-	/** The user service. */
-	private UserService userService = new UserService();
-
 	/**
 	 * Return a collection of users.
 	 *
@@ -35,13 +32,21 @@ public class UserEndpoint {
 	 * @return a list of Users
 	 * @throws CommonException the common exception
 	 */
-	@ApiMethod(name = "listUser", scopes = { Constant.EMAIL_SCOPE }, clientIds = { Constant.WEB_CLIENT_ID,
-			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID }, audiences = { Constant.ANDROID_AUDIENCE }, authenticators = AppAuthenticator.class)
-	public CollectionResponse<User> listUser(com.google.appengine.api.users.User user,
-			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count)
-			throws CommonException {
-		if (user == null)
-			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION, ErrorCodeDetail.ERROR_USER_NOT_AUTHENTICATED);
+	//FIXME authenticated
+//	@ApiMethod(name = "listUser", scopes = { Constant.EMAIL_SCOPE }, clientIds = { Constant.WEB_CLIENT_ID,
+//			com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID }, audiences = { Constant.ANDROID_AUDIENCE }, authenticators = AppAuthenticator.class)
+//	public CollectionResponse<User> listUser(com.google.appengine.api.users.User user,
+//			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count)
+//			throws CommonException {
+//		if (user == null)
+//			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION, ErrorCodeDetail.ERROR_USER_NOT_AUTHENTICATED);
+//		return userService.listUser(cursorString, count);
+//	}
+	
+	@ApiMethod(name = "listUser")
+	public CollectionResponse<User> listUser(
+			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
+		UserService userService = new UserService();
 		return userService.listUser(cursorString, count);
 	}
 
@@ -57,6 +62,7 @@ public class UserEndpoint {
 	@ApiMethod(name = "insertUser")
 	public User insertUser(User user) throws CommonException {
 		user.setType(Constant.SYSTEM_USER);
+		UserService userService = new UserService();
 		return userService.insertUser(user);
 	}
 
@@ -72,6 +78,7 @@ public class UserEndpoint {
 	public User updateUser(User user, com.google.appengine.api.users.User authUser) throws CommonException {
 		if (authUser == null)
 			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION, ErrorCodeDetail.ERROR_USER_NOT_AUTHENTICATED);
+		UserService userService = new UserService();
 		return userService.updateUser(user);
 	}
 
@@ -85,6 +92,7 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "removeUser")
 	public void removeUser(@Named("id") Long id) throws CommonException {
+		UserService userService = new UserService();
 		userService.removeUser(id);
 	}
 
@@ -100,6 +108,7 @@ public class UserEndpoint {
 	public User getUser(@Named("id") Long id, com.google.appengine.api.users.User user) throws CommonException {
 		if (user == null)
 			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION, ErrorCodeDetail.ERROR_USER_NOT_AUTHENTICATED);
+		UserService userService = new UserService();
 		return userService.findRecord(id);
 	}
 
@@ -116,6 +125,7 @@ public class UserEndpoint {
 	public User getAccount(com.google.appengine.api.users.User user) throws CommonException {
 		if (user == null)
 			throw new CommonException(ErrorCode.UNAUTHORIZED_EXCEPTION, ErrorCodeDetail.ERROR_USER_NOT_AUTHENTICATED);
+		UserService userService = new UserService();
 		return userService.findOneByEmail(user.getEmail(), Constant.SYSTEM_USER);
 	}
 
@@ -126,7 +136,19 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "initData", httpMethod = HttpMethod.POST, path = "initData")
 	public void initData() throws CommonException{
+		UserService userService = new UserService();
 		userService.initData();
+	}
+	
+	/**
+	 * Inits the add role.
+	 *
+	 * @throws CommonException the common exception
+	 */
+	@ApiMethod(name = "initAddRole", httpMethod = HttpMethod.POST, path = "initAddRole")
+	public void initAddRole() throws CommonException{
+		UserService userService = new UserService();
+		userService.initAddRole();
 	}
 
 	/**
@@ -134,6 +156,7 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "cleanData", httpMethod = HttpMethod.POST, path = "cleanData")
 	public void cleanData() {
+		UserService userService = new UserService();
 		userService.cleanData();
 	}
 
@@ -154,6 +177,7 @@ public class UserEndpoint {
 	public CollectionResponse<User> searchUser(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count)
 			throws CommonException {
+		UserService userService = new UserService();
 		return userService.searchUser(querySearch, cursorString, count);
 	}
 
@@ -171,6 +195,7 @@ public class UserEndpoint {
 	@ApiMethod(name = "login", httpMethod = HttpMethod.GET, path = "login")
 	public User login(@Nullable @Named("login") String login, @Nullable @Named("password") String password)
 			throws CommonException {
+		UserService userService = new UserService();
 		return userService.login(login, password);
 	}
 
@@ -185,6 +210,7 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "activateAccount", httpMethod = HttpMethod.POST, path = "activateAccount")
 	public User activateAccount(@Nullable @Named(value = "activateKey") String activateKey) throws CommonException {
+		UserService userService = new UserService();
 		return userService.activateAccount(activateKey);
 	}
 
@@ -199,6 +225,7 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "getToken", httpMethod = HttpMethod.GET, path = "getToken")
 	public User getToken(@Nullable @Named(value = "token") String token) throws CommonException {
+		UserService userService = new UserService();
 		return userService.getToken(token);
 	}
 
@@ -212,6 +239,7 @@ public class UserEndpoint {
 	 */
 	@ApiMethod(name = "addAuthority", httpMethod = HttpMethod.POST, path = "addAuthority")
 	public void addAuthority(@Named("userId") Long userId, @Named("role") String role) throws CommonException {
+		UserService userService = new UserService();
 		userService.addAuthority(userId, role);
 	}
 

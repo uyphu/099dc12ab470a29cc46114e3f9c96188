@@ -572,7 +572,7 @@ public class User {
 	 */
 	public User(Long id, Long userGroupId, String login, String password, String salt, String firstName,
 			String lastName, String email, boolean activated, String langKey, String activationKey, String resetKey,
-			Date resetAt, Date createdAt, String image, String code, String ip) {
+			Date resetAt, Date createdAt, String image, String code, String ip, String type) {
 		this.id = id;
 		this.userGroupId = userGroupId;
 		this.login = login;
@@ -590,6 +590,7 @@ public class User {
 		this.image = image;
 		this.code = code;
 		this.ip = ip;
+		this.type = type;
 	}
 	
 	/**
@@ -614,7 +615,7 @@ public class User {
 	 */
 	public User(Long userGroupId, String login, String password, String salt, String firstName,
 			String lastName, String email, boolean activated, String langKey, String activationKey, String resetKey,
-			Date resetAt, Date createdAt, String image, String code, String ip) {
+			Date resetAt, Date createdAt, String image, String code, String ip, String type) {
 		this.userGroupId = userGroupId;
 		this.login = login;
 		this.password = password;
@@ -631,6 +632,7 @@ public class User {
 		this.image = image;
 		this.code = code;
 		this.ip = ip;
+		this.type = type;
 	}
 	
 	/**

@@ -20,9 +20,13 @@ import com.ltu.yealtube.utils.AppUtils;
 
 /**
  * The Class UserDao.
+ * @author uyphu
  */
 public class UserDao extends AbstractDao<User> {
 	
+	//private final Logger log = Logger.getLogger(UserDao.class);
+	
+	/** The instance. */
 	private static UserDao instance = null;
 	
 	/**
@@ -32,6 +36,11 @@ public class UserDao extends AbstractDao<User> {
 		super(User.class);
 	}
 	
+	/**
+	 * Gets the single instance of UserDao.
+	 *
+	 * @return single instance of UserDao
+	 */
 	public static UserDao getInstance() {
 		if (instance == null) {
 			instance = new UserDao();
@@ -41,28 +50,43 @@ public class UserDao extends AbstractDao<User> {
 
 	/**
 	 * Inits the data.
+	 *
+	 * @throws CommonException the common exception
 	 */
 	public void initData() throws CommonException {
 		User user;
 
-		user = new User(1L, "admin", AppUtils.cryptWithMD5("password1"), "", "Phu", "Le", "uyphu@yahoo.com", true, "en", null,
-				"", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null);
+		user = new User(1L, "admin", AppUtils.cryptWithMD5("admin"), "", "Phu", "Le", "uyphu@yahoo.com", true, "en", null, "",
+				Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null, Constant.SYSTEM_USER);
 		persist(user);
-		addRole(1L, AuthorityConstants.ROLE_ADMIN);
-		addRole(1L, AuthorityConstants.ROLE_USER);
-		addRole(1L, AuthorityConstants.ROLE_EDIT);
-		
-		user = new User(2L, "user", AppUtils.cryptWithMD5("password1"), "", "User", "Le", "user@yahoo.com", true, "en", null,
-				"", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null);
-		addRole(1L, AuthorityConstants.ROLE_USER);
-		addRole(1L, AuthorityConstants.ROLE_EDIT);
-		user = new User(2L, "Anonymous", AppUtils.cryptWithMD5("password1"), "", "Anonymous", "Le", "Anonymous@yahoo.com", true, "en", null,
-				"", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null);
+
+		user = new User(2L, "user", AppUtils.cryptWithMD5("user"), "", "User", "Le", "user@yahoo.com", true, "en", null, "",
+				Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null, Constant.SYSTEM_USER);
 		persist(user);
-		addRole(1L, AuthorityConstants.ROLE_ANONYMOUS);
+
+		user = new User(3L, "anonymous", AppUtils.cryptWithMD5("anonymous"), "", "Anonymous", "Le", "Anonymous@yahoo.com",
+				true, "en", null, "", Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), null, null, null,
+				Constant.SYSTEM_USER);
+		persist(user);
+
+		initAddRoles();
 
 	}
-
+	
+	/**
+	 * Inits the add roles.
+	 *
+	 * @throws CommonException the common exception
+	 */
+	public void initAddRoles() throws CommonException {
+		addRole("admin", AuthorityConstants.ROLE_ADMIN);
+		addRole("admin", AuthorityConstants.ROLE_USER);
+		addRole("admin", AuthorityConstants.ROLE_EDIT);
+		addRole("user", AuthorityConstants.ROLE_USER);
+		addRole("user", AuthorityConstants.ROLE_EDIT);
+		addRole("anonymous", AuthorityConstants.ROLE_ANONYMOUS);
+	}
+	
 	/**
 	 * Clean data.
 	 */
@@ -206,6 +230,7 @@ public class UserDao extends AbstractDao<User> {
 	 * Find one by email.
 	 *
 	 * @param email the email
+	 * @param type the type
 	 * @return the user
 	 */
 	public User findOneByEmail(String email, String type) {
@@ -283,15 +308,14 @@ public class UserDao extends AbstractDao<User> {
 	
 	/**
 	 * Adds the role.
-	 * 
-	 * @param login
-	 *            the login
-	 * @param role
-	 *            the role
+	 *
+	 * @param login            the login
+	 * @param role            the role
+	 * @throws CommonException the common exception
 	 */
 	public void addRole(String login, String role) throws CommonException {
 		User user = findOneByLogin(login);
-		AuthorityDao authorityDao = new AuthorityDao();
+		AuthorityDao authorityDao = AuthorityDao.getInstance();
 		Authority authority = authorityDao.getAuthorityByName(role);
 		if (user != null && authority != null) {
 			Key<Authority> key = Key.create(Authority.class, authority.getId());
@@ -313,9 +337,16 @@ public class UserDao extends AbstractDao<User> {
 		}
 	}
 	
+	/**
+	 * Adds the role.
+	 *
+	 * @param userId the user id
+	 * @param role the role
+	 * @throws CommonException the common exception
+	 */
 	public void addRole(Long userId, String role) throws CommonException {
 		User user = find(userId);
-		AuthorityDao authorityDao = new AuthorityDao();
+		AuthorityDao authorityDao = AuthorityDao.getInstance();
 		Authority authority = authorityDao.getAuthorityByName(role);
 		if (user != null && authority != null) {
 			Key<Authority> key = Key.create(Authority.class, authority.getId());
@@ -346,7 +377,7 @@ public class UserDao extends AbstractDao<User> {
 	 */
 	public void removeRole(String login, String role) throws CommonException {
 		User user = findOneByLogin(login);
-		AuthorityDao authorityDao = new AuthorityDao();
+		AuthorityDao authorityDao = AuthorityDao.getInstance();
 		Authority authority = authorityDao.getAuthorityByName(role);
 		if (user != null && authority != null) {
 			Key<Authority> key = Key.create(Authority.class, authority.getId());
@@ -399,6 +430,9 @@ public class UserDao extends AbstractDao<User> {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ltu.yealtube.dao.AbstractDao#update(java.lang.Object)
+	 */
 	@Override
 	public User update(User user) {
 		User oldUser = find(user.getId());

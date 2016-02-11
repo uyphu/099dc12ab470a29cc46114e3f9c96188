@@ -1,0 +1,50 @@
+{
+    "yealtube": {
+        "tube" : {
+            "home": {
+                "title": "Tubesfr",
+                "createLabel": "Create a new Tube",
+                "createOrEditLabel": "Create or edit a Tube"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Tube {{ id }}?"
+            },
+            "detail": {
+                "title": "Tube"
+            },
+            "title": "Title",
+            "videoId": "Video Id",
+            "userId": "UserId",
+            "description": "Description",
+            "category": "Category",
+            "url": "Url",
+            "like": "Like",
+            "dislike": "Dislike",
+            "favorite": "Favorite",
+            "comment": "Comment",
+            "rating": "Rating",
+            "view": "View",
+            "status": "Status",
+            "modifiedAt": "Modified At",
+            "createdAt": "created At",
+            "tags": "Tags",
+            "embedHtml": "EmbedHtml",
+            "error":{
+           		"message":{
+           			"querySearch":"Invalid query search!",
+           			"invalidName":"Invalid name!",
+           			"invalidUser":"Invalid user!",
+           			"saveError":"Save Error!",
+           			"saveError":"Save Error!",
+           			"updateError": "Update error",
+           			"idNotFoundError": "Not found id to update",
+           			"inputError": "Invalid input"
+           		}
+           },
+           "message": {
+           		"success": "Successfully executed!"
+           }
+        }
+    }
+}
+

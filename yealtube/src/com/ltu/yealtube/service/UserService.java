@@ -213,6 +213,15 @@ public class UserService {
 	}
 	
 	/**
+	 * Inits the add role.
+	 *
+	 * @throws CommonException the common exception
+	 */
+	public void initAddRole() throws CommonException{
+		userDao.initAddRoles();
+	}
+	
+	/**
 	 * Clean data.
 	 */
 	public void cleanData() {
