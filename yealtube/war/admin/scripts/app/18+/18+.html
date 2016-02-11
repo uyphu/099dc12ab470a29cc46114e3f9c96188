@@ -1,29 +1,31 @@
-<div ng-cloak>
-    <div class="row">
-        <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
-        </div>
-        <div class="col-md-8">
-<!--             <h1 translate="main.title">Welcome, Fun!</h1> -->
-			<h1 >Welcome, 18+!</h1>
-            <p class="lead" translate="main.subtitle">This is your homepage</p>
-
-            <div ng-switch="isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true"
-                     translate="main.logged.message" translate-values="{username: '{{account.login}}'}">
-                    You are logged in as user "Admin".
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
-                    If you want to <a href="#/login">authenticate</a>, you can try the default login="admin" and
-                    password="admin".
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
-                    Don't have an account? <a href=\"#/register\">Register</a>
-                </div>
-            </div>
-
-        </div>
+<div>
+	<div class="recommended-info">
+		<div class="heading">
+			<h3>Recommended 18+</h3>
+		</div>
+	</div>
+	<div class="row row-sm" >
+		<div infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="busy" infinite-scroll-distance='1'>
+	    <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="tube in tubes">
+	      <div class="item">
+	        <div class="pos-rlt b-a bg-white wrapper-xs">
+	          <div class="item-overlay bg-white-opacity">
+	            <div class="center text-center m-t-n w-full">
+	              <a ui-sref="dashboard.videoDetail({id:tube.id})" ><i class="fa fa-play-circle fa-2x text-white"></i></a>
+	            </div>
+	          </div>
+	          <a ui-sref="dashboard.videoDetail({id:tube.id})"><img src="//i.ytimg.com/vi/{{tube.id}}/mqdefault.jpg" alt="" class="img-full"></a>
+	        </div>
+	        <div class="padder-v">
+	          <a ui-sref="dashboard.videoDetail({id:tube.id})" class="text-ellipsis" >{{tube.title}}</a>
+	          <ul>
+				<li><p class="author author-info"><a href="#" class="author">{{tube.author}}</a></p></li>
+				<li class="right-list"><p class="views views-info">{{tube.viewCount | number:0}} views</p></li>
+			</ul>
+	        </div>
+	      </div>
+	    </div>
+	    </div>
     </div>
 </div>
+    

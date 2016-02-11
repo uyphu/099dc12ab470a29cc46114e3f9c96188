@@ -2,11 +2,11 @@
 
 angular.module('jhipsterApp').config(
 		function($stateProvider) {
-			$stateProvider.state('dashboard.sports', {
+			$stateProvider.state('dashboard.movie', {
 				parent : 'dashboard',
-				url : '/sports',
-				templateUrl : 'scripts/app/sports/sports.html',
-				controller : 'SportsController',
+				url : '/movie',
+				templateUrl : 'scripts/app/movie/movie.html',
+				controller : 'MovieController',
 				data : {
 					roles : ['ROLE_USER']
 				},
@@ -14,7 +14,7 @@ angular.module('jhipsterApp').config(
 					mainTranslatePartialLoader : [ '$translate',
 							'$translatePartialLoader',
 							function($translate, $translatePartialLoader) {
-								$translatePartialLoader.addPart('sports');
+								$translatePartialLoader.addPart('movie');
 								return $translate.refresh();
 							} ]
 				}

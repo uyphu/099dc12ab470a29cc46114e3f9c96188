@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jhipsterApp')
-   .controller('18+Controller', function ($scope, $rootScope, $timeout, usSpinnerService, 
+   .controller('MovieController', function ($scope, $rootScope, $timeout, usSpinnerService, 
 		   Tube, TubeSearch, ParseLinks, localStorageService) {
        $scope.tubes = [];
        $scope.page = 1;
