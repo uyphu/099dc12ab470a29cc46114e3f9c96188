@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.api.server.spi.response.CollectionResponse;
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.cmd.Query;
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.Tube;
@@ -77,13 +78,31 @@ public class TubeDao extends AbstractDao<Tube> {
 		try {
 			if (querySearch != null) {
 				Query<Tube> query;
+				String[] fields = querySearch.split("@@");
 				Map<String, Object> map = new HashMap<String, Object>();
-				if (querySearch.indexOf("status:") != -1) {
-					String[] queries = querySearch.split(":");
-					map.put("status", Long.parseLong(queries[1]));
+				if (fields != null && fields.length > 1) {
+					for (String field : fields) {
+						if (field.indexOf("status:") != -1) {
+							String[] queries = field.split(":");
+							map.put("status", Long.parseLong(queries[1]));
+						} else if (field.indexOf("category:") != -1) {
+							String[] queries = field.split(":");
+							map.put("categoryRef", Ref.create(CategoryDao.getInstance().find(Long.parseLong(queries[1]))));
+						}
+					}
 					query = getQuery(map);
 				} else {
-					query = getQueryByName("title", querySearch);
+					if (querySearch.indexOf("status:") != -1) {
+						String[] queries = querySearch.split(":");
+						map.put("status", Long.parseLong(queries[1]));
+						query = getQuery(map);
+					} else if (querySearch.indexOf("category:") != -1) {
+						String[] queries = querySearch.split(":");
+						map.put("categoryRef", Ref.create(CategoryDao.getInstance().find(Long.parseLong(queries[1]))));
+						query = getQuery(map);
+					} else {
+						query = getQueryByName("title", querySearch);
+					}
 				}
 				return query;
 			} else {

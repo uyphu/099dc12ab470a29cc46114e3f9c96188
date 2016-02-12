@@ -60,7 +60,7 @@ public class TubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	@ApiMethod(name = "insertYouTube")
+	@ApiMethod(name = "insertYouTube", httpMethod=HttpMethods.POST, path="insertYouTube")
 	public Tube insertYouTube(@Named("videoId") String videoId) throws CommonException {
 		TubeService service = TubeService.getInstance();
 		return service.insert(videoId);

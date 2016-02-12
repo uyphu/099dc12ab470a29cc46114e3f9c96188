@@ -4,14 +4,12 @@ import java.util.Date;
 
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.ApiResourceProperty;
-import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.IgnoreSave;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.OnLoad;
-import com.ltu.yealtube.dao.CategoryDao;
 
 /**
  * The Class Tube.
@@ -30,12 +28,15 @@ public class Tube {
 	private String title;
 
 	/** The description. */
-	@Index
 	private String description;
 
 	/** The category keys. */
-	@Load
-	private Key<Category> categoryKey;
+//	@Load
+//	@Index
+//	private Key<Category> categoryKey;
+	
+	@Index
+	private Ref<Category> categoryRef;
 
 	/** The user id. */
 	@Index
@@ -94,10 +95,10 @@ public class Tube {
 	
 	@OnLoad
 	private void onLoad() {
-		if (categoryKey != null) {
-			CategoryDao dao = CategoryDao.getInstance();
-			category = dao.find(categoryKey.getId());
-		}
+//		if (categoryKey != null) {
+//			CategoryDao dao = CategoryDao.getInstance();
+//			category = dao.find(categoryKey.getId());
+//		}
 	}
 
 	/**
@@ -181,27 +182,30 @@ public class Tube {
 	 * 
 	 * @return the category key
 	 */
-	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	public Key<Category> getCategoryKey() {
-		return categoryKey;
-	}
-
-	/**
-	 * Sets the category key.
-	 * 
-	 * @param categoryKey
-	 *            the new category key
-	 */
-	public void setCategoryKey(Key<Category> categoryKey) {
-		this.categoryKey = categoryKey;
-	}
+//	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+//	public Key<Category> getCategoryKey() {
+//		return categoryKey;
+//	}
+//
+//	/**
+//	 * Sets the category key.
+//	 * 
+//	 * @param categoryKey
+//	 *            the new category key
+//	 */
+//	public void setCategoryKey(Key<Category> categoryKey) {
+//		this.categoryKey = categoryKey;
+//	}
 	
 	public Category getCategory() {
+		if (categoryRef != null) {
+			return categoryRef.get();
+		}
 		return category;
 	}
 
 	public void setCategory(Category category) {
-		this.category = category;
+		this.categoryRef = Ref.create(category);
 	}
 
 	/**
@@ -432,6 +436,15 @@ public class Tube {
 	public void setEmbedHtml(String embedHtml) {
 		this.embedHtml = embedHtml;
 	}
+	
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	public Ref<Category> getCategoryRef() {
+		return categoryRef;
+	}
+
+	public void setCategoryRef(Ref<Category> categoryRef) {
+		this.categoryRef = categoryRef;
+	}
 
 	/**
 	 * Instantiates a new tube.
@@ -463,13 +476,12 @@ public class Tube {
 	 * @param categories the categories
 	 * @param embedHtml the embed html
 	 */
-	public Tube(String id, String title, String description, Key<Category> categoryKey, Long userId, int viewCount, int status,
+	public Tube(String id, String title, String description, Long userId, int viewCount, int status,
 			Date createdAt, Date modifiedAt, int likeCount, int dislikeCount, int favoriteCount, int commentCount,
-			float rating, String author, String categoryId, String tags, String embedHtml, Category category) {
+			float rating, String author, String tags, String embedHtml, Category category) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.categoryKey = categoryKey;
 		this.userId = userId;
 		this.viewCount = viewCount;
 		this.status = status;
@@ -482,6 +494,7 @@ public class Tube {
 		this.rating = rating;
 		this.author = author;
 		this.category = category;
+		this.setCategory(category);
 		this.tags = tags;
 		this.embedHtml = embedHtml;
 	}
@@ -508,6 +521,7 @@ public class Tube {
 		this.status = status;
 		this.category = category;
 		this.tags = tags;
+		this.setCategory(category);
 	}
 
 }

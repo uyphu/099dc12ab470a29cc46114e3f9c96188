@@ -99,10 +99,12 @@ public class YoutubeUtils {
 							tube.setTitle(item.getString("title"));
 							tube.setDescription(item.getString("description"));
 							tube.setEmbedHtml(YoutubeUtils.getEmbedHtml(id));
-							jsonArray = (JSONArray)item.get("tags");
-							if (jsonArray != null) {
-								tube.setTags(jsonArray.toString());
+							try {
+								tube.setTags(item.getString("tags"));
+							} catch (Exception e) {
+								log.error(e.getMessage(), e.getCause());
 							}
+							
 							tube.setAuthor("admin");
 							tube.setUserId(Constant.ADMIN_ID);
 							return tube;

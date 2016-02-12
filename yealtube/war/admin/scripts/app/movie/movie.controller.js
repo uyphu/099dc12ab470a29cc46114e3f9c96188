@@ -11,6 +11,7 @@ angular.module('jhipsterApp')
        $scope.invalidName = null;
        $scope.value = 10;
        $scope.busy  = false;
+       $scope.querySearch = 'status:' + AppConstant.APPROVED_STATUS + "@@category:5";
        $scope.loadAll = function() {
     	   initData($scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
        };
@@ -41,8 +42,7 @@ angular.module('jhipsterApp')
        
        function initData(cursor, count) {
     	   $scope.startSpin();
-    	   var querySearch = 'status:' + AppConstant.APPROVED_STATUS;
-    	   Tube.search(querySearch, cursor, count).then(function(data) {
+    	   Tube.search($scope.querySearch, cursor, count).then(function(data) {
     		   $scope.stopSpin();
     		   if (data != null) {
     			   if (data.items != null) {
@@ -58,8 +58,7 @@ angular.module('jhipsterApp')
        function listData(cursor, count) {
     	   $scope.startSpin();
     	   $scope.busy  = true;
-    	   var querySearch = 'status:' + AppConstant.APPROVED_STATUS;
-    	   Tube.search(querySearch, cursor, count).then(function(data) {
+    	   Tube.search($scope.querySearch, cursor, count).then(function(data) {
     		   $scope.stopSpin();
     		   if (data != null) {
     			   if (data.items != null) {

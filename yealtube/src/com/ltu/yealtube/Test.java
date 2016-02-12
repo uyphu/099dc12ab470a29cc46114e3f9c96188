@@ -9,7 +9,11 @@ public class Test {
 		
 		//VideoListResponse list = search.getVideos("b3SpBNEbxG0");
 		
-		testAPI();
+		//testAPI();
+		
+		String test = "category:2@@status:2";
+		String[] fields = test.split("@@");
+		System.out.println(fields.toString());
 		
 //		System.out.println(list.getItems().toString());
 	}

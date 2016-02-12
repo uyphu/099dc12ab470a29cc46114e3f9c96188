@@ -6,10 +6,9 @@ import org.apache.log4j.Logger;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.googlecode.objectify.Key;
 import com.ltu.yealtube.constants.Constant;
+import com.ltu.yealtube.dao.CategoryDao;
 import com.ltu.yealtube.dao.TubeDao;
-import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
@@ -67,6 +66,7 @@ public class TubeService {
 			}
 			tube.setCreatedAt(Calendar.getInstance().getTime());
 			tube.setModifiedAt(Calendar.getInstance().getTime());
+			tube.setStatus(Constant.PENDING_STATUS);
 			return tubeDao.persist(tube);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
@@ -90,6 +90,9 @@ public class TubeService {
 			tube.setModifiedAt(Calendar.getInstance().getTime());
 			tube.setStatus(Constant.PENDING_STATUS);
 			tube.setUserId(Constant.ADMIN_ID);
+			//FIXME need to remove
+			//tube.setCategoryKey(Key.create(Category.class, 1L));
+			//tube.setCategory(CategoryDao.getInstance().find(2L));
 			tube = tubeDao.persist(tube);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
@@ -112,7 +115,8 @@ public class TubeService {
 			}
 			tube.setModifiedAt(Calendar.getInstance().getTime());
 			if (tube.getCategory() != null) {
-				tube.setCategoryKey(Key.create(Category.class, tube.getCategory().getId()));
+				//tube.setCategoryKey(Key.create(Category.class, tube.getCategory().getId()));
+				tube.setCategory(CategoryDao.getInstance().find(tube.getCategory().getId()));
 			}
 			return tubeDao.update(tube);
 		} else {
