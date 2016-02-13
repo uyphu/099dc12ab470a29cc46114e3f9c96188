@@ -12,6 +12,9 @@ import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
+/**
+ * The Class CategoryDao.
+ */
 public class CategoryDao extends AbstractDao<Category> {
 	
 	/** The instance. */
@@ -23,6 +26,11 @@ public class CategoryDao extends AbstractDao<Category> {
 		super(Category.class);
 	}
 	
+	/**
+	 * Gets the single instance of CategoryDao.
+	 *
+	 * @return single instance of CategoryDao
+	 */
 	public static CategoryDao getInstance() {
 		if (instance == null) {
 			instance = new CategoryDao();
@@ -36,15 +44,15 @@ public class CategoryDao extends AbstractDao<Category> {
 	public void initData() {
 		Category category;
 
-		category = new Category(1L, Constant.CATEGORY_FUN, 0L, "Fun", "Fun", "Fun", "Fun");
+		category = new Category(1L, Constant.CATEGORY_FUN, 0L, "Fun", "Fun", "Fun", "fun, comedy, vui, hai, funny, cuoi");
 		persist(category);
-		category = new Category(2L, Constant.CATEGORY_SPORTS, 0L, "Sports", "Sports", "Sports", "Sports");
+		category = new Category(2L, Constant.CATEGORY_SPORTS, 0L, "Sports", "Sports", "Sports", "sports, football, volleyball, tennis, athletic");
 		persist(category);
-		category = new Category(3L, Constant.CATEGORY_MUSIC, 0L, "Music", "Music", "Music", "Music");
+		category = new Category(3L, Constant.CATEGORY_MUSIC, 0L, "Music", "Music", "Music", "music, shows");
 		persist(category);
-		category = new Category(4L, Constant.CATEGORY_18PLUS, 0L, "18+", "18+", "18+", "18+");
+		category = new Category(4L, Constant.CATEGORY_18PLUS, 0L, "18+", "18+", "18+", "18+, sexy, naked, nude, hot girl, sweet, adult, naughty, tinh duc, bikini, nguoi lon, tinh cam");
 		persist(category);
-		category = new Category(5L, Constant.CATEGORY_MOVIE, 0L, "Movie", "Movie", "Movie", "Movie");
+		category = new Category(5L, Constant.CATEGORY_MOVIE, 0L, "Movie", "Movie", "Movie", "movies, movie, film");
 		persist(category);
 	}
 
@@ -74,7 +82,7 @@ public class CategoryDao extends AbstractDao<Category> {
 				Map<String, Object> map = new HashMap<String, Object>();
 				if (querySearch.indexOf("keyword:") != -1) {
 					String[] queries = querySearch.split(":");
-					map.put("metaKeyword", Long.parseLong(queries[1]));
+					map.put("keyword", Long.parseLong(queries[1]));
 					query = getQuery(map);
 				} else {
 					query = getQueryByName("name", querySearch);
@@ -107,5 +115,24 @@ public class CategoryDao extends AbstractDao<Category> {
 		Query<Category> query = getQuery(querySearch);
 		return executeQuery(query, cursorString, count);
 	}
-
+	
+	/**
+	 * Find one by name.
+	 *
+	 * @param name the name
+	 * @return the category
+	 */
+	public Category findOneByName(String name) {
+		if (name != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("name", name);
+			Query<Category> query = getQuery(map);
+			List<Category> list = executeQuery(query, 1);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		}
+		return null;
+	}
+	
 }

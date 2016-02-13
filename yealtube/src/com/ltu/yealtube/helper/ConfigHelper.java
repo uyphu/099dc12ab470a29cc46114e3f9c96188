@@ -87,7 +87,7 @@ public class ConfigHelper {
 	public void setSecretKey(String secretKey) {
 		this.secretKey = secretKey;
 	}
-
+	
 	/**
 	 * The main method.
 	 *

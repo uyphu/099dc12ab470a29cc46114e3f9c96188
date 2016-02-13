@@ -1,16 +1,20 @@
 package com.ltu.yealtube.service;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.dao.CategoryDao;
 import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCode;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CategoryService.
  * 
@@ -191,6 +195,59 @@ public class CategoryService {
 	public CollectionResponse<Category> searchCategory(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
 		return categoryDao.searchCategory(querySearch, cursorString, count);
+	}
+	
+	/**
+	 * Find one by name.
+	 *
+	 * @param name the name
+	 * @return the category
+	 */
+	public Category findOneByName(String name) {
+		return categoryDao.findOneByName(name);
+	}
+	
+	/**
+	 * Find one by keword.
+	 *
+	 * @param keyword the keyword
+	 * @return the category
+	 */
+	public Category findOneByKeword(String keyword) {
+		if (keyword != null) {
+			keyword = keyword.toLowerCase();
+			List<Category> categories = categoryDao.findAll();
+			for (Category category : categories) {
+				if (keyword.indexOf(category.getName().toLowerCase()) != -1) {
+					return category;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Find one by tags.
+	 *
+	 * @param tags the tags
+	 * @return the category
+	 */
+	public Category findOneByTags(String tags) {
+		if (tags != null) {
+			tags = tags.toLowerCase();
+			List<Category> categories = categoryDao.findAll();
+			for (Category category : categories) {
+				if (category.getMetaKeyword() != null) {
+					String[] metaKeys = category.getMetaKeyword().toLowerCase().split(Constant.COMMA_STRING);
+					for (String metaKey : metaKeys) {
+						if (tags.indexOf(metaKey.trim()) != -1) {
+							return category;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 }

@@ -103,5 +103,12 @@ public class Constant {
 	/** The Constant HOME_DIRECTORY_FILENAME. */
 	public static final String HOME_DIRECTORY_FILENAME = "config.properties";
 	
+	/** The Constant KEYWORD_18PLUS. */
+	public static final String KEYWORD_18PLUS = "18plus";
+	
+	/** The Constant KEYWORD_18PLUS_VALUE. */
+	public static final String KEYWORD_18PLUS_VALUE = "sexy, naked, nude, hot, sweet";
+	
+	public static final String COMMA_STRING = ",";
 	
 }

@@ -386,5 +386,5 @@ public class UserService {
 	public User findOneByEmail(String email, String userType) {
 		return userDao.findOneByEmail(email, userType);
 	}
-
+	
 }

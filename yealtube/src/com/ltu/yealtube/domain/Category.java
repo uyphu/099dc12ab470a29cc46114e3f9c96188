@@ -211,5 +211,11 @@ public class Category {
 		this.metaDescription = metaDescription;
 		this.metaKeyword = metaKeyword;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", parentId=" + parentId + ", description=" + description
+				+ ", metaTitle=" + metaTitle + ", metaDescription=" + metaDescription + ", metaKeyword=" + metaKeyword + "]";
+	}
 	
 }

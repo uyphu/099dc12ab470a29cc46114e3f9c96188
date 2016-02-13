@@ -1,12 +1,16 @@
 package com.ltu.yealtube.endpoint;
 
+import java.util.List;
+
 import javax.inject.Named;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.response.CollectionResponse;
 import com.ltu.yealtube.constants.Constant;
+import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.service.TubeService;
@@ -96,6 +100,19 @@ public class YoutubeEndpoint {
 	@ApiMethod(name = "getDetailVideo", httpMethod = HttpMethod.GET, path = "getDetailVideo")
 	public Tube getDetailVideo(@Named("id") String id) {
 		return tubeService.getDetailTube(id);
+	}
+	
+	/**
+	 * Gets the all categories.
+	 *
+	 * @param id the id
+	 * @return the all categories
+	 */
+	@ApiMethod(name = "getAllCategories", httpMethod = HttpMethod.GET, path = "getAllCategories")
+	public CollectionResponse<Category> getAllCategories(@Named("id") String id) {
+		List<Category> categories = YoutubeUtils.getAllCategories();
+		return CollectionResponse.<Category> builder().setItems(categories)
+	            .setNextPageToken(null).build();
 	}
 
 }

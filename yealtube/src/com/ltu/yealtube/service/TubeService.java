@@ -9,6 +9,7 @@ import com.google.api.server.spi.response.CollectionResponse;
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.dao.CategoryDao;
 import com.ltu.yealtube.dao.TubeDao;
+import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
@@ -90,10 +91,14 @@ public class TubeService {
 			tube.setModifiedAt(Calendar.getInstance().getTime());
 			tube.setStatus(Constant.PENDING_STATUS);
 			tube.setUserId(Constant.ADMIN_ID);
-			//FIXME need to remove
-			//tube.setCategoryKey(Key.create(Category.class, 1L));
-			//tube.setCategory(CategoryDao.getInstance().find(2L));
-			tube = tubeDao.persist(tube);
+			Category category = YoutubeUtils.getCategory(youtubeId);
+			if (category != null) {
+				tube.setCategory(category);
+				tube = tubeDao.persist(tube);
+			} else {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_FORBIDDEN, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+			}
+			
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}

@@ -10,24 +10,27 @@ angular.module('jhipsterApp')
        $scope.spinneractive = false;
        $scope.invalidName = null;
        $scope.value = 10;
-       //$scope.startcounter = 0;
+       $scope.busy  = false;
+       $scope.searchQuery = localStorageService.get('searchTubeQuery');
+       
        $scope.loadAll = function() {
-    	   listData($scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
+    	   $scope.busy  = true;
+    	   $scope.search($scope.searchQuery, $scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
        };
        $scope.reset = function() {
            $scope.page = 1;
            $scope.cursor = null;
            $scope.tubes = [];
            $scope.loadAll();
+           $scope.busy  = false;
        };
        $scope.loadPage = function(page) {
            $scope.page = page;
            if ($scope.searchQuery != null) {
-        	   $scope.search();
+        	   $scope.search($scope.searchQuery, $scope.cursor, AppConstant.MAX_NEXT_PAGE_SIZE);
            } else {
         	   if ($scope.cursor != null) {
-            	   //listData($scope.cursor);
-        		   listData($scope.cursor, AppConstant.MAX_NEXT_PAGE_SIZE);
+        		   $scope.search(null, $scope.cursor, AppConstant.MAX_NEXT_PAGE_SIZE);
                }
            }
        };
@@ -39,21 +42,6 @@ angular.module('jhipsterApp')
            });
        };
        
-       function listData(cursor, count) {
-    	   $scope.startSpin();
-    	   Tube.loadAll(cursor, count).then(function(data) {
-    		   $scope.stopSpin();
-    		   if (data != null) {
-    			   if (data.items != null) {
-	    			   for (var i = 0; i < data.items.length; i++) {
-	                     $scope.tubes.push(data.items[i]);
-	    			   }
-	    			   $scope.cursor = data.nextPageToken;
-    			   }
-    		   }
-    	   });
-       };
-
        $scope.save = function () {
 	       if ($scope.tube.id != null) {
 	    	   var account = localStorageService.get('account');
@@ -92,58 +80,57 @@ angular.module('jhipsterApp')
                $scope.clear();
     	   });
        };
-
-       $scope.search = function () {
+       
+       $scope.searchHandler = function() {
     	   $scope.invalidQuerySearch = null;
     	   if ($scope.cursor == null) {
      		   $scope.tubes = [];
      	   }
-    	   if ($scope.searchQuery != null && $scope.searchQuery != '') {
-    		   if ($scope.searchQuery.indexOf('id:') != -1) {
-    			   var query = $scope.searchQuery.split(':', 2);
+    	   $scope.search($scope.searchQuery, $scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
+       }
+
+       $scope.search = function (searchQuery, cursor, count) {
+    	   if (searchQuery != null && searchQuery != '') {
+    		   if (searchQuery.indexOf('id:') != -1) {
+    			   var query = searchQuery.split(':', 2);
     			   try {
-//    				   var id = parseInt(query[1]);
     				   var id = query[1];
-    				   //if (!isNaN(id)) {
-    					   $scope.startSpin();
-    					   Tube.get(id).then(function(data){
-    						   startTimer();
-    						   $scope.tubes = [];
-    						   if (data != null) {
-    							   $scope.tubes.push(data.result);
-    						   }
-    					   });
-//    				   } else {
-//    					   $scope.invalidQuerySearch = 'ERROR';
-//    				   }
+					   $scope.startSpin();
+					   Tube.get(id).then(function(data){
+						   startTimer();
+						   $scope.tubes = [];
+						   if (data != null) {
+							   $scope.tubes.push(data.result);
+						   }
+					   });
     				} catch (e) {
     					$scope.invalidQuerySearch = 'ERROR';
     				}
-    			   
-    			   
     		   } else {
-    			   $scope.startSpin();
-    			   TubeSearch.searchTube($scope.searchQuery, $scope.cursor).then(function(data) {
-    				   $scope.stopSpin();
-    	    		   if ($scope.cursor == null) {
-    	    			   $scope.tubes = [];
-    	    		   }
-    	    		   if (data != null) {
-    	    			   for (var i = 0; i < data.items.length; i++) {
-    	                       $scope.tubes.push(data.items[i]);
-    	      			   }
-    	    			   $scope.cursor = data.nextPageToken;
-    	    		   }
-    	       		}, 
-    	       		function(response) {
-    	               if(response.status === 404) {
-    	                   $scope.loadAll();
-    	               }
-    	       		});
+    			   searchTube(searchQuery, cursor, count)
     		   }
     	   } else {
-    		   listData($scope.cursor, AppConstant.MAX_PAGE_SIZE);
+    		   searchTube(null, cursor, count);
     	   }
+       };
+       
+       function searchTube(searchQuery, cursor, count) {
+    	   $scope.startSpin();
+    	   $scope.busy  = true;
+		   TubeSearch.searchTube(searchQuery, cursor, count).then(function(data) {
+			   $scope.stopSpin();
+    		   if (data != null) {
+    			   localStorageService.set('searchTubeQuery', searchQuery);
+    			   for (var i = 0; i < data.items.length; i++) {
+                       $scope.tubes.push(data.items[i]);
+      			   }
+    			   $scope.cursor = data.nextPageToken;
+    		   }
+    		   $scope.busy  = false;
+       		}, function(response) {
+       			$scope.stopSpin();
+       			$scope.invalidQuerySearch = 'ERROR';
+       		});
        };
 
        $scope.refresh = function () {
@@ -157,6 +144,7 @@ angular.module('jhipsterApp')
            $scope.tube = {name: null, description: null, url: null, id: null, 
         		   status:null, like:null, dislike:null, rating:null, dateAdded:null, dateModified:null};
            $scope.editForm.$setPristine();
+           
            //$scope.editForm.$setUntouched();
        };
        
@@ -167,7 +155,6 @@ angular.module('jhipsterApp')
        $scope.startSpin = function() {
     	   if (!$scope.spinneractive) {
     		   usSpinnerService.spin('spinner-1');
-    		   //$scope.startcounter++;
     	   }
        };
 

@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()" id="searchQuery" placeholder="query">
                 </div>
-                <button class="btn btn-info" ng-click="search()"><span class="glyphicon glyphicon-search"></span> <span>Search a Tube</span>
+                <button class="btn btn-info" ng-click="searchHandler()"><span class="glyphicon glyphicon-search"></span> <span>Search a Tube</span>
                 </button>
             </form>
         </div>
@@ -43,11 +43,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
-<!--                 <div class="modal-header"> -->
-<!--                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" -->
-<!--                             ng-click="clear()">&times;</button> -->
-<!--                     <h4 class="modal-title" id="myTubeLabel" translate="yealtube.tube.home.createOrEditLabel">Create or edit a Tube</h4> -->
-<!--                 </div> -->
                 <div class="modal-body">
                 	<div class="form-group">
 						<div class="alert alert-danger" ng-show="invalidName" translate="yealtube.tube.error.message.invalidName">
@@ -103,7 +98,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
                         <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
                     </button>
-                    <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                    <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger" aria-hidden="true">
                         <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
                     </button>
                 </div>
@@ -131,7 +126,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+        <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="busy">
             <tr ng-repeat="tube in tubes">
 <!--                 <td><a ui-sref="tubeDetail({id:tube.id})">{{tube.id}}</a></td> -->
 <!--                 <td>{{tube.title}}</td> -->
@@ -166,8 +161,8 @@
                             class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
                     </button>
-                    <button type="submit"
-                            ng-click="delete(tube.id)"
+                    <button type="submit" data-toggle="modal" data-target="#deleteTubeConfirmation"
+                            ng-click="delete(tube.id)" 
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
                     </button>
