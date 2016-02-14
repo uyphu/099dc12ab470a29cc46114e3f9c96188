@@ -89,7 +89,7 @@ public class TubeService {
 			Tube tube = YoutubeUtils.getTube(youtubeId);
 			tube.setCreatedAt(Calendar.getInstance().getTime());
 			tube.setModifiedAt(Calendar.getInstance().getTime());
-			tube.setStatus(Constant.PENDING_STATUS);
+			tube.setStatus(Constant.APPROVED_STATUS);
 			tube.setUserId(Constant.ADMIN_ID);
 			Category category = YoutubeUtils.getCategory(youtubeId);
 			if (category != null) {

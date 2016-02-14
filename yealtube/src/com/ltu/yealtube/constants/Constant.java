@@ -65,7 +65,7 @@ public class Constant {
     
     //FIXME need to be configurable
     /** The Constant BASE_URL. */
-    public static final String BASE_URL = "https://yealtubetest.appspot.com/admin1";
+    public static final String BASE_URL = "https://yealtubetest.appspot.com/admin";
     
     /** The Constant ADMIN_EMAIL. */
     public static final String ADMIN_EMAIL = "uyphu@yahoo.com";
