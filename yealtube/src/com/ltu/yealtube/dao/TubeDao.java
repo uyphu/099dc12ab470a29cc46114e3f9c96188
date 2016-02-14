@@ -64,6 +64,20 @@ public class TubeDao extends AbstractDao<Tube> {
 			delete(item);
 		}
 	}
+	
+	/**
+	 * Clean data.
+	 *
+	 * @param status the status
+	 * @throws CommonException the common exception
+	 */
+	public void cleanData(Integer status) throws CommonException{
+		CollectionResponse<Tube> list;
+		list = searchTube("status:"+status.toString(), null, null);
+		for (Tube item : list.getItems()) {
+			delete(item);
+		}
+	}
 
 	/**
 	 * Gets the query.

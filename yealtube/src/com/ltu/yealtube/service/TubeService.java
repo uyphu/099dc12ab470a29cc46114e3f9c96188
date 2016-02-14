@@ -94,7 +94,7 @@ public class TubeService {
 			Category category = YoutubeUtils.getCategory(youtubeId);
 			if (category != null) {
 				tube.setCategory(category);
-				tube = tubeDao.persist(tube);
+				return tubeDao.persist(tube);
 			} else {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_FORBIDDEN, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 			}
@@ -102,7 +102,6 @@ public class TubeService {
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
 		}
-		return null;
 	}
 	
 	/**
@@ -266,6 +265,16 @@ public class TubeService {
 	 */
 	public void cleanData() {
 		tubeDao.cleanData();
+	}
+	
+	/**
+	 * Clean data.
+	 *
+	 * @param status the status
+	 * @throws CommonException the common exception
+	 */
+	public void cleanData(Integer status) throws CommonException{
+		tubeDao.cleanData(status);
 	}
 
 }

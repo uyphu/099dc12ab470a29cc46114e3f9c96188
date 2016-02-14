@@ -132,7 +132,7 @@ public class TubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-	@ApiMethod(name = "searchTube", httpMethod = HttpMethod.GET, path = "search_tube")
+	@ApiMethod(name = "searchTube", httpMethod = HttpMethod.GET, path = "searchTube")
 	public CollectionResponse<Tube> searchTube(@Nullable @Named("querySearch") String querySearch,
 			@Nullable @Named("cursor") String cursorString, @Nullable @Named("count") Integer count) throws CommonException {
 		TubeService service = TubeService.getInstance();
@@ -155,6 +155,18 @@ public class TubeEndpoint {
 	public void cleanData() {
 		TubeService service = TubeService.getInstance();
 		service.cleanData();
+	}
+	
+	/**
+	 * Clean data by status.
+	 *
+	 * @param status the status
+	 * @throws CommonException the common exception
+	 */
+	@ApiMethod(name = "cleanDataByStatus", httpMethod = HttpMethod.POST, path = "cleanDataByStatus")
+	public void cleanDataByStatus( @Nullable @Named("status") Integer status) throws CommonException{
+		TubeService service = TubeService.getInstance();
+		service.cleanData(status);
 	}
 
 }
