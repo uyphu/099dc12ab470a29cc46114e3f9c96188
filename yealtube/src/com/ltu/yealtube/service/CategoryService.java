@@ -218,7 +218,7 @@ public class CategoryService {
 			keyword = keyword.toLowerCase();
 			List<Category> categories = categoryDao.findAll();
 			for (Category category : categories) {
-				if (keyword.indexOf(category.getName().toLowerCase()) != -1) {
+				if (category.getMetaKeyword() != null && category.getMetaKeyword().toLowerCase().indexOf(keyword) != -1) {
 					return category;
 				}
 			}
