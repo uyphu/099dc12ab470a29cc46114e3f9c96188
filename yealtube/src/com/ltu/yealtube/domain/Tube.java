@@ -30,11 +30,6 @@ public class Tube {
 	/** The description. */
 	private String description;
 
-	/** The category keys. */
-//	@Load
-//	@Index
-//	private Key<Category> categoryKey;
-	
 	@Index
 	private Ref<Category> categoryRef;
 

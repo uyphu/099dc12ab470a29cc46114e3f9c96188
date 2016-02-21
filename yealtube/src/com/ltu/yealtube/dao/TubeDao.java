@@ -142,7 +142,7 @@ public class TubeDao extends AbstractDao<Tube> {
 	 *             the proconco exception
 	 */
 	public CollectionResponse<Tube> searchTube(String querySearch, String cursorString, Integer count) throws CommonException {
-		Query<Tube> query = getQuery(querySearch);
+		Query<Tube> query = getQuery(querySearch).order("-createdAt");
 		return executeQuery(query, cursorString, count);
 	}
 
@@ -161,7 +161,7 @@ public class TubeDao extends AbstractDao<Tube> {
 	 */
 	public CollectionResponse<Tube> getTubeByTitle(String title, String cursorString, Integer count) throws CommonException {
 		if (title != null) {
-			Query<Tube> query = getQueryByName("title", title);
+			Query<Tube> query = getQueryByName("title", title).order("-createdAt");
 			return executeQuery(query, cursorString, count);
 		}
 		return null;

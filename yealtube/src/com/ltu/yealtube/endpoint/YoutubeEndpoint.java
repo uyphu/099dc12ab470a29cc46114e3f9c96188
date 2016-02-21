@@ -109,7 +109,7 @@ public class YoutubeEndpoint {
 	 * @return the all categories
 	 */
 	@ApiMethod(name = "getAllCategories", httpMethod = HttpMethod.GET, path = "getAllCategories")
-	public CollectionResponse<Category> getAllCategories(@Named("id") String id) {
+	public CollectionResponse<Category> getAllCategories() {
 		List<Category> categories = YoutubeUtils.getAllCategories();
 		return CollectionResponse.<Category> builder().setItems(categories)
 	            .setNextPageToken(null).build();
