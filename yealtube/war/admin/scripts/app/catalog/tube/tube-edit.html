@@ -28,11 +28,11 @@
 					        Update error
 					    </div>
 				    </div>
-                    <div class="form-group">
-                        <label>ID</label>
-                        <input type="text" class="form-control" name="id"
-                               ng-model="tube.id" readonly>
-                    </div>
+<!--                     <div class="form-group"> -->
+<!--                         <label>ID</label> -->
+<!--                         <input type="text" class="form-control" name="id" -->
+<!--                                ng-model="tube.id" readonly> -->
+<!--                     </div> -->
 
                     <div class="form-group">
                         <label translate="yealtube.tube.title">title</label>
@@ -77,61 +77,77 @@
                         <select class="form-control" name="category" ng-model="tube.category.id" ng-options="category.id as category.name for category in categories"></select>
                     </div>
                     
-                    <div class="form-group">
-                        <label translate="yealtube.tube.userId">userId</label>
-                        <input type="text" class="form-control" name="userId"
-                               ng-model="tube.userId" required min="0" readonly>
-                    </div>
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.userId">userId</label> -->
+<!--                         <input type="text" class="form-control" name="userId" -->
+<!--                                ng-model="tube.userId" required min="0" readonly> -->
+<!--                     </div> -->
                     
                     
-                    <div class="form-group">
-                        <label translate="yealtube.tube.like">like</label>
-                        <input type="text" class="form-control" name="likeCount"
-                               ng-model="tube.likeCount" readonly>
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.like">like</label> -->
+<!--                         <input type="text" class="form-control" name="likeCount" -->
+<!--                                ng-model="tube.likeCount" readonly> -->
 
+<!--                     </div> -->
+                    <div class="row show-grid">
+                        <div class="col-md-6">UserId {{tube.userId}}</div>
+                        <div class="col-md-6">{{tube.likeCount}} like</div>
                     </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.dislike">dislike</label>
-                        <input type="text" class="form-control" name="dislikeCount"
-                               ng-model="tube.dislikeCount" readonly>
+                    <div class="row show-grid">
+                        <div class="col-md-6">{{tube.dislikeCount}} dislike</div>
+                        <div class="col-md-6">{{tube.favoriteCount}} favorite</div>
+                    </div>
+                    <div class="row show-grid">
+                        <div class="col-md-6">{{tube.commentCount}} comments</div>
+                        <div class="col-md-6">{{tube.rating}} rating</div>
+                    </div>
+                    <div class="row show-grid">
+                        <div class="col-md-6">{{tube.modifiedAt}} </div>
+                        <div class="col-md-6">{{tube.viewCount}} views</div>
+                    </div>
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.dislike">dislike</label> -->
+<!--                         <input type="text" class="form-control" name="dislikeCount" -->
+<!--                                ng-model="tube.dislikeCount" readonly> -->
 
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.favorite">favorite</label>
-                        <input type="text" class="form-control" name="favoriteCount"
-                               ng-model="tube.favoriteCount" readonly>
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.favorite">favorite</label> -->
+<!--                         <input type="text" class="form-control" name="favoriteCount" -->
+<!--                                ng-model="tube.favoriteCount" readonly> -->
 
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.comment">comment</label>
-                        <input type="text" class="form-control" name="commentCount"
-                               ng-model="tube.commentCount" readonly>
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.comment">comment</label> -->
+<!--                         <input type="text" class="form-control" name="commentCount" -->
+<!--                                ng-model="tube.commentCount" readonly> -->
 
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.rating">rating</label>
-                        <input type="text" class="form-control" name="rating"
-                               ng-model="tube.rating" readonly>
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.rating">rating</label> -->
+<!--                         <input type="text" class="form-control" name="rating" -->
+<!--                                ng-model="tube.rating" readonly> -->
 
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.modifiedAt">modifiedAt</label>
-                        <input type="text" class="form-control" name="modifiedAt"
-                               ng-model="tube.modifiedAt" readonly>
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.modifiedAt">modifiedAt</label> -->
+<!--                         <input type="text" class="form-control" name="modifiedAt" -->
+<!--                                ng-model="tube.modifiedAt" readonly> -->
 
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.createdAt">createdAt</label>
-                        <input type="text" class="form-control" name="createdAt"
-                               ng-model="tube.createdAt" readonly>
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.createdAt">createdAt</label> -->
+<!--                         <input type="text" class="form-control" name="createdAt" -->
+<!--                                ng-model="tube.createdAt" readonly> -->
 
-                    </div>
-                    <div class="form-group">
-                        <label translate="yealtube.tube.embedHtml">embedHtml</label>
-                        <input type="text" class="form-control" name="embedHtml"
-                               ng-model="tube.embedHtml" readonly>
+<!--                     </div> -->
+<!--                     <div class="form-group"> -->
+<!--                         <label translate="yealtube.tube.embedHtml">embedHtml</label> -->
+<!--                         <input type="text" class="form-control" name="embedHtml" -->
+<!--                                ng-model="tube.embedHtml" readonly> -->
 
-                    </div>
+<!--                     </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="submit"
