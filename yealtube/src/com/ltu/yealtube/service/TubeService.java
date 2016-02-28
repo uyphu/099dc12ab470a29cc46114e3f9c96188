@@ -104,6 +104,32 @@ public class TubeService {
 		}
 	}
 	
+	public Tube insert(String youtubeId, Float rating) throws CommonException {
+		if (youtubeId != null) {
+			if (containsTube(youtubeId)) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
+			}
+			Tube tube = YoutubeUtils.getTube(youtubeId);
+			tube.setCreatedAt(Calendar.getInstance().getTime());
+			tube.setModifiedAt(Calendar.getInstance().getTime());
+			tube.setStatus(Constant.APPROVED_STATUS);
+			tube.setUserId(Constant.ADMIN_ID);
+			if (rating != null) {
+				tube.setRating(rating);
+			}
+			Category category = YoutubeUtils.getCategory(youtubeId);
+			if (category != null) {
+				tube.setCategory(category);
+				return tubeDao.persist(tube);
+			} else {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_FORBIDDEN, ErrorCodeDetail.ERROR_CATEGORY_NOT_FOUND.getMsg());
+			}
+			
+		} else {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+		}
+	}
+	
 	/**
 	 * Update.
 	 *

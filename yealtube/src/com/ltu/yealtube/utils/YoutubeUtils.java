@@ -6,8 +6,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -108,6 +115,7 @@ public class YoutubeUtils {
 							tube.setTitle(item.getString("title"));
 							tube.setDescription(item.getString("description"));
 							tube.setEmbedHtml(YoutubeUtils.getEmbedHtml(id));
+							tube.setDuration(YoutubeUtils.getDuration(id));
 							try {
 								tube.setTags(item.getString("tags"));
 							} catch (Exception e) {
@@ -229,8 +237,9 @@ public class YoutubeUtils {
 
 	/**
 	 * Gets the category.
-	 *
-	 * @param videoId the video id
+	 * 
+	 * @param videoId
+	 *            the video id
 	 * @return the category
 	 */
 	public static Category getCategory(String videoId) {
@@ -284,20 +293,21 @@ public class YoutubeUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Find category by tags.
-	 *
-	 * @param tags the tags
+	 * 
+	 * @param tags
+	 *            the tags
 	 * @return the category
 	 */
 	private static Category findCategoryByTags(String tags) {
 		return CategoryService.getInstance().findOneByTags(tags);
 	}
-	
+
 	/**
 	 * Gets the all categories from youtube.
-	 *
+	 * 
 	 * @return the all categories from youtube
 	 */
 	public static List<Category> getAllCategories() {
@@ -327,21 +337,100 @@ public class YoutubeUtils {
 	}
 
 	/**
+	 * Convert you tube duration.
+	 *
+	 * @param duration the duration
+	 * @return the string
+	 */
+	public static String convertYouTubeDuration(String duration) {
+		String youtubeDuration = duration; // "PT1H2M30S"; // "PT1M13S";
+		Calendar c = new GregorianCalendar();
+		try {
+			DateFormat df = new SimpleDateFormat("'PT'mm'M'ss'S'");
+			Date d = df.parse(youtubeDuration);
+			c.setTime(d);
+		} catch (ParseException e) {
+			try {
+				DateFormat df = new SimpleDateFormat("'PT'hh'H'mm'M'ss'S'");
+				Date d = df.parse(youtubeDuration);
+				c.setTime(d);
+			} catch (ParseException e1) {
+				try {
+					DateFormat df = new SimpleDateFormat("'PT'ss'S'");
+					Date d = df.parse(youtubeDuration);
+					c.setTime(d);
+				} catch (ParseException e2) {
+				}
+			}
+		}
+		c.setTimeZone(TimeZone.getDefault());
+
+		String time = "";
+		if (c.get(Calendar.HOUR) > 0) {
+			if (String.valueOf(c.get(Calendar.HOUR)).length() == 1) {
+				time += "0" + c.get(Calendar.HOUR);
+			} else {
+				time += c.get(Calendar.HOUR);
+			}
+			time += ":";
+		}
+		// test minute
+		if (String.valueOf(c.get(Calendar.MINUTE)).length() == 1) {
+			time += "0" + c.get(Calendar.MINUTE);
+		} else {
+			time += c.get(Calendar.MINUTE);
+		}
+		time += ":";
+		// test second
+		if (String.valueOf(c.get(Calendar.SECOND)).length() == 1) {
+			time += "0" + c.get(Calendar.SECOND);
+		} else {
+			time += c.get(Calendar.SECOND);
+		}
+		return time;
+	}
+	
+	/**
+	 * Gets the duration.
+	 *
+	 * @param id the id
+	 * @return the duration
+	 */
+	public static String getDuration(String id) {
+		try {
+			URL url = new URL(" https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id="+id+"&key="+Constant.API_KEY);
+			JSONObject json = callYoutube(url);
+			JSONArray jsonArray;
+			jsonArray = (JSONArray) json.get("items");
+			json = new JSONObject(jsonArray.get(0).toString());
+			json = new JSONObject(json.get("contentDetails").toString());
+			return convertYouTubeDuration(json.getString("duration"));
+		} catch (MalformedURLException e) {
+			log.error(e.getMessage(), e.getCause());
+		} catch (JSONException e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+		return null;
+	}
+
+	/**
 	 * The main method.
 	 * 
 	 * @param args
 	 *            the arguments
 	 */
 	public static void main(String[] args) {
-		//Tube tube = getTube("AY7GXcmXLE0");
-		//System.out.println(tube.toString());
+		// Tube tube = getTube("AY7GXcmXLE0");
+		// System.out.println(tube.toString());
 		// sendTube("2xk7ZiN7A6s");
 		// System.out.println(getEmbedHtml("AY7GXcmXLE0"));
-		//Category category = getCategory("LxUm5sml15k");
-		//System.out.println(category.toString());
-		String str = "[\"av\",\"sora\",\"aoi\",\"sexy\",\"hot\",\"kiss\",\"video\",\"clip\",\"youtube\"]";
-		int index = str.indexOf("sexy");
-		System.out.println(index);
+		// Category category = getCategory("LxUm5sml15k");
+		// System.out.println(category.toString());
+//		String str = "[\"av\",\"sora\",\"aoi\",\"sexy\",\"hot\",\"kiss\",\"video\",\"clip\",\"youtube\"]";
+//		int index = str.indexOf("sexy");
+//		System.out.println(index);
+		System.out.println(convertYouTubeDuration(getDuration("tpHu67Zq5Kk")));
+		
 	}
 
 }

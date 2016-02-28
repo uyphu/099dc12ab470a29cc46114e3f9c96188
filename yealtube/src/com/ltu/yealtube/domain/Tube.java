@@ -30,6 +30,7 @@ public class Tube {
 	/** The description. */
 	private String description;
 
+	/** The category ref. */
 	@Index
 	private Ref<Category> categoryRef;
 
@@ -69,7 +70,7 @@ public class Tube {
 	private int commentCount;
 
 	/** The rating. */
-	@IgnoreSave
+	@Index
 	private float rating;
 
 	/** The author. */
@@ -88,6 +89,13 @@ public class Tube {
 	@IgnoreSave
 	private String embedHtml;
 	
+	/** The duration. */
+	@Index
+	private String duration; 
+	
+	/**
+	 * On load.
+	 */
 	@OnLoad
 	private void onLoad() {
 //		if (categoryKey != null) {
@@ -199,6 +207,11 @@ public class Tube {
 		return category;
 	}
 
+	/**
+	 * Sets the category.
+	 *
+	 * @param category the new category
+	 */
 	public void setCategory(Category category) {
 		this.categoryRef = Ref.create(category);
 	}
@@ -432,13 +445,41 @@ public class Tube {
 		this.embedHtml = embedHtml;
 	}
 	
+	/**
+	 * Gets the category ref.
+	 *
+	 * @return the category ref
+	 */
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	public Ref<Category> getCategoryRef() {
 		return categoryRef;
 	}
 
+	/**
+	 * Sets the category ref.
+	 *
+	 * @param categoryRef the new category ref
+	 */
 	public void setCategoryRef(Ref<Category> categoryRef) {
 		this.categoryRef = categoryRef;
+	}
+	
+	/**
+	 * Gets the duration.
+	 *
+	 * @return the duration
+	 */
+	public String getDuration() {
+		return duration;
+	}
+
+	/**
+	 * Sets the duration.
+	 *
+	 * @param duration the new duration
+	 */
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	/**
@@ -454,7 +495,6 @@ public class Tube {
 	 * @param id the id
 	 * @param title the title
 	 * @param description the description
-	 * @param categoryKey the category key
 	 * @param userId the user id
 	 * @param viewCount the view count
 	 * @param status the status
@@ -466,10 +506,9 @@ public class Tube {
 	 * @param commentCount the comment count
 	 * @param rating the rating
 	 * @param author the author
-	 * @param categoryId the category id
 	 * @param tags the tags
-	 * @param categories the categories
 	 * @param embedHtml the embed html
+	 * @param category the category
 	 */
 	public Tube(String id, String title, String description, Long userId, int viewCount, int status,
 			Date createdAt, Date modifiedAt, int likeCount, int dislikeCount, int favoriteCount, int commentCount,
@@ -503,7 +542,7 @@ public class Tube {
 	 * @param userId the user id
 	 * @param viewCount the view count
 	 * @param status the status
-	 * @param categoryId the category id
+	 * @param category the category
 	 * @param tags the tags
 	 */
 	public Tube(String id, String title, String description, Long userId, int viewCount, int status, Category category,

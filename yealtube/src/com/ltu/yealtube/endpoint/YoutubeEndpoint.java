@@ -2,8 +2,10 @@ package com.ltu.yealtube.endpoint;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Named;
 
+import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -50,8 +52,22 @@ public class YoutubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
+//	@ApiMethod(name = "insertVideo", httpMethod = HttpMethod.POST, path = "insertVideo")
+//	public Tube insertVideo(@Named("id") String id) throws CommonException {
+//		return tubeService.insert(id);
+//	}
+	
 	@ApiMethod(name = "insertVideo", httpMethod = HttpMethod.POST, path = "insertVideo")
-	public Tube insertVideo(@Named("id") String id) throws CommonException {
+	public Tube insertVideo(@Named("id") String id, @Nullable @Named("rating") String rating) throws CommonException {
+		if (rating != null) {
+			try {
+				float value = Float.parseFloat(rating);
+				return tubeService.insert(id, value);
+			} catch (Exception e) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, e.getCause());
+			}
+			
+		}
 		return tubeService.insert(id);
 	}
 
