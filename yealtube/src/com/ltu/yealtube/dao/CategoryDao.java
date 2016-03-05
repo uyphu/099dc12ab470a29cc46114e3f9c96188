@@ -44,15 +44,15 @@ public class CategoryDao extends AbstractDao<Category> {
 	public void initData() {
 		Category category;
 
-		category = new Category(1L, Constant.CATEGORY_FUN, 0L, "Fun", "Fun", "Fun", "fun, comedy, vui, hai, funny, cuoi");
+		category = new Category(Constant.CATEGORY_FUN_ID, Constant.CATEGORY_FUN, 0L, "Fun", "Fun", "Fun", "fun, comedy, vui, hai, funny, cuoi");
 		persist(category);
-		category = new Category(2L, Constant.CATEGORY_SPORTS, 0L, "Sports", "Sports", "Sports", "sports, football, volleyball, tennis, athletic");
+		category = new Category(Constant.CATEGORY_SPORTS_ID, Constant.CATEGORY_SPORTS, 0L, "Sports", "Sports", "Sports", "sports, football, volleyball, tennis, athletic");
 		persist(category);
-		category = new Category(3L, Constant.CATEGORY_MUSIC, 0L, "Music", "Music", "Music", "music, shows");
+		category = new Category(Constant.CATEGORY_MUSIC_ID, Constant.CATEGORY_MUSIC, 0L, "Music", "Music", "Music", "music, shows");
 		persist(category);
-		category = new Category(4L, Constant.CATEGORY_18PLUS, 0L, "18+", "18+", "18+", "18+, sexy, naked, nude, hot girl, sweet, adult, naughty, tinh duc, bikini, nguoi lon, tinh cam");
+		category = new Category(Constant.CATEGORY_18PLUS_ID, Constant.CATEGORY_18PLUS, 0L, "18+", "18+", "18+", "18+, sexy, naked, nude, hot girl, sweet, adult, naughty, tinh duc, bikini, nguoi lon, tinh cam");
 		persist(category);
-		category = new Category(5L, Constant.CATEGORY_MOVIE, 0L, "Movie", "Movie", "Movie", "movies, movie, film");
+		category = new Category(Constant.CATEGORY_MOVIE_ID, Constant.CATEGORY_MOVIE, 0L, "Movie", "Movie", "Movie", "movies, movie, film");
 		persist(category);
 	}
 

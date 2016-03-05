@@ -5,5 +5,6 @@
         <property name="categoryRef" direction="asc"/>
         <property name="status" direction="asc" />
         <property name="createdAt" direction="desc" />
+        <property name="viewCount" direction="desc" />
     </datastore-index>
 </datastore-indexes>

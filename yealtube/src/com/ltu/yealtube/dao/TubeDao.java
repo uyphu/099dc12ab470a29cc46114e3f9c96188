@@ -1,5 +1,6 @@
 package com.ltu.yealtube.dao;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +100,7 @@ public class TubeDao extends AbstractDao<Tube> {
 						if (field.indexOf("status:") != -1) {
 							String[] queries = field.split(":");
 							map.put("status", Long.parseLong(queries[1]));
-						} else if (field.indexOf("category:") != -1) {
+						} else if (field.indexOf("categoryId:") != -1) {
 							String[] queries = field.split(":");
 							map.put("categoryRef", Ref.create(CategoryDao.getInstance().find(Long.parseLong(queries[1]))));
 						}
@@ -110,7 +111,7 @@ public class TubeDao extends AbstractDao<Tube> {
 						String[] queries = querySearch.split(":");
 						map.put("status", Long.parseLong(queries[1]));
 						query = getQuery(map);
-					} else if (querySearch.indexOf("category:") != -1) {
+					} else if (querySearch.indexOf("categoryId:") != -1) {
 						String[] queries = querySearch.split(":");
 						map.put("categoryRef", Ref.create(CategoryDao.getInstance().find(Long.parseLong(queries[1]))));
 						query = getQuery(map);
@@ -143,6 +144,36 @@ public class TubeDao extends AbstractDao<Tube> {
 	 */
 	public CollectionResponse<Tube> searchTube(String querySearch, String cursorString, Integer count) throws CommonException {
 		Query<Tube> query = getQuery(querySearch).order("-createdAt");
+		return executeQuery(query, cursorString, count);
+	}
+	
+	/**
+	 * Gets the top plays.
+	 *
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the top plays
+	 * @throws CommonException the common exception
+	 */
+	public CollectionResponse<Tube> getTopPlays(String cursorString, Integer count) throws CommonException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, -7);
+		Query<Tube> query = ofy().load().type(Tube.class).filter(" createdAt > ", calendar.getTime()).filter(" status = ", Constant.APPROVED_STATUS);
+		return executeQuery(query, cursorString, count);
+	}
+	
+	/**
+	 * Gets the top musics.
+	 *
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the top musics
+	 * @throws CommonException the common exception
+	 */
+	public CollectionResponse<Tube> getTopMusics(String cursorString, Integer count) throws CommonException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, -7);
+		Query<Tube> query = ofy().load().type(Tube.class).filter(" createdAt > ", calendar.getTime()).filter(" status = ", Constant.APPROVED_STATUS).filter(" categoryRef = ", Ref.create(CategoryDao.getInstance().find(Constant.CATEGORY_MUSIC_ID)));
 		return executeQuery(query, cursorString, count);
 	}
 

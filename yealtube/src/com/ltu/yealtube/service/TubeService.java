@@ -267,6 +267,30 @@ public class TubeService {
 	}
 	
 	/**
+	 * Gets the top plays.
+	 *
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the top plays
+	 * @throws CommonException the common exception
+	 */
+	public CollectionResponse<Tube> getTopPlays(String cursorString, Integer count) throws CommonException {
+		return tubeDao.getTopPlays(cursorString, count);
+	}
+	
+	/**
+	 * Gets the top musics.
+	 *
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the top musics
+	 * @throws CommonException the common exception
+	 */
+	public CollectionResponse<Tube> getTopMusics(String cursorString, Integer count) throws CommonException {
+		return tubeDao.getTopMusics(cursorString, count);
+	}
+	
+	/**
 	 * Find one by name.
 	 *
 	 * @param name the name
