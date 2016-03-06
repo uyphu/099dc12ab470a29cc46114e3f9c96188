@@ -52,11 +52,6 @@ public class YoutubeEndpoint {
 	 * @throws CommonException
 	 *             the common exception
 	 */
-//	@ApiMethod(name = "insertVideo", httpMethod = HttpMethod.POST, path = "insertVideo")
-//	public Tube insertVideo(@Named("id") String id) throws CommonException {
-//		return tubeService.insert(id);
-//	}
-	
 	@ApiMethod(name = "insertVideo", httpMethod = HttpMethod.POST, path = "insertVideo")
 	public Tube insertVideo(@Named("id") String id, @Nullable @Named("rating") String rating) throws CommonException {
 		if (rating != null) {

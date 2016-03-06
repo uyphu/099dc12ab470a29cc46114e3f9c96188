@@ -2,6 +2,10 @@ package com.ltu.yealtube.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -14,11 +18,23 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 
+import com.ltu.yealtube.constants.Constant;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AppUtils.
+ */
 public class AppUtils {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(AppUtils.class.getName());
 	
+	/**
+	 * Crypt with m d5.
+	 *
+	 * @param password the password
+	 * @return the string
+	 */
 	public static String cryptWithMD5(String password){
 		try {
 			if (password != null) {
@@ -38,14 +54,82 @@ public class AppUtils {
 		return null;
 	}
 	
+	/**
+	 * Generate token.
+	 *
+	 * @param login the login
+	 * @return the string
+	 */
 	public static String generateToken(String login){
 		//String token = Base64.encodeString(login) + RandomUtil.generateActivationKey();
 		String token = RandomUtil.generateActivationKey();
 		return token;
 	}
 	
+	/**
+	 * Gets the current time.
+	 *
+	 * @return the current time
+	 */
+	public static String getCurrentTime() {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS Z");
+		return DATE_FORMAT.format(Calendar.getInstance().getTime());
+	}
+	
+	/**
+	 * Gets the current date.
+	 *
+	 * @return the current date
+	 */
+	public static Date getCurrentDate() {
+		return Calendar.getInstance().getTime();
+	}
+	
+	/**
+	 * To date.
+	 *
+	 * @param date the date
+	 * @return the date
+	 */
+	public static Date toDate(String date) {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(Constant.LONG_DATE_FORMAT);
+		try {
+			return DATE_FORMAT.parse(date);
+		} catch (ParseException e) {
+			logger.error(e.getMessage(), e.getCause());
+			return null;
+		}
+	}
+	
+	/**
+	 * To string.
+	 *
+	 * @param date the date
+	 * @return the string
+	 */
+	public static String toString(Date date) {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(Constant.LONG_DATE_FORMAT);
+		return DATE_FORMAT.format(date);
+	}
+	
+	/**
+	 * To short date string.
+	 *
+	 * @param date the date
+	 * @return the string
+	 */
+	public static String toShortDateString(Date date) {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(Constant.SHORT_DATE_FORMAT);
+		return DATE_FORMAT.format(date);
+	}
 	
 	
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		Properties props = new Properties();

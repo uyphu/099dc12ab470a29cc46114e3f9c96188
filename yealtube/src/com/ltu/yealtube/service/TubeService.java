@@ -10,6 +10,7 @@ import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.dao.CategoryDao;
 import com.ltu.yealtube.dao.TubeDao;
 import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.domain.TopTube;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
 import com.ltu.yealtube.exception.ErrorCodeDetail;
@@ -68,6 +69,9 @@ public class TubeService {
 			tube.setCreatedAt(Calendar.getInstance().getTime());
 			tube.setModifiedAt(Calendar.getInstance().getTime());
 			tube.setStatus(Constant.PENDING_STATUS);
+			TopTubeService service = TopTubeService.getInstance();
+			//Insert top tube
+			service.insert(new TopTube(tube));
 			return tubeDao.persist(tube);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
@@ -94,6 +98,9 @@ public class TubeService {
 			Category category = YoutubeUtils.getCategory(youtubeId);
 			if (category != null) {
 				tube.setCategory(category);
+				TopTubeService service = TopTubeService.getInstance();
+				//Insert top tube
+				service.insert(new TopTube(tube));
 				return tubeDao.persist(tube);
 			} else {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_FORBIDDEN, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
@@ -120,6 +127,9 @@ public class TubeService {
 			Category category = YoutubeUtils.getCategory(youtubeId);
 			if (category != null) {
 				tube.setCategory(category);
+				TopTubeService service = TopTubeService.getInstance();
+				//Insert top tube
+				service.insert(new TopTube(tube));
 				return tubeDao.persist(tube);
 			} else {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_FORBIDDEN, ErrorCodeDetail.ERROR_CATEGORY_NOT_FOUND.getMsg());
@@ -145,9 +155,11 @@ public class TubeService {
 			}
 			tube.setModifiedAt(Calendar.getInstance().getTime());
 			if (tube.getCategory() != null) {
-				//tube.setCategoryKey(Key.create(Category.class, tube.getCategory().getId()));
 				tube.setCategory(CategoryDao.getInstance().find(tube.getCategory().getId()));
 			}
+			TopTubeService service = TopTubeService.getInstance();
+			//Update top tube
+			service.update(new TopTube(tube));
 			return tubeDao.update(tube);
 		} else {
 			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());

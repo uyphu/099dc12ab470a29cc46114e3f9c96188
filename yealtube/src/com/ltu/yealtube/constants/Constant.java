@@ -124,6 +124,16 @@ public class Constant {
 	/** The Constant KEYWORD_18PLUS_VALUE. */
 	public static final String KEYWORD_18PLUS_VALUE = "sexy, naked, nude, hot, sweet";
 	
+	/** The Constant COMMA_STRING. */
 	public static final String COMMA_STRING = ",";
+	
+	/** The Constant DATE_FORMAT. */
+	public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+	
+	/** The Constant LONG_DATE_FORMAT. */
+	public static final String LONG_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+	
+	/** The Constant SHORT_DATE_FORMAT. */
+	public static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
 	
 }
