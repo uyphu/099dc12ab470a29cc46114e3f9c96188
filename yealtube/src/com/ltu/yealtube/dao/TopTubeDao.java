@@ -164,7 +164,7 @@ public class TopTubeDao extends AbstractDao<TopTube> {
 	 *             the common exception
 	 */
 	public CollectionResponse<TopTube> getTopPlays(String cursorString, Integer count) throws CommonException {
-		Query<TopTube> query = ofy().load().type(TopTube.class).filter(" status = ", Constant.APPROVED_STATUS);
+		Query<TopTube> query = ofy().load().type(TopTube.class).filter("status", Constant.APPROVED_STATUS);
 		query = query.order("-viewCount");
 		return executeQuery(query, cursorString, count);
 	}
@@ -181,8 +181,8 @@ public class TopTubeDao extends AbstractDao<TopTube> {
 	 *             the common exception
 	 */
 	public CollectionResponse<TopTube> getTopMusics(String cursorString, Integer count) throws CommonException {
-		Query<TopTube> query = ofy().load().type(TopTube.class).filter(" status = ", Constant.APPROVED_STATUS)
-				.filter(" categoryRef = ", Ref.create(CategoryDao.getInstance().find(Constant.CATEGORY_MUSIC_ID)));
+		Query<TopTube> query = ofy().load().type(TopTube.class).filter("status", Constant.APPROVED_STATUS)
+				.filter("categoryRef", Ref.create(CategoryDao.getInstance().find(Constant.CATEGORY_MUSIC_ID)));
 		query = query.order("-viewCount");
 		return executeQuery(query, cursorString, count);
 	}
