@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.googlecode.objectify.Key;
 import com.ltu.yealtube.dao.ThingDao;
 import com.ltu.yealtube.domain.Thing;
 import com.ltu.yealtube.exception.CommonException;
@@ -68,6 +69,14 @@ public class ThingService {
 	 */
 	public List<Thing> findAll() {
 		return thingDao.findAll();
+	}
+	
+	public Thing find(Long id) {
+		return thingDao.find(id);
+	}
+	
+	public Thing find(Thing thing) {
+		return thingDao.find(thing);
 	}
 
 	/**

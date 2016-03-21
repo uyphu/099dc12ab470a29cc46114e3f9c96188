@@ -96,7 +96,7 @@ public class ThingDao extends RemoteAbstractDao<Thing>{
 				}
 				return query;
 			} else {
-				return ofy().load().type(Thing.class);
+				return getQuery();
 			}
 		} catch (Exception e) {
 			throw new CommonException(ErrorCode.SYSTEM_EXCEPTION.getId(), ErrorCodeDetail.ERROR_PARSE_QUERY

@@ -36,6 +36,10 @@ public class Thing {
 		this.name = name;
 	}
 	
+	public Thing(Long id) {
+		this.id = id;
+	}
+	
 	public Thing(String name) {
 		this.name = name;
 	}

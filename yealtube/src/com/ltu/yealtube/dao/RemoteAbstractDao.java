@@ -1,5 +1,6 @@
 package com.ltu.yealtube.dao;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
 import static com.googlecode.objectify.ObjectifyService.run;
 
 import java.util.ArrayList;
@@ -10,8 +11,6 @@ import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.QueryResultIterator;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.VoidWork;
 import com.googlecode.objectify.cmd.Query;
@@ -30,13 +29,13 @@ public abstract class RemoteAbstractDao<T> implements Dao<T> {
 	private CollectionResponse<T> response;
 	private Query<T> query;
 
-	public static Objectify ofy() {
-		return ObjectifyService.ofy();
-	}
-
-	public static ObjectifyFactory factory() {
-		return ObjectifyService.factory();
-	}
+//	public static Objectify ofy() {
+//		return ObjectifyService.ofy();
+//	}
+//
+//	public static ObjectifyFactory factory() {
+//		return ObjectifyService.factory();
+//	}
 	
 	private final Class<T> clazz;
 	
@@ -53,8 +52,22 @@ public abstract class RemoteAbstractDao<T> implements Dao<T> {
 			
 			@Override
 			public void vrun() {
-				item = ofy().load().type(clazz).id(id).now();
-				ofy().clear();
+				item = ofy().load().type(clazz).filter("id=", id).first().now();
+				//ofy().clear();
+			}
+		});
+		return item;
+	}
+	
+	public T find(final T t) {
+		item = null;
+		run(new VoidWork() {
+			
+			@Override
+			public void vrun() {
+				item = ofy().load().entity(t).now();
+//				System.out.println(item.toString());
+//				ofy().clear();
 			}
 		});
 		return item;
@@ -68,7 +81,7 @@ public abstract class RemoteAbstractDao<T> implements Dao<T> {
 			@Override
 			public void vrun() {
 				item = ofy().load().type(clazz).id(id).now();
-				ofy().clear();
+				//ofy().clear();
 			}
 		});
 		return item;
