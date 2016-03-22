@@ -11,7 +11,7 @@ angular.module('jhipsterApp')
        $scope.invalidName = null;
        $scope.value = 10;
        $scope.busy  = false;
-       $scope.querySearch = 'status:' + AppConstant.APPROVED_STATUS + "@@category:4";
+       $scope.querySearch = 'status:' + AppConstant.APPROVED_STATUS + "@@categoryId:4";
        $scope.loadAll = function() {
     	   initData($scope.cursor, AppConstant.MAX_INIT_PAGE_SIZE);
        };

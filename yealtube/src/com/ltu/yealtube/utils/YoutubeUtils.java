@@ -412,6 +412,27 @@ public class YoutubeUtils {
 		}
 		return null;
 	}
+	
+	/**
+	 * Checks if is valid.
+	 *
+	 * @param id the id
+	 * @return true, if is valid
+	 */
+	public static boolean isValid(String id) {
+		try {
+			String urlString = "https://www.googleapis.com/youtube/v3/videos?part=id&id="+id+"&key="+Constant.API_KEY;
+			JSONObject jsonObject = callYoutube(new URL(urlString));
+			JSONArray jsonArray = (JSONArray)jsonObject.get("items");
+			if (jsonArray != null && jsonArray.length() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+		return false;
+		
+	}
 
 	/**
 	 * The main method.
