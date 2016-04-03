@@ -29,7 +29,7 @@ public class TopTubeCronServlet extends HttpServlet {
 		try {
 			logger.info("Cron Job has been executed to delete top tube");
 			Cursor cursor = null;
-			TopTubeService service = TopTubeService.getInstance();
+//			TopTubeService service = TopTubeService.getInstance();
 //			CollectionResponse<Tube> tubes = service.searchTubes("status = ", (Integer)Constant.APPROVED_STATUS, cursor, (Integer)10);
 //			if (tubes != null) {
 //				for (TopTube tube : tubes.getItems()) {
