@@ -64,74 +64,6 @@
         "body" : "empty"
       }
     },
-    "commentendpoint.insertComment" : {
-      "path" : "comment",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.insertComment",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "commentendpoint.cleanData" : {
-      "path" : "cleanData",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "commentendpoint.removeComment" : {
-      "path" : "comment/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.removeComment",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "commentendpoint.updateComment" : {
-      "path" : "comment",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.updateComment",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "commentendpoint.listComment" : {
       "path" : "comment",
       "httpMethod" : "GET",
@@ -185,6 +117,74 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "commentendpoint.updateComment" : {
+      "path" : "comment",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.updateComment",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "commentendpoint.removeComment" : {
+      "path" : "comment/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.removeComment",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "commentendpoint.cleanData" : {
+      "path" : "cleanData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "commentendpoint.insertComment" : {
+      "path" : "comment",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CommentEndpoint.insertComment",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -213,11 +213,11 @@
           "status" : {
             "type" : "integer"
           },
-          "dateAdded" : {
+          "createdAt" : {
             "type" : "string",
             "format" : "date-time"
           },
-          "dateModified" : {
+          "modifiedAt" : {
             "type" : "string",
             "format" : "date-time"
           }
@@ -247,17 +247,15 @@
       },
       "com.ltu.yealtube.endpoint.CommentEndpoint.initData" : {
       },
-      "com.ltu.yealtube.endpoint.CommentEndpoint.insertComment" : {
-        "request" : {
-          "$ref" : "Comment"
-        },
+      "com.ltu.yealtube.endpoint.CommentEndpoint.listComment" : {
         "response" : {
-          "$ref" : "Comment"
+          "$ref" : "CollectionResponse_Comment"
         }
       },
-      "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData" : {
-      },
-      "com.ltu.yealtube.endpoint.CommentEndpoint.removeComment" : {
+      "com.ltu.yealtube.endpoint.CommentEndpoint.searchComment" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Comment"
+        }
       },
       "com.ltu.yealtube.endpoint.CommentEndpoint.updateComment" : {
         "request" : {
@@ -267,14 +265,16 @@
           "$ref" : "Comment"
         }
       },
-      "com.ltu.yealtube.endpoint.CommentEndpoint.listComment" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Comment"
-        }
+      "com.ltu.yealtube.endpoint.CommentEndpoint.removeComment" : {
       },
-      "com.ltu.yealtube.endpoint.CommentEndpoint.searchComment" : {
+      "com.ltu.yealtube.endpoint.CommentEndpoint.cleanData" : {
+      },
+      "com.ltu.yealtube.endpoint.CommentEndpoint.insertComment" : {
+        "request" : {
+          "$ref" : "Comment"
+        },
         "response" : {
-          "$ref" : "CollectionResponse_Comment"
+          "$ref" : "Comment"
         }
       }
     }

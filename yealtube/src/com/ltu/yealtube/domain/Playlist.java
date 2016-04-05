@@ -30,6 +30,9 @@ public class Playlist {
 	/** The published at. */
 	@Index
 	private Date publishedAt;
+	
+	@Index
+	private Long userId;
 
 	/** The status. */
 	@Index
@@ -98,9 +101,17 @@ public class Playlist {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public Playlist(String id, String title, String description, int viewCount, Date createdAt, Date modifiedAt,
-			Date publishedAt, int status) {
+			Date publishedAt, int status, Long userId) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -109,6 +120,7 @@ public class Playlist {
 		this.modifiedAt = modifiedAt;
 		this.publishedAt = publishedAt;
 		this.status = status;
+		this.userId = userId;
 	}
 
 	public Playlist() {
@@ -118,8 +130,8 @@ public class Playlist {
 	@Override
 	public String toString() {
 		return "Playlist [id=" + id + ", title=" + title + ", description=" + description + ", viewCount=" + viewCount
-				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + ", publishedAt=" + publishedAt + ", status="
-				+ status + "]";
+				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + ", publishedAt=" + publishedAt + ", userId="
+				+ userId + ", status=" + status + "]";
 	}
 
 }

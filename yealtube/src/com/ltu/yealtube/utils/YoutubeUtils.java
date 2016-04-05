@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.domain.Playlist;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.service.CategoryService;
 
@@ -432,6 +433,75 @@ public class YoutubeUtils {
 		}
 		return false;
 		
+	}
+	
+	/**
+	 * Gets the playlist.
+	 *
+	 * @param id the id
+	 * @param part the part
+	 * @return the playlist
+	 */
+	public static JSONObject getPlaylist(String id, String part) {
+		try {
+
+			URL url = new URL("https://www.googleapis.com/youtube/v3/playlists?part=" + part + "&id=" + id + "&key="
+					+ Constant.API_KEY);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+
+			if (conn.getResponseCode() != 200) {
+				log.error("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constant.UTF_8));
+
+			String output;
+			StringBuilder builder = new StringBuilder();
+			while ((output = br.readLine()) != null) {
+				builder.append(output);
+			}
+
+			JSONObject json = new JSONObject(builder.toString());
+
+			conn.disconnect();
+
+			return json;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e.getCause());
+		} 
+		return null;
+	}
+	
+	/**
+	 * Gets the play list.
+	 *
+	 * @param id the id
+	 * @return the play list
+	 */
+	public static Playlist getPlayList(String id) {
+		try {
+			Playlist tube = new Playlist();
+			JSONObject json = getPlaylist(id, "snippet");
+			if (json != null) {
+				JSONArray jsonArray = (JSONArray) json.get("items");
+				if (jsonArray != null) {
+					JSONObject item = new JSONObject(jsonArray.get(0).toString());
+					item = new JSONObject(item.get("snippet").toString());
+					tube.setId(id);
+					tube.setTitle(item.getString("title"));
+					tube.setDescription(item.getString("description"));
+					SimpleDateFormat format = new SimpleDateFormat(Constant.LONG_DATE_FORMAT);
+					tube.setPublishedAt(format.parse(item.getString("publishedAt")));
+					return tube;
+				}
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+		return null;
 	}
 
 	/**

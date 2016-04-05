@@ -13,8 +13,10 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.ltu.yealtube.constants.Constant;
 import com.ltu.yealtube.domain.Category;
+import com.ltu.yealtube.domain.Playlist;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.exception.CommonException;
+import com.ltu.yealtube.service.PlaylistService;
 import com.ltu.yealtube.service.TubeService;
 import com.ltu.yealtube.utils.YoutubeUtils;
 
@@ -64,6 +66,23 @@ public class YoutubeEndpoint {
 			
 		}
 		return tubeService.insert(id);
+	}
+	
+	/**
+	 * Insert playlist.
+	 *
+	 * @param id the id
+	 * @return the playlist
+	 * @throws CommonException the common exception
+	 */
+	@ApiMethod(name = "insertPlaylist", httpMethod = HttpMethod.POST, path = "insertPlaylist")
+	public Playlist insertPlaylist(@Named("id") String id, @Named("viewCount") String viewCount) throws CommonException {
+		try {
+			PlaylistService playlistService = PlaylistService.getInstance();
+			return playlistService.insert(id, Integer.parseInt(viewCount));
+		} catch (Exception e) {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, e.getCause());
+		}
 	}
 
 	/**
