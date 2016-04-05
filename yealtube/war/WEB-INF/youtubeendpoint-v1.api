@@ -28,6 +28,27 @@
   "ownerName" : "ltu.com",
   "packagePath" : "yealtube.domain",
   "methods" : {
+    "youtubeendpoint.getVideo" : {
+      "path" : "getVideo",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.YoutubeEndpoint.getVideo",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "youtubeendpoint.getAllCategories" : {
       "path" : "getAllCategories",
       "httpMethod" : "GET",
@@ -51,6 +72,27 @@
       "audiences" : [ ],
       "clientIds" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com" ],
       "rosyMethod" : "com.ltu.yealtube.endpoint.YoutubeEndpoint.updateVideo",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "youtubeendpoint.getDetailVideo" : {
+      "path" : "getDetailVideo",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.YoutubeEndpoint.getDetailVideo",
       "request" : {
         "parameters" : {
           "id" : {
@@ -89,48 +131,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "youtubeendpoint.getDetailVideo" : {
-      "path" : "getDetailVideo",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.YoutubeEndpoint.getDetailVideo",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "youtubeendpoint.getVideo" : {
-      "path" : "getVideo",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.YoutubeEndpoint.getVideo",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "youtubeendpoint.insertPlaylist" : {
       "path" : "insertPlaylist",
       "httpMethod" : "POST",
@@ -142,6 +142,10 @@
       "request" : {
         "parameters" : {
           "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "viewCount" : {
             "type" : "string",
             "required" : true
           }
@@ -176,50 +180,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Category" : {
-        "id" : "CollectionResponse_Category",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Category"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
-      "Category" : {
-        "id" : "Category",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "parentId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "metaTitle" : {
-            "type" : "string"
-          },
-          "metaDescription" : {
-            "type" : "string"
-          },
-          "metaKeyword" : {
-            "type" : "string"
-          }
-        }
-      },
       "Tube" : {
         "id" : "Tube",
         "type" : "object",
@@ -284,6 +244,50 @@
           }
         }
       },
+      "Category" : {
+        "id" : "Category",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "parentId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "metaTitle" : {
+            "type" : "string"
+          },
+          "metaDescription" : {
+            "type" : "string"
+          },
+          "metaKeyword" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Category" : {
+        "id" : "CollectionResponse_Category",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "Playlist" : {
         "id" : "Playlist",
         "type" : "object",
@@ -323,6 +327,11 @@
       }
     },
     "methods" : {
+      "com.ltu.yealtube.endpoint.YoutubeEndpoint.getVideo" : {
+        "response" : {
+          "$ref" : "Tube"
+        }
+      },
       "com.ltu.yealtube.endpoint.YoutubeEndpoint.getAllCategories" : {
         "response" : {
           "$ref" : "CollectionResponse_Category"
@@ -333,17 +342,12 @@
           "$ref" : "Tube"
         }
       },
-      "com.ltu.yealtube.endpoint.YoutubeEndpoint.insertVideo" : {
-        "response" : {
-          "$ref" : "Tube"
-        }
-      },
       "com.ltu.yealtube.endpoint.YoutubeEndpoint.getDetailVideo" : {
         "response" : {
           "$ref" : "Tube"
         }
       },
-      "com.ltu.yealtube.endpoint.YoutubeEndpoint.getVideo" : {
+      "com.ltu.yealtube.endpoint.YoutubeEndpoint.insertVideo" : {
         "response" : {
           "$ref" : "Tube"
         }

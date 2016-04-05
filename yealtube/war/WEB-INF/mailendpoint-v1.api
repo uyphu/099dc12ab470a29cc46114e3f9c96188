@@ -28,6 +28,31 @@
   "ownerName" : "ltu.com",
   "packagePath" : "yealtube.domain",
   "methods" : {
+    "mailendpoint.sendActiveMail" : {
+      "path" : "sendActiveMail",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.MailEndpoint.sendActiveMail",
+      "request" : {
+        "parameters" : {
+          "toEmail" : {
+            "type" : "string",
+            "required" : true
+          },
+          "subject" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "mailendpoint.sendMail" : {
       "path" : "sendMail",
       "httpMethod" : "POST",
@@ -56,40 +81,15 @@
       "response" : {
         "body" : "empty"
       }
-    },
-    "mailendpoint.sendActiveMail" : {
-      "path" : "sendActiveMail",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.MailEndpoint.sendActiveMail",
-      "request" : {
-        "parameters" : {
-          "toEmail" : {
-            "type" : "string",
-            "required" : true
-          },
-          "subject" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
     },
     "methods" : {
-      "com.ltu.yealtube.endpoint.MailEndpoint.sendMail" : {
-      },
       "com.ltu.yealtube.endpoint.MailEndpoint.sendActiveMail" : {
+      },
+      "com.ltu.yealtube.endpoint.MailEndpoint.sendMail" : {
       }
     }
   }

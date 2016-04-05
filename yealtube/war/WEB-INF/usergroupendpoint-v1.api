@@ -72,6 +72,22 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "usergroupendpoint.updateUserGroup" : {
+      "path" : "usergroup",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.updateUserGroup",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "usergroupendpoint.getUserGroup" : {
       "path" : "usergroup/{id}",
       "httpMethod" : "GET",
@@ -114,22 +130,6 @@
         "body" : "empty"
       }
     },
-    "usergroupendpoint.updateUserGroup" : {
-      "path" : "usergroup",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.updateUserGroup",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "usergroupendpoint.listUserGroup" : {
       "path" : "usergroup",
       "httpMethod" : "GET",
@@ -155,21 +155,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "usergroupendpoint.cleanData" : {
-      "path" : "cleanData",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "usergroupendpoint.insertUserGroup" : {
       "path" : "usergroup",
       "httpMethod" : "POST",
@@ -184,6 +169,21 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "usergroupendpoint.cleanData" : {
+      "path" : "cleanData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     }
   },
@@ -232,13 +232,6 @@
           "$ref" : "CollectionResponse_UserGroup"
         }
       },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup" : {
-        "response" : {
-          "$ref" : "UserGroup"
-        }
-      },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.removeUserGroup" : {
-      },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.updateUserGroup" : {
         "request" : {
           "$ref" : "UserGroup"
@@ -247,12 +240,17 @@
           "$ref" : "UserGroup"
         }
       },
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.getUserGroup" : {
+        "response" : {
+          "$ref" : "UserGroup"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.removeUserGroup" : {
+      },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.listUserGroup" : {
         "response" : {
           "$ref" : "CollectionResponse_UserGroup"
         }
-      },
-      "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.UserGroupEndpoint.insertUserGroup" : {
         "request" : {
@@ -261,6 +259,8 @@
         "response" : {
           "$ref" : "UserGroup"
         }
+      },
+      "com.ltu.yealtube.endpoint.UserGroupEndpoint.cleanData" : {
       }
     }
   }

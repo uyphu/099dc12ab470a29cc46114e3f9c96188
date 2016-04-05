@@ -28,21 +28,17 @@
   "ownerName" : "ltu.com",
   "packagePath" : "yealtube.domain",
   "methods" : {
-    "userxauthtokenendpoint.authorize" : {
-      "path" : "authorize",
+    "userxauthtokenendpoint.authorizeFacebook" : {
+      "path" : "authorizeFacebook",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorize",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorizeFacebook",
       "request" : {
         "parameters" : {
-          "login" : {
-            "type" : "string",
-            "required" : true
-          },
-          "password" : {
+          "token" : {
             "type" : "string",
             "required" : true
           }
@@ -74,17 +70,21 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userxauthtokenendpoint.authorizeFacebook" : {
-      "path" : "authorizeFacebook",
+    "userxauthtokenendpoint.authorize" : {
+      "path" : "authorize",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorizeFacebook",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorize",
       "request" : {
         "parameters" : {
-          "token" : {
+          "login" : {
+            "type" : "string",
+            "required" : true
+          },
+          "password" : {
             "type" : "string",
             "required" : true
           }
@@ -116,7 +116,7 @@
       }
     },
     "methods" : {
-      "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorize" : {
+      "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorizeFacebook" : {
         "response" : {
           "$ref" : "Token"
         }
@@ -126,7 +126,7 @@
           "$ref" : "Token"
         }
       },
-      "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorizeFacebook" : {
+      "com.ltu.yealtube.endpoint.UserXAuthTokenEndpoint.authorize" : {
         "response" : {
           "$ref" : "Token"
         }
