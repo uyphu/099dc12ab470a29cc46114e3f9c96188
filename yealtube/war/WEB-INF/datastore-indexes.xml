@@ -7,4 +7,10 @@
         <property name="createdAt" direction="desc" />
         <property name="viewCount" direction="desc" />
     </datastore-index>
+    <datastore-index kind="TopTube" ancestor="false" source="manual">
+        <property name="categoryRef" direction="asc"/>
+        <property name="status" direction="asc" />
+<!--         <property name="createdAt" direction="desc" /> -->
+        <property name="viewCount" direction="desc" />
+    </datastore-index>
 </datastore-indexes>

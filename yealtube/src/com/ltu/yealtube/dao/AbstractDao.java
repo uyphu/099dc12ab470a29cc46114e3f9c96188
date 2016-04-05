@@ -16,6 +16,7 @@ import com.ltu.yealtube.domain.Authority;
 import com.ltu.yealtube.domain.Category;
 import com.ltu.yealtube.domain.Comment;
 import com.ltu.yealtube.domain.ParamValue;
+import com.ltu.yealtube.domain.Playlist;
 import com.ltu.yealtube.domain.TopTube;
 import com.ltu.yealtube.domain.Tube;
 import com.ltu.yealtube.domain.User;
@@ -34,6 +35,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		ObjectifyService.register(Authority.class);
 		ObjectifyService.register(ParamValue.class);
 		ObjectifyService.register(TopTube.class);
+		ObjectifyService.register(Playlist.class);
 	}
 
 	public static Objectify ofy() {

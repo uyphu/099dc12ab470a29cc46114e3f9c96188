@@ -64,31 +64,6 @@
         "body" : "empty"
       }
     },
-    "userendpoint.login" : {
-      "path" : "login",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.login",
-      "request" : {
-        "parameters" : {
-          "login" : {
-            "type" : "string",
-            "required" : false
-          },
-          "password" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "userendpoint.getUser" : {
       "path" : "user/{id}",
       "httpMethod" : "GET",
@@ -110,90 +85,22 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.cleanData" : {
-      "path" : "cleanData",
+    "userendpoint.addAuthority" : {
+      "path" : "addAuthority",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.cleanData",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "userendpoint.listUser" : {
-      "path" : "user",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com" ],
-      "clientIds" : [ "967485763661-s62auqoraod5k5nhtkp62e8bl9krmcil.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.listUser",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.addAuthority",
       "request" : {
         "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.insertUser" : {
-      "path" : "user",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.insertUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.updateUser" : {
-      "path" : "user",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.updateUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.removeUser" : {
-      "path" : "user/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.removeUser",
-      "request" : {
-        "parameters" : {
-          "id" : {
+          "userId" : {
             "type" : "int64",
+            "required" : true
+          },
+          "role" : {
+            "type" : "string",
             "required" : true
           }
         },
@@ -203,15 +110,21 @@
         "body" : "empty"
       }
     },
-    "userendpoint.getAccount" : {
-      "path" : "getAccount",
-      "httpMethod" : "GET",
+    "userendpoint.activateAccount" : {
+      "path" : "activateAccount",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.getAccount",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount",
       "request" : {
+        "parameters" : {
+          "activateKey" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
         "body" : "empty"
       },
       "response" : {
@@ -247,18 +160,68 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.activateAccount" : {
-      "path" : "activateAccount",
+    "userendpoint.initAddRole" : {
+      "path" : "initAddRole",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.initAddRole",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "userendpoint.getAccount" : {
+      "path" : "getAccount",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.getAccount",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.updateUser" : {
+      "path" : "user",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.updateUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.listUser" : {
+      "path" : "user",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.listUser",
       "request" : {
         "parameters" : {
-          "activateKey" : {
+          "cursor" : {
             "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
             "required" : false
           }
         },
@@ -268,50 +231,81 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.testInsert" : {
-      "path" : "testInsert",
+    "userendpoint.insertUser" : {
+      "path" : "user",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.testInsert",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.insertUser",
       "request" : {
-        "parameters" : {
-          "value" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.addAuthority" : {
-      "path" : "addAuthority",
-      "httpMethod" : "POST",
+    "userendpoint.removeUser" : {
+      "path" : "user/{id}",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.addAuthority",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.removeUser",
       "request" : {
         "parameters" : {
-          "userId" : {
+          "id" : {
             "type" : "int64",
             "required" : true
-          },
-          "role" : {
-            "type" : "string",
-            "required" : true
           }
         },
         "body" : "empty"
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "userendpoint.cleanData" : {
+      "path" : "cleanData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.cleanData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "userendpoint.login" : {
+      "path" : "login",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.login",
+      "request" : {
+        "parameters" : {
+          "login" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -362,11 +356,11 @@
           "resetKey" : {
             "type" : "string"
           },
-          "resetDate" : {
+          "resetAt" : {
             "type" : "string",
             "format" : "date-time"
           },
-          "createDate" : {
+          "createdAt" : {
             "type" : "string",
             "format" : "date-time"
           },
@@ -440,17 +434,37 @@
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.initData" : {
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.login" : {
-        "response" : {
-          "$ref" : "User"
-        }
-      },
       "com.ltu.yealtube.endpoint.UserEndpoint.getUser" : {
         "response" : {
           "$ref" : "User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.cleanData" : {
+      "com.ltu.yealtube.endpoint.UserEndpoint.addAuthority" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.searchUser" : {
+        "response" : {
+          "$ref" : "CollectionResponse_User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.initAddRole" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.getAccount" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.updateUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "User"
+        }
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.listUser" : {
         "response" : {
@@ -465,37 +479,14 @@
           "$ref" : "User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.updateUser" : {
-        "request" : {
-          "$ref" : "User"
-        },
-        "response" : {
-          "$ref" : "User"
-        }
-      },
       "com.ltu.yealtube.endpoint.UserEndpoint.removeUser" : {
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.getAccount" : {
+      "com.ltu.yealtube.endpoint.UserEndpoint.cleanData" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.login" : {
         "response" : {
           "$ref" : "User"
         }
-      },
-      "com.ltu.yealtube.endpoint.UserEndpoint.searchUser" : {
-        "response" : {
-          "$ref" : "CollectionResponse_User"
-        }
-      },
-      "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount" : {
-        "response" : {
-          "$ref" : "User"
-        }
-      },
-      "com.ltu.yealtube.endpoint.UserEndpoint.testInsert" : {
-        "response" : {
-          "$ref" : "User"
-        }
-      },
-      "com.ltu.yealtube.endpoint.UserEndpoint.addAuthority" : {
       }
     }
   }

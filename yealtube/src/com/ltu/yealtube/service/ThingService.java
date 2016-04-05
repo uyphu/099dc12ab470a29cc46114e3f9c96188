@@ -7,7 +7,6 @@ import javax.inject.Named;
 
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.googlecode.objectify.Key;
 import com.ltu.yealtube.dao.ThingDao;
 import com.ltu.yealtube.domain.Thing;
 import com.ltu.yealtube.exception.CommonException;
