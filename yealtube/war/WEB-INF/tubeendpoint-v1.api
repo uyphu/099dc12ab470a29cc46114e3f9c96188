@@ -64,26 +64,17 @@
         "body" : "empty"
       }
     },
-    "tubeendpoint.getTopMusics" : {
-      "path" : "getTopMusics",
-      "httpMethod" : "GET",
+    "tubeendpoint.updateTube" : {
+      "path" : "tube",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTopMusics",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube",
       "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -103,56 +94,6 @@
             "type" : "string",
             "required" : false
           },
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tubeendpoint.getTopPlays" : {
-      "path" : "getTopPlays",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTopPlays",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tubeendpoint.getMusic" : {
-      "path" : "getMusic",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getMusic",
-      "request" : {
-        "parameters" : {
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -189,17 +130,113 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tubeendpoint.updateTube" : {
+    "tubeendpoint.insertTube" : {
       "path" : "tube",
-      "httpMethod" : "PUT",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.insertTube",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tubeendpoint.getMusic" : {
+      "path" : "getMusic",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getMusic",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tubeendpoint.getTube" : {
+      "path" : "tube/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTube",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tubeendpoint.getTopMusics" : {
+      "path" : "getTopMusics",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTopMusics",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tubeendpoint.getTopPlays" : {
+      "path" : "getTopPlays",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTopPlays",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -265,62 +302,10 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "tubeendpoint.insertTube" : {
-      "path" : "tube",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.insertTube",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tubeendpoint.getTube" : {
-      "path" : "tube/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.TubeEndpoint.getTube",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Tube" : {
-        "id" : "CollectionResponse_Tube",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Tube"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Tube" : {
         "id" : "Tube",
         "type" : "object",
@@ -413,37 +398,27 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_Tube" : {
+        "id" : "CollectionResponse_Tube",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Tube"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
       "com.ltu.yealtube.endpoint.TubeEndpoint.initData" : {
       },
       "com.ltu.yealtube.endpoint.TubeEndpoint.cleanDataByStatus" : {
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.getTopMusics" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Tube"
-        }
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.searchTube" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Tube"
-        }
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.getTopPlays" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Tube"
-        }
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.getMusic" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Tube"
-        }
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.insertYouTube" : {
-        "response" : {
-          "$ref" : "Tube"
-        }
       },
       "com.ltu.yealtube.endpoint.TubeEndpoint.updateTube" : {
         "request" : {
@@ -453,13 +428,14 @@
           "$ref" : "Tube"
         }
       },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.cleanData" : {
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.removeTube" : {
-      },
-      "com.ltu.yealtube.endpoint.TubeEndpoint.listTube" : {
+      "com.ltu.yealtube.endpoint.TubeEndpoint.searchTube" : {
         "response" : {
           "$ref" : "CollectionResponse_Tube"
+        }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.insertYouTube" : {
+        "response" : {
+          "$ref" : "Tube"
         }
       },
       "com.ltu.yealtube.endpoint.TubeEndpoint.insertTube" : {
@@ -470,9 +446,33 @@
           "$ref" : "Tube"
         }
       },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.getMusic" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Tube"
+        }
+      },
       "com.ltu.yealtube.endpoint.TubeEndpoint.getTube" : {
         "response" : {
           "$ref" : "Tube"
+        }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.getTopMusics" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Tube"
+        }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.getTopPlays" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Tube"
+        }
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.cleanData" : {
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.removeTube" : {
+      },
+      "com.ltu.yealtube.endpoint.TubeEndpoint.listTube" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Tube"
         }
       }
     }

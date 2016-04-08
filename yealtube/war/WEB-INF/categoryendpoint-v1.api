@@ -80,49 +80,19 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.searchCategory" : {
-      "path" : "search_category",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CategoryEndpoint.searchCategory",
-      "request" : {
-        "parameters" : {
-          "querySearch" : {
-            "type" : "string",
-            "required" : false
-          },
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "categoryendpoint.insertCategory" : {
-      "path" : "category",
+    "categoryendpoint.cleanData" : {
+      "path" : "cleanData",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CategoryEndpoint.insertCategory",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CategoryEndpoint.cleanData",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "body" : "empty"
       },
       "response" : {
-        "body" : "autoTemplate(backendResponse)"
+        "body" : "empty"
       }
     },
     "categoryendpoint.removeCategory" : {
@@ -171,19 +141,49 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.cleanData" : {
-      "path" : "cleanData",
+    "categoryendpoint.insertCategory" : {
+      "path" : "category",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.CategoryEndpoint.cleanData",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CategoryEndpoint.insertCategory",
       "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.searchCategory" : {
+      "path" : "search_category",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.CategoryEndpoint.searchCategory",
+      "request" : {
+        "parameters" : {
+          "querySearch" : {
+            "type" : "string",
+            "required" : false
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
         "body" : "empty"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -250,7 +250,11 @@
           "$ref" : "Category"
         }
       },
-      "com.ltu.yealtube.endpoint.CategoryEndpoint.searchCategory" : {
+      "com.ltu.yealtube.endpoint.CategoryEndpoint.cleanData" : {
+      },
+      "com.ltu.yealtube.endpoint.CategoryEndpoint.removeCategory" : {
+      },
+      "com.ltu.yealtube.endpoint.CategoryEndpoint.listCategory" : {
         "response" : {
           "$ref" : "CollectionResponse_Category"
         }
@@ -263,14 +267,10 @@
           "$ref" : "Category"
         }
       },
-      "com.ltu.yealtube.endpoint.CategoryEndpoint.removeCategory" : {
-      },
-      "com.ltu.yealtube.endpoint.CategoryEndpoint.listCategory" : {
+      "com.ltu.yealtube.endpoint.CategoryEndpoint.searchCategory" : {
         "response" : {
           "$ref" : "CollectionResponse_Category"
         }
-      },
-      "com.ltu.yealtube.endpoint.CategoryEndpoint.cleanData" : {
       }
     }
   }

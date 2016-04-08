@@ -93,22 +93,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "paramvalueendpoint.updateParamValue" : {
-      "path" : "paramvalue",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "paramvalueendpoint.insertParamValue" : {
       "path" : "paramvalue",
       "httpMethod" : "POST",
@@ -166,6 +150,22 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "paramvalueendpoint.updateParamValue" : {
+      "path" : "paramvalue",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -230,14 +230,6 @@
           "$ref" : "CollectionResponse_ParamValue"
         }
       },
-      "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue" : {
-        "request" : {
-          "$ref" : "ParamValue"
-        },
-        "response" : {
-          "$ref" : "ParamValue"
-        }
-      },
       "com.ltu.yealtube.endpoint.ParamValueEndpoint.insertParamValue" : {
         "request" : {
           "$ref" : "ParamValue"
@@ -251,6 +243,14 @@
       "com.ltu.yealtube.endpoint.ParamValueEndpoint.listParamValue" : {
         "response" : {
           "$ref" : "CollectionResponse_ParamValue"
+        }
+      },
+      "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue" : {
+        "request" : {
+          "$ref" : "ParamValue"
+        },
+        "response" : {
+          "$ref" : "ParamValue"
         }
       },
       "com.ltu.yealtube.endpoint.ParamValueEndpoint.cleanData" : {
