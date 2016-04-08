@@ -37,6 +37,8 @@ public class Playlist {
 	/** The status. */
 	@Index
 	private int status;
+	
+	private String thumbnail;
 
 	public String getId() {
 		return id;
@@ -109,9 +111,17 @@ public class Playlist {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 
 	public Playlist(String id, String title, String description, int viewCount, Date createdAt, Date modifiedAt,
-			Date publishedAt, int status, Long userId) {
+			Date publishedAt, int status, Long userId, String thumbnail) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -121,6 +131,7 @@ public class Playlist {
 		this.publishedAt = publishedAt;
 		this.status = status;
 		this.userId = userId;
+		this.thumbnail = thumbnail;
 	}
 
 	public Playlist() {
@@ -131,7 +142,7 @@ public class Playlist {
 	public String toString() {
 		return "Playlist [id=" + id + ", title=" + title + ", description=" + description + ", viewCount=" + viewCount
 				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + ", publishedAt=" + publishedAt + ", userId="
-				+ userId + ", status=" + status + "]";
+				+ userId + ", status=" + status + ", thumbnail=" + thumbnail + "]";
 	}
 
 }

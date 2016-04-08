@@ -483,20 +483,38 @@ public class YoutubeUtils {
 	 */
 	public static Playlist getPlayList(String id) {
 		try {
-			Playlist tube = new Playlist();
+			Playlist playlist = new Playlist();
 			JSONObject json = getPlaylist(id, "snippet");
 			if (json != null) {
 				JSONArray jsonArray = (JSONArray) json.get("items");
 				if (jsonArray != null) {
 					JSONObject item = new JSONObject(jsonArray.get(0).toString());
 					item = new JSONObject(item.get("snippet").toString());
-					tube.setId(id);
-					tube.setTitle(item.getString("title"));
-					tube.setDescription(item.getString("description"));
+					playlist.setId(id);
+					playlist.setTitle(item.getString("title"));
+					playlist.setDescription(item.getString("description"));
 					SimpleDateFormat format = new SimpleDateFormat(Constant.LONG_DATE_FORMAT);
-					tube.setPublishedAt(format.parse(item.getString("publishedAt")));
-					return tube;
+					playlist.setPublishedAt(format.parse(item.getString("publishedAt")));
+					playlist.setThumbnail(getVideoId(item.getString("thumbnails")));
+					return playlist;
 				}
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+		return null;
+	}
+	
+	private static String getVideoId(String thumbnails) {
+		try {
+			JSONObject item = new JSONObject(thumbnails);
+			String defaultStr = "/default.jpg";
+			item = new JSONObject(item.getString("default"));
+			String thumbnail = item.getString("url");
+			thumbnail = thumbnail.substring(0, thumbnail.length() - defaultStr.length());
+			int from = thumbnail.lastIndexOf("/");
+			if (from != -1) {
+				return thumbnail.substring(from + 1, thumbnail.length());
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e.getCause());
@@ -520,8 +538,9 @@ public class YoutubeUtils {
 //		String str = "[\"av\",\"sora\",\"aoi\",\"sexy\",\"hot\",\"kiss\",\"video\",\"clip\",\"youtube\"]";
 //		int index = str.indexOf("sexy");
 //		System.out.println(index);
-		System.out.println(convertYouTubeDuration(getDuration("tpHu67Zq5Kk")));
 		
+		//System.out.println(convertYouTubeDuration(getDuration("tpHu67Zq5Kk")));
+		System.out.println(getPlayList("PL0VVVtBqsouqaV-xmTk3OEVrdecRMo_OB"));
 	}
 
 }
