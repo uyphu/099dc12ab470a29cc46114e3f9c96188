@@ -538,7 +538,6 @@ public class YoutubeUtils {
 //		String str = "[\"av\",\"sora\",\"aoi\",\"sexy\",\"hot\",\"kiss\",\"video\",\"clip\",\"youtube\"]";
 //		int index = str.indexOf("sexy");
 //		System.out.println(index);
-		
 		//System.out.println(convertYouTubeDuration(getDuration("tpHu67Zq5Kk")));
 		System.out.println(getPlayList("PL0VVVtBqsouqaV-xmTk3OEVrdecRMo_OB"));
 	}
