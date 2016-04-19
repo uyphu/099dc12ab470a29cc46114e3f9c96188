@@ -558,4 +558,14 @@ public class Tube {
 		this.setCategory(category);
 	}
 
+	@Override
+	public String toString() {
+		return "Tube [id=" + id + ", title=" + title + ", description=" + description + ", categoryRef=" + categoryRef
+				+ ", userId=" + userId + ", viewCount=" + viewCount + ", status=" + status + ", createdAt=" + createdAt
+				+ ", modifiedAt=" + modifiedAt + ", likeCount=" + likeCount + ", dislikeCount=" + dislikeCount
+				+ ", favoriteCount=" + favoriteCount + ", commentCount=" + commentCount + ", rating=" + rating + ", author="
+				+ author + ", category=" + category + ", tags=" + tags + ", embedHtml=" + embedHtml + ", duration=" + duration
+				+ "]";
+	}
+
 }

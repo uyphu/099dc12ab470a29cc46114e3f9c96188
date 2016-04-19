@@ -144,5 +144,19 @@ public class YoutubeEndpoint {
 		return CollectionResponse.<Category> builder().setItems(categories)
 	            .setNextPageToken(null).build();
 	}
+	
+	/**
+	 * Gets the tubes.
+	 *
+	 * @param playlistId the playlist id
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the tubes
+	 */
+	@ApiMethod(name = "getTubes", httpMethod = HttpMethod.GET, path = "getTubes")
+	public CollectionResponse<Tube> getTubes(@Named("playlistId") String playlistId, @Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("count") Integer count) {
+		return YoutubeUtils.getTubes(playlistId, count, cursorString);
+	}
 
 }
