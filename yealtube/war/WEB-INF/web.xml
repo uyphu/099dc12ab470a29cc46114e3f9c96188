@@ -15,6 +15,14 @@
 		<servlet-name>TopTubeCron</servlet-name>
 		<url-pattern>/cron/toptube</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>RemoveCron</servlet-name>
+		<servlet-class>com.ltu.yealtube.cron.RemoveCronServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveCron</servlet-name>
+		<url-pattern>/cron/removecron</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

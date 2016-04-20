@@ -1,25 +1,19 @@
 package com.ltu.yealtube;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+import static com.googlecode.objectify.ObjectifyService.run;
+
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.api.server.spi.response.CollectionResponse;
-import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.VoidWork;
 import com.ltu.yealtube.dao.RemoteObjectifyFactory;
-import com.ltu.yealtube.domain.Authority;
 import com.ltu.yealtube.domain.Thing;
-import com.ltu.yealtube.service.AuthorityService;
-import com.ltu.yealtube.service.ThingService;
-
-import static com.googlecode.objectify.ObjectifyService.ofy;
-import static com.googlecode.objectify.ObjectifyService.run;
 
 @SuppressWarnings("serial")
 public class YealtubeServlet extends HttpServlet {
