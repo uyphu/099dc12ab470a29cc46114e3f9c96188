@@ -64,6 +64,37 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "paramvalueendpoint.cleanData" : {
+      "path" : "cleanData",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.cleanData",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "paramvalueendpoint.updateParamValue" : {
+      "path" : "paramvalue",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "paramvalueendpoint.searchParamValue" : {
       "path" : "searchParamValue",
       "httpMethod" : "GET",
@@ -93,22 +124,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "paramvalueendpoint.insertParamValue" : {
-      "path" : "paramvalue",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.insertParamValue",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "paramvalueendpoint.removeParamValue" : {
       "path" : "paramvalue/{id}",
       "httpMethod" : "DELETE",
@@ -128,6 +143,22 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "paramvalueendpoint.insertParamValue" : {
+      "path" : "paramvalue",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.insertParamValue",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "paramvalueendpoint.listParamValue" : {
@@ -153,37 +184,6 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "paramvalueendpoint.updateParamValue" : {
-      "path" : "paramvalue",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "paramvalueendpoint.cleanData" : {
-      "path" : "cleanData",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.ParamValueEndpoint.cleanData",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     }
   },
@@ -225,25 +225,7 @@
           "$ref" : "ParamValue"
         }
       },
-      "com.ltu.yealtube.endpoint.ParamValueEndpoint.searchParamValue" : {
-        "response" : {
-          "$ref" : "CollectionResponse_ParamValue"
-        }
-      },
-      "com.ltu.yealtube.endpoint.ParamValueEndpoint.insertParamValue" : {
-        "request" : {
-          "$ref" : "ParamValue"
-        },
-        "response" : {
-          "$ref" : "ParamValue"
-        }
-      },
-      "com.ltu.yealtube.endpoint.ParamValueEndpoint.removeParamValue" : {
-      },
-      "com.ltu.yealtube.endpoint.ParamValueEndpoint.listParamValue" : {
-        "response" : {
-          "$ref" : "CollectionResponse_ParamValue"
-        }
+      "com.ltu.yealtube.endpoint.ParamValueEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.ParamValueEndpoint.updateParamValue" : {
         "request" : {
@@ -253,7 +235,25 @@
           "$ref" : "ParamValue"
         }
       },
-      "com.ltu.yealtube.endpoint.ParamValueEndpoint.cleanData" : {
+      "com.ltu.yealtube.endpoint.ParamValueEndpoint.searchParamValue" : {
+        "response" : {
+          "$ref" : "CollectionResponse_ParamValue"
+        }
+      },
+      "com.ltu.yealtube.endpoint.ParamValueEndpoint.removeParamValue" : {
+      },
+      "com.ltu.yealtube.endpoint.ParamValueEndpoint.insertParamValue" : {
+        "request" : {
+          "$ref" : "ParamValue"
+        },
+        "response" : {
+          "$ref" : "ParamValue"
+        }
+      },
+      "com.ltu.yealtube.endpoint.ParamValueEndpoint.listParamValue" : {
+        "response" : {
+          "$ref" : "CollectionResponse_ParamValue"
+        }
       }
     }
   }

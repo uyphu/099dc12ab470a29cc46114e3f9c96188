@@ -59,6 +59,28 @@ public class YoutubeEndpoint {
 		if (rating != null) {
 			try {
 				float value = Float.parseFloat(rating);
+				return tubeService.insertMovie(id, value);
+			} catch (Exception e) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, e.getCause());
+			}
+			
+		}
+		return tubeService.insert(id);
+	}
+	
+	/**
+	 * Insert movie.
+	 *
+	 * @param id the id
+	 * @param rating the rating
+	 * @return the tube
+	 * @throws CommonException the common exception
+	 */
+	@ApiMethod(name = "insertMovie", httpMethod = HttpMethod.POST, path = "insertMovie")
+	public Tube insertMovie(@Named("id") String id, @Nullable @Named("rating") String rating) throws CommonException {
+		if (rating != null) {
+			try {
+				float value = Float.parseFloat(rating);
 				return tubeService.insert(id, value);
 			} catch (Exception e) {
 				throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, e.getCause());

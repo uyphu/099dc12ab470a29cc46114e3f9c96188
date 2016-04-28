@@ -141,6 +141,36 @@ public class TubeService {
 	}
 	
 	/**
+	 * Insert movie.
+	 *
+	 * @param youtubeId the youtube id
+	 * @param rating the rating
+	 * @return the tube
+	 * @throws CommonException the common exception
+	 */
+	public Tube insertMovie(String youtubeId, Float rating) throws CommonException {
+		if (youtubeId != null) {
+			if (containsTube(youtubeId)) {
+				throw new CommonException(HttpStatusCodes.STATUS_CODE_FOUND, ErrorCodeDetail.ERROR_EXIST_OBJECT.getMsg());
+			}
+			Tube tube = YoutubeUtils.getTube(youtubeId);
+			tube.setCreatedAt(Calendar.getInstance().getTime());
+			tube.setModifiedAt(Calendar.getInstance().getTime());
+			tube.setStatus(Constant.APPROVED_STATUS);
+			tube.setUserId(Constant.ADMIN_ID);
+			if (rating != null) {
+				tube.setRating(rating);
+			}
+			Category category = CategoryService.getInstance().findOneByName(Constant.CATEGORY_MOVIE);
+			tube.setCategory(category);
+			return tubeDao.persist(tube);
+			
+		} else {
+			throw new CommonException(HttpStatusCodes.STATUS_CODE_BAD_GATEWAY, ErrorCodeDetail.ERROR_INPUT_NOT_VALID.getMsg());
+		}
+	}
+	
+	/**
 	 * Update.
 	 *
 	 * @param tube the tube
