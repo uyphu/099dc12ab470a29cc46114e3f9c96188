@@ -5,10 +5,11 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
     'angularSpinner', 'angular-google-gapi', 'hm.readmore'])
     
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, 
-    		ENV, VERSION, GAuth, GApi, GData, localStorageService) {
+    		ENV, VERSION, GAuth, GApi, GData, localStorageService, AppUtil) {
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.LOADED = false;
+        $rootScope.TUBE = null;
         
         //Loading facebook
         $window.fbAsyncInit = function() {
@@ -99,7 +100,13 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'ui.bo
                 $window.document.title = title;
             });
         });
-
+        
+        $rootScope.$watch('TUBE', function() {
+        	if ($rootScope.TUBE != null) {
+        		AppUtil.updateHeader($rootScope.TUBE);
+			}
+        });
+        
         $rootScope.back = function() {
             // If previous state is 'activate' or do not exist go to 'home'
             if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {

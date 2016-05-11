@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jhipsterApp')
-  .controller('VideoDetailController', function ($scope, $stateParams, Tube, Youtube) {
+  .controller('VideoDetailController', function ($rootScope, $scope, $stateParams, Tube, Youtube) {
       $scope.tube = {};
       $scope.content = "<b>this is bold content</b>";
       $scope.limit = 200;
@@ -13,6 +13,7 @@ angular.module('jhipsterApp')
     	  Youtube.getDetail(id).then(function(result) {
             $scope.tube = result;
             document.getElementById('video-player').innerHTML = $scope.tube.embedHtml;
+            $rootScope.TUBE = $scope.tube;
           });
       };
       $scope.load($stateParams.id);
