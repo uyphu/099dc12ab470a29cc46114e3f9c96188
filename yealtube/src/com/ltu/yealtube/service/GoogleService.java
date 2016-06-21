@@ -14,6 +14,7 @@ import com.ltu.yealtube.exception.ErrorCodeDetail;
 
 /**
  * The Class GoogleService.
+ * @author uyphu
  */
 public class GoogleService {
 	

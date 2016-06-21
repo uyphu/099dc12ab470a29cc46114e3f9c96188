@@ -103,11 +103,11 @@ public class YoutubeUtils {
 					JSONObject item = new JSONObject(jsonArray.get(0).toString());
 					item = new JSONObject(item.get("statistics").toString());
 					tube.setId(id);
-					tube.setViewCount(Integer.parseInt(item.get("viewCount").toString()));
-					tube.setLikeCount(Integer.parseInt(item.get("likeCount").toString()));
-					tube.setDislikeCount(Integer.parseInt(item.get("dislikeCount").toString()));
-					tube.setFavoriteCount(Integer.parseInt(item.get("favoriteCount").toString()));
-					tube.setCommentCount(Integer.parseInt(item.get("commentCount").toString()));
+					tube.setViewCount(item.has("viewCount") ? Integer.parseInt(item.getString("viewCount")): 0);
+					tube.setLikeCount(item.has("likeCount") ? Integer.parseInt(item.getString("likeCount")): 0);
+					tube.setDislikeCount(item.has("dislikeCount") ? Integer.parseInt(item.getString("dislikeCount")): 0);
+					tube.setFavoriteCount(item.has("favoriteCount") ? Integer.parseInt(item.getString("favoriteCount")): 0);
+					tube.setCommentCount(item.has("commentCount") ? Integer.parseInt(item.getString("commentCount")): 0);
 					json = YoutubeUtils.getVideo(id, "snippet");
 					if (json != null) {
 						jsonArray = (JSONArray) json.get("items");
@@ -555,14 +555,49 @@ public class YoutubeUtils {
 				JSONArray jsonArray = (JSONArray) json.get("items");
 				cursor = json.has("nextPageToken") ? json.getString("nextPageToken") : null;
 				if (jsonArray != null) {
-					for (int i=0; i < jsonArray.length(); i++) {
+					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject item = jsonArray.getJSONObject(i);
 						item = new JSONObject(item.getString("snippet"));
 						item = new JSONObject(item.getString("resourceId"));
 						Tube tube = getTube(item.getString("videoId"));
 						tubes.add(tube);
 					}
-					
+
+				}
+			}
+			return CollectionResponse.<Tube> builder().setItems(tubes).setNextPageToken(cursor).build();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e.getCause());
+		}
+		return null;
+	}
+
+	public static CollectionResponse<Tube> getRelatedTubes(String videoId, Integer count, String pageToken) {
+		try {
+			List<Tube> tubes = new ArrayList<>();
+			StringBuilder builder = new StringBuilder(
+					"https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&relatedToVideoId=" + videoId
+							+ "&type=video&key=" + Constant.API_KEY);
+			if (count != null) {
+				builder.append("&maxResults=" + count);
+			}
+			if (pageToken != null) {
+				builder.append("&pageToken=" + pageToken);
+			}
+			String cursor = null;
+			JSONObject json = callYoutube(new URL(builder.toString()));
+			if (json != null) {
+				JSONArray jsonArray = (JSONArray) json.get("items");
+				cursor = json.has("nextPageToken") ? json.getString("nextPageToken") : null;
+				if (jsonArray != null) {
+					for (int i = 0; i < jsonArray.length(); i++) {
+						JSONObject item = jsonArray.getJSONObject(i);
+						item = new JSONObject(item.getString("id"));
+						// item = new JSONObject(item.getString("resourceId"));
+						Tube tube = getTube(item.getString("videoId"));
+						tubes.add(tube);
+					}
+
 				}
 			}
 			return CollectionResponse.<Tube> builder().setItems(tubes).setNextPageToken(cursor).build();
@@ -590,18 +625,20 @@ public class YoutubeUtils {
 		// int index = str.indexOf("sexy");
 		// System.out.println(index);
 		// System.out.println(convertYouTubeDuration(getDuration("tpHu67Zq5Kk")));
-		//System.out.println(getPlayList("PL0VVVtBqsouqaV-xmTk3OEVrdecRMo_OB"));
+		// System.out.println(getPlayList("PL0VVVtBqsouqaV-xmTk3OEVrdecRMo_OB"));
 		String cursor = null;
 		do {
-			CollectionResponse<Tube> response = getTubes("PLFJifqT2CnZV8jgr4XY2HAf1OBr7PWt3y", 10, cursor);
+			// CollectionResponse<Tube> response =
+			// getTubes("PLFJifqT2CnZV8jgr4XY2HAf1OBr7PWt3y", 10, cursor);
+			CollectionResponse<Tube> response = getRelatedTubes("HUCQPM6I0_M", 10, cursor);
 			cursor = response.getNextPageToken();
 			int count = 0;
 			for (Tube tube : response.getItems()) {
 				System.out.println(count++);
-				System.out.println(tube.getId() + " "+ tube.getTitle());
+				System.out.println(tube.getId() + " " + tube.getTitle());
 			}
 		} while (cursor != null);
-		
+
 	}
 
 }

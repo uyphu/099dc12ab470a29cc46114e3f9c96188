@@ -180,5 +180,21 @@ public class YoutubeEndpoint {
 			@Nullable @Named("count") Integer count) {
 		return YoutubeUtils.getTubes(playlistId, count, cursorString);
 	}
+	
+	/**
+	 * Gets the related tubes.
+	 *
+	 * @param videoId the video id
+	 * @param cursorString the cursor string
+	 * @param count the count
+	 * @return the related tubes
+	 * @throws CommonException the common exception
+	 */
+	@ApiMethod(name = "getRelatedTubes", httpMethod = HttpMethod.GET, path = "getRelatedTubes")
+	public CollectionResponse<Tube> getRelatedTubes(@Named("videoId") String videoId, 
+			@Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("count") Integer count) throws CommonException {
+		return YoutubeUtils.getRelatedTubes(videoId, count, cursorString);
+	}
 
 }
