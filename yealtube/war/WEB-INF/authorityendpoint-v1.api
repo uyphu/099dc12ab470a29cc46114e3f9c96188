@@ -79,6 +79,43 @@
         "body" : "empty"
       }
     },
+    "authorityendpoint.updateAuthority" : {
+      "path" : "authority",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.AuthorityEndpoint.updateAuthority",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "authorityendpoint.removeAuthority" : {
+      "path" : "authority/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.AuthorityEndpoint.removeAuthority",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "authorityendpoint.listAuthority" : {
       "path" : "authority",
       "httpMethod" : "GET",
@@ -118,43 +155,6 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "authorityendpoint.updateAuthority" : {
-      "path" : "authority",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.AuthorityEndpoint.updateAuthority",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "authorityendpoint.removeAuthority" : {
-      "path" : "authority/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.AuthorityEndpoint.removeAuthority",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     }
   },
@@ -199,6 +199,16 @@
       },
       "com.ltu.yealtube.endpoint.AuthorityEndpoint.cleanData" : {
       },
+      "com.ltu.yealtube.endpoint.AuthorityEndpoint.updateAuthority" : {
+        "request" : {
+          "$ref" : "Authority"
+        },
+        "response" : {
+          "$ref" : "Authority"
+        }
+      },
+      "com.ltu.yealtube.endpoint.AuthorityEndpoint.removeAuthority" : {
+      },
       "com.ltu.yealtube.endpoint.AuthorityEndpoint.listAuthority" : {
         "response" : {
           "$ref" : "CollectionResponse_Authority"
@@ -211,16 +221,6 @@
         "response" : {
           "$ref" : "Authority"
         }
-      },
-      "com.ltu.yealtube.endpoint.AuthorityEndpoint.updateAuthority" : {
-        "request" : {
-          "$ref" : "Authority"
-        },
-        "response" : {
-          "$ref" : "Authority"
-        }
-      },
-      "com.ltu.yealtube.endpoint.AuthorityEndpoint.removeAuthority" : {
       }
     }
   }

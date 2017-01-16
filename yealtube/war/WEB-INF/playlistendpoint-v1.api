@@ -43,6 +43,27 @@
         "body" : "empty"
       }
     },
+    "playlistendpoint.removePlaylist" : {
+      "path" : "playlist/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.removePlaylist",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "playlistendpoint.cleanData" : {
       "path" : "cleanData",
       "httpMethod" : "POST",
@@ -56,6 +77,27 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "playlistendpoint.getPlaylist" : {
+      "path" : "playlist/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.getPlaylist",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "playlistendpoint.listPlaylist" : {
@@ -83,22 +125,33 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "playlistendpoint.getPlaylist" : {
-      "path" : "playlist/{id}",
-      "httpMethod" : "GET",
+    "playlistendpoint.updatePlaylist" : {
+      "path" : "playlist",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.getPlaylist",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.updatePlaylist",
       "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "playlistendpoint.insertPlaylist" : {
+      "path" : "playlist",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.insertPlaylist",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -132,78 +185,10 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "playlistendpoint.updatePlaylist" : {
-      "path" : "playlist",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.updatePlaylist",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "playlistendpoint.removePlaylist" : {
-      "path" : "playlist/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.removePlaylist",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "playlistendpoint.insertPlaylist" : {
-      "path" : "playlist",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.PlaylistEndpoint.insertPlaylist",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Playlist" : {
-        "id" : "CollectionResponse_Playlist",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Playlist"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Playlist" : {
         "id" : "Playlist",
         "type" : "object",
@@ -243,24 +228,36 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_Playlist" : {
+        "id" : "CollectionResponse_Playlist",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Playlist"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
       "com.ltu.yealtube.endpoint.PlaylistEndpoint.initData" : {
       },
-      "com.ltu.yealtube.endpoint.PlaylistEndpoint.cleanData" : {
+      "com.ltu.yealtube.endpoint.PlaylistEndpoint.removePlaylist" : {
       },
-      "com.ltu.yealtube.endpoint.PlaylistEndpoint.listPlaylist" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Playlist"
-        }
+      "com.ltu.yealtube.endpoint.PlaylistEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.PlaylistEndpoint.getPlaylist" : {
         "response" : {
           "$ref" : "Playlist"
         }
       },
-      "com.ltu.yealtube.endpoint.PlaylistEndpoint.searchPlaylist" : {
+      "com.ltu.yealtube.endpoint.PlaylistEndpoint.listPlaylist" : {
         "response" : {
           "$ref" : "CollectionResponse_Playlist"
         }
@@ -273,14 +270,17 @@
           "$ref" : "Playlist"
         }
       },
-      "com.ltu.yealtube.endpoint.PlaylistEndpoint.removePlaylist" : {
-      },
       "com.ltu.yealtube.endpoint.PlaylistEndpoint.insertPlaylist" : {
         "request" : {
           "$ref" : "Playlist"
         },
         "response" : {
           "$ref" : "Playlist"
+        }
+      },
+      "com.ltu.yealtube.endpoint.PlaylistEndpoint.searchPlaylist" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Playlist"
         }
       }
     }

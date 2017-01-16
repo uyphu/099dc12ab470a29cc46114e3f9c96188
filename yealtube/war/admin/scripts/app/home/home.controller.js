@@ -2,7 +2,7 @@
 
 angular.module('jhipsterApp')
    .controller('HomeController', function ($scope, $rootScope, $timeout, usSpinnerService, 
-		   Tube, TubeSearch, ParseLinks, localStorageService) {
+		   Tube, TubeSearch, Youtube, ParseLinks, localStorageService) {
        $scope.tubes = [];
        $scope.page = 1;
        $scope.cursor = null;

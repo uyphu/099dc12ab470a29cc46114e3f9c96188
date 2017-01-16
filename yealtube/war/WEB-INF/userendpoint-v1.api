@@ -110,31 +110,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.listUser" : {
-      "path" : "user",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.listUser",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "userendpoint.cleanData" : {
       "path" : "cleanData",
       "httpMethod" : "POST",
@@ -171,21 +146,6 @@
         "body" : "empty"
       }
     },
-    "userendpoint.initAddRole" : {
-      "path" : "initAddRole",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.initAddRole",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "userendpoint.searchUser" : {
       "path" : "search_user",
       "httpMethod" : "GET",
@@ -215,20 +175,81 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userendpoint.updateUser" : {
+    "userendpoint.listUser" : {
       "path" : "user",
-      "httpMethod" : "PUT",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.updateUser",
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.listUser",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.activateAccount" : {
+      "path" : "activateAccount",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount",
+      "request" : {
+        "parameters" : {
+          "activateKey" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.insertUser" : {
+      "path" : "user",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.insertUser",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.initAddRole" : {
+      "path" : "initAddRole",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.initAddRole",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "userendpoint.addAuthority" : {
@@ -256,6 +277,22 @@
         "body" : "empty"
       }
     },
+    "userendpoint.updateUser" : {
+      "path" : "user",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.updateUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "userendpoint.getAccount" : {
       "path" : "getAccount",
       "httpMethod" : "GET",
@@ -265,43 +302,6 @@
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.getAccount",
       "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.insertUser" : {
-      "path" : "user",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.insertUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.activateAccount" : {
-      "path" : "activateAccount",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount",
-      "request" : {
-        "parameters" : {
-          "activateKey" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
         "body" : "empty"
       },
       "response" : {
@@ -444,33 +444,21 @@
           "$ref" : "User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.listUser" : {
-        "response" : {
-          "$ref" : "CollectionResponse_User"
-        }
-      },
       "com.ltu.yealtube.endpoint.UserEndpoint.cleanData" : {
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.removeUser" : {
-      },
-      "com.ltu.yealtube.endpoint.UserEndpoint.initAddRole" : {
       },
       "com.ltu.yealtube.endpoint.UserEndpoint.searchUser" : {
         "response" : {
           "$ref" : "CollectionResponse_User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.updateUser" : {
-        "request" : {
-          "$ref" : "User"
-        },
+      "com.ltu.yealtube.endpoint.UserEndpoint.listUser" : {
         "response" : {
-          "$ref" : "User"
+          "$ref" : "CollectionResponse_User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.addAuthority" : {
-      },
-      "com.ltu.yealtube.endpoint.UserEndpoint.getAccount" : {
+      "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount" : {
         "response" : {
           "$ref" : "User"
         }
@@ -483,7 +471,19 @@
           "$ref" : "User"
         }
       },
-      "com.ltu.yealtube.endpoint.UserEndpoint.activateAccount" : {
+      "com.ltu.yealtube.endpoint.UserEndpoint.initAddRole" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.addAuthority" : {
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.updateUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "com.ltu.yealtube.endpoint.UserEndpoint.getAccount" : {
         "response" : {
           "$ref" : "User"
         }
